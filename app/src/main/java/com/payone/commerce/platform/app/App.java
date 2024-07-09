@@ -3,10 +3,16 @@
  */
 package com.payone.commerce.platform.app;
 
-import com.payone.commerce.platform.lib.Test;
+import com.payone.commerce.platform.lib.endpoints.CommerceCaseApiClient;
+import com.payone.commerce.platform.lib.models.CreateCommerceCaseRequest;
 
 public class App {
     public static void main(String[] args) {
-        System.out.println(Test.test());
+        CommerceCaseApiClient client = new CommerceCaseApiClient("some_key");
+        CreateCommerceCaseRequest payload = new CreateCommerceCaseRequest();
+        payload.setMerchantReference("1234");
+        String res = client.createCommerceCaseRequest("merchant_id", payload);
+
+        System.out.println(res);
     }
 }
