@@ -4,7 +4,9 @@ import java.net.URI;
 import java.nio.charset.StandardCharsets;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
-import java.text.SimpleDateFormat;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
 import java.util.Base64;
 import java.util.Date;
 import java.util.List;
@@ -16,6 +18,16 @@ import javax.crypto.spec.SecretKeySpec;
 
 public class HmacSignatureGenerator {
     private static final String ALGORITHM = "HmacSHA256";
+    private static final DateTimeFormatter RFC_1123_DATE_TIME_FORMATTER;
+
+    static {
+        RFC_1123_DATE_TIME_FORMATTER = new DateTimeFormatterBuilder()
+                .parseCaseInsensitive()
+                .appendPattern("EEE, dd MMM yyyy HH:mm:ss ")
+                .appendLiteral("GMT")
+                .toFormatter(Locale.US)
+                .withZone(TimeZone.getTimeZone("GMT").toZoneId());
+    }
 
     public static HmacSignatureGenerator withSecret(String secret)
             throws NoSuchAlgorithmException, InvalidKeyException {
@@ -59,9 +71,8 @@ public class HmacSignatureGenerator {
     }
 
     private String formatDateRFC1123(Date date) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss z", Locale.US);
-        dateFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
-        return dateFormat.format(date);
+        ZonedDateTime zonedDateTime = ZonedDateTime.ofInstant(date.toInstant(), TimeZone.getTimeZone("GMT").toZoneId());
+        return RFC_1123_DATE_TIME_FORMATTER.format(zonedDateTime);
     }
 
     private String hash(byte[] toHash) {
