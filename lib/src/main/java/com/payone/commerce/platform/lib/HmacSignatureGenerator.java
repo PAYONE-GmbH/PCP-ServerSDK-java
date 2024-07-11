@@ -53,19 +53,15 @@ public class HmacSignatureGenerator {
                 break;
             case GET:
             case DELETE:
-                contentType = null;
+                contentType = "";
                 break;
             default:
                 throw new UnsupportedOperationException(
                         "The HTTP method " + method + " is unsupported. Use POST, PATCH, GET or DELETE");
         }
 
-        List<String> orderedHeaders = null;
-        if (contentType == null) {
-            orderedHeaders = List.of(method.toString(), formatDateRFC1123(date), resource.toString());
-        } else {
-            orderedHeaders = List.of(method.toString(), contentType, formatDateRFC1123(date), resource.toString());
-        }
+        List<String> orderedHeaders = List.of(method.toString(), contentType, formatDateRFC1123(date),
+                resource.toString());
         String stringToHash = String.join("\n", orderedHeaders) + "\n";
         return this.hash(stringToHash.getBytes(StandardCharsets.UTF_8));
     }
