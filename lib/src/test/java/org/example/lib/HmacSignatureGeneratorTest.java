@@ -69,4 +69,19 @@ public class HmacSignatureGeneratorTest {
 
         assertEquals(actualSignature, expectedSignature);
     }
+
+    @Test
+    void testSignatureGenerationFailsForTrace() {
+        String secret = "change it";
+        // Thu, 11 Jul 2024 13:16:35 GMT
+        Date date = new Date(1720703795041l);
+        try {
+            assertThrowsExactly(UnsupportedOperationException.class, () -> {
+                HmacSignatureGenerator generator = HmacSignatureGenerator.withSecret(secret);
+                generator.generate(HttpMethod.TRACE, date, new URI("/v1/commerce-cases"));
+            });
+        } catch (Exception e) {
+            fail("Failed to create Signature instance: " + e.getMessage());
+        }
+    }
 }
