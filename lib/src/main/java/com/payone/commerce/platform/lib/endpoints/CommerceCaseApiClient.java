@@ -4,6 +4,8 @@
 
 package com.payone.commerce.platform.lib.endpoints;
 
+import java.security.InvalidKeyException;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.payone.commerce.platform.lib.CommunicatorConfiguration;
 import com.payone.commerce.platform.lib.models.CreateCommerceCaseRequest;
@@ -14,7 +16,7 @@ import okhttp3.Response;
 
 public class CommerceCaseApiClient extends BaseApiClient {
 
-    public CommerceCaseApiClient(CommunicatorConfiguration config) {
+    public CommerceCaseApiClient(CommunicatorConfiguration config) throws InvalidKeyException {
         super(config);
     }
 

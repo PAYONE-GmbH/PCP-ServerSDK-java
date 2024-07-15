@@ -1,4 +1,4 @@
-package org.example.lib;
+package com.payone.commerce.platform.lib;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
@@ -7,8 +7,6 @@ import static org.junit.jupiter.api.Assertions.fail;
 import java.util.Date;
 
 import org.junit.jupiter.api.Test;
-
-import com.payone.commerce.platform.lib.HmacSignatureGenerator;
 
 public class HmacSignatureGeneratorTest {
     @Test

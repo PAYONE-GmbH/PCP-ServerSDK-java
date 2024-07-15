@@ -4,6 +4,8 @@
 
 package com.payone.commerce.platform.lib.endpoints;
 
+import java.security.InvalidKeyException;
+
 import com.payone.commerce.platform.lib.CommunicatorConfiguration;
 import com.payone.commerce.platform.lib.RequestHeaderGenerator;
 
@@ -19,7 +21,7 @@ public class BaseApiClient {
 
     private final RequestHeaderGenerator requestHeaderGenerator;
 
-    public BaseApiClient(CommunicatorConfiguration config) {
+    public BaseApiClient(CommunicatorConfiguration config) throws InvalidKeyException {
         this.requestHeaderGenerator = new RequestHeaderGenerator(config);
     }
 
