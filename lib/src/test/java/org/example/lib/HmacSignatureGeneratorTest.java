@@ -1,14 +1,14 @@
 package org.example.lib;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
+import static org.junit.jupiter.api.Assertions.fail;
+
+import java.util.Date;
+
 import org.junit.jupiter.api.Test;
 
-import com.payone.commerce.platform.lib.HttpMethod;
 import com.payone.commerce.platform.lib.HmacSignatureGenerator;
-
-import static org.junit.jupiter.api.Assertions.*;
-
-import java.net.URI;
-import java.util.Date;
 
 public class HmacSignatureGeneratorTest {
     @Test
@@ -22,7 +22,7 @@ public class HmacSignatureGeneratorTest {
         try {
             generator = HmacSignatureGenerator.withSecret(secret);
 
-            actualSignature = generator.generate(HttpMethod.POST, date, new URI("/v1/commerce_cases"));
+            actualSignature = generator.generate("POST", date, "/v1/commerce_cases");
         } catch (Exception e) {
             fail("Failed to create Signature instance: " + e.getMessage());
         }
@@ -42,7 +42,7 @@ public class HmacSignatureGeneratorTest {
         try {
             generator = HmacSignatureGenerator.withSecret(secret);
 
-            actualSignature = generator.generate(HttpMethod.GET, date, new URI("/v1/commerce-cases"));
+            actualSignature = generator.generate("GET", date, "/v1/commerce-cases");
         } catch (Exception e) {
             fail("Failed to create Signature instance: " + e.getMessage());
         }
@@ -62,7 +62,7 @@ public class HmacSignatureGeneratorTest {
         try {
             generator = HmacSignatureGenerator.withSecret(secret);
 
-            actualSignature = generator.generate(HttpMethod.DELETE, date, new URI("/v1/commerce-cases"));
+            actualSignature = generator.generate("DELETE", date, "/v1/commerce-cases");
         } catch (Exception e) {
             fail("Failed to create Signature instance: " + e.getMessage());
         }
@@ -78,7 +78,7 @@ public class HmacSignatureGeneratorTest {
         try {
             assertThrowsExactly(UnsupportedOperationException.class, () -> {
                 HmacSignatureGenerator generator = HmacSignatureGenerator.withSecret(secret);
-                generator.generate(HttpMethod.TRACE, date, new URI("/v1/commerce-cases"));
+                generator.generate("TRACE", date, "/v1/commerce-cases");
             });
         } catch (Exception e) {
             fail("Failed to create Signature instance: " + e.getMessage());

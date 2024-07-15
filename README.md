@@ -17,5 +17,6 @@ An example App is also provided in the `app` directory.
 
 
 ### TODOS
+- [ ] Setup changelog
 - [ ] Setup sonarcloud
 - [ ] Setup CI (build, test coverage, sonar, publish on mvncentral)

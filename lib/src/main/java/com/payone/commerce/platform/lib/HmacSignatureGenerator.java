@@ -1,6 +1,5 @@
 package com.payone.commerce.platform.lib;
 
-import java.net.URI;
 import java.nio.charset.StandardCharsets;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
@@ -44,15 +43,15 @@ public class HmacSignatureGenerator {
         this.mac = mac;
     }
 
-    public String generate(HttpMethod method, Date date, URI resource) {
+    public String generate(String method, Date date, String resource) {
         String contentType = null;
         switch (method) {
-            case POST:
-            case PATCH:
+            case "POST":
+            case "PATCH":
                 contentType = "application/json; charset=utf-8";
                 break;
-            case GET:
-            case DELETE:
+            case "GET":
+            case "DELETE":
                 contentType = "";
                 break;
             default:
@@ -61,7 +60,7 @@ public class HmacSignatureGenerator {
         }
 
         List<String> orderedHeaders = List.of(method.toString(), contentType, formatDateRFC1123(date),
-                resource.toString());
+                resource);
         String stringToHash = String.join("\n", orderedHeaders) + "\n";
         return this.hash(stringToHash.getBytes(StandardCharsets.UTF_8));
     }

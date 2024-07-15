@@ -3,15 +3,23 @@
  */
 package com.payone.commerce.platform.app;
 
+import com.payone.commerce.platform.lib.CommunicatorConfiguration;
 import com.payone.commerce.platform.lib.endpoints.CommerceCaseApiClient;
-import com.payone.commerce.platform.lib.models.CreateCommerceCaseRequest;
 
 public class App {
     public static void main(String[] args) {
-        CommerceCaseApiClient client = new CommerceCaseApiClient("some_key");
-        CreateCommerceCaseRequest payload = new CreateCommerceCaseRequest();
-        payload.setMerchantReference("1234");
-        String res = client.createCommerceCaseRequest("merchant_id", payload);
+
+        CommunicatorConfiguration config = new CommunicatorConfiguration("",
+                "");
+
+        CommerceCaseApiClient client = new CommerceCaseApiClient(config);
+
+        // CreateCommerceCaseRequest payload = new CreateCommerceCaseRequest();
+        // payload.setMerchantReference("123456");
+
+        // String res = client.createCommerceCaseRequest("P1_18352_2013244", payload);
+
+        String res = client.getAllCommerceCaseRequest("P1_18352_2013244");
 
         System.out.println(res);
     }
