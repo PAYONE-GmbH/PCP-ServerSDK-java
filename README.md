@@ -6,7 +6,7 @@ An example App is also provided in the `app` directory.
 ### Run the example app
 
 ```sh
-./gradlew :app:run
+API_KEY=api_key API_SECRET=api_secret ./gradlew :app:run
 ```
 
 ### Build the library

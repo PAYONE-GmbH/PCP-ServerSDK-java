@@ -44,9 +44,7 @@ public class RequestHeaderGenerator {
 
         String signature = hmacSignatureGenerator.generate(request.method(), date,
                 request.url().encodedPath().toString());
-        String authHeader = String.format("GCS v1HMAC:%s:%s", config.getApiKey(), signature);
-        System.out.println(authHeader);
-        return authHeader;
+        return String.format("GCS v1HMAC:%s:%s", config.getApiKey(), signature);
 
     }
 

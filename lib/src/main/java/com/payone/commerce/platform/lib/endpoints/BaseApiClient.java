@@ -37,7 +37,6 @@ public class BaseApiClient {
 
             Response response = this.getClient().newCall(request).execute();
 
-            System.out.println(response.isSuccessful());
             if (!response.isSuccessful()) {
                 throw new Exception("Unexpected code " + response);
             }

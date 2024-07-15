@@ -9,8 +9,10 @@ import com.payone.commerce.platform.lib.endpoints.CommerceCaseApiClient;
 public class App {
     public static void main(String[] args) {
 
-        CommunicatorConfiguration config = new CommunicatorConfiguration("",
-                "");
+        String API_KEY = System.getenv("API_KEY");
+        String API_SECRET = System.getenv("API_SECRET");
+
+        CommunicatorConfiguration config = new CommunicatorConfiguration(API_KEY, API_SECRET);
 
         CommerceCaseApiClient client = new CommerceCaseApiClient(config);
 
