@@ -4,6 +4,7 @@
 
 plugins {
      id 'java-library'
+     id 'jacoco'
 }
 
 repositories {
@@ -23,4 +24,16 @@ dependencies {
 tasks.named('test') {
     // Use JUnit Platform for unit tests.
     useJUnitPlatform()
+}
+
+jacoco {
+    toolVersion = "0.8.8" // Specify the version of JaCoCo you want to use
+}
+
+jacocoTestReport {
+    dependsOn test // Ensure tests are run before generating the report
+    reports {
+        xml.required.set(true)
+        html.required.set(true)
+    }
 }
