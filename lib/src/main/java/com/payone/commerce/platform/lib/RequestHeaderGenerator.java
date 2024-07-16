@@ -17,11 +17,12 @@ import okhttp3.Headers.Builder;
 import okhttp3.Request;
 
 public class RequestHeaderGenerator {
+    public static final String SERVER_META_INFO_HEADER_NAME = "X-GCS-ServerMetaInfo";
+    public static final String CLIENT_META_INFO_HEADER_NAME = "X-GCS-ClientMetaInfo";
+
     private static final String ALGORITHM = "HmacSHA256";
     private static final String WHITESPACE_REGEX = "\\r?\\n[\\h]*";
     private final String DATE_HEADER_NAME = "Date";
-    private final String SERVER_META_INFO_HEADER_NAME = "X-GCS-ServerMetaInfo";
-    private final String CLIENT_META_INFO_HEADER_NAME = "X-GCS-ClientMetaInfo";
     private final String AUTHORIZATION_HEADER_NAME = "Authorization";
 
     private final CommunicatorConfiguration config;
