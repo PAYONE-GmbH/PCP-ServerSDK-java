@@ -34,20 +34,13 @@ public class BaseApiClient {
     }
 
     protected Response makeApiCall(Request request) throws Exception {
+        Response response = this.getClient().newCall(request).execute();
 
-        try {
-
-            Response response = this.getClient().newCall(request).execute();
-
-            if (!response.isSuccessful()) {
-                throw new Exception("Unexpected code " + response);
-            }
-
-            return response;
-        } catch (Exception e) {
-            throw new Exception();
+        if (!response.isSuccessful()) {
+            throw new Exception("Unexpected code " + response);
         }
 
+        return response;
     }
 
 }

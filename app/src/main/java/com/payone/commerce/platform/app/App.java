@@ -14,15 +14,14 @@ public class App {
 
         CommunicatorConfiguration config = new CommunicatorConfiguration(API_KEY, API_SECRET);
 
-        CommerceCaseApiClient client = new CommerceCaseApiClient(config);
+        try {
+            CommerceCaseApiClient client = new CommerceCaseApiClient(config);
 
-        // CreateCommerceCaseRequest payload = new CreateCommerceCaseRequest();
-        // payload.setMerchantReference("123456");
+            String res = client.getAllCommerceCaseRequest("P1_18352_2013244");
 
-        // String res = client.createCommerceCaseRequest("P1_18352_2013244", payload);
-
-        String res = client.getAllCommerceCaseRequest("P1_18352_2013244");
-
-        System.out.println(res);
+            System.out.println(res);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 }

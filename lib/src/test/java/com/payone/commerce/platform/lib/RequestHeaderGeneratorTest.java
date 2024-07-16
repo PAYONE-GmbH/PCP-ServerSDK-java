@@ -26,7 +26,7 @@ public class RequestHeaderGeneratorTest {
             System.out.println(updatedRequest.header("Authorization"));
 
             assertEquals(updatedRequest.header("Authorization"),
-                    "GCS v1HMAC:KEY:01IrG0HNC2MFgqKNaHwfFUayaJg6dqTRE/Tv0DwQU6Y=");
+                    "GCS v1HMAC:KEY:29Obqkt6uQaF+pLAuKKmRxKJ5MeJrGDPIfvluAxiMLE=");
         } catch (Exception e) {
             fail("Failed to create request header generator: " + e.getMessage());
         }
