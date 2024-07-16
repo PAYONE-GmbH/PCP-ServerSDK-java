@@ -5,28 +5,40 @@
 package com.payone.commerce.platform.lib.endpoints;
 
 import java.security.InvalidKeyException;
+import java.util.List;
+import java.util.Map;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.payone.commerce.platform.lib.CommunicatorConfiguration;
 import com.payone.commerce.platform.lib.models.CreateCommerceCaseRequest;
+import com.payone.commerce.platform.lib.models.CreateCommerceCaseResponse;
 
+import okhttp3.HttpUrl;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class CommerceCaseApiClient extends BaseApiClient {
 
+    private final String DOMAIN = "commerce-cases";
+
     public CommerceCaseApiClient(CommunicatorConfiguration config) throws InvalidKeyException {
         super(config);
     }
 
-    public String createCommerceCaseRequest(String merchantId, CreateCommerceCaseRequest payload) {
+    public CreateCommerceCaseResponse createCommerceCaseRequest(String merchantId, CreateCommerceCaseRequest payload) {
         if (merchantId == null) {
             throw new IllegalArgumentException("Merchant ID is required");
         }
 
-        String path = String.format("/v1/%s/commerce-cases", merchantId);
-        String url = String.format("https://preprod.commerce-api.payone.com%s", path);
+        HttpUrl url = new HttpUrl.Builder()
+                .scheme("https")
+                .host(this.getConfig().getHost())
+                .addPathSegment("v1")
+                .addPathSegment(merchantId)
+                .addPathSegment(DOMAIN)
+                .build();
 
         try {
             ObjectMapper objectMapper = new ObjectMapper();
@@ -46,23 +58,37 @@ public class CommerceCaseApiClient extends BaseApiClient {
                 throw new Exception("Unexpected code " + response);
             }
 
-            return response.body().string();
+            return objectMapper.readValue(response.body().string(), CreateCommerceCaseResponse.class);
         } catch (Exception e) {
             throw new RuntimeException("Error processing JSON", e);
         }
-
     }
 
-    public String getAllCommerceCaseRequest(String merchantId) {
+    public List<CreateCommerceCaseResponse> getAllCommerceCaseRequest(String merchantId) {
+        return getAllCommerceCaseRequest(merchantId, null);
+    }
+
+    public List<CreateCommerceCaseResponse> getAllCommerceCaseRequest(String merchantId,
+            Map<String, String> queryParams) {
         if (merchantId == null) {
             throw new IllegalArgumentException("Merchant ID is required");
         }
 
-        String path = String.format("/v1/%s/commerce-cases", merchantId);
-        String url = String.format("https://preprod.commerce-api.payone.com%s", path);
+        HttpUrl.Builder urlBuilder = new HttpUrl.Builder()
+                .scheme("https")
+                .host(this.getConfig().getHost())
+                .addPathSegment("v1")
+                .addPathSegment(merchantId)
+                .addPathSegment(DOMAIN);
+
+        if (queryParams != null) {
+            for (Map.Entry<String, String> entry : queryParams.entrySet()) {
+                urlBuilder.addQueryParameter(entry.getKey(), entry.getValue());
+            }
+        }
+        HttpUrl url = urlBuilder.build();
 
         try {
-
             Request request = new Request.Builder()
                     .url(url)
                     .get()
@@ -72,10 +98,49 @@ public class CommerceCaseApiClient extends BaseApiClient {
 
             Response response = this.makeApiCall(request);
 
-            return response.body().string();
+            ObjectMapper objectMapper = new ObjectMapper();
+            return objectMapper.readValue(response.body().string(),
+                    new TypeReference<List<CreateCommerceCaseResponse>>() {
+                    });
         } catch (Exception e) {
             throw new RuntimeException("Error processing JSON", e);
         }
+    }
 
+    public CreateCommerceCaseResponse getCommerceCaseRequest(String merchantId,
+            String commerceCaseId) {
+        if (merchantId == null) {
+            throw new IllegalArgumentException("Merchant ID is required");
+        }
+        if (commerceCaseId == null) {
+            throw new IllegalArgumentException("Commerce Case ID is required");
+        }
+
+        HttpUrl.Builder urlBuilder = new HttpUrl.Builder()
+                .scheme("https")
+                .host(this.getConfig().getHost())
+                .addPathSegment("v1")
+                .addPathSegment(merchantId)
+                .addPathSegment(DOMAIN)
+                .addPathSegment(commerceCaseId);
+
+        HttpUrl url = urlBuilder.build();
+
+        try {
+            Request request = new Request.Builder()
+                    .url(url)
+                    .get()
+                    .build();
+
+            request = this.getRequestHeaderGenerator().generateAdditionalRequestHeaders(request);
+
+            Response response = this.makeApiCall(request);
+
+            ObjectMapper objectMapper = new ObjectMapper();
+            return objectMapper.readValue(response.body().string(), CreateCommerceCaseResponse.class);
+
+        } catch (Exception e) {
+            throw new RuntimeException("Error processing JSON", e);
+        }
     }
 }

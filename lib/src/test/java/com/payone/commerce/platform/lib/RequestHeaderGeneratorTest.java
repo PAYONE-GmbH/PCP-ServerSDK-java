@@ -24,7 +24,8 @@ import java.util.Date;
 public class RequestHeaderGeneratorTest {
     private static final String TEST_KEY = "KEY";
     private static final String TEST_SECRET = "Super duper Ethan Hunt level secret";
-    private static final CommunicatorConfiguration CONFIG = new CommunicatorConfiguration(TEST_KEY, TEST_SECRET);
+    private static final CommunicatorConfiguration CONFIG = new CommunicatorConfiguration(TEST_KEY, TEST_SECRET,
+            "awesome-api.com");
     private static final RequestHeaderGenerator HEADER_GENERATOR;
     static {
         try {

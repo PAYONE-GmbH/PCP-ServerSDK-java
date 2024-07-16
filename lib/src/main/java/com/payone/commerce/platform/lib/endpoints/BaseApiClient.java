@@ -20,9 +20,12 @@ public class BaseApiClient {
     protected static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
 
     private final RequestHeaderGenerator requestHeaderGenerator;
+    private final CommunicatorConfiguration config;
 
     public BaseApiClient(CommunicatorConfiguration config) throws InvalidKeyException {
+        this.config = config;
         this.requestHeaderGenerator = new RequestHeaderGenerator(config);
+
     }
 
     protected RequestHeaderGenerator getRequestHeaderGenerator() {
@@ -31,6 +34,10 @@ public class BaseApiClient {
 
     protected OkHttpClient getClient() {
         return client;
+    }
+
+    protected CommunicatorConfiguration getConfig() {
+        return config;
     }
 
     protected Response makeApiCall(Request request) throws Exception {
