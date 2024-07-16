@@ -52,6 +52,7 @@ public class CommerceCaseApiClient extends BaseApiClient {
             Request request = new Request.Builder()
                     .url(url)
                     .post(formBody)
+                    .header("Content-Type", "application/json")
                     .build();
 
             request = this.getRequestHeaderGenerator().generateAdditionalRequestHeaders(request);
@@ -147,8 +148,7 @@ public class CommerceCaseApiClient extends BaseApiClient {
         }
     }
 
-    // TODO: doesnt work yet, need to figure out how to send the customer payload
-    public CommerceCaseResponse updateCommerceCaseRequest(String merchantId, String commerceCaseId,
+    public void updateCommerceCaseRequest(String merchantId, String commerceCaseId,
             Customer payload) {
         if (merchantId == null) {
             throw new IllegalArgumentException("Merchant ID is required");
@@ -171,10 +171,11 @@ public class CommerceCaseApiClient extends BaseApiClient {
             String jsonString = objectMapper.writeValueAsString(payload);
 
             RequestBody formBody = RequestBody.create("{\"customer\":" + jsonString + "}", JSON);
-            System.out.println("{\"customer\":" + jsonString + "}");
+
             Request request = new Request.Builder()
                     .url(url)
                     .patch(formBody)
+                    .header("Content-Type", "application/json; charset=utf-8")
                     .build();
 
             request = this.getRequestHeaderGenerator().generateAdditionalRequestHeaders(request);
@@ -184,11 +185,8 @@ public class CommerceCaseApiClient extends BaseApiClient {
                 System.out.println("Not successful");
                 throw new Exception("Unexpected code " + response);
             }
-            System.out.println(response.body().string());
 
-            return objectMapper.readValue(response.body().string(), CommerceCaseResponse.class);
         } catch (Exception e) {
-            System.out.println(e.getMessage());
             throw new RuntimeException("Error processing JSON", e);
         }
     }
