@@ -17,8 +17,8 @@ import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.time.OffsetDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 import java.io.Serializable;
@@ -85,7 +85,7 @@ public class CheckoutResponse implements Serializable {
   private List<PaymentInformationResponse> paymentInformation;
 
   public static final String JSON_PROPERTY_CREATION_DATE_TIME = "creationDateTime";
-  private OffsetDateTime creationDateTime;
+  private Date creationDateTime;
 
   public static final String JSON_PROPERTY_ALLOWED_PAYMENT_ACTIONS = "allowedPaymentActions";
   private List<AllowedPaymentActions> allowedPaymentActions;
@@ -384,7 +384,7 @@ public class CheckoutResponse implements Serializable {
     this.paymentInformation = paymentInformation;
   }
 
-  public CheckoutResponse creationDateTime(OffsetDateTime creationDateTime) {
+  public CheckoutResponse creationDateTime(Date creationDateTime) {
 
     this.creationDateTime = creationDateTime;
     return this;
@@ -408,13 +408,13 @@ public class CheckoutResponse implements Serializable {
   @JsonProperty(JSON_PROPERTY_CREATION_DATE_TIME)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public OffsetDateTime getCreationDateTime() {
+  public Date getCreationDateTime() {
     return creationDateTime;
   }
 
   @JsonProperty(JSON_PROPERTY_CREATION_DATE_TIME)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setCreationDateTime(OffsetDateTime creationDateTime) {
+  public void setCreationDateTime(Date creationDateTime) {
     this.creationDateTime = creationDateTime;
   }
 

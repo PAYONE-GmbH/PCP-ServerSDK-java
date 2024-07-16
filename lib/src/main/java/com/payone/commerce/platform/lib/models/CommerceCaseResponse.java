@@ -17,8 +17,8 @@ import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.time.OffsetDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 import java.io.Serializable;
@@ -54,7 +54,7 @@ public class CommerceCaseResponse implements Serializable {
   private List<CheckoutResponse> checkouts;
 
   public static final String JSON_PROPERTY_CREATION_DATE_TIME = "creationDateTime";
-  private OffsetDateTime creationDateTime;
+  private Date creationDateTime;
 
   public CommerceCaseResponse() {
   }
@@ -169,7 +169,7 @@ public class CommerceCaseResponse implements Serializable {
     this.checkouts = checkouts;
   }
 
-  public CommerceCaseResponse creationDateTime(OffsetDateTime creationDateTime) {
+  public CommerceCaseResponse creationDateTime(Date creationDateTime) {
 
     this.creationDateTime = creationDateTime;
     return this;
@@ -193,13 +193,13 @@ public class CommerceCaseResponse implements Serializable {
   @JsonProperty(JSON_PROPERTY_CREATION_DATE_TIME)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public OffsetDateTime getCreationDateTime() {
+  public Date getCreationDateTime() {
     return creationDateTime;
   }
 
   @JsonProperty(JSON_PROPERTY_CREATION_DATE_TIME)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setCreationDateTime(OffsetDateTime creationDateTime) {
+  public void setCreationDateTime(Date creationDateTime) {
     this.creationDateTime = creationDateTime;
   }
 

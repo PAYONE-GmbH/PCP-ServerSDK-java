@@ -44,9 +44,9 @@ public class RequestHeaderGenerator {
     public Request generateAdditionalRequestHeaders(Request request) throws Exception {
         Headers headers = request.headers();
         Builder headersBuilder = headers.newBuilder();
-        Date date = new Date();
+
         if (headersBuilder.get(DATE_HEADER_NAME) == null) {
-            headersBuilder.add(DATE_HEADER_NAME, date);
+            headersBuilder.add(DATE_HEADER_NAME, new Date());
         }
         if (headersBuilder.get(SERVER_META_INFO_HEADER_NAME) == null) {
             headersBuilder.add(SERVER_META_INFO_HEADER_NAME, getServerMetaInfo());

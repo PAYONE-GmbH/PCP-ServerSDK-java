@@ -11,8 +11,11 @@ import java.util.Map;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.payone.commerce.platform.lib.CommunicatorConfiguration;
+import com.payone.commerce.platform.lib.models.CommerceCaseResponse;
 import com.payone.commerce.platform.lib.models.CreateCommerceCaseRequest;
 import com.payone.commerce.platform.lib.models.CreateCommerceCaseResponse;
+import com.payone.commerce.platform.lib.models.Customer;
+import com.payone.commerce.platform.lib.models.GetCommerceCasesQuery;
 
 import okhttp3.HttpUrl;
 import okhttp3.Request;
@@ -64,12 +67,12 @@ public class CommerceCaseApiClient extends BaseApiClient {
         }
     }
 
-    public List<CreateCommerceCaseResponse> getAllCommerceCaseRequest(String merchantId) {
+    public List<CommerceCaseResponse> getAllCommerceCaseRequest(String merchantId) {
         return getAllCommerceCaseRequest(merchantId, null);
     }
 
-    public List<CreateCommerceCaseResponse> getAllCommerceCaseRequest(String merchantId,
-            Map<String, String> queryParams) {
+    public List<CommerceCaseResponse> getAllCommerceCaseRequest(String merchantId,
+            GetCommerceCasesQuery queryParams) {
         if (merchantId == null) {
             throw new IllegalArgumentException("Merchant ID is required");
         }
@@ -82,7 +85,7 @@ public class CommerceCaseApiClient extends BaseApiClient {
                 .addPathSegment(DOMAIN);
 
         if (queryParams != null) {
-            for (Map.Entry<String, String> entry : queryParams.entrySet()) {
+            for (Map.Entry<String, String> entry : queryParams.toQueryMap().entrySet()) {
                 urlBuilder.addQueryParameter(entry.getKey(), entry.getValue());
             }
         }
@@ -100,14 +103,14 @@ public class CommerceCaseApiClient extends BaseApiClient {
 
             ObjectMapper objectMapper = new ObjectMapper();
             return objectMapper.readValue(response.body().string(),
-                    new TypeReference<List<CreateCommerceCaseResponse>>() {
+                    new TypeReference<List<CommerceCaseResponse>>() {
                     });
         } catch (Exception e) {
             throw new RuntimeException("Error processing JSON", e);
         }
     }
 
-    public CreateCommerceCaseResponse getCommerceCaseRequest(String merchantId,
+    public CommerceCaseResponse getCommerceCaseRequest(String merchantId,
             String commerceCaseId) {
         if (merchantId == null) {
             throw new IllegalArgumentException("Merchant ID is required");
@@ -137,9 +140,55 @@ public class CommerceCaseApiClient extends BaseApiClient {
             Response response = this.makeApiCall(request);
 
             ObjectMapper objectMapper = new ObjectMapper();
-            return objectMapper.readValue(response.body().string(), CreateCommerceCaseResponse.class);
+            return objectMapper.readValue(response.body().string(), CommerceCaseResponse.class);
 
         } catch (Exception e) {
+            throw new RuntimeException("Error processing JSON", e);
+        }
+    }
+
+    // TODO: doesnt work yet, need to figure out how to send the customer payload
+    public CommerceCaseResponse updateCommerceCaseRequest(String merchantId, String commerceCaseId,
+            Customer payload) {
+        if (merchantId == null) {
+            throw new IllegalArgumentException("Merchant ID is required");
+        }
+        if (commerceCaseId == null) {
+            throw new IllegalArgumentException("Commerce Case ID is required");
+        }
+
+        HttpUrl url = new HttpUrl.Builder()
+                .scheme("https")
+                .host(this.getConfig().getHost())
+                .addPathSegment("v1")
+                .addPathSegment(merchantId)
+                .addPathSegment(DOMAIN)
+                .addPathSegment(commerceCaseId)
+                .build();
+
+        try {
+            ObjectMapper objectMapper = new ObjectMapper();
+            String jsonString = objectMapper.writeValueAsString(payload);
+
+            RequestBody formBody = RequestBody.create("{\"customer\":" + jsonString + "}", JSON);
+            System.out.println("{\"customer\":" + jsonString + "}");
+            Request request = new Request.Builder()
+                    .url(url)
+                    .patch(formBody)
+                    .build();
+
+            request = this.getRequestHeaderGenerator().generateAdditionalRequestHeaders(request);
+
+            Response response = this.getClient().newCall(request).execute();
+            if (!response.isSuccessful()) {
+                System.out.println("Not successful");
+                throw new Exception("Unexpected code " + response);
+            }
+            System.out.println(response.body().string());
+
+            return objectMapper.readValue(response.body().string(), CommerceCaseResponse.class);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
             throw new RuntimeException("Error processing JSON", e);
         }
     }
