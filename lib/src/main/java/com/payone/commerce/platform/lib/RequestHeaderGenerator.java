@@ -110,7 +110,6 @@ public class RequestHeaderGenerator {
         ServerMetaInfo meta = new ServerMetaInfo();
         ObjectMapper objectMapper = new ObjectMapper();
         String jsonString = objectMapper.writeValueAsString(meta);
-        System.out.println(jsonString);
         return Base64.getEncoder().encodeToString(jsonString.getBytes(StandardCharsets.UTF_8));
     }
 
