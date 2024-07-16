@@ -19,12 +19,12 @@ import okhttp3.Request;
 public class RequestHeaderGenerator {
     private static final String ALGORITHM = "HmacSHA256";
     private static final String WHITESPACE_REGEX = "\\r?\\n[\\h]*";
-
-    private final CommunicatorConfiguration config;
     private final String DATE_HEADER_NAME = "Date";
     private final String SERVER_META_INFO_HEADER_NAME = "X-GCS-ServerMetaInfo";
     private final String CLIENT_META_INFO_HEADER_NAME = "X-GCS-ClientMetaInfo";
     private final String AUTHORIZATION_HEADER_NAME = "Authorization";
+
+    private final CommunicatorConfiguration config;
     private final Mac mac;
 
     public RequestHeaderGenerator(CommunicatorConfiguration config) throws InvalidKeyException {
@@ -72,7 +72,7 @@ public class RequestHeaderGenerator {
         }
         stringToSign.append("\n");
         // 3. Date
-        stringToSign.append(headersBuilder.get("Date"));
+        stringToSign.append(headersBuilder.get(DATE_HEADER_NAME));
         stringToSign.append("\n");
         // 4. Canonicalized Headers (starting with X-GCS, sorted by names)
         if (headersBuilder.get(CLIENT_META_INFO_HEADER_NAME) != null) {

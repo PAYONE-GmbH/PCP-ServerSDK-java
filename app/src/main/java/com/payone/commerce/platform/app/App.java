@@ -3,11 +3,13 @@
  */
 package com.payone.commerce.platform.app;
 
+import java.security.InvalidKeyException;
+
 import com.payone.commerce.platform.lib.CommunicatorConfiguration;
 import com.payone.commerce.platform.lib.endpoints.CommerceCaseApiClient;
 
 public class App {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InvalidKeyException {
 
         String API_KEY = System.getenv("API_KEY");
         String API_SECRET = System.getenv("API_SECRET");
