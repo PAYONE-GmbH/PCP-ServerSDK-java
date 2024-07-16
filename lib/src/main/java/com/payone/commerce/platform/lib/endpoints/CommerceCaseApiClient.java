@@ -52,7 +52,7 @@ public class CommerceCaseApiClient extends BaseApiClient {
             Request request = new Request.Builder()
                     .url(url)
                     .post(formBody)
-                    .header("Content-Type", "application/json")
+                    .header("Content-Type", JSON.toString())
                     .build();
 
             request = this.getRequestHeaderGenerator().generateAdditionalRequestHeaders(request);
@@ -175,7 +175,7 @@ public class CommerceCaseApiClient extends BaseApiClient {
             Request request = new Request.Builder()
                     .url(url)
                     .patch(formBody)
-                    .header("Content-Type", "application/json; charset=utf-8")
+                    .header("Content-Type", JSON.toString())
                     .build();
 
             request = this.getRequestHeaderGenerator().generateAdditionalRequestHeaders(request);
