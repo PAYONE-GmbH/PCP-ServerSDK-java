@@ -73,28 +73,26 @@ public class RequestHeaderGenerator {
         }
         stringToSign.append("\n");
         // 3. Date
-        stringToSign.append(headersBuilder.get(DATE_HEADER_NAME));
-        stringToSign.append("\n");
+        stringToSign.append(headersBuilder.get(DATE_HEADER_NAME))
+                .append("\n");
         // 4. Canonicalized Headers (starting with X-GCS, sorted by names)
         if (headersBuilder.get(CLIENT_META_INFO_HEADER_NAME) != null) {
-            stringToSign.append(CLIENT_META_INFO_HEADER_NAME.toLowerCase());
-            stringToSign.append(":");
-            stringToSign
-                    .append(headersBuilder.get(CLIENT_META_INFO_HEADER_NAME).replaceAll(WHITESPACE_REGEX, " ").trim());
-            stringToSign.append("\n");
+            stringToSign.append(CLIENT_META_INFO_HEADER_NAME.toLowerCase())
+                    .append(":")
+                    .append(headersBuilder.get(CLIENT_META_INFO_HEADER_NAME).replaceAll(WHITESPACE_REGEX, " ").trim())
+                    .append("\n");
         }
         if (headersBuilder.get(SERVER_META_INFO_HEADER_NAME) != null) {
-            stringToSign.append(SERVER_META_INFO_HEADER_NAME.toLowerCase());
-            stringToSign.append(":");
-            stringToSign
-                    .append(headersBuilder.get(SERVER_META_INFO_HEADER_NAME).replaceAll(WHITESPACE_REGEX, " ").trim());
-            stringToSign.append("\n");
+            stringToSign.append(SERVER_META_INFO_HEADER_NAME.toLowerCase())
+                    .append(":")
+                    .append(headersBuilder.get(SERVER_META_INFO_HEADER_NAME).replaceAll(WHITESPACE_REGEX, " ").trim())
+                    .append("\n");
         }
         // 5. Canonicalized Resource (has to include query parameters)
         stringToSign.append(request.url().encodedPath().toString());
         if (request.url().encodedQuery() != null) {
-            stringToSign.append("?");
-            stringToSign.append(request.url().encodedQuery());
+            stringToSign.append("?")
+                    .append(request.url().encodedQuery());
         }
         stringToSign.append("\n");
         String signature = this.sign(stringToSign.toString());
