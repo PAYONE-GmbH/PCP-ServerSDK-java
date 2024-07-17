@@ -19,12 +19,12 @@ import okhttp3.Response;
 public class BaseApiClient {
 
     private final OkHttpClient client = new OkHttpClient();
-    protected static final JsonMapper jsonMapper;
+    protected static final JsonMapper JSON_MAPPER;
     protected static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
 
     static {
-        jsonMapper = new JsonMapper();
-        jsonMapper.registerModule(new JavaTimeModule());
+        JSON_MAPPER = new JsonMapper();
+        JSON_MAPPER.registerModule(new JavaTimeModule());
     }
 
     private final RequestHeaderGenerator requestHeaderGenerator;
@@ -49,7 +49,7 @@ public class BaseApiClient {
     }
 
     protected JsonMapper getJsonMapper() {
-        return jsonMapper;
+        return JSON_MAPPER;
     }
 
     protected Response makeApiCall(Request request) throws Exception {

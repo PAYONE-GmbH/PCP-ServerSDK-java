@@ -7,7 +7,8 @@ import java.util.Base64;
 import java.util.Date;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.json.JsonMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.payone.commerce.platform.lib.utils.ServerMetaInfo;
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
@@ -17,8 +18,15 @@ import okhttp3.Headers.Builder;
 import okhttp3.Request;
 
 public class RequestHeaderGenerator {
+
     public static final String SERVER_META_INFO_HEADER_NAME = "X-GCS-ServerMetaInfo";
     public static final String CLIENT_META_INFO_HEADER_NAME = "X-GCS-ClientMetaInfo";
+    private static final JsonMapper JSON_MAPPER;
+
+    static {
+        JSON_MAPPER = new JsonMapper();
+        JSON_MAPPER.registerModule(new JavaTimeModule());
+    }
 
     private static final String ALGORITHM = "HmacSHA256";
     private static final String WHITESPACE_REGEX = "\\r?\\n[\\h]*";
@@ -106,11 +114,10 @@ public class RequestHeaderGenerator {
 
     private String getServerMetaInfo() {
         ServerMetaInfo meta = new ServerMetaInfo();
-        ObjectMapper objectMapper = new ObjectMapper();
         String jsonString;
 
         try {
-            jsonString = objectMapper.writeValueAsString(meta);
+            jsonString = JSON_MAPPER.writeValueAsString(meta);
             return Base64.getEncoder().encodeToString(jsonString.getBytes(StandardCharsets.UTF_8));
         } catch (JsonProcessingException e) {
             throw new RuntimeException(
