@@ -8,6 +8,8 @@ import java.security.InvalidKeyException;
 
 import com.payone.commerce.platform.lib.CommunicatorConfiguration;
 import com.payone.commerce.platform.lib.RequestHeaderGenerator;
+import com.fasterxml.jackson.databind.json.JsonMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
@@ -17,7 +19,13 @@ import okhttp3.Response;
 public class BaseApiClient {
 
     private final OkHttpClient client = new OkHttpClient();
+    protected static final JsonMapper jsonMapper;
     protected static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+
+    static {
+        jsonMapper = new JsonMapper();
+        jsonMapper.registerModule(new JavaTimeModule());
+    }
 
     private final RequestHeaderGenerator requestHeaderGenerator;
     private final CommunicatorConfiguration config;
@@ -38,6 +46,10 @@ public class BaseApiClient {
 
     protected CommunicatorConfiguration getConfig() {
         return config;
+    }
+
+    protected JsonMapper getJsonMapper() {
+        return jsonMapper;
     }
 
     protected Response makeApiCall(Request request) throws Exception {

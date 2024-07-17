@@ -6,8 +6,6 @@ import java.util.List;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.payone.commerce.platform.lib.ApiResponseException;
 import com.payone.commerce.platform.lib.CommunicatorConfiguration;
 import com.payone.commerce.platform.lib.models.CheckoutResponse;
@@ -49,11 +47,9 @@ public class CheckoutApiClient extends BaseApiClient {
                 .addPathSegment("checkouts")
                 .build();
 
-        ObjectMapper objectMapper = new ObjectMapper();
-        objectMapper.registerModule(new JavaTimeModule());
         String jsonString = null;
         try {
-            jsonString = objectMapper.writeValueAsString(payload);
+            jsonString = getJsonMapper().writeValueAsString(payload);
         } catch (JsonProcessingException e) {
             throw new RuntimeException("Failed to encode payload as json", e);
         }
@@ -75,10 +71,10 @@ public class CheckoutApiClient extends BaseApiClient {
                 if (response.code() != 400) {
                     throw new RuntimeException("Api error: " + response.code());
                 }
-                ErrorResponse error = objectMapper.readValue(response.body().string(), ErrorResponse.class);
+                ErrorResponse error = getJsonMapper().readValue(response.body().string(), ErrorResponse.class);
                 throw new ApiResponseException(error);
             }
-            return objectMapper.readValue(response.body().string(), CreateCheckoutResponse.class);
+            return getJsonMapper().readValue(response.body().string(), CreateCheckoutResponse.class);
         } catch (JsonMappingException e) {
             throw new RuntimeException("Excepted valid JSON response, but failed to parse", e);
         }
@@ -116,12 +112,11 @@ public class CheckoutApiClient extends BaseApiClient {
         Response response = this.getClient().newCall(request).execute();
 
         try {
-            ObjectMapper objectMapper = new ObjectMapper();
             if (!response.isSuccessful()) {
-                ErrorResponse error = objectMapper.readValue(response.body().string(), ErrorResponse.class);
+                ErrorResponse error = getJsonMapper().readValue(response.body().string(), ErrorResponse.class);
                 throw new ApiResponseException(error);
             }
-            return objectMapper.readValue(response.body().string(), CheckoutResponse.class);
+            return getJsonMapper().readValue(response.body().string(), CheckoutResponse.class);
         } catch (JsonMappingException e) {
             throw new RuntimeException("Excepted valid JSON response, but failed to parse", e);
         }
@@ -155,11 +150,9 @@ public class CheckoutApiClient extends BaseApiClient {
                 .addPathSegment(checkoutId)
                 .build();
 
-        ObjectMapper objectMapper = new ObjectMapper();
-        objectMapper.registerModule(new JavaTimeModule());
         String jsonString = null;
         try {
-            jsonString = objectMapper.writeValueAsString(payload);
+            jsonString = getJsonMapper().writeValueAsString(payload);
         } catch (JsonProcessingException e) {
             throw new RuntimeException("Failed to encode payload as json", e);
         }
@@ -176,7 +169,7 @@ public class CheckoutApiClient extends BaseApiClient {
 
         try {
             if (!response.isSuccessful()) {
-                ErrorResponse error = objectMapper.readValue(response.body().string(), ErrorResponse.class);
+                ErrorResponse error = getJsonMapper().readValue(response.body().string(), ErrorResponse.class);
                 throw new ApiResponseException(error);
             }
         } catch (JsonProcessingException e) {
@@ -217,7 +210,7 @@ public class CheckoutApiClient extends BaseApiClient {
 
         try {
             if (!response.isSuccessful()) {
-                ErrorResponse error = new ObjectMapper().readValue(response.body().string(), ErrorResponse.class);
+                ErrorResponse error = getJsonMapper().readValue(response.body().string(), ErrorResponse.class);
                 throw new ApiResponseException(error);
             }
         } catch (JsonMappingException e) {
