@@ -41,7 +41,7 @@ public class RequestHeaderGenerator {
         }
     }
 
-    public Request generateAdditionalRequestHeaders(Request request) throws Exception {
+    public Request generateAdditionalRequestHeaders(Request request) {
         Headers headers = request.headers();
         Builder headersBuilder = headers.newBuilder();
 
@@ -63,7 +63,7 @@ public class RequestHeaderGenerator {
 
     }
 
-    private String getAuthHeader(Request request, Builder headersBuilder) throws Exception {
+    private String getAuthHeader(Request request, Builder headersBuilder) {
         // 1. method
         StringBuilder stringToSign = new StringBuilder(request.method());
         stringToSign.append("\n");
@@ -104,11 +104,19 @@ public class RequestHeaderGenerator {
         return Base64.getEncoder().encodeToString(hash);
     }
 
-    private String getServerMetaInfo() throws JsonProcessingException {
+    private String getServerMetaInfo() {
         ServerMetaInfo meta = new ServerMetaInfo();
         ObjectMapper objectMapper = new ObjectMapper();
-        String jsonString = objectMapper.writeValueAsString(meta);
-        return Base64.getEncoder().encodeToString(jsonString.getBytes(StandardCharsets.UTF_8));
+        String jsonString;
+
+        try {
+            jsonString = objectMapper.writeValueAsString(meta);
+            return Base64.getEncoder().encodeToString(jsonString.getBytes(StandardCharsets.UTF_8));
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(
+                    "Server Meta Info must be encodable as JSON, this is likely an internal bug of the java PCP SDK",
+                    e);
+        }
     }
 
     private String getClientMetaInfo() {

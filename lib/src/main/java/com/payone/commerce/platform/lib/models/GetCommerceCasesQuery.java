@@ -6,7 +6,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-public class GetCommerceCasesQuery {
+import com.payone.commerce.platform.lib.utils.QueryConfig;
+
+public class GetCommerceCasesQuery implements QueryConfig {
     private Integer offset = null;
     private String size = null;
     private String fromDate = null;
