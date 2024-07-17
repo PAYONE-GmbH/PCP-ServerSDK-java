@@ -28,8 +28,6 @@ import okhttp3.Response;
 
 public class CommerceCaseApiClient extends BaseApiClient {
 
-    private final String DOMAIN = "commerce-cases";
-
     public CommerceCaseApiClient(CommunicatorConfiguration config) throws InvalidKeyException {
         super(config);
     }
@@ -45,7 +43,7 @@ public class CommerceCaseApiClient extends BaseApiClient {
                 .host(this.getConfig().getHost())
                 .addPathSegment("v1")
                 .addPathSegment(merchantId)
-                .addPathSegment(DOMAIN)
+                .addPathSegment("commerce-cases")
                 .build();
 
         String jsonString = getJsonMapper().writeValueAsString(payload);
@@ -93,7 +91,7 @@ public class CommerceCaseApiClient extends BaseApiClient {
                 .host(this.getConfig().getHost())
                 .addPathSegment("v1")
                 .addPathSegment(merchantId)
-                .addPathSegment(DOMAIN);
+                .addPathSegment("commerce-cases");
 
         if (queryParams != null) {
             for (Map.Entry<String, String> entry : queryParams.toQueryMap().entrySet()) {
@@ -142,7 +140,7 @@ public class CommerceCaseApiClient extends BaseApiClient {
                 .host(this.getConfig().getHost())
                 .addPathSegment("v1")
                 .addPathSegment(merchantId)
-                .addPathSegment(DOMAIN)
+                .addPathSegment("commerce-cases")
                 .addPathSegment(commerceCaseId);
 
         HttpUrl url = urlBuilder.build();
@@ -185,7 +183,7 @@ public class CommerceCaseApiClient extends BaseApiClient {
                 .host(this.getConfig().getHost())
                 .addPathSegment("v1")
                 .addPathSegment(merchantId)
-                .addPathSegment(DOMAIN)
+                .addPathSegment("commerce-cases")
                 .addPathSegment(commerceCaseId)
                 .build();
 

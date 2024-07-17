@@ -5,8 +5,9 @@ package com.payone.commerce.platform.app;
 
 import java.security.InvalidKeyException;
 
+import com.payone.commerce.platform.app.examples.CheckoutApiExample;
+import com.payone.commerce.platform.app.examples.CommerceCaseApiExample;
 import com.payone.commerce.platform.lib.CommunicatorConfiguration;
-import com.payone.commerce.platform.lib.endpoints.CommerceCaseApiClient;
 
 public class App {
     public static void main(String[] args) throws InvalidKeyException {
@@ -14,14 +15,23 @@ public class App {
         String API_KEY = System.getenv("API_KEY");
         String API_SECRET = System.getenv("API_SECRET");
 
-        CommunicatorConfiguration config = new CommunicatorConfiguration(API_KEY, API_SECRET);
+        CommunicatorConfiguration config = new CommunicatorConfiguration(API_KEY, API_SECRET,
+                "preprod.commerce-api.payone.com");
 
         try {
-            CommerceCaseApiClient client = new CommerceCaseApiClient(config);
+            CommerceCaseApiExample commerceCaseApiExample = new CommerceCaseApiExample(config);
+            commerceCaseApiExample.runPostOne();
+            commerceCaseApiExample.runGetAll();
+            commerceCaseApiExample.runGetOne();
+            commerceCaseApiExample.runUpdateOne();
 
-            String res = client.getAllCommerceCaseRequest("P1_18352_2013244");
+            CheckoutApiExample checkoutApiExample = new CheckoutApiExample(config);
+            checkoutApiExample.runPostOne();
+            checkoutApiExample.runGetAll();
+            checkoutApiExample.runGetOne();
+            checkoutApiExample.runUpdateOne();
+            checkoutApiExample.runDeleteOne();
 
-            System.out.println(res);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
