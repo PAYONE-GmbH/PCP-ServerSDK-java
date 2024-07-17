@@ -4,9 +4,10 @@ import java.io.IOException;
 import java.security.InvalidKeyException;
 import java.util.List;
 
-import javax.management.RuntimeErrorException;
-import javax.swing.text.StyledEditorKit;
-
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.payone.commerce.platform.lib.ApiResponseException;
 import com.payone.commerce.platform.lib.CommunicatorConfiguration;
 import com.payone.commerce.platform.lib.models.CheckoutResponse;
@@ -15,11 +16,6 @@ import com.payone.commerce.platform.lib.models.CreateCheckoutResponse;
 import com.payone.commerce.platform.lib.models.ErrorResponse;
 import com.payone.commerce.platform.lib.models.GetCheckoutsQuery;
 import com.payone.commerce.platform.lib.models.PatchCheckoutRequest;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.json.JsonMapper;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 import okhttp3.HttpUrl;
 import okhttp3.Request;
