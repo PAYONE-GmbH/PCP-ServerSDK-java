@@ -12,7 +12,6 @@ import java.util.Map;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.payone.commerce.platform.lib.ApiResponseException;
 import com.payone.commerce.platform.lib.CommunicatorConfiguration;
 import com.payone.commerce.platform.lib.models.CommerceCaseResponse;
@@ -49,8 +48,7 @@ public class CommerceCaseApiClient extends BaseApiClient {
                 .addPathSegment(DOMAIN)
                 .build();
 
-        ObjectMapper objectMapper = new ObjectMapper();
-        String jsonString = objectMapper.writeValueAsString(payload);
+        String jsonString = getJsonMapper().writeValueAsString(payload);
 
         RequestBody formBody = RequestBody.create(jsonString, JSON);
 
@@ -69,10 +67,10 @@ public class CommerceCaseApiClient extends BaseApiClient {
                 if (response.code() != 400) {
                     throw new RuntimeException("Api error: " + response.code());
                 }
-                ErrorResponse error = objectMapper.readValue(response.body().string(), ErrorResponse.class);
+                ErrorResponse error = getJsonMapper().readValue(response.body().string(), ErrorResponse.class);
                 throw new ApiResponseException(error);
             }
-            return objectMapper.readValue(response.body().string(), CreateCommerceCaseResponse.class);
+            return getJsonMapper().readValue(response.body().string(), CreateCommerceCaseResponse.class);
         } catch (JsonMappingException e) {
             throw new RuntimeException("Excepted valid JSON response, but failed to parse", e);
         }
@@ -113,17 +111,15 @@ public class CommerceCaseApiClient extends BaseApiClient {
 
         Response response = this.getClient().newCall(request).execute();
 
-        ObjectMapper objectMapper = new ObjectMapper();
-
         try {
             if (!response.isSuccessful()) {
                 if (response.code() != 400) {
                     throw new RuntimeException("Api error: " + response.code());
                 }
-                ErrorResponse error = objectMapper.readValue(response.body().string(), ErrorResponse.class);
+                ErrorResponse error = getJsonMapper().readValue(response.body().string(), ErrorResponse.class);
                 throw new ApiResponseException(error);
             }
-            return objectMapper.readValue(response.body().string(),
+            return getJsonMapper().readValue(response.body().string(),
                     new TypeReference<List<CommerceCaseResponse>>() {
                     });
         } catch (JsonProcessingException e) {
@@ -160,16 +156,15 @@ public class CommerceCaseApiClient extends BaseApiClient {
 
         Response response = this.getClient().newCall(request).execute();
 
-        ObjectMapper objectMapper = new ObjectMapper();
         try {
             if (!response.isSuccessful()) {
                 if (response.code() != 400) {
                     throw new RuntimeException("Api error: " + response.code());
                 }
-                ErrorResponse error = objectMapper.readValue(response.body().string(), ErrorResponse.class);
+                ErrorResponse error = getJsonMapper().readValue(response.body().string(), ErrorResponse.class);
                 throw new ApiResponseException(error);
             }
-            return objectMapper.readValue(response.body().string(), CommerceCaseResponse.class);
+            return getJsonMapper().readValue(response.body().string(), CommerceCaseResponse.class);
         } catch (JsonMappingException e) {
             throw new RuntimeException("Excepted valid JSON response, but failed to parse", e);
         }
@@ -194,10 +189,9 @@ public class CommerceCaseApiClient extends BaseApiClient {
                 .addPathSegment(commerceCaseId)
                 .build();
 
-        ObjectMapper objectMapper = new ObjectMapper();
         String jsonString = null;
         try {
-            jsonString = objectMapper.writeValueAsString(payload);
+            jsonString = getJsonMapper().writeValueAsString(payload);
         } catch (JsonProcessingException e) {
             throw new RuntimeException("Failed to encode payload as json", e);
         }
@@ -218,7 +212,7 @@ public class CommerceCaseApiClient extends BaseApiClient {
                 if (response.code() != 400) {
                     throw new RuntimeException("Api error: " + response.code());
                 }
-                ErrorResponse error = objectMapper.readValue(response.body().string(), ErrorResponse.class);
+                ErrorResponse error = getJsonMapper().readValue(response.body().string(), ErrorResponse.class);
                 throw new ApiResponseException(error);
             }
 
