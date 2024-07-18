@@ -99,7 +99,7 @@ public class CommerceCaseApiClient extends BaseApiClient {
             }
         }
         HttpUrl url = urlBuilder.build();
-        System.out.println(url.toString());
+
         Request request = new Request.Builder()
                 .url(url)
                 .get()

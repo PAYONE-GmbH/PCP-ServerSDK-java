@@ -59,8 +59,6 @@ public class CheckoutApiClient extends BaseApiClient {
                 .post(RequestBody.create(jsonString, JSON))
                 .header("Content-Type", JSON.toString())
                 .build();
-        System.out.println(request.url().toString());
-        System.out.println(request.headers().toString());
 
         request = this.getRequestHeaderGenerator().generateAdditionalRequestHeaders(request);
 
