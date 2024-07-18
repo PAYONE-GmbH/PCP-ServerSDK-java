@@ -11,20 +11,17 @@ import java.util.Map;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.payone.commerce.platform.lib.ApiResponseException;
 import com.payone.commerce.platform.lib.CommunicatorConfiguration;
 import com.payone.commerce.platform.lib.models.CommerceCaseResponse;
 import com.payone.commerce.platform.lib.models.CreateCommerceCaseRequest;
 import com.payone.commerce.platform.lib.models.CreateCommerceCaseResponse;
 import com.payone.commerce.platform.lib.models.Customer;
-import com.payone.commerce.platform.lib.models.ErrorResponse;
 import com.payone.commerce.platform.lib.queries.GetCommerceCasesQuery;
 
 import okhttp3.HttpUrl;
 import okhttp3.Request;
 import okhttp3.RequestBody;
-import okhttp3.Response;
 
 public class CommerceCaseApiClient extends BaseApiClient {
 
@@ -58,20 +55,7 @@ public class CommerceCaseApiClient extends BaseApiClient {
 
         request = this.getRequestHeaderGenerator().generateAdditionalRequestHeaders(request);
 
-        Response response = this.getClient().newCall(request).execute();
-
-        try {
-            if (!response.isSuccessful()) {
-                if (response.code() != 400) {
-                    throw new RuntimeException("Api error: " + response.code());
-                }
-                ErrorResponse error = getJsonMapper().readValue(response.body().string(), ErrorResponse.class);
-                throw new ApiResponseException(error);
-            }
-            return getJsonMapper().readValue(response.body().string(), CreateCommerceCaseResponse.class);
-        } catch (JsonMappingException e) {
-            throw new RuntimeException("Excepted valid JSON response, but failed to parse", e);
-        }
+        return this.makeApiCall(request, CreateCommerceCaseResponse.class);
 
     }
 
@@ -107,22 +91,8 @@ public class CommerceCaseApiClient extends BaseApiClient {
 
         request = this.getRequestHeaderGenerator().generateAdditionalRequestHeaders(request);
 
-        Response response = this.getClient().newCall(request).execute();
-
-        try {
-            if (!response.isSuccessful()) {
-                if (response.code() != 400) {
-                    throw new RuntimeException("Api error: " + response.code());
-                }
-                ErrorResponse error = getJsonMapper().readValue(response.body().string(), ErrorResponse.class);
-                throw new ApiResponseException(error);
-            }
-            return getJsonMapper().readValue(response.body().string(),
-                    new TypeReference<List<CommerceCaseResponse>>() {
-                    });
-        } catch (JsonProcessingException e) {
-            throw new RuntimeException("Excepted valid JSON response, but failed to parse", e);
-        }
+        return this.makeApiCall(request, new TypeReference<List<CommerceCaseResponse>>() {
+        });
 
     }
 
@@ -152,20 +122,7 @@ public class CommerceCaseApiClient extends BaseApiClient {
 
         request = this.getRequestHeaderGenerator().generateAdditionalRequestHeaders(request);
 
-        Response response = this.getClient().newCall(request).execute();
-
-        try {
-            if (!response.isSuccessful()) {
-                if (response.code() != 400) {
-                    throw new RuntimeException("Api error: " + response.code());
-                }
-                ErrorResponse error = getJsonMapper().readValue(response.body().string(), ErrorResponse.class);
-                throw new ApiResponseException(error);
-            }
-            return getJsonMapper().readValue(response.body().string(), CommerceCaseResponse.class);
-        } catch (JsonMappingException e) {
-            throw new RuntimeException("Excepted valid JSON response, but failed to parse", e);
-        }
+        return this.makeApiCall(request, CommerceCaseResponse.class);
 
     }
 
@@ -204,19 +161,7 @@ public class CommerceCaseApiClient extends BaseApiClient {
 
         request = this.getRequestHeaderGenerator().generateAdditionalRequestHeaders(request);
 
-        Response response = this.getClient().newCall(request).execute();
-        try {
-            if (!response.isSuccessful()) {
-                if (response.code() != 400) {
-                    throw new RuntimeException("Api error: " + response.code());
-                }
-                ErrorResponse error = getJsonMapper().readValue(response.body().string(), ErrorResponse.class);
-                throw new ApiResponseException(error);
-            }
-
-        } catch (JsonMappingException e) {
-            throw new RuntimeException("Excepted valid JSON response, but failed to parse", e);
-        }
+        this.makeApiCall(request);
 
     }
 }

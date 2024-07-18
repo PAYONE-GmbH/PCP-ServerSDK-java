@@ -7,14 +7,12 @@ package com.payone.commerce.platform.lib.endpoints;
 import java.io.IOException;
 import java.security.InvalidKeyException;
 
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.payone.commerce.platform.lib.ApiResponseException;
 import com.payone.commerce.platform.lib.CommunicatorConfiguration;
 import com.payone.commerce.platform.lib.models.CancelRequest;
 import com.payone.commerce.platform.lib.models.CancelResponse;
 import com.payone.commerce.platform.lib.models.DeliverRequest;
 import com.payone.commerce.platform.lib.models.DeliverResponse;
-import com.payone.commerce.platform.lib.models.ErrorResponse;
 import com.payone.commerce.platform.lib.models.OrderRequest;
 import com.payone.commerce.platform.lib.models.OrderResponse;
 import com.payone.commerce.platform.lib.models.ReturnRequest;
@@ -23,7 +21,6 @@ import com.payone.commerce.platform.lib.models.ReturnResponse;
 import okhttp3.HttpUrl;
 import okhttp3.Request;
 import okhttp3.RequestBody;
-import okhttp3.Response;
 
 public class OrderManagementCheckoutActionsApiClient extends BaseApiClient {
 
@@ -71,20 +68,8 @@ public class OrderManagementCheckoutActionsApiClient extends BaseApiClient {
 
         request = this.getRequestHeaderGenerator().generateAdditionalRequestHeaders(request);
 
-        Response response = this.getClient().newCall(request).execute();
+        return this.makeApiCall(request, OrderResponse.class);
 
-        try {
-            if (!response.isSuccessful()) {
-                if (response.code() != 400) {
-                    throw new RuntimeException("Api error: " + response.code());
-                }
-                ErrorResponse error = getJsonMapper().readValue(response.body().string(), ErrorResponse.class);
-                throw new ApiResponseException(error);
-            }
-            return getJsonMapper().readValue(response.body().string(), OrderResponse.class);
-        } catch (JsonMappingException e) {
-            throw new RuntimeException("Excepted valid JSON response, but failed to parse", e);
-        }
     }
 
     public DeliverResponse deliverOrder(String merchantId, String commerceCaseId,
@@ -127,20 +112,8 @@ public class OrderManagementCheckoutActionsApiClient extends BaseApiClient {
 
         request = this.getRequestHeaderGenerator().generateAdditionalRequestHeaders(request);
 
-        Response response = this.getClient().newCall(request).execute();
+        return this.makeApiCall(request, DeliverResponse.class);
 
-        try {
-            if (!response.isSuccessful()) {
-                if (response.code() != 400) {
-                    throw new RuntimeException("Api error: " + response.code());
-                }
-                ErrorResponse error = getJsonMapper().readValue(response.body().string(), ErrorResponse.class);
-                throw new ApiResponseException(error);
-            }
-            return getJsonMapper().readValue(response.body().string(), DeliverResponse.class);
-        } catch (JsonMappingException e) {
-            throw new RuntimeException("Excepted valid JSON response, but failed to parse", e);
-        }
     }
 
     public ReturnResponse returnOrder(String merchantId, String commerceCaseId,
@@ -183,20 +156,8 @@ public class OrderManagementCheckoutActionsApiClient extends BaseApiClient {
 
         request = this.getRequestHeaderGenerator().generateAdditionalRequestHeaders(request);
 
-        Response response = this.getClient().newCall(request).execute();
+        return this.makeApiCall(request, ReturnResponse.class);
 
-        try {
-            if (!response.isSuccessful()) {
-                if (response.code() != 400) {
-                    throw new RuntimeException("Api error: " + response.code());
-                }
-                ErrorResponse error = getJsonMapper().readValue(response.body().string(), ErrorResponse.class);
-                throw new ApiResponseException(error);
-            }
-            return getJsonMapper().readValue(response.body().string(), ReturnResponse.class);
-        } catch (JsonMappingException e) {
-            throw new RuntimeException("Excepted valid JSON response, but failed to parse", e);
-        }
     }
 
     public CancelResponse cancelOrder(String merchantId, String commerceCaseId,
@@ -239,20 +200,8 @@ public class OrderManagementCheckoutActionsApiClient extends BaseApiClient {
 
         request = this.getRequestHeaderGenerator().generateAdditionalRequestHeaders(request);
 
-        Response response = this.getClient().newCall(request).execute();
+        return this.makeApiCall(request, CancelResponse.class);
 
-        try {
-            if (!response.isSuccessful()) {
-                if (response.code() != 400) {
-                    throw new RuntimeException("Api error: " + response.code());
-                }
-                ErrorResponse error = getJsonMapper().readValue(response.body().string(), ErrorResponse.class);
-                throw new ApiResponseException(error);
-            }
-            return getJsonMapper().readValue(response.body().string(), CancelResponse.class);
-        } catch (JsonMappingException e) {
-            throw new RuntimeException("Excepted valid JSON response, but failed to parse", e);
-        }
     }
 
 }

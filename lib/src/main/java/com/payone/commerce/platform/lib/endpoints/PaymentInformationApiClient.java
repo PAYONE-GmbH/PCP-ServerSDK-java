@@ -7,17 +7,14 @@ package com.payone.commerce.platform.lib.endpoints;
 import java.io.IOException;
 import java.security.InvalidKeyException;
 
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.payone.commerce.platform.lib.ApiResponseException;
 import com.payone.commerce.platform.lib.CommunicatorConfiguration;
-import com.payone.commerce.platform.lib.models.ErrorResponse;
 import com.payone.commerce.platform.lib.models.PaymentInformationRequest;
 import com.payone.commerce.platform.lib.models.PaymentInformationResponse;
 
 import okhttp3.HttpUrl;
 import okhttp3.Request;
 import okhttp3.RequestBody;
-import okhttp3.Response;
 
 public class PaymentInformationApiClient extends BaseApiClient {
 
@@ -65,21 +62,8 @@ public class PaymentInformationApiClient extends BaseApiClient {
 
         request = this.getRequestHeaderGenerator().generateAdditionalRequestHeaders(request);
 
-        Response response = this.getClient().newCall(request).execute();
+        return this.makeApiCall(request, PaymentInformationResponse.class);
 
-        try {
-            String body = response.body().string();
-            if (!response.isSuccessful()) {
-                if (response.code() != 400) {
-                    throw new RuntimeException("Api error: " + response.code());
-                }
-                ErrorResponse error = getJsonMapper().readValue(body, ErrorResponse.class);
-                throw new ApiResponseException(error);
-            }
-            return getJsonMapper().readValue(body, PaymentInformationResponse.class);
-        } catch (JsonMappingException e) {
-            throw new RuntimeException("Excepted valid JSON response, but failed to parse", e);
-        }
     }
 
     public PaymentInformationResponse getPaymentInformation(String merchantId, String commerceCaseId,
@@ -118,21 +102,8 @@ public class PaymentInformationApiClient extends BaseApiClient {
 
         request = this.getRequestHeaderGenerator().generateAdditionalRequestHeaders(request);
 
-        Response response = this.getClient().newCall(request).execute();
+        return this.makeApiCall(request, PaymentInformationResponse.class);
 
-        try {
-            String body = response.body().string();
-            if (!response.isSuccessful()) {
-                if (response.code() != 400) {
-                    throw new RuntimeException("Api error: " + response.code());
-                }
-                ErrorResponse error = getJsonMapper().readValue(body, ErrorResponse.class);
-                throw new ApiResponseException(error);
-            }
-            return getJsonMapper().readValue(body, PaymentInformationResponse.class);
-        } catch (JsonMappingException e) {
-            throw new RuntimeException("Excepted valid JSON response, but failed to parse", e);
-        }
     }
 
 }
