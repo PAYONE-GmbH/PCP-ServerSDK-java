@@ -2,9 +2,8 @@ package com.payone.commerce.platform.lib.queries;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.ArrayList;
 
 import com.payone.commerce.platform.lib.models.ExtendedCheckoutStatus;
 import com.payone.commerce.platform.lib.models.PaymentChannel;
@@ -31,10 +30,10 @@ public class GetCheckoutsQuery implements QueryConfig {
   private String checkoutId;
   private String merchantReference;
   private String merchantCustomerId;
-  private Set<Integer> includePaymentProductId;
-  private Set<StatusCheckout> includeCheckoutStatus;
-  private Set<ExtendedCheckoutStatus> includeExtendedCheckoutStatus;
-  private Set<PaymentChannel> includePaymentChannel;
+  private List<Integer> includePaymentProductId;
+  private List<StatusCheckout> includeCheckoutStatus;
+  private List<ExtendedCheckoutStatus> includeExtendedCheckoutStatus;
+  private List<PaymentChannel> includePaymentChannel;
   private String paymentReference;
   private String paymentId;
   private String firstName;
@@ -142,22 +141,23 @@ public class GetCheckoutsQuery implements QueryConfig {
     return this;
   }
 
-  public GetCheckoutsQuery setIncludePaymentProductId(Set<Integer> includePaymentProductId) {
+  public GetCheckoutsQuery setIncludePaymentProductId(List<Integer> includePaymentProductId) {
     this.includePaymentProductId = includePaymentProductId;
     return this;
   }
 
-  public GetCheckoutsQuery setIncludeCheckoutStatus(Set<StatusCheckout> includeCheckoutStatus) {
+  public GetCheckoutsQuery setIncludeCheckoutStatus(List<StatusCheckout> includeCheckoutStatus) {
     this.includeCheckoutStatus = includeCheckoutStatus;
     return this;
   }
 
-  public GetCheckoutsQuery setIncludeExtendedCheckoutStatus(Set<ExtendedCheckoutStatus> includeExtendedCheckoutStatus) {
+  public GetCheckoutsQuery setIncludeExtendedCheckoutStatus(
+      List<ExtendedCheckoutStatus> includeExtendedCheckoutStatus) {
     this.includeExtendedCheckoutStatus = includeExtendedCheckoutStatus;
     return this;
   }
 
-  public GetCheckoutsQuery setIncludePaymentChannel(Set<PaymentChannel> includePaymentChannel) {
+  public GetCheckoutsQuery setIncludePaymentChannel(List<PaymentChannel> includePaymentChannel) {
     this.includePaymentChannel = includePaymentChannel;
     return this;
   }
@@ -278,19 +278,19 @@ public class GetCheckoutsQuery implements QueryConfig {
     return this.merchantCustomerId;
   }
 
-  public Set<Integer> getIncludePaymentProductId() {
+  public List<Integer> getIncludePaymentProductId() {
     return this.includePaymentProductId;
   }
 
-  public Set<StatusCheckout> getIncludeCheckoutStatus() {
+  public List<StatusCheckout> getIncludeCheckoutStatus() {
     return this.includeCheckoutStatus;
   }
 
-  public Set<ExtendedCheckoutStatus> getIncludeExtendedCheckoutStatus() {
+  public List<ExtendedCheckoutStatus> getIncludeExtendedCheckoutStatus() {
     return this.includeExtendedCheckoutStatus;
   }
 
-  public Set<PaymentChannel> getIncludePaymentChannel() {
+  public List<PaymentChannel> getIncludePaymentChannel() {
     return this.includePaymentChannel;
   }
 

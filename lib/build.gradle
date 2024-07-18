@@ -24,19 +24,26 @@ dependencies {
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
 
-tasks.named('test') {
-    // Use JUnit Platform for unit tests.
-    useJUnitPlatform()
-}
-
 jacoco {
     toolVersion = "0.8.8" // Specify the version of JaCoCo you want to use
 }
 
-jacocoTestReport {
-    dependsOn test // Ensure tests are run before generating the report
+tasks.test {
+    // Use JUnit Platform for unit tests.
+    useJUnitPlatform()
+}
+
+tasks.jacocoTestReport {
+    dependsOn(tasks.test) 
     reports {
         xml.required.set(true)
         html.required.set(true)
+    }
+    afterEvaluate {
+        classDirectories.setFrom(files(classDirectories.files.collect {
+            fileTree(dir: it, exclude: [
+                "com/payone/**/models/*"
+            ])
+        }))    
     }
 }

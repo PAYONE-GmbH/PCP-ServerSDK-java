@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import com.payone.commerce.platform.lib.models.PaymentChannel;
 import com.payone.commerce.platform.lib.models.StatusCheckout;
@@ -18,8 +17,8 @@ public class GetCommerceCasesQuery implements QueryConfig {
     private String commerceCaseId = null;
     private String merchantReference = null;
     private String merchantCustomerId = null;
-    private Set<StatusCheckout> includeCheckoutStatus = null;
-    private Set<PaymentChannel> includePaymentChannel = null;
+    private List<StatusCheckout> includeCheckoutStatus = null;
+    private List<PaymentChannel> includePaymentChannel = null;
 
     public GetCommerceCasesQuery() {
 
@@ -60,12 +59,12 @@ public class GetCommerceCasesQuery implements QueryConfig {
         return this;
     }
 
-    public GetCommerceCasesQuery setIncludeCheckoutStatus(Set<StatusCheckout> includeCheckoutStatus) {
+    public GetCommerceCasesQuery setIncludeCheckoutStatus(List<StatusCheckout> includeCheckoutStatus) {
         this.includeCheckoutStatus = includeCheckoutStatus;
         return this;
     }
 
-    public GetCommerceCasesQuery setIncludePaymentChannel(Set<PaymentChannel> includePaymentChannel) {
+    public GetCommerceCasesQuery setIncludePaymentChannel(List<PaymentChannel> includePaymentChannel) {
         this.includePaymentChannel = includePaymentChannel;
         return this;
     }
@@ -98,11 +97,11 @@ public class GetCommerceCasesQuery implements QueryConfig {
         return merchantCustomerId;
     }
 
-    public Set<StatusCheckout> getIncludeCheckoutStatus() {
+    public List<StatusCheckout> getIncludeCheckoutStatus() {
         return includeCheckoutStatus;
     }
 
-    public Set<PaymentChannel> getIncludePaymentChannel() {
+    public List<PaymentChannel> getIncludePaymentChannel() {
         return includePaymentChannel;
     }
 
