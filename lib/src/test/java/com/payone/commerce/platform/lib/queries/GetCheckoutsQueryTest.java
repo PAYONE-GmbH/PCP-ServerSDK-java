@@ -1,0 +1,41 @@
+package com.payone.commerce.platform.lib.queries;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.util.Map;
+import java.util.Set;
+
+import org.junit.jupiter.api.Test;
+
+import com.payone.commerce.platform.lib.models.PaymentChannel;
+import com.payone.commerce.platform.lib.models.StatusCheckout;
+
+public class GetCheckoutsQueryTest {
+
+    @Test
+    void toQueryMap() {
+        GetCheckoutsQuery query = new GetCheckoutsQuery();
+        query.setOffset(1);
+        query.setSize(10);
+        query.setFromDate("2021-01-01");
+        query.setToDate("2021-01-31");
+        query.setCheckoutId("123456");
+        query.setMerchantReference("7890");
+        query.setMerchantCustomerId("1234");
+        query.setIncludeCheckoutStatus(Set.of(StatusCheckout.BILLED, StatusCheckout.CHARGEBACKED));
+        query.setIncludePaymentChannel(Set.of(PaymentChannel.ECOMMERCE, PaymentChannel.POS));
+
+        Map<String, String> queryMap = query.toQueryMap();
+        assertEquals("1", queryMap.get("offset"));
+        assertEquals("10", queryMap.get("size"));
+        assertEquals("2021-01-01", queryMap.get("fromDate"));
+        assertEquals("2021-01-31", queryMap.get("toDate"));
+        assertEquals("123456", queryMap.get("checkoutId"));
+        assertEquals("7890", queryMap.get("merchantReference"));
+        assertEquals("1234", queryMap.get("merchantCustomerId"));
+        assertEquals("BILLED,CHARGEBACKED", queryMap.get("includeCheckoutStatus"));
+        assertEquals("ECOMMERCE,POS", queryMap.get("includePaymentChannel"));
+
+    }
+
+}

@@ -1,4 +1,4 @@
-package com.payone.commerce.platform.lib.models;
+package com.payone.commerce.platform.lib.queries;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -6,11 +6,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import com.payone.commerce.platform.lib.models.PaymentChannel;
+import com.payone.commerce.platform.lib.models.StatusCheckout;
 import com.payone.commerce.platform.lib.utils.QueryConfig;
 
 public class GetCommerceCasesQuery implements QueryConfig {
     private Integer offset = null;
-    private String size = null;
+    private Integer size = null;
     private String fromDate = null;
     private String toDate = null;
     private String commerceCaseId = null;
@@ -28,7 +30,7 @@ public class GetCommerceCasesQuery implements QueryConfig {
         return this;
     }
 
-    public GetCommerceCasesQuery setSize(String size) {
+    public GetCommerceCasesQuery setSize(Integer size) {
         this.size = size;
         return this;
     }
@@ -72,7 +74,7 @@ public class GetCommerceCasesQuery implements QueryConfig {
         return offset;
     }
 
-    public String getSize() {
+    public Integer getSize() {
         return size;
     }
 
@@ -111,7 +113,7 @@ public class GetCommerceCasesQuery implements QueryConfig {
             query.put("offset", offset.toString());
         }
         if (size != null) {
-            query.put("size", size);
+            query.put("size", size.toString());
         }
         if (fromDate != null) {
             query.put("fromDate", fromDate);

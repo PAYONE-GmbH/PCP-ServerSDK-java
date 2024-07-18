@@ -19,7 +19,7 @@ import com.payone.commerce.platform.lib.models.CreateCommerceCaseRequest;
 import com.payone.commerce.platform.lib.models.CreateCommerceCaseResponse;
 import com.payone.commerce.platform.lib.models.Customer;
 import com.payone.commerce.platform.lib.models.ErrorResponse;
-import com.payone.commerce.platform.lib.models.GetCommerceCasesQuery;
+import com.payone.commerce.platform.lib.queries.GetCommerceCasesQuery;
 
 import okhttp3.HttpUrl;
 import okhttp3.Request;

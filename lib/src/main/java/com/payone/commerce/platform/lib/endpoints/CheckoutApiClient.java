@@ -12,8 +12,8 @@ import com.payone.commerce.platform.lib.models.CheckoutResponse;
 import com.payone.commerce.platform.lib.models.CreateCheckoutRequest;
 import com.payone.commerce.platform.lib.models.CreateCheckoutResponse;
 import com.payone.commerce.platform.lib.models.ErrorResponse;
-import com.payone.commerce.platform.lib.models.GetCheckoutsQuery;
 import com.payone.commerce.platform.lib.models.PatchCheckoutRequest;
+import com.payone.commerce.platform.lib.queries.GetCheckoutsQuery;
 
 import okhttp3.HttpUrl;
 import okhttp3.Request;
