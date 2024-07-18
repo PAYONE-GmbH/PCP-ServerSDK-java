@@ -40,7 +40,6 @@ public class ApiResponseMocks {
         return createErrorResponse(statusCode, List.of(apiError));
     }
 
-    @SuppressWarnings("deprecation")
     public static Response createErrorResponse(int statusCode, List<APIError> apiErrors)
             throws JsonProcessingException {
         ErrorResponse errorResponse = new ErrorResponse();
@@ -54,9 +53,8 @@ public class ApiResponseMocks {
                 .protocol(Protocol.HTTP_2)
                 .code(statusCode)
                 .message("")
-                .body(ResponseBody.create(
-                        MediaType.get("application/json; charset=utf-8"),
-                        jsonString))
+                .body(ResponseBody.create(jsonString,
+                        MediaType.get("application/json; charset=utf-8")))
                 .build();
     }
 }

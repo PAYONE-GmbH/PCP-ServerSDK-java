@@ -71,7 +71,7 @@ public class RequestHeaderGeneratorTest {
                 .add(RequestHeaderGenerator.CLIENT_META_INFO_HEADER_NAME, "client fixed")
                 .build();
         Request request = new Request.Builder()
-                .post(RequestBody.Companion.create(mediaType, ""))
+                .post(RequestBody.create("", mediaType))
                 .url("http://awesome-api.com/v1/commerce_cases")
                 .headers(headers)
                 .build();
