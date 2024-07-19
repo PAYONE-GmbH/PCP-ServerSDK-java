@@ -35,10 +35,8 @@ public class CheckoutApiClient extends BaseApiClient {
             throw new IllegalArgumentException("Commerce Case ID is required");
         }
         if (payload == null) {
-            throw new IllegalArgumentException("Checkout is required");
+            throw new IllegalArgumentException("Payload is required");
         }
-
-        System.out.println(this.getConfig().getHost());
 
         HttpUrl url = new HttpUrl.Builder()
                 .scheme("https")
