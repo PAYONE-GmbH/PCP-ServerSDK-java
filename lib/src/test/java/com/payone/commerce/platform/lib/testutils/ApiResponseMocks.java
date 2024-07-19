@@ -14,7 +14,6 @@ import okhttp3.Response;
 import okhttp3.ResponseBody;
 
 public class ApiResponseMocks {
-    @SuppressWarnings("deprecation")
     public static <T> Response createResponse(int statusCode, T clazz) throws JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();
         String jsonString = objectMapper.writeValueAsString(clazz);
@@ -25,8 +24,8 @@ public class ApiResponseMocks {
                 .code(statusCode)
                 .message("")
                 .body(ResponseBody.create(
-                        MediaType.get("application/json; charset=utf-8"),
-                        jsonString))
+                        jsonString,
+                        MediaType.get("application/json; charset=utf-8")))
                 .build();
     }
 

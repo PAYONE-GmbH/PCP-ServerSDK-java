@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.when;
 
 import java.io.IOException;
 import java.security.InvalidKeyException;
@@ -34,14 +35,15 @@ public class CheckoutApiClientTest {
         @DisplayName("given request was successful, then return response")
         void createCheckoutRequestSuccessful() throws InvalidKeyException, ApiResponseException, IOException {
 
-            CheckoutApiClient baseApiClient = spy(new CheckoutApiClient(CONFIG));
+            CheckoutApiClient checkoutApiClient = spy(new CheckoutApiClient(CONFIG));
             CreateCheckoutResponse expected = new CreateCheckoutResponse();
             Response response = ApiResponseMocks.createResponse(200, new CreateCheckoutResponse());
 
-            doReturn(response).when(baseApiClient).getResponse(any());
+            doReturn(response).when(checkoutApiClient).getResponse(any());
+            when(checkoutApiClient.getResponse(any())).thenReturn(response);
 
             CreateCheckoutRequest payload = new CreateCheckoutRequest();
-            CreateCheckoutResponse res = baseApiClient.createCheckoutRequest("1", "2", payload);
+            CreateCheckoutResponse res = checkoutApiClient.createCheckoutRequest("1", "2", payload);
 
             assertEquals(expected, res);
 
