@@ -54,7 +54,7 @@ public class ApplePaymentDataTokenHeaderInformation implements Serializable {
    * 
    * @return transactionId
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_TRANSACTION_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -80,7 +80,7 @@ public class ApplePaymentDataTokenHeaderInformation implements Serializable {
    * 
    * @return applicationData
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_APPLICATION_DATA)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 

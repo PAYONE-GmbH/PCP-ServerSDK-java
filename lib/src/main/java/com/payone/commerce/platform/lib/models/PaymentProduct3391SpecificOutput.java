@@ -58,7 +58,7 @@ public class PaymentProduct3391SpecificOutput implements Serializable {
    * 
    * @return installmentOptions
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_INSTALLMENT_OPTIONS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 

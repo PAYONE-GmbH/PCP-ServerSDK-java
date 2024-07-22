@@ -65,7 +65,7 @@ public class PaymentExecutionSpecificInput implements Serializable {
    * 
    * @return amountOfMoney
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_AMOUNT_OF_MONEY)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -90,7 +90,7 @@ public class PaymentExecutionSpecificInput implements Serializable {
    * 
    * @return shoppingCart
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_SHOPPING_CART)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 

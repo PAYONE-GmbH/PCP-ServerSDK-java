@@ -62,7 +62,7 @@ public class PaymentProduct840CustomerAccount implements Serializable {
    * 
    * @return companyName
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_COMPANY_NAME)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -87,7 +87,7 @@ public class PaymentProduct840CustomerAccount implements Serializable {
    * 
    * @return firstName
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_FIRST_NAME)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -113,7 +113,7 @@ public class PaymentProduct840CustomerAccount implements Serializable {
    * 
    * @return payerId
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_PAYER_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -138,7 +138,7 @@ public class PaymentProduct840CustomerAccount implements Serializable {
    * 
    * @return surname
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_SURNAME)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 

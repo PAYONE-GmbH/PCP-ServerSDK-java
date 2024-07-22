@@ -62,7 +62,7 @@ public class PaymentResponse implements Serializable {
    * 
    * @return paymentOutput
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_PAYMENT_OUTPUT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -87,7 +87,7 @@ public class PaymentResponse implements Serializable {
    * 
    * @return status
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_STATUS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -112,7 +112,7 @@ public class PaymentResponse implements Serializable {
    * 
    * @return statusOutput
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_STATUS_OUTPUT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -137,7 +137,7 @@ public class PaymentResponse implements Serializable {
    * 
    * @return id
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 

@@ -61,7 +61,7 @@ public class CompletePaymentRequest implements Serializable {
    * 
    * @return financingPaymentMethodSpecificInput
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_FINANCING_PAYMENT_METHOD_SPECIFIC_INPUT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -87,7 +87,7 @@ public class CompletePaymentRequest implements Serializable {
    * 
    * @return order
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_ORDER)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -112,7 +112,7 @@ public class CompletePaymentRequest implements Serializable {
    * 
    * @return device
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_DEVICE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 

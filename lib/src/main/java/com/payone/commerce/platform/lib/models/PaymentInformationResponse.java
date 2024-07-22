@@ -93,7 +93,7 @@ public class PaymentInformationResponse implements Serializable {
    * 
    * @return commerceCaseId
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_COMMERCE_CASE_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -118,7 +118,7 @@ public class PaymentInformationResponse implements Serializable {
    * 
    * @return checkoutId
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_CHECKOUT_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -143,7 +143,7 @@ public class PaymentInformationResponse implements Serializable {
    * 
    * @return merchantCustomerId
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_MERCHANT_CUSTOMER_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -168,7 +168,7 @@ public class PaymentInformationResponse implements Serializable {
    * 
    * @return paymentInformationId
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_PAYMENT_INFORMATION_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -193,7 +193,7 @@ public class PaymentInformationResponse implements Serializable {
    * 
    * @return paymentChannel
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_PAYMENT_CHANNEL)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -221,7 +221,7 @@ public class PaymentInformationResponse implements Serializable {
    * 
    * @return paymentProductId
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_PAYMENT_PRODUCT_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -246,7 +246,7 @@ public class PaymentInformationResponse implements Serializable {
    * 
    * @return terminalId
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_TERMINAL_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -272,7 +272,7 @@ public class PaymentInformationResponse implements Serializable {
    * 
    * @return cardAcceptorId
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_CARD_ACCEPTOR_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -300,7 +300,7 @@ public class PaymentInformationResponse implements Serializable {
    * 
    * @return merchantReference
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_MERCHANT_REFERENCE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -325,7 +325,7 @@ public class PaymentInformationResponse implements Serializable {
    * 
    * @return cardPaymentDetails
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_CARD_PAYMENT_DETAILS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -358,7 +358,7 @@ public class PaymentInformationResponse implements Serializable {
    * 
    * @return events
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_EVENTS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 

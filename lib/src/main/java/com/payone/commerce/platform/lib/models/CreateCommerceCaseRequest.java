@@ -64,7 +64,7 @@ public class CreateCommerceCaseRequest implements Serializable {
    * 
    * @return merchantReference
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_MERCHANT_REFERENCE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -89,7 +89,7 @@ public class CreateCommerceCaseRequest implements Serializable {
    * 
    * @return customer
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_CUSTOMER)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -123,7 +123,7 @@ public class CreateCommerceCaseRequest implements Serializable {
    * 
    * @return creationDateTime
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_CREATION_DATE_TIME)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -148,7 +148,7 @@ public class CreateCommerceCaseRequest implements Serializable {
    * 
    * @return checkout
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_CHECKOUT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 

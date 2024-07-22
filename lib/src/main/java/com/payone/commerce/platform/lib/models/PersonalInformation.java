@@ -98,7 +98,7 @@ public class PersonalInformation implements Serializable {
    * 
    * @return dateOfBirth
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_DATE_OF_BIRTH)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -123,7 +123,7 @@ public class PersonalInformation implements Serializable {
    * 
    * @return gender
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_GENDER)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -148,7 +148,7 @@ public class PersonalInformation implements Serializable {
    * 
    * @return name
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_NAME)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 

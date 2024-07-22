@@ -56,7 +56,7 @@ public class PaymentProduct840SpecificOutput implements Serializable {
    * 
    * @return billingAddress
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_BILLING_ADDRESS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -81,7 +81,7 @@ public class PaymentProduct840SpecificOutput implements Serializable {
    * 
    * @return customerAccount
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_CUSTOMER_ACCOUNT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -106,7 +106,7 @@ public class PaymentProduct840SpecificOutput implements Serializable {
    * 
    * @return shippingAddress
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_SHIPPING_ADDRESS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 

@@ -78,7 +78,7 @@ public class Customer implements Serializable {
    * 
    * @return companyInformation
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_COMPANY_INFORMATION)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -103,7 +103,7 @@ public class Customer implements Serializable {
    * 
    * @return merchantCustomerId
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_MERCHANT_CUSTOMER_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -128,7 +128,7 @@ public class Customer implements Serializable {
    * 
    * @return billingAddress
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_BILLING_ADDRESS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -153,7 +153,7 @@ public class Customer implements Serializable {
    * 
    * @return contactDetails
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_CONTACT_DETAILS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -185,7 +185,7 @@ public class Customer implements Serializable {
    * 
    * @return fiscalNumber
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_FISCAL_NUMBER)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -213,7 +213,7 @@ public class Customer implements Serializable {
    * 
    * @return businessRelation
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_BUSINESS_RELATION)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -239,7 +239,7 @@ public class Customer implements Serializable {
    * 
    * @return locale
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_LOCALE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -264,7 +264,7 @@ public class Customer implements Serializable {
    * 
    * @return personalInformation
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_PERSONAL_INFORMATION)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 

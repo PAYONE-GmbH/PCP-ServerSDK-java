@@ -58,7 +58,7 @@ public class ShoppingCartInput implements Serializable {
    * 
    * @return items
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_ITEMS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 

@@ -59,7 +59,7 @@ public class RefundRequest implements Serializable {
    * 
    * @return amountOfMoney
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_AMOUNT_OF_MONEY)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -84,7 +84,7 @@ public class RefundRequest implements Serializable {
    * 
    * @return references
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_REFERENCES)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -109,7 +109,7 @@ public class RefundRequest implements Serializable {
    * 
    * @return _return
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_RETURN)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 

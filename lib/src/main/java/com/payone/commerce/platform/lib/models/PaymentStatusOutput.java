@@ -65,7 +65,7 @@ public class PaymentStatusOutput implements Serializable {
    * 
    * @return isCancellable
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_IS_CANCELLABLE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -90,7 +90,7 @@ public class PaymentStatusOutput implements Serializable {
    * 
    * @return statusCategory
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_STATUS_CATEGORY)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -115,7 +115,7 @@ public class PaymentStatusOutput implements Serializable {
    * 
    * @return isAuthorized
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_IS_AUTHORIZED)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -140,7 +140,7 @@ public class PaymentStatusOutput implements Serializable {
    * 
    * @return isRefundable
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_IS_REFUNDABLE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 

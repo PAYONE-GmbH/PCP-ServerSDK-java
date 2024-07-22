@@ -56,7 +56,7 @@ public class RedirectPaymentProduct840SpecificInput implements Serializable {
    * 
    * @return addressSelectionAtPayPal
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_ADDRESS_SELECTION_AT_PAY_PAL)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 

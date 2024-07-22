@@ -48,7 +48,7 @@ public class CancelPaymentResponse implements Serializable {
    * 
    * @return payment
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_PAYMENT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 

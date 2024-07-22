@@ -73,7 +73,7 @@ public class DeliverRequest implements Serializable {
    * 
    * @return deliverType
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_DELIVER_TYPE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -101,7 +101,7 @@ public class DeliverRequest implements Serializable {
    * 
    * @return isFinal
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_IS_FINAL)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -126,7 +126,7 @@ public class DeliverRequest implements Serializable {
    * 
    * @return cancellationReason
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_CANCELLATION_REASON)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -159,7 +159,7 @@ public class DeliverRequest implements Serializable {
    * 
    * @return deliverItems
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_DELIVER_ITEMS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 

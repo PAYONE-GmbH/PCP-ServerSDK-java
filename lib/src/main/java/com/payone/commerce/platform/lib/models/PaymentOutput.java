@@ -82,7 +82,7 @@ public class PaymentOutput implements Serializable {
    * 
    * @return amountOfMoney
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_AMOUNT_OF_MONEY)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -108,7 +108,7 @@ public class PaymentOutput implements Serializable {
    * 
    * @return merchantParameters
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_MERCHANT_PARAMETERS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -133,7 +133,7 @@ public class PaymentOutput implements Serializable {
    * 
    * @return references
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_REFERENCES)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -159,7 +159,7 @@ public class PaymentOutput implements Serializable {
    * 
    * @return cardPaymentMethodSpecificOutput
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_CARD_PAYMENT_METHOD_SPECIFIC_OUTPUT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -185,7 +185,7 @@ public class PaymentOutput implements Serializable {
    * 
    * @return mobilePaymentMethodSpecificOutput
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_MOBILE_PAYMENT_METHOD_SPECIFIC_OUTPUT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -211,7 +211,7 @@ public class PaymentOutput implements Serializable {
    * 
    * @return paymentMethod
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_PAYMENT_METHOD)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -237,7 +237,7 @@ public class PaymentOutput implements Serializable {
    * 
    * @return redirectPaymentMethodSpecificOutput
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_REDIRECT_PAYMENT_METHOD_SPECIFIC_OUTPUT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -264,7 +264,7 @@ public class PaymentOutput implements Serializable {
    * 
    * @return sepaDirectDebitPaymentMethodSpecificOutput
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_SEPA_DIRECT_DEBIT_PAYMENT_METHOD_SPECIFIC_OUTPUT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -291,7 +291,7 @@ public class PaymentOutput implements Serializable {
    * 
    * @return financingPaymentMethodSpecificOutput
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_FINANCING_PAYMENT_METHOD_SPECIFIC_OUTPUT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 

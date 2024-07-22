@@ -50,7 +50,7 @@ public class PaymentProduct771SpecificOutput implements Serializable {
    * 
    * @return mandateReference
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_MANDATE_REFERENCE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 

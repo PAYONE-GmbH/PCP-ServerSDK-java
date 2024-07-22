@@ -53,7 +53,7 @@ public class OrderResponse implements Serializable {
    * 
    * @return createPaymentResponse
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_CREATE_PAYMENT_RESPONSE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -78,7 +78,7 @@ public class OrderResponse implements Serializable {
    * 
    * @return shoppingCart
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_SHOPPING_CART)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 

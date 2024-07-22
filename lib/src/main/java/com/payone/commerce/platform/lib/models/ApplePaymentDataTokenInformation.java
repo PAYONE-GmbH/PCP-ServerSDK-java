@@ -97,7 +97,7 @@ public class ApplePaymentDataTokenInformation implements Serializable {
    * 
    * @return version
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_VERSION)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -124,7 +124,7 @@ public class ApplePaymentDataTokenInformation implements Serializable {
    * 
    * @return signature
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_SIGNATURE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -149,7 +149,7 @@ public class ApplePaymentDataTokenInformation implements Serializable {
    * 
    * @return header
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_HEADER)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 

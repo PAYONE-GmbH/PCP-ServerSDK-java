@@ -55,7 +55,7 @@ public class CheckoutReferences implements Serializable {
    * 
    * @return merchantReference
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_MERCHANT_REFERENCE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -81,7 +81,7 @@ public class CheckoutReferences implements Serializable {
    * 
    * @return merchantShopReference
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_MERCHANT_SHOP_REFERENCE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 

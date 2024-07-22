@@ -73,7 +73,7 @@ public class CapturePaymentRequest implements Serializable {
    * 
    * @return amount
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_AMOUNT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -100,7 +100,7 @@ public class CapturePaymentRequest implements Serializable {
    * 
    * @return isFinal
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_IS_FINAL)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -125,7 +125,7 @@ public class CapturePaymentRequest implements Serializable {
    * 
    * @return cancellationReason
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_CANCELLATION_REASON)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -150,7 +150,7 @@ public class CapturePaymentRequest implements Serializable {
    * 
    * @return references
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_REFERENCES)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -175,7 +175,7 @@ public class CapturePaymentRequest implements Serializable {
    * 
    * @return delivery
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_DELIVERY)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 

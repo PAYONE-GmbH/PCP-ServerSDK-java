@@ -100,7 +100,7 @@ public class PaymentProduct320SpecificInput implements Serializable {
    * 
    * @return network
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_NETWORK)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -125,7 +125,7 @@ public class PaymentProduct320SpecificInput implements Serializable {
    * 
    * @return token
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_TOKEN)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 

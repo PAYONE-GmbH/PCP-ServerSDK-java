@@ -58,7 +58,7 @@ public class PersonalName implements Serializable {
    * 
    * @return firstName
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_FIRST_NAME)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -83,7 +83,7 @@ public class PersonalName implements Serializable {
    * 
    * @return surname
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_SURNAME)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -108,7 +108,7 @@ public class PersonalName implements Serializable {
    * 
    * @return title
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_TITLE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 

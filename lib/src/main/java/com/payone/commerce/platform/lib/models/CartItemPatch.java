@@ -53,7 +53,7 @@ public class CartItemPatch implements Serializable {
    * 
    * @return invoiceData
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_INVOICE_DATA)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -78,7 +78,7 @@ public class CartItemPatch implements Serializable {
    * 
    * @return orderLineDetails
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_ORDER_LINE_DETAILS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 

@@ -58,7 +58,7 @@ public class CheckoutsResponse implements Serializable {
    * 
    * @return numberOfCheckouts
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_NUMBER_OF_CHECKOUTS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -91,7 +91,7 @@ public class CheckoutsResponse implements Serializable {
    * 
    * @return checkouts
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_CHECKOUTS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 

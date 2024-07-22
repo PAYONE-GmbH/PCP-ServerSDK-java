@@ -66,7 +66,7 @@ public class ReturnRequest implements Serializable {
    * 
    * @return returnType
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_RETURN_TYPE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -91,7 +91,7 @@ public class ReturnRequest implements Serializable {
    * 
    * @return returnReason
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_RETURN_REASON)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -124,7 +124,7 @@ public class ReturnRequest implements Serializable {
    * 
    * @return returnItems
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_RETURN_ITEMS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 

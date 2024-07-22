@@ -51,7 +51,7 @@ public class CardInfo implements Serializable {
    * 
    * @return cardholderName
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_CARDHOLDER_NAME)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 

@@ -57,7 +57,7 @@ public class SepaDirectDebitPaymentMethodSpecificOutput implements Serializable 
    * 
    * @return paymentProductId
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_PAYMENT_PRODUCT_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -83,7 +83,7 @@ public class SepaDirectDebitPaymentMethodSpecificOutput implements Serializable 
    * 
    * @return paymentProduct771SpecificOutput
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_PAYMENT_PRODUCT771_SPECIFIC_OUTPUT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 

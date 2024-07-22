@@ -51,7 +51,7 @@ public class RedirectData implements Serializable {
    * 
    * @return redirectURL
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_REDIRECT_U_R_L)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 

@@ -82,7 +82,7 @@ public class CreateCheckoutRequest implements Serializable {
    * 
    * @return amountOfMoney
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_AMOUNT_OF_MONEY)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -107,7 +107,7 @@ public class CreateCheckoutRequest implements Serializable {
    * 
    * @return references
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_REFERENCES)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -132,7 +132,7 @@ public class CreateCheckoutRequest implements Serializable {
    * 
    * @return shipping
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_SHIPPING)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -157,7 +157,7 @@ public class CreateCheckoutRequest implements Serializable {
    * 
    * @return shoppingCart
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_SHOPPING_CART)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -182,7 +182,7 @@ public class CreateCheckoutRequest implements Serializable {
    * 
    * @return orderRequest
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_ORDER_REQUEST)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -216,7 +216,7 @@ public class CreateCheckoutRequest implements Serializable {
    * 
    * @return creationDateTime
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_CREATION_DATE_TIME)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -244,7 +244,7 @@ public class CreateCheckoutRequest implements Serializable {
    * 
    * @return autoExecuteOrder
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_AUTO_EXECUTE_ORDER)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 

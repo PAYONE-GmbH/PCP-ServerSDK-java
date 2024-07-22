@@ -73,7 +73,7 @@ public class MobilePaymentMethodSpecificInput implements Serializable {
    * 
    * @return paymentProductId
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_PAYMENT_PRODUCT_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -98,7 +98,7 @@ public class MobilePaymentMethodSpecificInput implements Serializable {
    * 
    * @return authorizationMode
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_AUTHORIZATION_MODE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -125,7 +125,7 @@ public class MobilePaymentMethodSpecificInput implements Serializable {
    * 
    * @return encryptedPaymentData
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_ENCRYPTED_PAYMENT_DATA)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -151,7 +151,7 @@ public class MobilePaymentMethodSpecificInput implements Serializable {
    * 
    * @return publicKeyHash
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_PUBLIC_KEY_HASH)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -176,7 +176,7 @@ public class MobilePaymentMethodSpecificInput implements Serializable {
    * 
    * @return ephemeralKey
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_EPHEMERAL_KEY)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -202,7 +202,7 @@ public class MobilePaymentMethodSpecificInput implements Serializable {
    * 
    * @return paymentProduct302SpecificInput
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_PAYMENT_PRODUCT302_SPECIFIC_INPUT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 

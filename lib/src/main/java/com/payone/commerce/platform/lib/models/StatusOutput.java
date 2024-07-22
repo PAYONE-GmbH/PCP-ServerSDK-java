@@ -127,7 +127,7 @@ public class StatusOutput implements Serializable {
    * 
    * @return paymentStatus
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_PAYMENT_STATUS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -153,7 +153,7 @@ public class StatusOutput implements Serializable {
    * 
    * @return isModifiable
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_IS_MODIFIABLE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -180,7 +180,7 @@ public class StatusOutput implements Serializable {
    * 
    * @return openAmount
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_OPEN_AMOUNT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -208,7 +208,7 @@ public class StatusOutput implements Serializable {
    * 
    * @return collectedAmount
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_COLLECTED_AMOUNT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -236,7 +236,7 @@ public class StatusOutput implements Serializable {
    * 
    * @return cancelledAmount
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_CANCELLED_AMOUNT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -264,7 +264,7 @@ public class StatusOutput implements Serializable {
    * 
    * @return refundedAmount
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_REFUNDED_AMOUNT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -292,7 +292,7 @@ public class StatusOutput implements Serializable {
    * 
    * @return chargebackAmount
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_CHARGEBACK_AMOUNT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 

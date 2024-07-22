@@ -94,7 +94,7 @@ public class ThreeDSecureResults implements Serializable {
    * 
    * @return version
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_VERSION)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -120,7 +120,7 @@ public class ThreeDSecureResults implements Serializable {
    * 
    * @return schemeEci
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_SCHEME_ECI)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -145,7 +145,7 @@ public class ThreeDSecureResults implements Serializable {
    * 
    * @return appliedExemption
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_APPLIED_EXEMPTION)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 

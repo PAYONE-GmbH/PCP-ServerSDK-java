@@ -52,7 +52,7 @@ public class CancelResponse implements Serializable {
    * 
    * @return cancelPaymentResponse
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_CANCEL_PAYMENT_RESPONSE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -77,7 +77,7 @@ public class CancelResponse implements Serializable {
    * 
    * @return shoppingCart
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_SHOPPING_CART)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 

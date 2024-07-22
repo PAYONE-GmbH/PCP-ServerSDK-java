@@ -65,7 +65,7 @@ public class RedirectPaymentMethodSpecificOutput implements Serializable {
    * 
    * @return paymentProductId
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_PAYMENT_PRODUCT_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -91,7 +91,7 @@ public class RedirectPaymentMethodSpecificOutput implements Serializable {
    * 
    * @return paymentProduct840SpecificOutput
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_PAYMENT_PRODUCT840_SPECIFIC_OUTPUT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -117,7 +117,7 @@ public class RedirectPaymentMethodSpecificOutput implements Serializable {
    * 
    * @return paymentProcessingToken
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_PAYMENT_PROCESSING_TOKEN)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -142,7 +142,7 @@ public class RedirectPaymentMethodSpecificOutput implements Serializable {
    * 
    * @return reportingToken
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_REPORTING_TOKEN)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 

@@ -60,7 +60,7 @@ public class FinancingPaymentMethodSpecificOutput implements Serializable {
    * 
    * @return paymentProductId
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_PAYMENT_PRODUCT_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -86,7 +86,7 @@ public class FinancingPaymentMethodSpecificOutput implements Serializable {
    * 
    * @return paymentProduct3391SpecificOutput
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_PAYMENT_PRODUCT3391_SPECIFIC_OUTPUT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 

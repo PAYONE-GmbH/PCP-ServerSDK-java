@@ -79,7 +79,7 @@ public class PaymentMethodSpecificInput implements Serializable {
    * 
    * @return cardPaymentMethodSpecificInput
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_CARD_PAYMENT_METHOD_SPECIFIC_INPUT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -105,7 +105,7 @@ public class PaymentMethodSpecificInput implements Serializable {
    * 
    * @return mobilePaymentMethodSpecificInput
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_MOBILE_PAYMENT_METHOD_SPECIFIC_INPUT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -131,7 +131,7 @@ public class PaymentMethodSpecificInput implements Serializable {
    * 
    * @return redirectPaymentMethodSpecificInput
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_REDIRECT_PAYMENT_METHOD_SPECIFIC_INPUT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -158,7 +158,7 @@ public class PaymentMethodSpecificInput implements Serializable {
    * 
    * @return sepaDirectDebitPaymentMethodSpecificInput
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_SEPA_DIRECT_DEBIT_PAYMENT_METHOD_SPECIFIC_INPUT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -185,7 +185,7 @@ public class PaymentMethodSpecificInput implements Serializable {
    * 
    * @return financingPaymentMethodSpecificInput
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_FINANCING_PAYMENT_METHOD_SPECIFIC_INPUT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -211,7 +211,7 @@ public class PaymentMethodSpecificInput implements Serializable {
    * 
    * @return customerDevice
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_CUSTOMER_DEVICE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -236,7 +236,7 @@ public class PaymentMethodSpecificInput implements Serializable {
    * 
    * @return paymentChannel
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_PAYMENT_CHANNEL)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 

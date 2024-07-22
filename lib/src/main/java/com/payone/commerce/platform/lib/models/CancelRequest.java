@@ -67,7 +67,7 @@ public class CancelRequest implements Serializable {
    * 
    * @return cancelType
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_CANCEL_TYPE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -92,7 +92,7 @@ public class CancelRequest implements Serializable {
    * 
    * @return cancellationReason
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_CANCELLATION_REASON)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -125,7 +125,7 @@ public class CancelRequest implements Serializable {
    * 
    * @return cancelItems
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_CANCEL_ITEMS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 

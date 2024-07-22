@@ -104,7 +104,7 @@ public class CheckoutResponse implements Serializable {
    * 
    * @return commerceCaseId
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_COMMERCE_CASE_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -129,7 +129,7 @@ public class CheckoutResponse implements Serializable {
    * 
    * @return checkoutId
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_CHECKOUT_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -154,7 +154,7 @@ public class CheckoutResponse implements Serializable {
    * 
    * @return merchantCustomerId
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_MERCHANT_CUSTOMER_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -179,7 +179,7 @@ public class CheckoutResponse implements Serializable {
    * 
    * @return amountOfMoney
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_AMOUNT_OF_MONEY)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -204,7 +204,7 @@ public class CheckoutResponse implements Serializable {
    * 
    * @return references
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_REFERENCES)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -229,7 +229,7 @@ public class CheckoutResponse implements Serializable {
    * 
    * @return shipping
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_SHIPPING)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -254,7 +254,7 @@ public class CheckoutResponse implements Serializable {
    * 
    * @return shoppingCart
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_SHOPPING_CART)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -287,7 +287,7 @@ public class CheckoutResponse implements Serializable {
    * 
    * @return paymentExecutions
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_PAYMENT_EXECUTIONS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -312,7 +312,7 @@ public class CheckoutResponse implements Serializable {
    * 
    * @return checkoutStatus
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_CHECKOUT_STATUS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -337,7 +337,7 @@ public class CheckoutResponse implements Serializable {
    * 
    * @return statusOutput
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_STATUS_OUTPUT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -370,7 +370,7 @@ public class CheckoutResponse implements Serializable {
    * 
    * @return paymentInformation
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_PAYMENT_INFORMATION)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -404,7 +404,7 @@ public class CheckoutResponse implements Serializable {
    * 
    * @return creationDateTime
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_CREATION_DATE_TIME)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -437,7 +437,7 @@ public class CheckoutResponse implements Serializable {
    * 
    * @return allowedPaymentActions
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_ALLOWED_PAYMENT_ACTIONS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 

@@ -58,7 +58,7 @@ public class ReturnInformation implements Serializable {
    * 
    * @return returnReason
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_RETURN_REASON)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -91,7 +91,7 @@ public class ReturnInformation implements Serializable {
    * 
    * @return items
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_ITEMS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 

@@ -78,7 +78,7 @@ public class References implements Serializable {
    * 
    * @return descriptor
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_DESCRIPTOR)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -133,7 +133,7 @@ public class References implements Serializable {
    * 
    * @return merchantParameters
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_MERCHANT_PARAMETERS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 

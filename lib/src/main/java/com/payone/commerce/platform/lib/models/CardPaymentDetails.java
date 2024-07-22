@@ -58,7 +58,7 @@ public class CardPaymentDetails implements Serializable {
    * 
    * @return maskedCardNumber
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_MASKED_CARD_NUMBER)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -84,7 +84,7 @@ public class CardPaymentDetails implements Serializable {
    * 
    * @return paymentProcessingToken
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_PAYMENT_PROCESSING_TOKEN)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -109,7 +109,7 @@ public class CardPaymentDetails implements Serializable {
    * 
    * @return reportingToken
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_REPORTING_TOKEN)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 

@@ -94,7 +94,7 @@ public class OrderLineDetailsResult implements Serializable {
    * 
    * @return id
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -127,7 +127,7 @@ public class OrderLineDetailsResult implements Serializable {
    * 
    * @return status
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_STATUS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -152,7 +152,7 @@ public class OrderLineDetailsResult implements Serializable {
    * 
    * @return productCode
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_PRODUCT_CODE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -204,7 +204,7 @@ public class OrderLineDetailsResult implements Serializable {
    * 
    * @return productType
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_PRODUCT_TYPE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -259,7 +259,7 @@ public class OrderLineDetailsResult implements Serializable {
    * 
    * @return taxAmount
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_TAX_AMOUNT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -284,7 +284,7 @@ public class OrderLineDetailsResult implements Serializable {
    * 
    * @return productUrl
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_PRODUCT_URL)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -309,7 +309,7 @@ public class OrderLineDetailsResult implements Serializable {
    * 
    * @return productImageUrl
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_PRODUCT_IMAGE_URL)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -334,7 +334,7 @@ public class OrderLineDetailsResult implements Serializable {
    * 
    * @return productCategoryPath
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_PRODUCT_CATEGORY_PATH)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -360,7 +360,7 @@ public class OrderLineDetailsResult implements Serializable {
    * 
    * @return merchantShopDeliveryReference
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_MERCHANT_SHOP_DELIVERY_REFERENCE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 

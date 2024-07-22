@@ -56,7 +56,7 @@ public class CardRecurrenceDetails implements Serializable {
    * 
    * @return recurringPaymentSequenceIndicator
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_RECURRING_PAYMENT_SEQUENCE_INDICATOR)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 

@@ -79,7 +79,7 @@ public class AddressPersonal implements Serializable {
    * 
    * @return additionalInfo
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_ADDITIONAL_INFO)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -104,7 +104,7 @@ public class AddressPersonal implements Serializable {
    * 
    * @return city
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_CITY)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -129,7 +129,7 @@ public class AddressPersonal implements Serializable {
    * 
    * @return countryCode
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_COUNTRY_CODE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -154,7 +154,7 @@ public class AddressPersonal implements Serializable {
    * 
    * @return houseNumber
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_HOUSE_NUMBER)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -179,7 +179,7 @@ public class AddressPersonal implements Serializable {
    * 
    * @return state
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_STATE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -204,7 +204,7 @@ public class AddressPersonal implements Serializable {
    * 
    * @return street
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_STREET)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -229,7 +229,7 @@ public class AddressPersonal implements Serializable {
    * 
    * @return zip
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_ZIP)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -254,7 +254,7 @@ public class AddressPersonal implements Serializable {
    * 
    * @return name
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_NAME)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 

@@ -71,7 +71,7 @@ public class MerchantAction implements Serializable {
    * 
    * @return actionType
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_ACTION_TYPE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -96,7 +96,7 @@ public class MerchantAction implements Serializable {
    * 
    * @return redirectData
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_REDIRECT_DATA)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 

@@ -50,7 +50,7 @@ public class PausePaymentResponse implements Serializable {
    * 
    * @return status
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_STATUS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 

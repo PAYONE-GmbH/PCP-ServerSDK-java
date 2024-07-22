@@ -51,7 +51,7 @@ public class PaymentCreationOutput implements Serializable {
    * 
    * @return externalReference
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_EXTERNAL_REFERENCE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 

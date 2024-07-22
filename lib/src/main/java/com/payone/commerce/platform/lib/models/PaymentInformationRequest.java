@@ -172,7 +172,7 @@ public class PaymentInformationRequest implements Serializable {
    * 
    * @return merchantReference
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_MERCHANT_REFERENCE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 

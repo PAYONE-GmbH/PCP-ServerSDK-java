@@ -54,7 +54,7 @@ public class CustomerDevice implements Serializable {
    * 
    * @return ipAddress
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_IP_ADDRESS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -80,7 +80,7 @@ public class CustomerDevice implements Serializable {
    * 
    * @return deviceToken
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_DEVICE_TOKEN)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 

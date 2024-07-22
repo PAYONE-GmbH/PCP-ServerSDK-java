@@ -69,7 +69,7 @@ public class MobilePaymentMethodSpecificOutput implements Serializable {
    * 
    * @return paymentProductId
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_PAYMENT_PRODUCT_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -94,7 +94,7 @@ public class MobilePaymentMethodSpecificOutput implements Serializable {
    * 
    * @return authorisationCode
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_AUTHORISATION_CODE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -119,7 +119,7 @@ public class MobilePaymentMethodSpecificOutput implements Serializable {
    * 
    * @return fraudResults
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_FRAUD_RESULTS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -144,7 +144,7 @@ public class MobilePaymentMethodSpecificOutput implements Serializable {
    * 
    * @return threeDSecureResults
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_THREE_D_SECURE_RESULTS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -169,7 +169,7 @@ public class MobilePaymentMethodSpecificOutput implements Serializable {
    * 
    * @return network
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_NETWORK)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 

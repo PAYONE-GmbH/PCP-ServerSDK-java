@@ -52,7 +52,7 @@ public class ContactDetails implements Serializable {
    * 
    * @return emailAddress
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_EMAIL_ADDRESS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -77,7 +77,7 @@ public class ContactDetails implements Serializable {
    * 
    * @return phoneNumber
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_PHONE_NUMBER)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 

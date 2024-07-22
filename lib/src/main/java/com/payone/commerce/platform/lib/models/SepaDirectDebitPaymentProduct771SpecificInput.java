@@ -55,7 +55,7 @@ public class SepaDirectDebitPaymentProduct771SpecificInput implements Serializab
    * 
    * @return existingUniqueMandateReference
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_EXISTING_UNIQUE_MANDATE_REFERENCE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -80,7 +80,7 @@ public class SepaDirectDebitPaymentProduct771SpecificInput implements Serializab
    * 
    * @return mandate
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_MANDATE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 

@@ -70,7 +70,7 @@ public class CardFraudResults implements Serializable {
    * 
    * @return avsResult
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_AVS_RESULT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 

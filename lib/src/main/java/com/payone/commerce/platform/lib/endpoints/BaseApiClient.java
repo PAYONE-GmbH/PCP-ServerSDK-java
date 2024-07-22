@@ -21,7 +21,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public class BaseApiClient {
+public abstract class BaseApiClient {
 
     private final OkHttpClient client = new OkHttpClient();
     private final String JSON_PARSE_ERROR = "Excepted valid JSON response, but failed to parse";
@@ -38,6 +38,7 @@ public class BaseApiClient {
 
     }
 
+    // only used for testsuite
     public BaseApiClient() {
         this.config = null;
         this.requestHeaderGenerator = null;

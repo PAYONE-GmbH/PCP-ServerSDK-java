@@ -52,7 +52,7 @@ public class CompleteOrderRequest implements Serializable {
    * 
    * @return completePaymentMethodSpecificInput
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_COMPLETE_PAYMENT_METHOD_SPECIFIC_INPUT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 

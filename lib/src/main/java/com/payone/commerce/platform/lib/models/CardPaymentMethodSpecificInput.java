@@ -145,7 +145,7 @@ public class CardPaymentMethodSpecificInput implements Serializable {
    * 
    * @return authorizationMode
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_AUTHORIZATION_MODE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -170,7 +170,7 @@ public class CardPaymentMethodSpecificInput implements Serializable {
    * 
    * @return recurring
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_RECURRING)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -195,7 +195,7 @@ public class CardPaymentMethodSpecificInput implements Serializable {
    * 
    * @return paymentProcessingToken
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_PAYMENT_PROCESSING_TOKEN)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -214,7 +214,7 @@ public class CardPaymentMethodSpecificInput implements Serializable {
    * 
    * @return reportingToken
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_REPORTING_TOKEN)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -233,7 +233,7 @@ public class CardPaymentMethodSpecificInput implements Serializable {
    * 
    * @return transactionChannel
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_TRANSACTION_CHANNEL)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -259,7 +259,7 @@ public class CardPaymentMethodSpecificInput implements Serializable {
    * 
    * @return unscheduledCardOnFileRequestor
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_UNSCHEDULED_CARD_ON_FILE_REQUESTOR)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -285,7 +285,7 @@ public class CardPaymentMethodSpecificInput implements Serializable {
    * 
    * @return unscheduledCardOnFileSequenceIndicator
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_UNSCHEDULED_CARD_ON_FILE_SEQUENCE_INDICATOR)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -314,7 +314,7 @@ public class CardPaymentMethodSpecificInput implements Serializable {
    * 
    * @return paymentProductId
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_PAYMENT_PRODUCT_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -339,7 +339,7 @@ public class CardPaymentMethodSpecificInput implements Serializable {
    * 
    * @return card
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_CARD)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -372,7 +372,7 @@ public class CardPaymentMethodSpecificInput implements Serializable {
    * 
    * @return returnUrl
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_RETURN_URL)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -399,7 +399,7 @@ public class CardPaymentMethodSpecificInput implements Serializable {
    * 
    * @return cardOnFileRecurringFrequency
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_CARD_ON_FILE_RECURRING_FREQUENCY)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -425,7 +425,7 @@ public class CardPaymentMethodSpecificInput implements Serializable {
    * 
    * @return cardOnFileRecurringExpiration
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_CARD_ON_FILE_RECURRING_EXPIRATION)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 

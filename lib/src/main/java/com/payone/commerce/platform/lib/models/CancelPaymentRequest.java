@@ -50,7 +50,7 @@ public class CancelPaymentRequest implements Serializable {
    * 
    * @return cancellationReason
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_CANCELLATION_REASON)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 

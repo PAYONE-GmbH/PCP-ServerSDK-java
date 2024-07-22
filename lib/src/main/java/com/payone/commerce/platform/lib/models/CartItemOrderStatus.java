@@ -54,7 +54,7 @@ public class CartItemOrderStatus implements Serializable {
    * 
    * @return cartItemStatus
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_CART_ITEM_STATUS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -82,7 +82,7 @@ public class CartItemOrderStatus implements Serializable {
    * 
    * @return quantity
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_QUANTITY)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 

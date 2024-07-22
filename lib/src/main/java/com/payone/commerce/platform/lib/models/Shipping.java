@@ -48,7 +48,7 @@ public class Shipping implements Serializable {
    * 
    * @return address
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_ADDRESS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 

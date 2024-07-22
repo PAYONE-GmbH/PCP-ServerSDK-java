@@ -51,7 +51,7 @@ public class CompletePaymentMethodSpecificInput implements Serializable {
    * 
    * @return paymentProduct3391SpecificInput
    **/
-  @jakarta.annotation.Nullable
+
   @JsonProperty(JSON_PROPERTY_PAYMENT_PRODUCT3391_SPECIFIC_INPUT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
