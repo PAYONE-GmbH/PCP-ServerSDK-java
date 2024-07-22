@@ -14,17 +14,17 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
-
+    strategy:
+      matrix:
+        java: ['8', '11', '17', '21']
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-
       - name: Set up JDK
         uses: actions/setup-java@v4
         with:
-          java-version: '17'
+          java-version: ${{ matrix.java }}
           distribution: 'adopt'
-
       - name: Test
         run: |
           ./gradlew :lib:test
