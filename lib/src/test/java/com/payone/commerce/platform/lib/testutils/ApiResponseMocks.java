@@ -1,5 +1,6 @@
 package com.payone.commerce.platform.lib.testutils;
 
+import java.util.Arrays;
 import java.util.List;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -45,7 +46,7 @@ public class ApiResponseMocks {
     }
 
     public static Response createErrorResponse(int statusCode, APIError apiError) throws JsonProcessingException {
-        return createErrorResponse(statusCode, List.of(apiError));
+        return createErrorResponse(statusCode, Arrays.asList(apiError));
     }
 
     public static Response createErrorResponse(int statusCode, List<APIError> apiErrors)

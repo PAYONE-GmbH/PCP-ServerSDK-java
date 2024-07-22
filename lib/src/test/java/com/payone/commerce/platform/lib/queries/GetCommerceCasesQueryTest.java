@@ -2,8 +2,8 @@ package com.payone.commerce.platform.lib.queries;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.util.Arrays;
 import java.util.Map;
-import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
@@ -22,8 +22,8 @@ public class GetCommerceCasesQueryTest {
         query.setCommerceCaseId("123456");
         query.setMerchantReference("7890");
         query.setMerchantCustomerId("1234");
-        query.setIncludeCheckoutStatus(List.of(StatusCheckout.BILLED, StatusCheckout.CHARGEBACKED));
-        query.setIncludePaymentChannel(List.of(PaymentChannel.ECOMMERCE, PaymentChannel.POS));
+        query.setIncludeCheckoutStatus(Arrays.asList(StatusCheckout.BILLED, StatusCheckout.CHARGEBACKED));
+        query.setIncludePaymentChannel(Arrays.asList(PaymentChannel.ECOMMERCE, PaymentChannel.POS));
 
         Map<String, String> queryMap = query.toQueryMap();
         assertEquals("1", queryMap.get("offset"));
@@ -47,8 +47,8 @@ public class GetCommerceCasesQueryTest {
         query.setCommerceCaseId("123456");
         query.setMerchantReference("7890");
         query.setMerchantCustomerId("1234");
-        query.setIncludeCheckoutStatus(List.of(StatusCheckout.BILLED, StatusCheckout.CHARGEBACKED));
-        query.setIncludePaymentChannel(List.of(PaymentChannel.ECOMMERCE, PaymentChannel.POS));
+        query.setIncludeCheckoutStatus(Arrays.asList(StatusCheckout.BILLED, StatusCheckout.CHARGEBACKED));
+        query.setIncludePaymentChannel(Arrays.asList(PaymentChannel.ECOMMERCE, PaymentChannel.POS));
 
         assertEquals(1, query.getOffset());
         assertEquals(10, query.getSize());
@@ -57,8 +57,9 @@ public class GetCommerceCasesQueryTest {
         assertEquals("123456", query.getCommerceCaseId());
         assertEquals("7890", query.getMerchantReference());
         assertEquals("1234", query.getMerchantCustomerId());
-        assertEquals(List.of(StatusCheckout.BILLED, StatusCheckout.CHARGEBACKED), query.getIncludeCheckoutStatus());
-        assertEquals(List.of(PaymentChannel.ECOMMERCE, PaymentChannel.POS), query.getIncludePaymentChannel());
+        assertEquals(Arrays.asList(StatusCheckout.BILLED, StatusCheckout.CHARGEBACKED),
+                query.getIncludeCheckoutStatus());
+        assertEquals(Arrays.asList(PaymentChannel.ECOMMERCE, PaymentChannel.POS), query.getIncludePaymentChannel());
     }
 
     @Test

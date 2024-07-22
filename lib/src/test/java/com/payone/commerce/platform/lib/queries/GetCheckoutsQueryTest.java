@@ -2,8 +2,8 @@ package com.payone.commerce.platform.lib.queries;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.util.Arrays;
 import java.util.Map;
-import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
@@ -35,10 +35,11 @@ public class GetCheckoutsQueryTest {
         query.setCheckoutId("123456");
         query.setMerchantReference("7890");
         query.setMerchantCustomerId("1234");
-        query.setIncludePaymentProductId(List.of(12, 456));
-        query.setIncludeCheckoutStatus(List.of(StatusCheckout.BILLED, StatusCheckout.CHARGEBACKED));
-        query.setIncludeExtendedCheckoutStatus(List.of(ExtendedCheckoutStatus.OPEN, ExtendedCheckoutStatus.DELETED));
-        query.setIncludePaymentChannel(List.of(PaymentChannel.ECOMMERCE, PaymentChannel.POS));
+        query.setIncludePaymentProductId(Arrays.asList(12, 456));
+        query.setIncludeCheckoutStatus(Arrays.asList(StatusCheckout.BILLED, StatusCheckout.CHARGEBACKED));
+        query.setIncludeExtendedCheckoutStatus(
+                Arrays.asList(ExtendedCheckoutStatus.OPEN, ExtendedCheckoutStatus.DELETED));
+        query.setIncludePaymentChannel(Arrays.asList(PaymentChannel.ECOMMERCE, PaymentChannel.POS));
         query.setPaymentReference("1234");
         query.setPaymentId("5678");
         query.setFirstName("John");
@@ -105,10 +106,11 @@ public class GetCheckoutsQueryTest {
         query.setCheckoutId("123456");
         query.setMerchantReference("7890");
         query.setMerchantCustomerId("1234");
-        query.setIncludePaymentProductId(List.of(12, 456));
-        query.setIncludeCheckoutStatus(List.of(StatusCheckout.BILLED, StatusCheckout.CHARGEBACKED));
-        query.setIncludeExtendedCheckoutStatus(List.of(ExtendedCheckoutStatus.OPEN, ExtendedCheckoutStatus.DELETED));
-        query.setIncludePaymentChannel(List.of(PaymentChannel.ECOMMERCE, PaymentChannel.POS));
+        query.setIncludePaymentProductId(Arrays.asList(12, 456));
+        query.setIncludeCheckoutStatus(Arrays.asList(StatusCheckout.BILLED, StatusCheckout.CHARGEBACKED));
+        query.setIncludeExtendedCheckoutStatus(
+                Arrays.asList(ExtendedCheckoutStatus.OPEN, ExtendedCheckoutStatus.DELETED));
+        query.setIncludePaymentChannel(Arrays.asList(PaymentChannel.ECOMMERCE, PaymentChannel.POS));
         query.setPaymentReference("1234");
         query.setPaymentId("5678");
         query.setFirstName("John");
@@ -138,11 +140,12 @@ public class GetCheckoutsQueryTest {
 
         assertEquals("7890", query.getMerchantReference());
         assertEquals("1234", query.getMerchantCustomerId());
-        assertEquals(List.of(12, 456), query.getIncludePaymentProductId());
-        assertEquals(List.of(StatusCheckout.BILLED, StatusCheckout.CHARGEBACKED), query.getIncludeCheckoutStatus());
-        assertEquals(List.of(ExtendedCheckoutStatus.OPEN, ExtendedCheckoutStatus.DELETED),
+        assertEquals(Arrays.asList(12, 456), query.getIncludePaymentProductId());
+        assertEquals(Arrays.asList(StatusCheckout.BILLED, StatusCheckout.CHARGEBACKED),
+                query.getIncludeCheckoutStatus());
+        assertEquals(Arrays.asList(ExtendedCheckoutStatus.OPEN, ExtendedCheckoutStatus.DELETED),
                 query.getIncludeExtendedCheckoutStatus());
-        assertEquals(List.of(PaymentChannel.ECOMMERCE, PaymentChannel.POS), query.getIncludePaymentChannel());
+        assertEquals(Arrays.asList(PaymentChannel.ECOMMERCE, PaymentChannel.POS), query.getIncludePaymentChannel());
         assertEquals("1234", query.getPaymentReference());
         assertEquals("5678", query.getPaymentId());
         assertEquals("John", query.getFirstName());

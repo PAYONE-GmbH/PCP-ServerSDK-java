@@ -9,6 +9,7 @@ import static org.mockito.Mockito.when;
 
 import java.io.IOException;
 import java.security.InvalidKeyException;
+import java.util.Arrays;
 import java.util.List;
 
 import org.junit.jupiter.api.DisplayName;
@@ -120,8 +121,8 @@ public class CommerceCaseApiClientTest {
 
             CommerceCaseApiClient commerceCaseApiClient = spy(
                     new CommerceCaseApiClient(TestConfig.COMMUNICATOR_CONFIGURATION));
-            List<CommerceCaseResponse> expected = List.of(new CommerceCaseResponse());
-            Response response = ApiResponseMocks.createResponse(200, List.of(new CommerceCaseResponse()));
+            List<CommerceCaseResponse> expected = Arrays.asList(new CommerceCaseResponse());
+            Response response = ApiResponseMocks.createResponse(200, Arrays.asList(new CommerceCaseResponse()));
 
             doReturn(response).when(commerceCaseApiClient).getResponse(any());
             when(commerceCaseApiClient.getResponse(any())).thenReturn(response);
