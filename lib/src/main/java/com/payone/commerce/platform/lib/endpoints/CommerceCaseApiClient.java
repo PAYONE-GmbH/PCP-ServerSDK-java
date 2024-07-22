@@ -34,6 +34,9 @@ public class CommerceCaseApiClient extends BaseApiClient {
         if (merchantId == null) {
             throw new IllegalArgumentException("Merchant ID is required");
         }
+        if (payload == null) {
+            throw new IllegalArgumentException("Payload is required");
+        }
 
         HttpUrl url = new HttpUrl.Builder()
                 .scheme("https")
@@ -133,6 +136,9 @@ public class CommerceCaseApiClient extends BaseApiClient {
         }
         if (commerceCaseId == null) {
             throw new IllegalArgumentException("Commerce Case ID is required");
+        }
+        if (payload == null) {
+            throw new IllegalArgumentException("Payload is required");
         }
 
         HttpUrl url = new HttpUrl.Builder()
