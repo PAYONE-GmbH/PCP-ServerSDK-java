@@ -4,3 +4,10 @@
 # Ignore Gradle build output directory
 build
 bin
+
+# Eclipse Gradle plugin generated files
+# Eclipse Core
+.settings/
+.project
+# JDT-specific (Eclipse Java Development Tools)
+.classpath
