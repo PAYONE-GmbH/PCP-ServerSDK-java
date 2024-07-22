@@ -70,7 +70,7 @@ public class APIError implements Serializable {
    * 
    * @return errorCode
    **/
-  @jakarta.annotation.Nonnull
+
   @JsonProperty(JSON_PROPERTY_ERROR_CODE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
 

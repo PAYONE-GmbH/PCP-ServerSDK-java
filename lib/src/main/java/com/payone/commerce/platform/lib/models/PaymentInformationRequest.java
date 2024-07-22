@@ -66,7 +66,7 @@ public class PaymentInformationRequest implements Serializable {
    * 
    * @return amountOfMoney
    **/
-  @jakarta.annotation.Nonnull
+
   @JsonProperty(JSON_PROPERTY_AMOUNT_OF_MONEY)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
 
@@ -91,7 +91,7 @@ public class PaymentInformationRequest implements Serializable {
    * 
    * @return type
    **/
-  @jakarta.annotation.Nonnull
+
   @JsonProperty(JSON_PROPERTY_TYPE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
 
@@ -116,7 +116,7 @@ public class PaymentInformationRequest implements Serializable {
    * 
    * @return paymentChannel
    **/
-  @jakarta.annotation.Nonnull
+
   @JsonProperty(JSON_PROPERTY_PAYMENT_CHANNEL)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
 
@@ -144,7 +144,7 @@ public class PaymentInformationRequest implements Serializable {
    * 
    * @return paymentProductId
    **/
-  @jakarta.annotation.Nonnull
+
   @JsonProperty(JSON_PROPERTY_PAYMENT_PRODUCT_ID)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
 

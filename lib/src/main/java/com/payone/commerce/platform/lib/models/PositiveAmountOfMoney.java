@@ -56,7 +56,7 @@ public class PositiveAmountOfMoney implements Serializable {
    * 
    * @return amount
    **/
-  @jakarta.annotation.Nonnull
+
   @JsonProperty(JSON_PROPERTY_AMOUNT)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
 
@@ -81,7 +81,7 @@ public class PositiveAmountOfMoney implements Serializable {
    * 
    * @return currencyCode
    **/
-  @jakarta.annotation.Nonnull
+
   @JsonProperty(JSON_PROPERTY_CURRENCY_CODE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
 

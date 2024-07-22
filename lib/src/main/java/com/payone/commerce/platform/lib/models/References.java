@@ -107,7 +107,7 @@ public class References implements Serializable {
    * 
    * @return merchantReference
    **/
-  @jakarta.annotation.Nonnull
+
   @JsonProperty(JSON_PROPERTY_MERCHANT_REFERENCE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
 

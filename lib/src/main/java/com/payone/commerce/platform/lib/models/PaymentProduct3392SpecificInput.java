@@ -48,7 +48,7 @@ public class PaymentProduct3392SpecificInput implements Serializable {
    * 
    * @return bankAccountInformation
    **/
-  @jakarta.annotation.Nonnull
+
   @JsonProperty(JSON_PROPERTY_BANK_ACCOUNT_INFORMATION)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
 

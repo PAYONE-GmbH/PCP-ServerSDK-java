@@ -55,7 +55,7 @@ public class ReturnItem implements Serializable {
    * 
    * @return id
    **/
-  @jakarta.annotation.Nonnull
+
   @JsonProperty(JSON_PROPERTY_ID)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
 
@@ -83,7 +83,7 @@ public class ReturnItem implements Serializable {
    * 
    * @return quantity
    **/
-  @jakarta.annotation.Nonnull
+
   @JsonProperty(JSON_PROPERTY_QUANTITY)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
 

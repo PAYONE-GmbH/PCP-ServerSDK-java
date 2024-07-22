@@ -68,7 +68,7 @@ public class ProcessingMandateInformation implements Serializable {
    * 
    * @return bankAccountIban
    **/
-  @jakarta.annotation.Nonnull
+
   @JsonProperty(JSON_PROPERTY_BANK_ACCOUNT_IBAN)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
 
@@ -93,7 +93,7 @@ public class ProcessingMandateInformation implements Serializable {
    * 
    * @return recurrenceType
    **/
-  @jakarta.annotation.Nonnull
+
   @JsonProperty(JSON_PROPERTY_RECURRENCE_TYPE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
 
@@ -118,7 +118,7 @@ public class ProcessingMandateInformation implements Serializable {
    * 
    * @return uniqueMandateReference
    **/
-  @jakarta.annotation.Nonnull
+
   @JsonProperty(JSON_PROPERTY_UNIQUE_MANDATE_REFERENCE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
 
@@ -143,7 +143,7 @@ public class ProcessingMandateInformation implements Serializable {
    * 
    * @return dateOfSignature
    **/
-  @jakarta.annotation.Nonnull
+
   @JsonProperty(JSON_PROPERTY_DATE_OF_SIGNATURE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
 
@@ -168,7 +168,7 @@ public class ProcessingMandateInformation implements Serializable {
    * 
    * @return creditorId
    **/
-  @jakarta.annotation.Nonnull
+
   @JsonProperty(JSON_PROPERTY_CREDITOR_ID)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
 

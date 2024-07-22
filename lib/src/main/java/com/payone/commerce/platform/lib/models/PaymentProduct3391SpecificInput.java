@@ -55,7 +55,7 @@ public class PaymentProduct3391SpecificInput implements Serializable {
    * 
    * @return installmentOptionId
    **/
-  @jakarta.annotation.Nonnull
+
   @JsonProperty(JSON_PROPERTY_INSTALLMENT_OPTION_ID)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
 
@@ -80,7 +80,7 @@ public class PaymentProduct3391SpecificInput implements Serializable {
    * 
    * @return bankAccountInformation
    **/
-  @jakarta.annotation.Nonnull
+
   @JsonProperty(JSON_PROPERTY_BANK_ACCOUNT_INFORMATION)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
 

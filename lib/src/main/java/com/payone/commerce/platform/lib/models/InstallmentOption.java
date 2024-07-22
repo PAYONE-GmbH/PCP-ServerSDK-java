@@ -83,7 +83,7 @@ public class InstallmentOption implements Serializable {
    * 
    * @return installmentOptionId
    **/
-  @jakarta.annotation.Nonnull
+
   @JsonProperty(JSON_PROPERTY_INSTALLMENT_OPTION_ID)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
 
@@ -108,7 +108,7 @@ public class InstallmentOption implements Serializable {
    * 
    * @return numberOfPayments
    **/
-  @jakarta.annotation.Nonnull
+
   @JsonProperty(JSON_PROPERTY_NUMBER_OF_PAYMENTS)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
 
@@ -133,7 +133,7 @@ public class InstallmentOption implements Serializable {
    * 
    * @return monthlyAmount
    **/
-  @jakarta.annotation.Nonnull
+
   @JsonProperty(JSON_PROPERTY_MONTHLY_AMOUNT)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
 
@@ -158,7 +158,7 @@ public class InstallmentOption implements Serializable {
    * 
    * @return lastRateAmount
    **/
-  @jakarta.annotation.Nonnull
+
   @JsonProperty(JSON_PROPERTY_LAST_RATE_AMOUNT)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
 
@@ -183,7 +183,7 @@ public class InstallmentOption implements Serializable {
    * 
    * @return effectiveInterestRate
    **/
-  @jakarta.annotation.Nonnull
+
   @JsonProperty(JSON_PROPERTY_EFFECTIVE_INTEREST_RATE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
 
@@ -208,7 +208,7 @@ public class InstallmentOption implements Serializable {
    * 
    * @return nominalInterestRate
    **/
-  @jakarta.annotation.Nonnull
+
   @JsonProperty(JSON_PROPERTY_NOMINAL_INTEREST_RATE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
 
@@ -233,7 +233,7 @@ public class InstallmentOption implements Serializable {
    * 
    * @return totalAmount
    **/
-  @jakarta.annotation.Nonnull
+
   @JsonProperty(JSON_PROPERTY_TOTAL_AMOUNT)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
 
@@ -258,7 +258,7 @@ public class InstallmentOption implements Serializable {
    * 
    * @return firstRateDate
    **/
-  @jakarta.annotation.Nonnull
+
   @JsonProperty(JSON_PROPERTY_FIRST_RATE_DATE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
 
@@ -283,7 +283,7 @@ public class InstallmentOption implements Serializable {
    * 
    * @return creditInformation
    **/
-  @jakarta.annotation.Nonnull
+
   @JsonProperty(JSON_PROPERTY_CREDIT_INFORMATION)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
 

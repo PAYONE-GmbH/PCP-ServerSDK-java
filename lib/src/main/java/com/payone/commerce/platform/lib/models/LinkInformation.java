@@ -54,7 +54,7 @@ public class LinkInformation implements Serializable {
    * 
    * @return href
    **/
-  @jakarta.annotation.Nonnull
+
   @JsonProperty(JSON_PROPERTY_HREF)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
 
@@ -79,7 +79,7 @@ public class LinkInformation implements Serializable {
    * 
    * @return type
    **/
-  @jakarta.annotation.Nonnull
+
   @JsonProperty(JSON_PROPERTY_TYPE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
 

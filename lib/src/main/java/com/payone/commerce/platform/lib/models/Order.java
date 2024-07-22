@@ -115,7 +115,7 @@ public class Order implements Serializable {
    * 
    * @return references
    **/
-  @jakarta.annotation.Nonnull
+
   @JsonProperty(JSON_PROPERTY_REFERENCES)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
 

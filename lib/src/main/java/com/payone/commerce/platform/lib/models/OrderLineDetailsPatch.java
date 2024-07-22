@@ -179,7 +179,7 @@ public class OrderLineDetailsPatch implements Serializable {
    * 
    * @return productPrice
    **/
-  @jakarta.annotation.Nonnull
+
   @JsonProperty(JSON_PROPERTY_PRODUCT_PRICE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
 
@@ -232,7 +232,7 @@ public class OrderLineDetailsPatch implements Serializable {
    * 
    * @return quantity
    **/
-  @jakarta.annotation.Nonnull
+
   @JsonProperty(JSON_PROPERTY_QUANTITY)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
 

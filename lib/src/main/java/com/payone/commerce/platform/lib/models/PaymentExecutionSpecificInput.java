@@ -115,7 +115,7 @@ public class PaymentExecutionSpecificInput implements Serializable {
    * 
    * @return paymentReferences
    **/
-  @jakarta.annotation.Nonnull
+
   @JsonProperty(JSON_PROPERTY_PAYMENT_REFERENCES)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
 

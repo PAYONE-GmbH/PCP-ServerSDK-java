@@ -56,7 +56,7 @@ public class BankAccountInformation implements Serializable {
    * 
    * @return iban
    **/
-  @jakarta.annotation.Nonnull
+
   @JsonProperty(JSON_PROPERTY_IBAN)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
 
@@ -82,7 +82,7 @@ public class BankAccountInformation implements Serializable {
    * 
    * @return accountHolder
    **/
-  @jakarta.annotation.Nonnull
+
   @JsonProperty(JSON_PROPERTY_ACCOUNT_HOLDER)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
 
