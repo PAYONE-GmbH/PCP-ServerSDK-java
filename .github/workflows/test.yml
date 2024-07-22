@@ -25,6 +25,6 @@ jobs:
           java-version: '21'
           distribution: 'adopt'
 
-      - name: Build and Test
+      - name: Test
         run: |
-          ./gradlew :lib/jacocoTestReport
+          ./gradlew :lib:jacocoTestReport
