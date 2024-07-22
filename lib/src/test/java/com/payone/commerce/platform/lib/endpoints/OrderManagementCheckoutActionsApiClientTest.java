@@ -14,7 +14,6 @@ import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 import com.payone.commerce.platform.lib.ApiResponseException;
-import com.payone.commerce.platform.lib.CommunicatorConfiguration;
 import com.payone.commerce.platform.lib.models.CancelRequest;
 import com.payone.commerce.platform.lib.models.CancelResponse;
 import com.payone.commerce.platform.lib.models.DeliverRequest;
@@ -24,15 +23,11 @@ import com.payone.commerce.platform.lib.models.OrderResponse;
 import com.payone.commerce.platform.lib.models.ReturnRequest;
 import com.payone.commerce.platform.lib.models.ReturnResponse;
 import com.payone.commerce.platform.lib.testutils.ApiResponseMocks;
+import com.payone.commerce.platform.lib.testutils.TestConfig;
 
 import okhttp3.Response;
 
 public class OrderManagementCheckoutActionsApiClientTest {
-
-    private final String TEST_KEY = "KEY";
-    private final String TEST_SECRET = "Super duper Ethan Hunt level secret";
-    private final CommunicatorConfiguration CONFIG = new CommunicatorConfiguration(TEST_KEY, TEST_SECRET,
-            "awesome-api.com");
 
     @Nested
     @DisplayName("createOrder")
@@ -42,7 +37,7 @@ public class OrderManagementCheckoutActionsApiClientTest {
         void createOrderSuccessful() throws InvalidKeyException, ApiResponseException, IOException {
 
             OrderManagementCheckoutActionsApiClient orderManagementCheckoutActionsApiClient = spy(
-                    new OrderManagementCheckoutActionsApiClient(CONFIG));
+                    new OrderManagementCheckoutActionsApiClient(TestConfig.COMMUNICATOR_CONFIGURATION));
             OrderResponse expected = new OrderResponse();
             Response response = ApiResponseMocks.createResponse(200, new OrderResponse());
 
@@ -61,7 +56,7 @@ public class OrderManagementCheckoutActionsApiClientTest {
         void createOrderUnsuccessful() throws InvalidKeyException, ApiResponseException, IOException {
 
             OrderManagementCheckoutActionsApiClient orderManagementCheckoutActionsApiClient = spy(
-                    new OrderManagementCheckoutActionsApiClient(CONFIG));
+                    new OrderManagementCheckoutActionsApiClient(TestConfig.COMMUNICATOR_CONFIGURATION));
             Response response = ApiResponseMocks.createErrorResponse(400);
 
             doReturn(response).when(orderManagementCheckoutActionsApiClient).getResponse(any());
@@ -80,7 +75,7 @@ public class OrderManagementCheckoutActionsApiClientTest {
         void createOrderUnsuccessful500() throws InvalidKeyException, ApiResponseException, IOException {
 
             OrderManagementCheckoutActionsApiClient orderManagementCheckoutActionsApiClient = spy(
-                    new OrderManagementCheckoutActionsApiClient(CONFIG));
+                    new OrderManagementCheckoutActionsApiClient(TestConfig.COMMUNICATOR_CONFIGURATION));
             Response response = ApiResponseMocks.createErrorResponse(500);
 
             doReturn(response).when(orderManagementCheckoutActionsApiClient).getResponse(any());
@@ -99,7 +94,7 @@ public class OrderManagementCheckoutActionsApiClientTest {
         void createOrderNullParams() throws InvalidKeyException, ApiResponseException, IOException {
 
             OrderManagementCheckoutActionsApiClient orderManagementCheckoutActionsApiClient = spy(
-                    new OrderManagementCheckoutActionsApiClient(CONFIG));
+                    new OrderManagementCheckoutActionsApiClient(TestConfig.COMMUNICATOR_CONFIGURATION));
             OrderRequest payload = new OrderRequest();
 
             try {
@@ -140,7 +135,7 @@ public class OrderManagementCheckoutActionsApiClientTest {
         void deliverOrderSuccessful() throws InvalidKeyException, ApiResponseException, IOException {
 
             OrderManagementCheckoutActionsApiClient orderManagementCheckoutActionsApiClient = spy(
-                    new OrderManagementCheckoutActionsApiClient(CONFIG));
+                    new OrderManagementCheckoutActionsApiClient(TestConfig.COMMUNICATOR_CONFIGURATION));
             DeliverResponse expected = new DeliverResponse();
             Response response = ApiResponseMocks.createResponse(200, new DeliverResponse());
 
@@ -159,7 +154,7 @@ public class OrderManagementCheckoutActionsApiClientTest {
         void deliverOrderUnsuccessful() throws InvalidKeyException, ApiResponseException, IOException {
 
             OrderManagementCheckoutActionsApiClient orderManagementCheckoutActionsApiClient = spy(
-                    new OrderManagementCheckoutActionsApiClient(CONFIG));
+                    new OrderManagementCheckoutActionsApiClient(TestConfig.COMMUNICATOR_CONFIGURATION));
             Response response = ApiResponseMocks.createErrorResponse(400);
 
             doReturn(response).when(orderManagementCheckoutActionsApiClient).getResponse(any());
@@ -178,7 +173,7 @@ public class OrderManagementCheckoutActionsApiClientTest {
         void deliverOrderUnsuccessful500() throws InvalidKeyException, ApiResponseException, IOException {
 
             OrderManagementCheckoutActionsApiClient orderManagementCheckoutActionsApiClient = spy(
-                    new OrderManagementCheckoutActionsApiClient(CONFIG));
+                    new OrderManagementCheckoutActionsApiClient(TestConfig.COMMUNICATOR_CONFIGURATION));
             Response response = ApiResponseMocks.createErrorResponse(500);
 
             doReturn(response).when(orderManagementCheckoutActionsApiClient).getResponse(any());
@@ -197,7 +192,7 @@ public class OrderManagementCheckoutActionsApiClientTest {
         void deliverOrderNullParams() throws InvalidKeyException, ApiResponseException, IOException {
 
             OrderManagementCheckoutActionsApiClient orderManagementCheckoutActionsApiClient = spy(
-                    new OrderManagementCheckoutActionsApiClient(CONFIG));
+                    new OrderManagementCheckoutActionsApiClient(TestConfig.COMMUNICATOR_CONFIGURATION));
             DeliverRequest payload = new DeliverRequest();
 
             try {
@@ -238,7 +233,7 @@ public class OrderManagementCheckoutActionsApiClientTest {
         void returnOrderSuccessful() throws InvalidKeyException, ApiResponseException, IOException {
 
             OrderManagementCheckoutActionsApiClient orderManagementCheckoutActionsApiClient = spy(
-                    new OrderManagementCheckoutActionsApiClient(CONFIG));
+                    new OrderManagementCheckoutActionsApiClient(TestConfig.COMMUNICATOR_CONFIGURATION));
             ReturnResponse expected = new ReturnResponse();
             Response response = ApiResponseMocks.createResponse(200, new ReturnResponse());
 
@@ -257,7 +252,7 @@ public class OrderManagementCheckoutActionsApiClientTest {
         void returnOrderUnsuccessful() throws InvalidKeyException, ApiResponseException, IOException {
 
             OrderManagementCheckoutActionsApiClient orderManagementCheckoutActionsApiClient = spy(
-                    new OrderManagementCheckoutActionsApiClient(CONFIG));
+                    new OrderManagementCheckoutActionsApiClient(TestConfig.COMMUNICATOR_CONFIGURATION));
             Response response = ApiResponseMocks.createErrorResponse(400);
 
             doReturn(response).when(orderManagementCheckoutActionsApiClient).getResponse(any());
@@ -276,7 +271,7 @@ public class OrderManagementCheckoutActionsApiClientTest {
         void returnOrderUnsuccessful500() throws InvalidKeyException, ApiResponseException, IOException {
 
             OrderManagementCheckoutActionsApiClient orderManagementCheckoutActionsApiClient = spy(
-                    new OrderManagementCheckoutActionsApiClient(CONFIG));
+                    new OrderManagementCheckoutActionsApiClient(TestConfig.COMMUNICATOR_CONFIGURATION));
             Response response = ApiResponseMocks.createErrorResponse(500);
 
             doReturn(response).when(orderManagementCheckoutActionsApiClient).getResponse(any());
@@ -295,7 +290,7 @@ public class OrderManagementCheckoutActionsApiClientTest {
         void returnOrderNullParams() throws InvalidKeyException, ApiResponseException, IOException {
 
             OrderManagementCheckoutActionsApiClient orderManagementCheckoutActionsApiClient = spy(
-                    new OrderManagementCheckoutActionsApiClient(CONFIG));
+                    new OrderManagementCheckoutActionsApiClient(TestConfig.COMMUNICATOR_CONFIGURATION));
             ReturnRequest payload = new ReturnRequest();
 
             try {
@@ -336,7 +331,7 @@ public class OrderManagementCheckoutActionsApiClientTest {
         void cancelOrderSuccessful() throws InvalidKeyException, ApiResponseException, IOException {
 
             OrderManagementCheckoutActionsApiClient orderManagementCheckoutActionsApiClient = spy(
-                    new OrderManagementCheckoutActionsApiClient(CONFIG));
+                    new OrderManagementCheckoutActionsApiClient(TestConfig.COMMUNICATOR_CONFIGURATION));
             CancelResponse expected = new CancelResponse();
             Response response = ApiResponseMocks.createResponse(200, new CancelResponse());
 
@@ -355,7 +350,7 @@ public class OrderManagementCheckoutActionsApiClientTest {
         void cancelOrderUnsuccessful() throws InvalidKeyException, ApiResponseException, IOException {
 
             OrderManagementCheckoutActionsApiClient orderManagementCheckoutActionsApiClient = spy(
-                    new OrderManagementCheckoutActionsApiClient(CONFIG));
+                    new OrderManagementCheckoutActionsApiClient(TestConfig.COMMUNICATOR_CONFIGURATION));
             Response response = ApiResponseMocks.createErrorResponse(400);
 
             doReturn(response).when(orderManagementCheckoutActionsApiClient).getResponse(any());
@@ -374,7 +369,7 @@ public class OrderManagementCheckoutActionsApiClientTest {
         void cancelOrderUnsuccessful500() throws InvalidKeyException, ApiResponseException, IOException {
 
             OrderManagementCheckoutActionsApiClient orderManagementCheckoutActionsApiClient = spy(
-                    new OrderManagementCheckoutActionsApiClient(CONFIG));
+                    new OrderManagementCheckoutActionsApiClient(TestConfig.COMMUNICATOR_CONFIGURATION));
             Response response = ApiResponseMocks.createErrorResponse(500);
 
             doReturn(response).when(orderManagementCheckoutActionsApiClient).getResponse(any());
@@ -393,7 +388,7 @@ public class OrderManagementCheckoutActionsApiClientTest {
         void cancelOrderNullParams() throws InvalidKeyException, ApiResponseException, IOException {
 
             OrderManagementCheckoutActionsApiClient orderManagementCheckoutActionsApiClient = spy(
-                    new OrderManagementCheckoutActionsApiClient(CONFIG));
+                    new OrderManagementCheckoutActionsApiClient(TestConfig.COMMUNICATOR_CONFIGURATION));
             CancelRequest payload = new CancelRequest();
 
             try {

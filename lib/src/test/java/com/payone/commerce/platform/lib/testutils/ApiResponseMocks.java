@@ -29,6 +29,15 @@ public class ApiResponseMocks {
                 .build();
     }
 
+    public static Response createResponse(int statusCode) {
+        return new Response.Builder()
+                .request(new Request.Builder().url("https://some-url.com").build())
+                .protocol(Protocol.HTTP_2)
+                .code(statusCode)
+                .message("")
+                .build();
+    }
+
     public static Response createErrorResponse(int statusCode) throws JsonProcessingException {
         APIError apiError = new APIError();
         apiError.setHttpStatusCode(statusCode);

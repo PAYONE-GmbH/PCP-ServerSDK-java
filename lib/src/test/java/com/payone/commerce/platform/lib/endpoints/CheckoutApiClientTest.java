@@ -1,11 +1,11 @@
 package com.payone.commerce.platform.lib.endpoints;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.IOException;
 import java.security.InvalidKeyException;
@@ -15,21 +15,16 @@ import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 import com.payone.commerce.platform.lib.ApiResponseException;
-import com.payone.commerce.platform.lib.CommunicatorConfiguration;
 import com.payone.commerce.platform.lib.models.CheckoutResponse;
 import com.payone.commerce.platform.lib.models.CreateCheckoutRequest;
 import com.payone.commerce.platform.lib.models.CreateCheckoutResponse;
 import com.payone.commerce.platform.lib.models.PatchCheckoutRequest;
 import com.payone.commerce.platform.lib.testutils.ApiResponseMocks;
+import com.payone.commerce.platform.lib.testutils.TestConfig;
 
 import okhttp3.Response;
 
 public class CheckoutApiClientTest {
-
-    private final String TEST_KEY = "KEY";
-    private final String TEST_SECRET = "Super duper Ethan Hunt level secret";
-    private final CommunicatorConfiguration CONFIG = new CommunicatorConfiguration(TEST_KEY, TEST_SECRET,
-            "awesome-api.com");
 
     @Nested
     @DisplayName("createCheckoutRequest")
@@ -38,7 +33,8 @@ public class CheckoutApiClientTest {
         @DisplayName("given request was successful, then return response")
         void createCheckoutRequestSuccessful() throws InvalidKeyException, ApiResponseException, IOException {
 
-            CheckoutApiClient checkoutApiClient = spy(new CheckoutApiClient(CONFIG));
+            CheckoutApiClient checkoutApiClient = spy(
+                    new CheckoutApiClient(TestConfig.COMMUNICATOR_CONFIGURATION));
             CreateCheckoutResponse expected = new CreateCheckoutResponse();
             Response response = ApiResponseMocks.createResponse(200, new CreateCheckoutResponse());
 
@@ -56,7 +52,7 @@ public class CheckoutApiClientTest {
         @DisplayName("given request was unsuccessful (400), then throw exception")
         void createCheckoutRequestUnsuccessful() throws InvalidKeyException, ApiResponseException, IOException {
 
-            CheckoutApiClient checkoutApiClient = spy(new CheckoutApiClient(CONFIG));
+            CheckoutApiClient checkoutApiClient = spy(new CheckoutApiClient(TestConfig.COMMUNICATOR_CONFIGURATION));
             Response response = ApiResponseMocks.createErrorResponse(400);
 
             doReturn(response).when(checkoutApiClient).getResponse(any());
@@ -74,7 +70,7 @@ public class CheckoutApiClientTest {
         @DisplayName("given request was unsuccessful (500), then throw exception")
         void createCheckoutRequestUnsuccessful500() throws InvalidKeyException, ApiResponseException, IOException {
 
-            CheckoutApiClient checkoutApiClient = spy(new CheckoutApiClient(CONFIG));
+            CheckoutApiClient checkoutApiClient = spy(new CheckoutApiClient(TestConfig.COMMUNICATOR_CONFIGURATION));
             Response response = ApiResponseMocks.createErrorResponse(500);
 
             doReturn(response).when(checkoutApiClient).getResponse(any());
@@ -92,7 +88,7 @@ public class CheckoutApiClientTest {
         @DisplayName("given some params are null, then throw exception")
         void createCheckoutRequestNullParams() throws InvalidKeyException, ApiResponseException, IOException {
 
-            CheckoutApiClient checkoutApiClient = spy(new CheckoutApiClient(CONFIG));
+            CheckoutApiClient checkoutApiClient = spy(new CheckoutApiClient(TestConfig.COMMUNICATOR_CONFIGURATION));
             CreateCheckoutRequest payload = new CreateCheckoutRequest();
 
             try {
@@ -125,7 +121,7 @@ public class CheckoutApiClientTest {
         @DisplayName("given request was successful, then return response")
         void getCheckoutRequestSuccessful() throws InvalidKeyException, ApiResponseException, IOException {
 
-            CheckoutApiClient checkoutApiClient = spy(new CheckoutApiClient(CONFIG));
+            CheckoutApiClient checkoutApiClient = spy(new CheckoutApiClient(TestConfig.COMMUNICATOR_CONFIGURATION));
             CheckoutResponse expected = new CheckoutResponse();
             Response response = ApiResponseMocks.createResponse(200, new CheckoutResponse());
 
@@ -142,7 +138,7 @@ public class CheckoutApiClientTest {
         @DisplayName("given request was unsuccessful (400), then throw exception")
         void getCheckoutRequestUnsuccessful() throws InvalidKeyException, ApiResponseException, IOException {
 
-            CheckoutApiClient checkoutApiClient = spy(new CheckoutApiClient(CONFIG));
+            CheckoutApiClient checkoutApiClient = spy(new CheckoutApiClient(TestConfig.COMMUNICATOR_CONFIGURATION));
             Response response = ApiResponseMocks.createErrorResponse(400);
 
             doReturn(response).when(checkoutApiClient).getResponse(any());
@@ -159,7 +155,7 @@ public class CheckoutApiClientTest {
         @DisplayName("given request was unsuccessful (500), then throw exception")
         void getCheckoutRequestUnsuccessful500() throws InvalidKeyException, ApiResponseException, IOException {
 
-            CheckoutApiClient checkoutApiClient = spy(new CheckoutApiClient(CONFIG));
+            CheckoutApiClient checkoutApiClient = spy(new CheckoutApiClient(TestConfig.COMMUNICATOR_CONFIGURATION));
             Response response = ApiResponseMocks.createErrorResponse(500);
 
             doReturn(response).when(checkoutApiClient).getResponse(any());
@@ -176,7 +172,7 @@ public class CheckoutApiClientTest {
         @DisplayName("given some params are null, then throw exception")
         void getCheckoutRequestNullParams() throws InvalidKeyException, ApiResponseException, IOException {
 
-            CheckoutApiClient checkoutApiClient = spy(new CheckoutApiClient(CONFIG));
+            CheckoutApiClient checkoutApiClient = spy(new CheckoutApiClient(TestConfig.COMMUNICATOR_CONFIGURATION));
 
             try {
                 checkoutApiClient.getCheckoutRequest(null, "2", "3");
@@ -208,7 +204,7 @@ public class CheckoutApiClientTest {
         @DisplayName("given request was successful, then throw no exception")
         void updateCheckoutRequestSuccessful() throws InvalidKeyException, ApiResponseException, IOException {
 
-            CheckoutApiClient checkoutApiClient = spy(new CheckoutApiClient(CONFIG));
+            CheckoutApiClient checkoutApiClient = spy(new CheckoutApiClient(TestConfig.COMMUNICATOR_CONFIGURATION));
             Response response = ApiResponseMocks.createResponse(200);
 
             doReturn(response).when(checkoutApiClient).getResponse(any());
@@ -224,7 +220,7 @@ public class CheckoutApiClientTest {
         @DisplayName("given request was unsuccessful (400), then throw exception")
         void updateCheckoutRequestUnsuccessful() throws InvalidKeyException, ApiResponseException, IOException {
 
-            CheckoutApiClient checkoutApiClient = spy(new CheckoutApiClient(CONFIG));
+            CheckoutApiClient checkoutApiClient = spy(new CheckoutApiClient(TestConfig.COMMUNICATOR_CONFIGURATION));
             Response response = ApiResponseMocks.createErrorResponse(400);
 
             doReturn(response).when(checkoutApiClient).getResponse(any());
@@ -243,7 +239,7 @@ public class CheckoutApiClientTest {
         @DisplayName("given request was unsuccessful (500), then throw exception")
         void updateCheckoutRequestUnsuccessful500() throws InvalidKeyException, ApiResponseException, IOException {
 
-            CheckoutApiClient checkoutApiClient = spy(new CheckoutApiClient(CONFIG));
+            CheckoutApiClient checkoutApiClient = spy(new CheckoutApiClient(TestConfig.COMMUNICATOR_CONFIGURATION));
             Response response = ApiResponseMocks.createErrorResponse(500);
 
             doReturn(response).when(checkoutApiClient).getResponse(any());
@@ -261,7 +257,7 @@ public class CheckoutApiClientTest {
         @DisplayName("given some params are null, then throw exception")
         void updateCheckoutRequestNullParams() throws InvalidKeyException, ApiResponseException, IOException {
 
-            CheckoutApiClient checkoutApiClient = spy(new CheckoutApiClient(CONFIG));
+            CheckoutApiClient checkoutApiClient = spy(new CheckoutApiClient(TestConfig.COMMUNICATOR_CONFIGURATION));
 
             try {
                 PatchCheckoutRequest payload = new PatchCheckoutRequest();
@@ -302,7 +298,7 @@ public class CheckoutApiClientTest {
         @DisplayName("given request was successful, then throw no exception")
         void removeCheckoutRequestSuccessful() throws InvalidKeyException, ApiResponseException, IOException {
 
-            CheckoutApiClient checkoutApiClient = spy(new CheckoutApiClient(CONFIG));
+            CheckoutApiClient checkoutApiClient = spy(new CheckoutApiClient(TestConfig.COMMUNICATOR_CONFIGURATION));
             Response response = ApiResponseMocks.createResponse(200);
 
             doReturn(response).when(checkoutApiClient).getResponse(any());
@@ -316,7 +312,7 @@ public class CheckoutApiClientTest {
         @DisplayName("given request was unsuccessful (400), then throw exception")
         void removeCheckoutRequestUnsuccessful() throws InvalidKeyException, ApiResponseException, IOException {
 
-            CheckoutApiClient checkoutApiClient = spy(new CheckoutApiClient(CONFIG));
+            CheckoutApiClient checkoutApiClient = spy(new CheckoutApiClient(TestConfig.COMMUNICATOR_CONFIGURATION));
             Response response = ApiResponseMocks.createErrorResponse(400);
 
             doReturn(response).when(checkoutApiClient).getResponse(any());
@@ -334,7 +330,7 @@ public class CheckoutApiClientTest {
         @DisplayName("given request was unsuccessful (500), then throw exception")
         void removeCheckoutRequestUnsuccessful500() throws InvalidKeyException, ApiResponseException, IOException {
 
-            CheckoutApiClient checkoutApiClient = spy(new CheckoutApiClient(CONFIG));
+            CheckoutApiClient checkoutApiClient = spy(new CheckoutApiClient(TestConfig.COMMUNICATOR_CONFIGURATION));
             Response response = ApiResponseMocks.createErrorResponse(500);
 
             doReturn(response).when(checkoutApiClient).getResponse(any());
@@ -351,7 +347,7 @@ public class CheckoutApiClientTest {
         @DisplayName("given some params are null, then throw exception")
         void removeCheckoutRequestNullParams() throws InvalidKeyException, ApiResponseException, IOException {
 
-            CheckoutApiClient checkoutApiClient = spy(new CheckoutApiClient(CONFIG));
+            CheckoutApiClient checkoutApiClient = spy(new CheckoutApiClient(TestConfig.COMMUNICATOR_CONFIGURATION));
 
             try {
                 checkoutApiClient.removeCheckoutRequest(null, "2", "3");

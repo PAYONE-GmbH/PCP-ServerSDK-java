@@ -16,21 +16,16 @@ import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 import com.payone.commerce.platform.lib.ApiResponseException;
-import com.payone.commerce.platform.lib.CommunicatorConfiguration;
 import com.payone.commerce.platform.lib.models.CommerceCaseResponse;
 import com.payone.commerce.platform.lib.models.CreateCommerceCaseRequest;
 import com.payone.commerce.platform.lib.models.CreateCommerceCaseResponse;
 import com.payone.commerce.platform.lib.models.Customer;
 import com.payone.commerce.platform.lib.testutils.ApiResponseMocks;
+import com.payone.commerce.platform.lib.testutils.TestConfig;
 
 import okhttp3.Response;
 
 public class CommerceCaseApiClientTest {
-
-    private final String TEST_KEY = "KEY";
-    private final String TEST_SECRET = "Super duper Ethan Hunt level secret";
-    private final CommunicatorConfiguration CONFIG = new CommunicatorConfiguration(TEST_KEY, TEST_SECRET,
-            "awesome-api.com");
 
     @Nested
     @DisplayName("createCommerceCaseRequest")
@@ -39,7 +34,8 @@ public class CommerceCaseApiClientTest {
         @DisplayName("given request was successful, then return response")
         void createCommerceCaseRequestSuccessful() throws InvalidKeyException, ApiResponseException, IOException {
 
-            CommerceCaseApiClient commerceCaseApiClient = spy(new CommerceCaseApiClient(CONFIG));
+            CommerceCaseApiClient commerceCaseApiClient = spy(
+                    new CommerceCaseApiClient(TestConfig.COMMUNICATOR_CONFIGURATION));
             CreateCommerceCaseResponse expected = new CreateCommerceCaseResponse();
             Response response = ApiResponseMocks.createResponse(200, new CreateCommerceCaseResponse());
 
@@ -57,7 +53,8 @@ public class CommerceCaseApiClientTest {
         @DisplayName("given request was unsuccessful (400), then throw exception")
         void createCommerceCaseRequestUnsuccessful() throws InvalidKeyException, ApiResponseException, IOException {
 
-            CommerceCaseApiClient commerceCaseApiClient = spy(new CommerceCaseApiClient(CONFIG));
+            CommerceCaseApiClient commerceCaseApiClient = spy(
+                    new CommerceCaseApiClient(TestConfig.COMMUNICATOR_CONFIGURATION));
             Response response = ApiResponseMocks.createErrorResponse(400);
 
             doReturn(response).when(commerceCaseApiClient).getResponse(any());
@@ -75,7 +72,8 @@ public class CommerceCaseApiClientTest {
         @DisplayName("given request was unsuccessful (500), then throw exception")
         void createCommerceCaseRequestUnsuccessful500() throws InvalidKeyException, ApiResponseException, IOException {
 
-            CommerceCaseApiClient commerceCaseApiClient = spy(new CommerceCaseApiClient(CONFIG));
+            CommerceCaseApiClient commerceCaseApiClient = spy(
+                    new CommerceCaseApiClient(TestConfig.COMMUNICATOR_CONFIGURATION));
             Response response = ApiResponseMocks.createErrorResponse(500);
 
             doReturn(response).when(commerceCaseApiClient).getResponse(any());
@@ -93,7 +91,8 @@ public class CommerceCaseApiClientTest {
         @DisplayName("given some params are null, then throw exception")
         void createCommerceCaseRequestNullParams() throws InvalidKeyException, ApiResponseException, IOException {
 
-            CommerceCaseApiClient commerceCaseApiClient = spy(new CommerceCaseApiClient(CONFIG));
+            CommerceCaseApiClient commerceCaseApiClient = spy(
+                    new CommerceCaseApiClient(TestConfig.COMMUNICATOR_CONFIGURATION));
             CreateCommerceCaseRequest payload = new CreateCommerceCaseRequest();
 
             try {
@@ -119,7 +118,8 @@ public class CommerceCaseApiClientTest {
         @DisplayName("given request was successful, then return response")
         void getAllCommerceCaseRequestSuccessful() throws InvalidKeyException, ApiResponseException, IOException {
 
-            CommerceCaseApiClient commerceCaseApiClient = spy(new CommerceCaseApiClient(CONFIG));
+            CommerceCaseApiClient commerceCaseApiClient = spy(
+                    new CommerceCaseApiClient(TestConfig.COMMUNICATOR_CONFIGURATION));
             List<CommerceCaseResponse> expected = List.of(new CommerceCaseResponse());
             Response response = ApiResponseMocks.createResponse(200, List.of(new CommerceCaseResponse()));
 
@@ -136,7 +136,8 @@ public class CommerceCaseApiClientTest {
         @DisplayName("given request was unsuccessful (400), then throw exception")
         void getAllCommerceCaseRequestUnsuccessful() throws InvalidKeyException, ApiResponseException, IOException {
 
-            CommerceCaseApiClient commerceCaseApiClient = spy(new CommerceCaseApiClient(CONFIG));
+            CommerceCaseApiClient commerceCaseApiClient = spy(
+                    new CommerceCaseApiClient(TestConfig.COMMUNICATOR_CONFIGURATION));
             Response response = ApiResponseMocks.createErrorResponse(400);
 
             doReturn(response).when(commerceCaseApiClient).getResponse(any());
@@ -153,7 +154,8 @@ public class CommerceCaseApiClientTest {
         @DisplayName("given request was unsuccessful (500), then throw exception")
         void getAllCommerceCaseRequestUnsuccessful500() throws InvalidKeyException, ApiResponseException, IOException {
 
-            CommerceCaseApiClient commerceCaseApiClient = spy(new CommerceCaseApiClient(CONFIG));
+            CommerceCaseApiClient commerceCaseApiClient = spy(
+                    new CommerceCaseApiClient(TestConfig.COMMUNICATOR_CONFIGURATION));
             Response response = ApiResponseMocks.createErrorResponse(500);
 
             doReturn(response).when(commerceCaseApiClient).getResponse(any());
@@ -170,7 +172,8 @@ public class CommerceCaseApiClientTest {
         @DisplayName("given some params are null, then throw exception")
         void getAllCommerceCaseRequestNullParams() throws InvalidKeyException, ApiResponseException, IOException {
 
-            CommerceCaseApiClient commerceCaseApiClient = spy(new CommerceCaseApiClient(CONFIG));
+            CommerceCaseApiClient commerceCaseApiClient = spy(
+                    new CommerceCaseApiClient(TestConfig.COMMUNICATOR_CONFIGURATION));
 
             try {
                 commerceCaseApiClient.getAllCommerceCaseRequest(null);
@@ -189,7 +192,8 @@ public class CommerceCaseApiClientTest {
         @DisplayName("given request was successful, then return response")
         void getCommerceCaseRequestSuccessful() throws InvalidKeyException, ApiResponseException, IOException {
 
-            CommerceCaseApiClient commerceCaseApiClient = spy(new CommerceCaseApiClient(CONFIG));
+            CommerceCaseApiClient commerceCaseApiClient = spy(
+                    new CommerceCaseApiClient(TestConfig.COMMUNICATOR_CONFIGURATION));
             CommerceCaseResponse expected = new CommerceCaseResponse();
             Response response = ApiResponseMocks.createResponse(200, new CommerceCaseResponse());
 
@@ -206,7 +210,8 @@ public class CommerceCaseApiClientTest {
         @DisplayName("given request was unsuccessful (400), then throw exception")
         void getCommerceCaseRequestUnsuccessful() throws InvalidKeyException, ApiResponseException, IOException {
 
-            CommerceCaseApiClient commerceCaseApiClient = spy(new CommerceCaseApiClient(CONFIG));
+            CommerceCaseApiClient commerceCaseApiClient = spy(
+                    new CommerceCaseApiClient(TestConfig.COMMUNICATOR_CONFIGURATION));
             Response response = ApiResponseMocks.createErrorResponse(400);
 
             doReturn(response).when(commerceCaseApiClient).getResponse(any());
@@ -223,7 +228,8 @@ public class CommerceCaseApiClientTest {
         @DisplayName("given request was unsuccessful (500), then throw exception")
         void getCommerceCaseRequestUnsuccessful500() throws InvalidKeyException, ApiResponseException, IOException {
 
-            CommerceCaseApiClient commerceCaseApiClient = spy(new CommerceCaseApiClient(CONFIG));
+            CommerceCaseApiClient commerceCaseApiClient = spy(
+                    new CommerceCaseApiClient(TestConfig.COMMUNICATOR_CONFIGURATION));
             Response response = ApiResponseMocks.createErrorResponse(500);
 
             doReturn(response).when(commerceCaseApiClient).getResponse(any());
@@ -240,7 +246,8 @@ public class CommerceCaseApiClientTest {
         @DisplayName("given some params are null, then throw exception")
         void getCommerceCaseRequestNullParams() throws InvalidKeyException, ApiResponseException, IOException {
 
-            CommerceCaseApiClient commerceCaseApiClient = spy(new CommerceCaseApiClient(CONFIG));
+            CommerceCaseApiClient commerceCaseApiClient = spy(
+                    new CommerceCaseApiClient(TestConfig.COMMUNICATOR_CONFIGURATION));
 
             try {
                 commerceCaseApiClient.getCommerceCaseRequest(null, "2");
@@ -265,7 +272,8 @@ public class CommerceCaseApiClientTest {
         @DisplayName("given request was successful, then throw no exception")
         void updateCommerceCaseRequestSuccessful() throws InvalidKeyException, ApiResponseException, IOException {
 
-            CommerceCaseApiClient commerceCaseApiClient = spy(new CommerceCaseApiClient(CONFIG));
+            CommerceCaseApiClient commerceCaseApiClient = spy(
+                    new CommerceCaseApiClient(TestConfig.COMMUNICATOR_CONFIGURATION));
             Response response = ApiResponseMocks.createResponse(200);
 
             doReturn(response).when(commerceCaseApiClient).getResponse(any());
@@ -281,7 +289,8 @@ public class CommerceCaseApiClientTest {
         @DisplayName("given request was unsuccessful (400), then throw exception")
         void updateCommerceCaseRequestUnsuccessful() throws InvalidKeyException, ApiResponseException, IOException {
 
-            CommerceCaseApiClient commerceCaseApiClient = spy(new CommerceCaseApiClient(CONFIG));
+            CommerceCaseApiClient commerceCaseApiClient = spy(
+                    new CommerceCaseApiClient(TestConfig.COMMUNICATOR_CONFIGURATION));
             Response response = ApiResponseMocks.createErrorResponse(400);
 
             doReturn(response).when(commerceCaseApiClient).getResponse(any());
@@ -300,7 +309,8 @@ public class CommerceCaseApiClientTest {
         @DisplayName("given request was unsuccessful (500), then throw exception")
         void updateCommerceCaseRequestUnsuccessful500() throws InvalidKeyException, ApiResponseException, IOException {
 
-            CommerceCaseApiClient commerceCaseApiClient = spy(new CommerceCaseApiClient(CONFIG));
+            CommerceCaseApiClient commerceCaseApiClient = spy(
+                    new CommerceCaseApiClient(TestConfig.COMMUNICATOR_CONFIGURATION));
             Response response = ApiResponseMocks.createErrorResponse(500);
 
             doReturn(response).when(commerceCaseApiClient).getResponse(any());
@@ -318,7 +328,8 @@ public class CommerceCaseApiClientTest {
         @DisplayName("given some params are null, then throw exception")
         void updateCommerceCaseRequestNullParams() throws InvalidKeyException, ApiResponseException, IOException {
 
-            CommerceCaseApiClient commerceCaseApiClient = spy(new CommerceCaseApiClient(CONFIG));
+            CommerceCaseApiClient commerceCaseApiClient = spy(
+                    new CommerceCaseApiClient(TestConfig.COMMUNICATOR_CONFIGURATION));
 
             try {
                 Customer payload = new Customer();
