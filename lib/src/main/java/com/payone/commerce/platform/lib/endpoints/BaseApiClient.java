@@ -3,13 +3,15 @@ package com.payone.commerce.platform.lib.endpoints;
 import java.io.IOException;
 import java.security.InvalidKeyException;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.json.JsonMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import com.payone.commerce.platform.lib.ApiResponseException;
 import com.payone.commerce.platform.lib.CommunicatorConfiguration;
 import com.payone.commerce.platform.lib.RequestHeaderGenerator;
+import com.payone.commerce.platform.lib.errors.ApiErrorResponseException;
+import com.payone.commerce.platform.lib.errors.ApiResponseRetrievalException;
 import com.payone.commerce.platform.lib.models.ErrorResponse;
 
 import okhttp3.MediaType;
@@ -17,7 +19,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public abstract class BaseApiClient {
+public class BaseApiClient {
 
     private final OkHttpClient client = new OkHttpClient();
     private final String JSON_PARSE_ERROR = "Excepted valid JSON response, but failed to parse";
@@ -34,7 +36,6 @@ public abstract class BaseApiClient {
 
     }
 
-    // only used for testsuite
     public BaseApiClient() {
         this.config = null;
         this.requestHeaderGenerator = null;
@@ -56,13 +57,14 @@ public abstract class BaseApiClient {
         return JSON_MAPPER;
     }
 
-    protected void makeApiCall(Request request) throws IOException, ApiResponseException {
+    protected void makeApiCall(Request request)
+            throws IOException, ApiErrorResponseException, ApiResponseRetrievalException {
         Response response = getResponse(request);
         handleError(response);
     }
 
     protected <T> T makeApiCall(Request request, TypeReference<T> valueTypeRef)
-            throws IOException, ApiResponseException {
+            throws IOException, ApiErrorResponseException, ApiResponseRetrievalException {
         Response response = getResponse(request);
         handleError(response);
         try {
@@ -72,7 +74,8 @@ public abstract class BaseApiClient {
         }
     }
 
-    protected <T> T makeApiCall(Request request, Class<T> clazz) throws IOException, ApiResponseException {
+    protected <T> T makeApiCall(Request request, Class<T> clazz)
+            throws IOException, ApiErrorResponseException, ApiResponseRetrievalException {
         Response response = getResponse(request);
         handleError(response);
         try {
@@ -83,20 +86,21 @@ public abstract class BaseApiClient {
     }
 
     private void handleError(Response response)
-            throws ApiResponseException, IOException {
+            throws ApiErrorResponseException, ApiResponseRetrievalException, IOException {
         if (response.isSuccessful()) {
             return;
         }
-        if (response.code() != 400) {
-            throw new RuntimeException("Api error: " + response.code());
+
+        String responseBody = response.body().string();
+        if (responseBody == null || responseBody.isEmpty()) {
+            throw new ApiResponseRetrievalException(response.code(), responseBody);
         }
         try {
-            ErrorResponse error = getJsonMapper().readValue(response.body().string(), ErrorResponse.class);
-            throw new ApiResponseException(error);
-        } catch (JsonMappingException e) {
-            throw new RuntimeException(JSON_PARSE_ERROR, e);
+            ErrorResponse error = getJsonMapper().readValue(responseBody, ErrorResponse.class);
+            throw new ApiErrorResponseException(response.code(), responseBody, error.getErrors());
+        } catch (JsonProcessingException e) {
+            throw new ApiResponseRetrievalException(response.code(), responseBody, e);
         }
-
     }
 
     public Response getResponse(Request request) throws IOException {

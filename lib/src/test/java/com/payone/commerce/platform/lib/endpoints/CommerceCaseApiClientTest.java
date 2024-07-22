@@ -2,6 +2,7 @@ package com.payone.commerce.platform.lib.endpoints;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
@@ -16,7 +17,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
-import com.payone.commerce.platform.lib.ApiResponseException;
+import com.payone.commerce.platform.lib.errors.ApiErrorResponseException;
+import com.payone.commerce.platform.lib.errors.ApiException;
+import com.payone.commerce.platform.lib.errors.ApiResponseRetrievalException;
 import com.payone.commerce.platform.lib.models.CommerceCaseResponse;
 import com.payone.commerce.platform.lib.models.CreateCommerceCaseRequest;
 import com.payone.commerce.platform.lib.models.CreateCommerceCaseResponse;
@@ -33,7 +36,7 @@ public class CommerceCaseApiClientTest {
     class CreateCommerceCaseRequestTests {
         @Test
         @DisplayName("given request was successful, then return response")
-        void createCommerceCaseRequestSuccessful() throws InvalidKeyException, ApiResponseException, IOException {
+        void createCommerceCaseRequestSuccessful() throws InvalidKeyException, ApiException, IOException {
 
             CommerceCaseApiClient commerceCaseApiClient = spy(
                     new CommerceCaseApiClient(TestConfig.COMMUNICATOR_CONFIGURATION));
@@ -52,7 +55,7 @@ public class CommerceCaseApiClientTest {
 
         @Test
         @DisplayName("given request was unsuccessful (400), then throw exception")
-        void createCommerceCaseRequestUnsuccessful() throws InvalidKeyException, ApiResponseException, IOException {
+        void createCommerceCaseRequestUnsuccessful() throws InvalidKeyException, ApiException, IOException {
 
             CommerceCaseApiClient commerceCaseApiClient = spy(
                     new CommerceCaseApiClient(TestConfig.COMMUNICATOR_CONFIGURATION));
@@ -60,55 +63,54 @@ public class CommerceCaseApiClientTest {
 
             doReturn(response).when(commerceCaseApiClient).getResponse(any());
 
-            CreateCommerceCaseRequest payload = new CreateCommerceCaseRequest();
-            try {
+            ApiErrorResponseException e = assertThrows(ApiErrorResponseException.class, () -> {
+                CreateCommerceCaseRequest payload = new CreateCommerceCaseRequest();
                 commerceCaseApiClient.createCommerceCaseRequest("1", payload);
-            } catch (ApiResponseException e) {
-                int s = e.getResponse().getErrors().get(0).getHttpStatusCode();
-                assertEquals(400, s);
-            }
+            });
+            int s = e.getErrors().get(0).getHttpStatusCode();
+            assertEquals(400, s);
         }
 
         @Test
-        @DisplayName("given request was unsuccessful (500), then throw exception")
-        void createCommerceCaseRequestUnsuccessful500() throws InvalidKeyException, ApiResponseException, IOException {
+        @DisplayName("given request was unsuccessful (500) with empty body, then throw exception")
+        void createCommerceCaseRequestUnsuccessful500() throws InvalidKeyException, ApiException, IOException {
 
             CommerceCaseApiClient commerceCaseApiClient = spy(
                     new CommerceCaseApiClient(TestConfig.COMMUNICATOR_CONFIGURATION));
-            Response response = ApiResponseMocks.createErrorResponse(500);
+            Response response = ApiResponseMocks.createEmptyErrorResponse(500);
 
             doReturn(response).when(commerceCaseApiClient).getResponse(any());
 
-            CreateCommerceCaseRequest payload = new CreateCommerceCaseRequest();
-            try {
+            ApiResponseRetrievalException e = assertThrows(ApiResponseRetrievalException.class, () -> {
+                CreateCommerceCaseRequest payload = new CreateCommerceCaseRequest();
                 commerceCaseApiClient.createCommerceCaseRequest("1", payload);
-            } catch (RuntimeException e) {
-                String m = e.getMessage();
-                assertEquals("Api error: 500", m);
-            }
+            });
+            int code = e.getStatusCode();
+            assertEquals(500, code);
         }
 
         @Test
         @DisplayName("given some params are null, then throw exception")
-        void createCommerceCaseRequestNullParams() throws InvalidKeyException, ApiResponseException, IOException {
+        void createCommerceCaseRequestNullParams() throws InvalidKeyException, ApiException, IOException {
 
             CommerceCaseApiClient commerceCaseApiClient = spy(
                     new CommerceCaseApiClient(TestConfig.COMMUNICATOR_CONFIGURATION));
             CreateCommerceCaseRequest payload = new CreateCommerceCaseRequest();
 
-            try {
-                commerceCaseApiClient.createCommerceCaseRequest(null, payload);
-            } catch (IllegalArgumentException e) {
-                String m = e.getMessage();
-                assertEquals("Merchant ID is required", m);
-            }
+            IllegalArgumentException e;
+            String m;
 
-            try {
+            e = assertThrows(IllegalArgumentException.class, () -> {
+                commerceCaseApiClient.createCommerceCaseRequest(null, payload);
+            });
+            m = e.getMessage();
+            assertEquals("Merchant ID is required", m);
+
+            e = assertThrows(IllegalArgumentException.class, () -> {
                 commerceCaseApiClient.createCommerceCaseRequest("1", null);
-            } catch (IllegalArgumentException e) {
-                String m = e.getMessage();
-                assertEquals("Payload is required", m);
-            }
+            });
+            m = e.getMessage();
+            assertEquals("Payload is required", m);
         }
     }
 
@@ -117,7 +119,7 @@ public class CommerceCaseApiClientTest {
     class getAllCommerceCaseRequestTests {
         @Test
         @DisplayName("given request was successful, then return response")
-        void getAllCommerceCaseRequestSuccessful() throws InvalidKeyException, ApiResponseException, IOException {
+        void getAllCommerceCaseRequestSuccessful() throws InvalidKeyException, ApiException, IOException {
 
             CommerceCaseApiClient commerceCaseApiClient = spy(
                     new CommerceCaseApiClient(TestConfig.COMMUNICATOR_CONFIGURATION));
@@ -135,7 +137,7 @@ public class CommerceCaseApiClientTest {
 
         @Test
         @DisplayName("given request was unsuccessful (400), then throw exception")
-        void getAllCommerceCaseRequestUnsuccessful() throws InvalidKeyException, ApiResponseException, IOException {
+        void getAllCommerceCaseRequestUnsuccessful() throws InvalidKeyException, ApiException, IOException {
 
             CommerceCaseApiClient commerceCaseApiClient = spy(
                     new CommerceCaseApiClient(TestConfig.COMMUNICATOR_CONFIGURATION));
@@ -143,46 +145,45 @@ public class CommerceCaseApiClientTest {
 
             doReturn(response).when(commerceCaseApiClient).getResponse(any());
 
-            try {
+            ApiErrorResponseException e = assertThrows(ApiErrorResponseException.class, () -> {
                 commerceCaseApiClient.getAllCommerceCaseRequest("1");
-            } catch (ApiResponseException e) {
-                int s = e.getResponse().getErrors().get(0).getHttpStatusCode();
-                assertEquals(400, s);
-            }
+            });
+            int s = e.getStatusCode();
+            assertEquals(400, s);
         }
 
         @Test
         @DisplayName("given request was unsuccessful (500), then throw exception")
-        void getAllCommerceCaseRequestUnsuccessful500() throws InvalidKeyException, ApiResponseException, IOException {
+        void getAllCommerceCaseRequestUnsuccessful500() throws InvalidKeyException, ApiException, IOException {
 
             CommerceCaseApiClient commerceCaseApiClient = spy(
                     new CommerceCaseApiClient(TestConfig.COMMUNICATOR_CONFIGURATION));
-            Response response = ApiResponseMocks.createErrorResponse(500);
+            Response response = ApiResponseMocks.createEmptyErrorResponse(500);
 
             doReturn(response).when(commerceCaseApiClient).getResponse(any());
 
-            try {
+            ApiResponseRetrievalException e = assertThrows(ApiResponseRetrievalException.class, () -> {
                 commerceCaseApiClient.getAllCommerceCaseRequest("1");
-            } catch (RuntimeException e) {
-                String m = e.getMessage();
-                assertEquals("Api error: 500", m);
-            }
+            });
+            int code = e.getStatusCode();
+            assertEquals(500, code);
         }
 
         @Test
         @DisplayName("given some params are null, then throw exception")
-        void getAllCommerceCaseRequestNullParams() throws InvalidKeyException, ApiResponseException, IOException {
+        void getAllCommerceCaseRequestNullParams() throws InvalidKeyException, ApiException, IOException {
 
             CommerceCaseApiClient commerceCaseApiClient = spy(
                     new CommerceCaseApiClient(TestConfig.COMMUNICATOR_CONFIGURATION));
 
-            try {
-                commerceCaseApiClient.getAllCommerceCaseRequest(null);
-            } catch (IllegalArgumentException e) {
-                String m = e.getMessage();
-                assertEquals("Merchant ID is required", m);
-            }
+            IllegalArgumentException e;
+            String m;
 
+            e = assertThrows(IllegalArgumentException.class, () -> {
+                commerceCaseApiClient.getAllCommerceCaseRequest(null);
+            });
+            m = e.getMessage();
+            assertEquals("Merchant ID is required", m);
         }
     }
 
@@ -191,7 +192,7 @@ public class CommerceCaseApiClientTest {
     class GetCommerceCaseRequestTests {
         @Test
         @DisplayName("given request was successful, then return response")
-        void getCommerceCaseRequestSuccessful() throws InvalidKeyException, ApiResponseException, IOException {
+        void getCommerceCaseRequestSuccessful() throws InvalidKeyException, ApiException, IOException {
 
             CommerceCaseApiClient commerceCaseApiClient = spy(
                     new CommerceCaseApiClient(TestConfig.COMMUNICATOR_CONFIGURATION));
@@ -209,7 +210,7 @@ public class CommerceCaseApiClientTest {
 
         @Test
         @DisplayName("given request was unsuccessful (400), then throw exception")
-        void getCommerceCaseRequestUnsuccessful() throws InvalidKeyException, ApiResponseException, IOException {
+        void getCommerceCaseRequestUnsuccessful() throws InvalidKeyException, ApiException, IOException {
 
             CommerceCaseApiClient commerceCaseApiClient = spy(
                     new CommerceCaseApiClient(TestConfig.COMMUNICATOR_CONFIGURATION));
@@ -217,52 +218,51 @@ public class CommerceCaseApiClientTest {
 
             doReturn(response).when(commerceCaseApiClient).getResponse(any());
 
-            try {
+            ApiErrorResponseException e = assertThrows(ApiErrorResponseException.class, () -> {
                 commerceCaseApiClient.getCommerceCaseRequest("1", "2");
-            } catch (ApiResponseException e) {
-                int s = e.getResponse().getErrors().get(0).getHttpStatusCode();
-                assertEquals(400, s);
-            }
+            });
+            int s = e.getStatusCode();
+            assertEquals(400, s);
         }
 
         @Test
-        @DisplayName("given request was unsuccessful (500), then throw exception")
-        void getCommerceCaseRequestUnsuccessful500() throws InvalidKeyException, ApiResponseException, IOException {
+        @DisplayName("given request was unsuccessful (500) with empty body, then throw exception")
+        void getCommerceCaseRequestUnsuccessful500() throws InvalidKeyException, ApiException, IOException {
 
             CommerceCaseApiClient commerceCaseApiClient = spy(
                     new CommerceCaseApiClient(TestConfig.COMMUNICATOR_CONFIGURATION));
-            Response response = ApiResponseMocks.createErrorResponse(500);
+            Response response = ApiResponseMocks.createEmptyErrorResponse(500);
 
             doReturn(response).when(commerceCaseApiClient).getResponse(any());
 
-            try {
+            ApiResponseRetrievalException e = assertThrows(ApiResponseRetrievalException.class, () -> {
                 commerceCaseApiClient.getCommerceCaseRequest("1", "2");
-            } catch (RuntimeException e) {
-                String m = e.getMessage();
-                assertEquals("Api error: 500", m);
-            }
+            });
+            int code = e.getStatusCode();
+            assertEquals(500, code);
         }
 
         @Test
         @DisplayName("given some params are null, then throw exception")
-        void getCommerceCaseRequestNullParams() throws InvalidKeyException, ApiResponseException, IOException {
+        void getCommerceCaseRequestNullParams() throws InvalidKeyException, ApiException, IOException {
 
             CommerceCaseApiClient commerceCaseApiClient = spy(
                     new CommerceCaseApiClient(TestConfig.COMMUNICATOR_CONFIGURATION));
 
-            try {
-                commerceCaseApiClient.getCommerceCaseRequest(null, "2");
-            } catch (IllegalArgumentException e) {
-                String m = e.getMessage();
-                assertEquals("Merchant ID is required", m);
-            }
+            IllegalArgumentException e;
+            String m;
 
-            try {
+            e = assertThrows(IllegalArgumentException.class, () -> {
+                commerceCaseApiClient.getCommerceCaseRequest(null, "2");
+            });
+            m = e.getMessage();
+            assertEquals("Merchant ID is required", m);
+
+            e = assertThrows(IllegalArgumentException.class, () -> {
                 commerceCaseApiClient.getCommerceCaseRequest("1", null);
-            } catch (IllegalArgumentException e) {
-                String m = e.getMessage();
-                assertEquals("Commerce Case ID is required", m);
-            }
+            });
+            m = e.getMessage();
+            assertEquals("Commerce Case ID is required", m);
         }
     }
 
@@ -271,7 +271,7 @@ public class CommerceCaseApiClientTest {
     class UpdateCommerceCaseRequestTests {
         @Test
         @DisplayName("given request was successful, then throw no exception")
-        void updateCommerceCaseRequestSuccessful() throws InvalidKeyException, ApiResponseException, IOException {
+        void updateCommerceCaseRequestSuccessful() throws InvalidKeyException, ApiException, IOException {
 
             CommerceCaseApiClient commerceCaseApiClient = spy(
                     new CommerceCaseApiClient(TestConfig.COMMUNICATOR_CONFIGURATION));
@@ -288,7 +288,7 @@ public class CommerceCaseApiClientTest {
 
         @Test
         @DisplayName("given request was unsuccessful (400), then throw exception")
-        void updateCommerceCaseRequestUnsuccessful() throws InvalidKeyException, ApiResponseException, IOException {
+        void updateCommerceCaseRequestUnsuccessful() throws InvalidKeyException, ApiException, IOException {
 
             CommerceCaseApiClient commerceCaseApiClient = spy(
                     new CommerceCaseApiClient(TestConfig.COMMUNICATOR_CONFIGURATION));
@@ -296,64 +296,61 @@ public class CommerceCaseApiClientTest {
 
             doReturn(response).when(commerceCaseApiClient).getResponse(any());
 
-            try {
-
+            ApiErrorResponseException e = assertThrows(ApiErrorResponseException.class, () -> {
                 Customer payload = new Customer();
                 commerceCaseApiClient.updateCommerceCaseRequest("1", "3", payload);
-            } catch (ApiResponseException e) {
-                int s = e.getResponse().getErrors().get(0).getHttpStatusCode();
-                assertEquals(400, s);
-            }
+            });
+            int s = e.getErrors().get(0).getHttpStatusCode();
+            assertEquals(400, s);
         }
 
         @Test
-        @DisplayName("given request was unsuccessful (500), then throw exception")
-        void updateCommerceCaseRequestUnsuccessful500() throws InvalidKeyException, ApiResponseException, IOException {
+        @DisplayName("given request was unsuccessful (500) with empty body, then throw exception")
+        void updateCommerceCaseRequestUnsuccessful500() throws InvalidKeyException, ApiException, IOException {
 
             CommerceCaseApiClient commerceCaseApiClient = spy(
                     new CommerceCaseApiClient(TestConfig.COMMUNICATOR_CONFIGURATION));
-            Response response = ApiResponseMocks.createErrorResponse(500);
+            Response response = ApiResponseMocks.createEmptyErrorResponse(500);
 
             doReturn(response).when(commerceCaseApiClient).getResponse(any());
 
-            try {
+            ApiResponseRetrievalException e = assertThrows(ApiResponseRetrievalException.class, () -> {
                 Customer payload = new Customer();
                 commerceCaseApiClient.updateCommerceCaseRequest("1", "3", payload);
-            } catch (RuntimeException e) {
-                String m = e.getMessage();
-                assertEquals("Api error: 500", m);
-            }
+            });
+            int code = e.getStatusCode();
+            assertEquals(500, code);
         }
 
         @Test
         @DisplayName("given some params are null, then throw exception")
-        void updateCommerceCaseRequestNullParams() throws InvalidKeyException, ApiResponseException, IOException {
+        void updateCommerceCaseRequestNullParams() throws InvalidKeyException, ApiException, IOException {
 
             CommerceCaseApiClient commerceCaseApiClient = spy(
                     new CommerceCaseApiClient(TestConfig.COMMUNICATOR_CONFIGURATION));
 
-            try {
+            IllegalArgumentException e;
+            String m;
+
+            e = assertThrows(IllegalArgumentException.class, () -> {
                 Customer payload = new Customer();
                 commerceCaseApiClient.updateCommerceCaseRequest(null, "2", payload);
-            } catch (IllegalArgumentException e) {
-                String m = e.getMessage();
-                assertEquals("Merchant ID is required", m);
-            }
+            });
+            m = e.getMessage();
+            assertEquals("Merchant ID is required", m);
 
-            try {
+            e = assertThrows(IllegalArgumentException.class, () -> {
                 Customer payload = new Customer();
                 commerceCaseApiClient.updateCommerceCaseRequest("1", null, payload);
-            } catch (IllegalArgumentException e) {
-                String m = e.getMessage();
-                assertEquals("Commerce Case ID is required", m);
-            }
+            });
+            m = e.getMessage();
+            assertEquals("Commerce Case ID is required", m);
 
-            try {
+            e = assertThrows(IllegalArgumentException.class, () -> {
                 commerceCaseApiClient.updateCommerceCaseRequest("1", "2", null);
-            } catch (IllegalArgumentException e) {
-                String m = e.getMessage();
-                assertEquals("Payload is required", m);
-            }
+            });
+            m = e.getMessage();
+            assertEquals("Payload is required", m);
         }
     }
 

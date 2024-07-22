@@ -5,6 +5,7 @@ import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.io.IOException;
 import java.security.InvalidKeyException;
@@ -13,7 +14,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
-import com.payone.commerce.platform.lib.ApiResponseException;
+import com.payone.commerce.platform.lib.errors.ApiErrorResponseException;
+import com.payone.commerce.platform.lib.errors.ApiException;
+import com.payone.commerce.platform.lib.errors.ApiResponseRetrievalException;
 import com.payone.commerce.platform.lib.CommunicatorConfiguration;
 import com.payone.commerce.platform.lib.models.PaymentExecutionRequest;
 import com.payone.commerce.platform.lib.models.RefundPaymentResponse;
@@ -40,7 +43,7 @@ public class PaymentExecutionApiClientTest {
     class createPayment {
         @Test
         @DisplayName("given request was successful, then return response")
-        void createPaymentRequestSuccessful() throws InvalidKeyException, ApiResponseException, IOException {
+        void createPaymentRequestSuccessful() throws InvalidKeyException, ApiException, IOException {
 
             PaymentExecutionApiClient paymentExecutionApiClient = spy(new PaymentExecutionApiClient(CONFIG));
             CreatePaymentResponse expected = new CreatePaymentResponse();
@@ -57,7 +60,7 @@ public class PaymentExecutionApiClientTest {
 
         @Test
         @DisplayName("given request was unsuccessful (400), then throw exception")
-        void createPaymentRequestUnsuccessful() throws InvalidKeyException, ApiResponseException, IOException {
+        void createPaymentRequestUnsuccessful() throws InvalidKeyException, ApiException, IOException {
 
             PaymentExecutionApiClient paymentExecutionApiClient = spy(new PaymentExecutionApiClient(CONFIG));
             Response response = ApiResponseMocks.createErrorResponse(400);
@@ -65,67 +68,65 @@ public class PaymentExecutionApiClientTest {
             doReturn(response).when(paymentExecutionApiClient).getResponse(any());
             when(paymentExecutionApiClient.getResponse(any())).thenReturn(response);
 
-            PaymentExecutionRequest payload = new PaymentExecutionRequest();
-            try {
+            ApiErrorResponseException e = assertThrows(ApiErrorResponseException.class, () -> {
+                PaymentExecutionRequest payload = new PaymentExecutionRequest();
                 paymentExecutionApiClient.createPayment("1", "2", "3", payload);
-            } catch (ApiResponseException e) {
-                int code = e.getResponse().getErrors().get(0).getHttpStatusCode();
-                assertEquals(400, code);
-            }
+            });
+            int code = e.getErrors().get(0).getHttpStatusCode();
+            assertEquals(400, code);
         }
 
         @Test
-        @DisplayName("given request was unsuccessful (500), then throw exception")
-        void createPaymentRequestUnsuccessful500() throws InvalidKeyException, ApiResponseException, IOException {
+        @DisplayName("given request was unsuccessful (500) with empty body, then throw exception")
+        void createPaymentRequestUnsuccessful500() throws InvalidKeyException, ApiException, IOException {
 
             PaymentExecutionApiClient paymentExecutionApiClient = spy(new PaymentExecutionApiClient(CONFIG));
-            Response response = ApiResponseMocks.createErrorResponse(500);
+            Response response = ApiResponseMocks.createEmptyErrorResponse(500);
 
             doReturn(response).when(paymentExecutionApiClient).getResponse(any());
             when(paymentExecutionApiClient.getResponse(any())).thenReturn(response);
 
-            PaymentExecutionRequest payload = new PaymentExecutionRequest();
-            try {
+            ApiResponseRetrievalException e = assertThrows(ApiResponseRetrievalException.class, () -> {
+                PaymentExecutionRequest payload = new PaymentExecutionRequest();
                 paymentExecutionApiClient.createPayment("1", "2", "3", payload);
-            } catch (RuntimeException e) {
-                String m = e.getMessage();
-                assertEquals("Api error: 500", m);
-            }
+            });
+            int code = e.getStatusCode();
+            assertEquals(500, code);
         }
 
         @Test
         @DisplayName("Given required params are null, then throw exception")
-        void createPaymentRequestNullParams() throws InvalidKeyException, ApiResponseException, IOException {
+        void createPaymentRequestNullParams() throws InvalidKeyException, ApiException, IOException {
 
             PaymentExecutionApiClient paymentExecutionApiClient = spy(new PaymentExecutionApiClient(CONFIG));
             PaymentExecutionRequest payload = new PaymentExecutionRequest();
-            try {
+
+            IllegalArgumentException e;
+            String m;
+
+            e = assertThrows(IllegalArgumentException.class, () -> {
                 paymentExecutionApiClient.createPayment(null, "2", "3", payload);
-            } catch (IllegalArgumentException e) {
-                String m = e.getMessage();
-                assertEquals("Merchant ID is required", m);
-            }
+            });
+            m = e.getMessage();
+            assertEquals("Merchant ID is required", m);
 
-            try {
+            e = assertThrows(IllegalArgumentException.class, () -> {
                 paymentExecutionApiClient.createPayment("1", null, "3", payload);
-            } catch (IllegalArgumentException e) {
-                String m = e.getMessage();
-                assertEquals("Commerce Case ID is required", m);
-            }
+            });
+            m = e.getMessage();
+            assertEquals("Commerce Case ID is required", m);
 
-            try {
+            e = assertThrows(IllegalArgumentException.class, () -> {
                 paymentExecutionApiClient.createPayment("1", "2", null, payload);
-            } catch (IllegalArgumentException e) {
-                String m = e.getMessage();
-                assertEquals("Checkout ID is required", m);
-            }
+            });
+            m = e.getMessage();
+            assertEquals("Checkout ID is required", m);
 
-            try {
+            e = assertThrows(IllegalArgumentException.class, () -> {
                 paymentExecutionApiClient.createPayment("1", "2", "3", null);
-            } catch (IllegalArgumentException e) {
-                String m = e.getMessage();
-                assertEquals("Payload is required", m);
-            }
+            });
+            m = e.getMessage();
+            assertEquals("Payload is required", m);
         }
     }
 
@@ -134,7 +135,7 @@ public class PaymentExecutionApiClientTest {
     class CapturePayment {
         @Test
         @DisplayName("given request was successful, then return response")
-        void capturePaymentRequestSuccessful() throws InvalidKeyException, ApiResponseException, IOException {
+        void capturePaymentRequestSuccessful() throws InvalidKeyException, ApiException, IOException {
 
             PaymentExecutionApiClient paymentExecutionApiClient = spy(new PaymentExecutionApiClient(CONFIG));
             CapturePaymentResponse expected = new CapturePaymentResponse();
@@ -151,7 +152,7 @@ public class PaymentExecutionApiClientTest {
 
         @Test
         @DisplayName("given request unsuccessful (400), then throw exception")
-        void capturePaymentRequestUnsuccessful400() throws InvalidKeyException, ApiResponseException, IOException {
+        void capturePaymentRequestUnsuccessful400() throws InvalidKeyException, ApiException, IOException {
 
             PaymentExecutionApiClient paymentExecutionApiClient = spy(new PaymentExecutionApiClient(CONFIG));
             Response response = ApiResponseMocks.createErrorResponse(400);
@@ -159,74 +160,71 @@ public class PaymentExecutionApiClientTest {
             doReturn(response).when(paymentExecutionApiClient).getResponse(any());
             when(paymentExecutionApiClient.getResponse(any())).thenReturn(response);
 
-            CapturePaymentRequest payload = new CapturePaymentRequest();
-            try {
+            ApiErrorResponseException e = assertThrows(ApiErrorResponseException.class, () -> {
+                CapturePaymentRequest payload = new CapturePaymentRequest();
                 paymentExecutionApiClient.capturePayment("1", "2", "3", "4", payload);
-            } catch (ApiResponseException e) {
-                int code = e.getResponse().getErrors().get(0).getHttpStatusCode();
-                assertEquals(400, code);
-            }
+            });
+            int code = e.getErrors().get(0).getHttpStatusCode();
+            assertEquals(400, code);
         }
 
         @Test
-        @DisplayName("given request unsuccessful (500), then throw exception")
-        void capturePaymentRequestUnsuccessful500() throws InvalidKeyException, ApiResponseException, IOException {
+        @DisplayName("given request unsuccessful (500) with empty body, then throw exception")
+        void capturePaymentRequestUnsuccessful500() throws InvalidKeyException, ApiException, IOException {
 
             PaymentExecutionApiClient paymentExecutionApiClient = spy(new PaymentExecutionApiClient(CONFIG));
-            Response response = ApiResponseMocks.createErrorResponse(500);
+            Response response = ApiResponseMocks.createEmptyErrorResponse(500);
 
             doReturn(response).when(paymentExecutionApiClient).getResponse(any());
             when(paymentExecutionApiClient.getResponse(any())).thenReturn(response);
 
-            CapturePaymentRequest payload = new CapturePaymentRequest();
-            try {
+            ApiResponseRetrievalException e = assertThrows(ApiResponseRetrievalException.class, () -> {
+                CapturePaymentRequest payload = new CapturePaymentRequest();
                 paymentExecutionApiClient.capturePayment("1", "2", "3", "4", payload);
-            } catch (RuntimeException e) {
-                String m = e.getMessage();
-                assertEquals("Api error: 500", m);
-            }
+            });
+            int code = e.getStatusCode();
+            assertEquals(500, code);
         }
 
         @Test
         @DisplayName("Given required params are null, then throw exception")
-        void capturePaymentRequestParamsNull() throws InvalidKeyException, ApiResponseException, IOException {
+        void capturePaymentRequestParamsNull() throws InvalidKeyException, ApiException, IOException {
 
             PaymentExecutionApiClient paymentExecutionApiClient = spy(new PaymentExecutionApiClient(CONFIG));
             CapturePaymentRequest payload = new CapturePaymentRequest();
-            try {
+
+            IllegalArgumentException e;
+            String m;
+
+            e = assertThrows(IllegalArgumentException.class, () -> {
                 paymentExecutionApiClient.capturePayment(null, "2", "3", "4", payload);
-            } catch (IllegalArgumentException e) {
-                String m = e.getMessage();
-                assertEquals("Merchant ID is required", m);
-            }
+            });
+            m = e.getMessage();
+            assertEquals("Merchant ID is required", m);
 
-            try {
+            e = assertThrows(IllegalArgumentException.class, () -> {
                 paymentExecutionApiClient.capturePayment("1", null, "3", "4", payload);
-            } catch (IllegalArgumentException e) {
-                String m = e.getMessage();
-                assertEquals("Commerce Case ID is required", m);
-            }
+            });
+            m = e.getMessage();
+            assertEquals("Commerce Case ID is required", m);
 
-            try {
+            e = assertThrows(IllegalArgumentException.class, () -> {
                 paymentExecutionApiClient.capturePayment("1", "2", null, "4", payload);
-            } catch (IllegalArgumentException e) {
-                String m = e.getMessage();
-                assertEquals("Checkout ID is required", m);
-            }
+            });
+            m = e.getMessage();
+            assertEquals("Checkout ID is required", m);
 
-            try {
+            e = assertThrows(IllegalArgumentException.class, () -> {
                 paymentExecutionApiClient.capturePayment("1", "2", "3", null, payload);
-            } catch (IllegalArgumentException e) {
-                String m = e.getMessage();
-                assertEquals("Payment Execution ID is required", m);
-            }
+            });
+            m = e.getMessage();
+            assertEquals("Payment Execution ID is required", m);
 
-            try {
+            e = assertThrows(IllegalArgumentException.class, () -> {
                 paymentExecutionApiClient.capturePayment("1", "2", "3", "4", null);
-            } catch (IllegalArgumentException e) {
-                String m = e.getMessage();
-                assertEquals("Payload is required", m);
-            }
+            });
+            m = e.getMessage();
+            assertEquals("Payload is required", m);
         }
     }
 
@@ -235,7 +233,7 @@ public class PaymentExecutionApiClientTest {
     class CancelPayment {
         @Test
         @DisplayName("given request was successful, then return response")
-        void cancelPaymentRequestSuccessful() throws InvalidKeyException, ApiResponseException, IOException {
+        void cancelPaymentRequestSuccessful() throws InvalidKeyException, ApiException, IOException {
 
             PaymentExecutionApiClient paymentExecutionApiClient = spy(new PaymentExecutionApiClient(CONFIG));
             CancelPaymentResponse expected = new CancelPaymentResponse();
@@ -252,7 +250,7 @@ public class PaymentExecutionApiClientTest {
 
         @Test
         @DisplayName("given request unsuccessful (400), then throw exception")
-        void cancelPaymentRequestUnsuccessful400() throws InvalidKeyException, ApiResponseException, IOException {
+        void cancelPaymentRequestUnsuccessful400() throws InvalidKeyException, ApiException, IOException {
 
             PaymentExecutionApiClient paymentExecutionApiClient = spy(new PaymentExecutionApiClient(CONFIG));
             Response response = ApiResponseMocks.createErrorResponse(400);
@@ -261,73 +259,70 @@ public class PaymentExecutionApiClientTest {
             when(paymentExecutionApiClient.getResponse(any())).thenReturn(response);
 
             CancelPaymentRequest payload = new CancelPaymentRequest();
-            try {
+            ApiErrorResponseException e = assertThrows(ApiErrorResponseException.class, () -> {
                 paymentExecutionApiClient.cancelPayment("1", "2", "3", "4", payload);
-            } catch (ApiResponseException e) {
-                int code = e.getResponse().getErrors().get(0).getHttpStatusCode();
-                assertEquals(400, code);
-            }
+            });
+            int code = e.getErrors().get(0).getHttpStatusCode();
+            assertEquals(400, code);
         }
 
         @Test
-        @DisplayName("given request unsuccessful (500), then throw exception")
-        void cancelPaymentRequestUnsuccessful500() throws InvalidKeyException, ApiResponseException, IOException {
+        @DisplayName("given request unsuccessful (500) with empty body, then throw exception")
+        void cancelPaymentRequestUnsuccessful500() throws InvalidKeyException, ApiException, IOException {
 
             PaymentExecutionApiClient paymentExecutionApiClient = spy(new PaymentExecutionApiClient(CONFIG));
-            Response response = ApiResponseMocks.createErrorResponse(500);
+            Response response = ApiResponseMocks.createEmptyErrorResponse(500);
 
             doReturn(response).when(paymentExecutionApiClient).getResponse(any());
             when(paymentExecutionApiClient.getResponse(any())).thenReturn(response);
 
-            CancelPaymentRequest payload = new CancelPaymentRequest();
-            try {
+            ApiResponseRetrievalException e = assertThrows(ApiResponseRetrievalException.class, () -> {
+                CancelPaymentRequest payload = new CancelPaymentRequest();
                 paymentExecutionApiClient.cancelPayment("1", "2", "3", "4", payload);
-            } catch (RuntimeException e) {
-                String m = e.getMessage();
-                assertEquals("Api error: 500", m);
-            }
+            });
+            int code = e.getStatusCode();
+            assertEquals(500, code);
         }
 
         @Test
         @DisplayName("Given required params are null, then throw exception")
-        void cancelPaymentRequestParamsNull() throws InvalidKeyException, ApiResponseException, IOException {
+        void cancelPaymentRequestParamsNull() throws InvalidKeyException, ApiException, IOException {
 
             PaymentExecutionApiClient paymentExecutionApiClient = spy(new PaymentExecutionApiClient(CONFIG));
             CancelPaymentRequest payload = new CancelPaymentRequest();
-            try {
+
+            IllegalArgumentException e;
+            String m;
+
+            e = assertThrows(IllegalArgumentException.class, () -> {
                 paymentExecutionApiClient.cancelPayment(null, "2", "3", "4", payload);
-            } catch (IllegalArgumentException e) {
-                String m = e.getMessage();
-                assertEquals("Merchant ID is required", m);
-            }
+            });
+            m = e.getMessage();
+            assertEquals("Merchant ID is required", m);
 
-            try {
+            e = assertThrows(IllegalArgumentException.class, () -> {
                 paymentExecutionApiClient.cancelPayment("1", null, "3", "4", payload);
-            } catch (IllegalArgumentException e) {
-                String m = e.getMessage();
-                assertEquals("Commerce Case ID is required", m);
-            }
+            });
+            m = e.getMessage();
+            assertEquals("Commerce Case ID is required", m);
 
-            try {
+            e = assertThrows(IllegalArgumentException.class, () -> {
                 paymentExecutionApiClient.cancelPayment("1", "2", null, "4", payload);
-            } catch (IllegalArgumentException e) {
-                String m = e.getMessage();
-                assertEquals("Checkout ID is required", m);
-            }
+            });
+            m = e.getMessage();
+            assertEquals("Checkout ID is required", m);
 
-            try {
+            e = assertThrows(IllegalArgumentException.class, () -> {
                 paymentExecutionApiClient.cancelPayment("1", "2", "3", null, payload);
-            } catch (IllegalArgumentException e) {
-                String m = e.getMessage();
-                assertEquals("Payment Execution ID is required", m);
-            }
+            });
+            m = e.getMessage();
+            assertEquals("Payment Execution ID is required", m);
 
-            try {
+            e = assertThrows(IllegalArgumentException.class, () -> {
                 paymentExecutionApiClient.cancelPayment("1", "2", "3", "4", null);
-            } catch (IllegalArgumentException e) {
-                String m = e.getMessage();
-                assertEquals("Payload is required", m);
-            }
+            });
+            m = e.getMessage();
+            assertEquals("Payload is required", m);
         }
     }
 
@@ -336,7 +331,7 @@ public class PaymentExecutionApiClientTest {
     class CompletePayment {
         @Test
         @DisplayName("given request was successful, then return response")
-        void completePaymentRequestSuccessful() throws InvalidKeyException, ApiResponseException, IOException {
+        void completePaymentRequestSuccessful() throws InvalidKeyException, ApiException, IOException {
 
             PaymentExecutionApiClient paymentExecutionApiClient = spy(new PaymentExecutionApiClient(CONFIG));
             CompletePaymentResponse expected = new CompletePaymentResponse();
@@ -353,7 +348,7 @@ public class PaymentExecutionApiClientTest {
 
         @Test
         @DisplayName("given request unsuccessful (400), then throw exception")
-        void completePaymentRequestUnsuccessful400() throws InvalidKeyException, ApiResponseException, IOException {
+        void completePaymentRequestUnsuccessful400() throws InvalidKeyException, ApiException, IOException {
 
             PaymentExecutionApiClient paymentExecutionApiClient = spy(new PaymentExecutionApiClient(CONFIG));
             Response response = ApiResponseMocks.createErrorResponse(400);
@@ -361,74 +356,71 @@ public class PaymentExecutionApiClientTest {
             doReturn(response).when(paymentExecutionApiClient).getResponse(any());
             when(paymentExecutionApiClient.getResponse(any())).thenReturn(response);
 
-            CompletePaymentRequest payload = new CompletePaymentRequest();
-            try {
+            ApiErrorResponseException e = assertThrows(ApiErrorResponseException.class, () -> {
+                CompletePaymentRequest payload = new CompletePaymentRequest();
                 paymentExecutionApiClient.completePayment("1", "2", "3", "4", payload);
-            } catch (ApiResponseException e) {
-                int code = e.getResponse().getErrors().get(0).getHttpStatusCode();
-                assertEquals(400, code);
-            }
+            });
+            int code = e.getErrors().get(0).getHttpStatusCode();
+            assertEquals(400, code);
         }
 
         @Test
-        @DisplayName("given request unsuccessful (500), then throw exception")
-        void completePaymentRequestUnsuccessful500() throws InvalidKeyException, ApiResponseException, IOException {
+        @DisplayName("given request unsuccessful (500) with empty body, then throw exception")
+        void completePaymentRequestUnsuccessful500() throws InvalidKeyException, ApiException, IOException {
 
             PaymentExecutionApiClient paymentExecutionApiClient = spy(new PaymentExecutionApiClient(CONFIG));
-            Response response = ApiResponseMocks.createErrorResponse(500);
+            Response response = ApiResponseMocks.createEmptyErrorResponse(500);
 
             doReturn(response).when(paymentExecutionApiClient).getResponse(any());
             when(paymentExecutionApiClient.getResponse(any())).thenReturn(response);
 
-            CompletePaymentRequest payload = new CompletePaymentRequest();
-            try {
+            ApiResponseRetrievalException e = assertThrows(ApiResponseRetrievalException.class, () -> {
+                CompletePaymentRequest payload = new CompletePaymentRequest();
                 paymentExecutionApiClient.completePayment("1", "2", "3", "4", payload);
-            } catch (RuntimeException e) {
-                String m = e.getMessage();
-                assertEquals("Api error: 500", m);
-            }
+            });
+            int code = e.getStatusCode();
+            assertEquals(500, code);
         }
 
         @Test
         @DisplayName("Given required params are null, then throw exception")
-        void completePaymentRequestParamsNull() throws InvalidKeyException, ApiResponseException, IOException {
+        void completePaymentRequestParamsNull() throws InvalidKeyException, ApiException, IOException {
 
             PaymentExecutionApiClient paymentExecutionApiClient = spy(new PaymentExecutionApiClient(CONFIG));
             CompletePaymentRequest payload = new CompletePaymentRequest();
-            try {
+
+            IllegalArgumentException e;
+            String m;
+
+            e = assertThrows(IllegalArgumentException.class, () -> {
                 paymentExecutionApiClient.completePayment(null, "2", "3", "4", payload);
-            } catch (IllegalArgumentException e) {
-                String m = e.getMessage();
-                assertEquals("Merchant ID is required", m);
-            }
+            });
+            m = e.getMessage();
+            assertEquals("Merchant ID is required", m);
 
-            try {
+            e = assertThrows(IllegalArgumentException.class, () -> {
                 paymentExecutionApiClient.completePayment("1", null, "3", "4", payload);
-            } catch (IllegalArgumentException e) {
-                String m = e.getMessage();
-                assertEquals("Commerce Case ID is required", m);
-            }
+            });
+            m = e.getMessage();
+            assertEquals("Commerce Case ID is required", m);
 
-            try {
+            e = assertThrows(IllegalArgumentException.class, () -> {
                 paymentExecutionApiClient.completePayment("1", "2", null, "4", payload);
-            } catch (IllegalArgumentException e) {
-                String m = e.getMessage();
-                assertEquals("Checkout ID is required", m);
-            }
+            });
+            m = e.getMessage();
+            assertEquals("Checkout ID is required", m);
 
-            try {
+            e = assertThrows(IllegalArgumentException.class, () -> {
                 paymentExecutionApiClient.completePayment("1", "2", "3", null, payload);
-            } catch (IllegalArgumentException e) {
-                String m = e.getMessage();
-                assertEquals("Payment Execution ID is required", m);
-            }
+            });
+            m = e.getMessage();
+            assertEquals("Payment Execution ID is required", m);
 
-            try {
+            e = assertThrows(IllegalArgumentException.class, () -> {
                 paymentExecutionApiClient.completePayment("1", "2", "3", "4", null);
-            } catch (IllegalArgumentException e) {
-                String m = e.getMessage();
-                assertEquals("Payload is required", m);
-            }
+            });
+            m = e.getMessage();
+            assertEquals("Payload is required", m);
         }
     }
 
@@ -437,7 +429,7 @@ public class PaymentExecutionApiClientTest {
     class PaymentRefund {
         @Test
         @DisplayName("given request was successful, then return response")
-        void refundPaymentRequestSuccessful() throws InvalidKeyException, ApiResponseException, IOException {
+        void refundPaymentRequestSuccessful() throws InvalidKeyException, ApiException, IOException {
 
             PaymentExecutionApiClient paymentExecutionApiClient = spy(new PaymentExecutionApiClient(CONFIG));
             RefundPaymentResponse expected = new RefundPaymentResponse();
@@ -454,7 +446,7 @@ public class PaymentExecutionApiClientTest {
 
         @Test
         @DisplayName("given request unsuccessful (400), then throw exception")
-        void refundPaymentRequestUnsuccessful400() throws InvalidKeyException, ApiResponseException, IOException {
+        void refundPaymentRequestUnsuccessful400() throws InvalidKeyException, ApiException, IOException {
 
             PaymentExecutionApiClient paymentExecutionApiClient = spy(new PaymentExecutionApiClient(CONFIG));
             Response response = ApiResponseMocks.createErrorResponse(400);
@@ -463,73 +455,70 @@ public class PaymentExecutionApiClientTest {
             when(paymentExecutionApiClient.getResponse(any())).thenReturn(response);
 
             RefundRequest payload = new RefundRequest();
-            try {
+            ApiErrorResponseException e = assertThrows(ApiErrorResponseException.class, () -> {
                 paymentExecutionApiClient.refundPayment("1", "2", "3", "4", payload);
-            } catch (ApiResponseException e) {
-                int code = e.getResponse().getErrors().get(0).getHttpStatusCode();
-                assertEquals(400, code);
-            }
+            });
+            int code = e.getErrors().get(0).getHttpStatusCode();
+            assertEquals(400, code);
         }
 
         @Test
-        @DisplayName("given request unsuccessful (500), then throw exception")
-        void refundPaymentRequestUnsuccessful500() throws InvalidKeyException, ApiResponseException, IOException {
+        @DisplayName("given request unsuccessful (500) with empty body, then throw exception")
+        void refundPaymentRequestUnsuccessful500() throws InvalidKeyException, ApiException, IOException {
 
             PaymentExecutionApiClient paymentExecutionApiClient = spy(new PaymentExecutionApiClient(CONFIG));
-            Response response = ApiResponseMocks.createErrorResponse(500);
+            Response response = ApiResponseMocks.createEmptyErrorResponse(500);
 
             doReturn(response).when(paymentExecutionApiClient).getResponse(any());
             when(paymentExecutionApiClient.getResponse(any())).thenReturn(response);
 
-            RefundRequest payload = new RefundRequest();
-            try {
+            ApiResponseRetrievalException e = assertThrows(ApiResponseRetrievalException.class, () -> {
+                RefundRequest payload = new RefundRequest();
                 paymentExecutionApiClient.refundPayment("1", "2", "3", "4", payload);
-            } catch (RuntimeException e) {
-                String m = e.getMessage();
-                assertEquals("Api error: 500", m);
-            }
+            });
+            int code = e.getStatusCode();
+            assertEquals(500, code);
         }
 
         @Test
         @DisplayName("Given required params are null, then throw exception")
-        void refundPaymentRequestParamsNull() throws InvalidKeyException, ApiResponseException, IOException {
+        void refundPaymentRequestParamsNull() throws InvalidKeyException, ApiException, IOException {
 
             PaymentExecutionApiClient paymentExecutionApiClient = spy(new PaymentExecutionApiClient(CONFIG));
             RefundRequest payload = new RefundRequest();
-            try {
+
+            IllegalArgumentException e;
+            String m;
+
+            e = assertThrows(IllegalArgumentException.class, () -> {
                 paymentExecutionApiClient.refundPayment(null, "2", "3", "4", payload);
-            } catch (IllegalArgumentException e) {
-                String m = e.getMessage();
-                assertEquals("Merchant ID is required", m);
-            }
+            });
+            m = e.getMessage();
+            assertEquals("Merchant ID is required", m);
 
-            try {
+            e = assertThrows(IllegalArgumentException.class, () -> {
                 paymentExecutionApiClient.refundPayment("1", null, "3", "4", payload);
-            } catch (IllegalArgumentException e) {
-                String m = e.getMessage();
-                assertEquals("Commerce Case ID is required", m);
-            }
+            });
+            m = e.getMessage();
+            assertEquals("Commerce Case ID is required", m);
 
-            try {
+            e = assertThrows(IllegalArgumentException.class, () -> {
                 paymentExecutionApiClient.refundPayment("1", "2", null, "4", payload);
-            } catch (IllegalArgumentException e) {
-                String m = e.getMessage();
-                assertEquals("Checkout ID is required", m);
-            }
+            });
+            m = e.getMessage();
+            assertEquals("Checkout ID is required", m);
 
-            try {
+            e = assertThrows(IllegalArgumentException.class, () -> {
                 paymentExecutionApiClient.refundPayment("1", "2", "3", null, payload);
-            } catch (IllegalArgumentException e) {
-                String m = e.getMessage();
-                assertEquals("Payment Execution ID is required", m);
-            }
+            });
+            m = e.getMessage();
+            assertEquals("Payment Execution ID is required", m);
 
-            try {
+            e = assertThrows(IllegalArgumentException.class, () -> {
                 paymentExecutionApiClient.refundPayment("1", "2", "3", "4", null);
-            } catch (IllegalArgumentException e) {
-                String m = e.getMessage();
-                assertEquals("Payload is required", m);
-            }
+            });
+            m = e.getMessage();
+            assertEquals("Payload is required", m);
         }
     }
 }

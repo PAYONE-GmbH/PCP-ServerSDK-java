@@ -1,6 +1,7 @@
 package com.payone.commerce.platform.lib.endpoints;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
@@ -13,7 +14,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
-import com.payone.commerce.platform.lib.ApiResponseException;
+import com.payone.commerce.platform.lib.errors.ApiErrorResponseException;
+import com.payone.commerce.platform.lib.errors.ApiException;
+import com.payone.commerce.platform.lib.errors.ApiResponseRetrievalException;
 import com.payone.commerce.platform.lib.models.CancelRequest;
 import com.payone.commerce.platform.lib.models.CancelResponse;
 import com.payone.commerce.platform.lib.models.DeliverRequest;
@@ -34,7 +37,7 @@ public class OrderManagementCheckoutActionsApiClientTest {
     class CreateOrderTests {
         @Test
         @DisplayName("given request was successful, then return response")
-        void createOrderSuccessful() throws InvalidKeyException, ApiResponseException, IOException {
+        void createOrderSuccessful() throws InvalidKeyException, ApiException, IOException {
 
             OrderManagementCheckoutActionsApiClient orderManagementCheckoutActionsApiClient = spy(
                     new OrderManagementCheckoutActionsApiClient(TestConfig.COMMUNICATOR_CONFIGURATION));
@@ -53,7 +56,7 @@ public class OrderManagementCheckoutActionsApiClientTest {
 
         @Test
         @DisplayName("given request was unsuccessful (400), then throw exception")
-        void createOrderUnsuccessful() throws InvalidKeyException, ApiResponseException, IOException {
+        void createOrderUnsuccessful() throws InvalidKeyException, ApiException, IOException {
 
             OrderManagementCheckoutActionsApiClient orderManagementCheckoutActionsApiClient = spy(
                     new OrderManagementCheckoutActionsApiClient(TestConfig.COMMUNICATOR_CONFIGURATION));
@@ -62,68 +65,65 @@ public class OrderManagementCheckoutActionsApiClientTest {
             doReturn(response).when(orderManagementCheckoutActionsApiClient).getResponse(any());
 
             OrderRequest payload = new OrderRequest();
-            try {
+            ApiErrorResponseException e = assertThrows(ApiErrorResponseException.class, () -> {
                 orderManagementCheckoutActionsApiClient.createOrder("1", "2", "3", payload);
-            } catch (ApiResponseException e) {
-                int s = e.getResponse().getErrors().get(0).getHttpStatusCode();
-                assertEquals(400, s);
-            }
+            });
+            int s = e.getErrors().get(0).getHttpStatusCode();
+            assertEquals(400, s);
         }
 
         @Test
-        @DisplayName("given request was unsuccessful (500), then throw exception")
-        void createOrderUnsuccessful500() throws InvalidKeyException, ApiResponseException, IOException {
+        @DisplayName("given request was unsuccessful (500) with empty body, then throw exception")
+        void createOrderUnsuccessful500() throws InvalidKeyException, ApiException, IOException {
 
             OrderManagementCheckoutActionsApiClient orderManagementCheckoutActionsApiClient = spy(
                     new OrderManagementCheckoutActionsApiClient(TestConfig.COMMUNICATOR_CONFIGURATION));
-            Response response = ApiResponseMocks.createErrorResponse(500);
+            Response response = ApiResponseMocks.createEmptyErrorResponse(500);
 
             doReturn(response).when(orderManagementCheckoutActionsApiClient).getResponse(any());
 
             OrderRequest payload = new OrderRequest();
-            try {
+            ApiResponseRetrievalException e = assertThrows(ApiResponseRetrievalException.class, () -> {
                 orderManagementCheckoutActionsApiClient.createOrder("1", "2", "3", payload);
-            } catch (RuntimeException e) {
-                String m = e.getMessage();
-                assertEquals("Api error: 500", m);
-            }
+            });
+            int code = e.getStatusCode();
+            assertEquals(500, code);
         }
 
         @Test
         @DisplayName("given some params are null, then throw exception")
-        void createOrderNullParams() throws InvalidKeyException, ApiResponseException, IOException {
+        void createOrderNullParams() throws InvalidKeyException, ApiException, IOException {
 
             OrderManagementCheckoutActionsApiClient orderManagementCheckoutActionsApiClient = spy(
                     new OrderManagementCheckoutActionsApiClient(TestConfig.COMMUNICATOR_CONFIGURATION));
             OrderRequest payload = new OrderRequest();
 
-            try {
+            IllegalArgumentException e;
+            String m;
+
+            e = assertThrows(IllegalArgumentException.class, () -> {
                 orderManagementCheckoutActionsApiClient.createOrder(null, "2", "3", payload);
-            } catch (IllegalArgumentException e) {
-                String m = e.getMessage();
-                assertEquals("Merchant ID is required", m);
-            }
+            });
+            m = e.getMessage();
+            assertEquals("Merchant ID is required", m);
 
-            try {
+            e = assertThrows(IllegalArgumentException.class, () -> {
                 orderManagementCheckoutActionsApiClient.createOrder("1", null, "3", payload);
-            } catch (IllegalArgumentException e) {
-                String m = e.getMessage();
-                assertEquals("Commerce Case ID is required", m);
-            }
+            });
+            m = e.getMessage();
+            assertEquals("Commerce Case ID is required", m);
 
-            try {
+            e = assertThrows(IllegalArgumentException.class, () -> {
                 orderManagementCheckoutActionsApiClient.createOrder("1", "2", null, payload);
-            } catch (IllegalArgumentException e) {
-                String m = e.getMessage();
-                assertEquals("Checkout ID is required", m);
-            }
+            });
+            m = e.getMessage();
+            assertEquals("Checkout ID is required", m);
 
-            try {
+            e = assertThrows(IllegalArgumentException.class, () -> {
                 orderManagementCheckoutActionsApiClient.createOrder("1", "2", "3", null);
-            } catch (IllegalArgumentException e) {
-                String m = e.getMessage();
-                assertEquals("Payload is required", m);
-            }
+            });
+            m = e.getMessage();
+            assertEquals("Payload is required", m);
         }
     }
 
@@ -132,7 +132,7 @@ public class OrderManagementCheckoutActionsApiClientTest {
     class DeliverOrderTests {
         @Test
         @DisplayName("given request was successful, then return response")
-        void deliverOrderSuccessful() throws InvalidKeyException, ApiResponseException, IOException {
+        void deliverOrderSuccessful() throws InvalidKeyException, ApiException, IOException {
 
             OrderManagementCheckoutActionsApiClient orderManagementCheckoutActionsApiClient = spy(
                     new OrderManagementCheckoutActionsApiClient(TestConfig.COMMUNICATOR_CONFIGURATION));
@@ -151,7 +151,7 @@ public class OrderManagementCheckoutActionsApiClientTest {
 
         @Test
         @DisplayName("given request was unsuccessful (400), then throw exception")
-        void deliverOrderUnsuccessful() throws InvalidKeyException, ApiResponseException, IOException {
+        void deliverOrderUnsuccessful() throws InvalidKeyException, ApiException, IOException {
 
             OrderManagementCheckoutActionsApiClient orderManagementCheckoutActionsApiClient = spy(
                     new OrderManagementCheckoutActionsApiClient(TestConfig.COMMUNICATOR_CONFIGURATION));
@@ -160,68 +160,65 @@ public class OrderManagementCheckoutActionsApiClientTest {
             doReturn(response).when(orderManagementCheckoutActionsApiClient).getResponse(any());
 
             DeliverRequest payload = new DeliverRequest();
-            try {
+            ApiErrorResponseException e = assertThrows(ApiErrorResponseException.class, () -> {
                 orderManagementCheckoutActionsApiClient.deliverOrder("1", "2", "3", payload);
-            } catch (ApiResponseException e) {
-                int s = e.getResponse().getErrors().get(0).getHttpStatusCode();
-                assertEquals(400, s);
-            }
+            });
+            int s = e.getErrors().get(0).getHttpStatusCode();
+            assertEquals(400, s);
         }
 
         @Test
-        @DisplayName("given request was unsuccessful (500), then throw exception")
-        void deliverOrderUnsuccessful500() throws InvalidKeyException, ApiResponseException, IOException {
+        @DisplayName("given request was unsuccessful (500) with empty body, then throw exception")
+        void deliverOrderUnsuccessful500() throws InvalidKeyException, ApiException, IOException {
 
             OrderManagementCheckoutActionsApiClient orderManagementCheckoutActionsApiClient = spy(
                     new OrderManagementCheckoutActionsApiClient(TestConfig.COMMUNICATOR_CONFIGURATION));
-            Response response = ApiResponseMocks.createErrorResponse(500);
+            Response response = ApiResponseMocks.createEmptyErrorResponse(500);
 
             doReturn(response).when(orderManagementCheckoutActionsApiClient).getResponse(any());
 
-            DeliverRequest payload = new DeliverRequest();
-            try {
+            ApiResponseRetrievalException e = assertThrows(ApiResponseRetrievalException.class, () -> {
+                DeliverRequest payload = new DeliverRequest();
                 orderManagementCheckoutActionsApiClient.deliverOrder("1", "2", "3", payload);
-            } catch (RuntimeException e) {
-                String m = e.getMessage();
-                assertEquals("Api error: 500", m);
-            }
+            });
+            int code = e.getStatusCode();
+            assertEquals(500, code);
         }
 
         @Test
         @DisplayName("given some params are null, then throw exception")
-        void deliverOrderNullParams() throws InvalidKeyException, ApiResponseException, IOException {
+        void deliverOrderNullParams() throws InvalidKeyException, ApiException, IOException {
 
             OrderManagementCheckoutActionsApiClient orderManagementCheckoutActionsApiClient = spy(
                     new OrderManagementCheckoutActionsApiClient(TestConfig.COMMUNICATOR_CONFIGURATION));
             DeliverRequest payload = new DeliverRequest();
 
-            try {
+            IllegalArgumentException e;
+            String m;
+
+            e = assertThrows(IllegalArgumentException.class, () -> {
                 orderManagementCheckoutActionsApiClient.deliverOrder(null, "2", "3", payload);
-            } catch (IllegalArgumentException e) {
-                String m = e.getMessage();
-                assertEquals("Merchant ID is required", m);
-            }
+            });
+            m = e.getMessage();
+            assertEquals("Merchant ID is required", m);
 
-            try {
+            e = assertThrows(IllegalArgumentException.class, () -> {
                 orderManagementCheckoutActionsApiClient.deliverOrder("1", null, "3", payload);
-            } catch (IllegalArgumentException e) {
-                String m = e.getMessage();
-                assertEquals("Commerce Case ID is required", m);
-            }
+            });
+            m = e.getMessage();
+            assertEquals("Commerce Case ID is required", m);
 
-            try {
+            e = assertThrows(IllegalArgumentException.class, () -> {
                 orderManagementCheckoutActionsApiClient.deliverOrder("1", "2", null, payload);
-            } catch (IllegalArgumentException e) {
-                String m = e.getMessage();
-                assertEquals("Checkout ID is required", m);
-            }
+            });
+            m = e.getMessage();
+            assertEquals("Checkout ID is required", m);
 
-            try {
+            e = assertThrows(IllegalArgumentException.class, () -> {
                 orderManagementCheckoutActionsApiClient.deliverOrder("1", "2", "3", null);
-            } catch (IllegalArgumentException e) {
-                String m = e.getMessage();
-                assertEquals("Payload is required", m);
-            }
+            });
+            m = e.getMessage();
+            assertEquals("Payload is required", m);
         }
     }
 
@@ -230,7 +227,7 @@ public class OrderManagementCheckoutActionsApiClientTest {
     class ReturnOrderTests {
         @Test
         @DisplayName("given request was successful, then return response")
-        void returnOrderSuccessful() throws InvalidKeyException, ApiResponseException, IOException {
+        void returnOrderSuccessful() throws InvalidKeyException, ApiException, IOException {
 
             OrderManagementCheckoutActionsApiClient orderManagementCheckoutActionsApiClient = spy(
                     new OrderManagementCheckoutActionsApiClient(TestConfig.COMMUNICATOR_CONFIGURATION));
@@ -249,7 +246,7 @@ public class OrderManagementCheckoutActionsApiClientTest {
 
         @Test
         @DisplayName("given request was unsuccessful (400), then throw exception")
-        void returnOrderUnsuccessful() throws InvalidKeyException, ApiResponseException, IOException {
+        void returnOrderUnsuccessful() throws InvalidKeyException, ApiException, IOException {
 
             OrderManagementCheckoutActionsApiClient orderManagementCheckoutActionsApiClient = spy(
                     new OrderManagementCheckoutActionsApiClient(TestConfig.COMMUNICATOR_CONFIGURATION));
@@ -258,68 +255,65 @@ public class OrderManagementCheckoutActionsApiClientTest {
             doReturn(response).when(orderManagementCheckoutActionsApiClient).getResponse(any());
 
             ReturnRequest payload = new ReturnRequest();
-            try {
+            ApiErrorResponseException e = assertThrows(ApiErrorResponseException.class, () -> {
                 orderManagementCheckoutActionsApiClient.returnOrder("1", "2", "3", payload);
-            } catch (ApiResponseException e) {
-                int s = e.getResponse().getErrors().get(0).getHttpStatusCode();
-                assertEquals(400, s);
-            }
+            });
+            int s = e.getErrors().get(0).getHttpStatusCode();
+            assertEquals(400, s);
         }
 
         @Test
-        @DisplayName("given request was unsuccessful (500), then throw exception")
-        void returnOrderUnsuccessful500() throws InvalidKeyException, ApiResponseException, IOException {
+        @DisplayName("given request was unsuccessful (500) with empty body, then throw exception")
+        void returnOrderUnsuccessful500() throws InvalidKeyException, ApiException, IOException {
 
             OrderManagementCheckoutActionsApiClient orderManagementCheckoutActionsApiClient = spy(
                     new OrderManagementCheckoutActionsApiClient(TestConfig.COMMUNICATOR_CONFIGURATION));
-            Response response = ApiResponseMocks.createErrorResponse(500);
+            Response response = ApiResponseMocks.createEmptyErrorResponse(500);
 
             doReturn(response).when(orderManagementCheckoutActionsApiClient).getResponse(any());
 
             ReturnRequest payload = new ReturnRequest();
-            try {
+            ApiResponseRetrievalException e = assertThrows(ApiResponseRetrievalException.class, () -> {
                 orderManagementCheckoutActionsApiClient.returnOrder("1", "2", "3", payload);
-            } catch (RuntimeException e) {
-                String m = e.getMessage();
-                assertEquals("Api error: 500", m);
-            }
+            });
+            int code = e.getStatusCode();
+            assertEquals(500, code);
         }
 
         @Test
         @DisplayName("given some params are null, then throw exception")
-        void returnOrderNullParams() throws InvalidKeyException, ApiResponseException, IOException {
+        void returnOrderNullParams() throws InvalidKeyException, ApiException, IOException {
 
             OrderManagementCheckoutActionsApiClient orderManagementCheckoutActionsApiClient = spy(
                     new OrderManagementCheckoutActionsApiClient(TestConfig.COMMUNICATOR_CONFIGURATION));
             ReturnRequest payload = new ReturnRequest();
 
-            try {
+            IllegalArgumentException e;
+            String m;
+
+            e = assertThrows(IllegalArgumentException.class, () -> {
                 orderManagementCheckoutActionsApiClient.returnOrder(null, "2", "3", payload);
-            } catch (IllegalArgumentException e) {
-                String m = e.getMessage();
-                assertEquals("Merchant ID is required", m);
-            }
+            });
+            m = e.getMessage();
+            assertEquals("Merchant ID is required", m);
 
-            try {
+            e = assertThrows(IllegalArgumentException.class, () -> {
                 orderManagementCheckoutActionsApiClient.returnOrder("1", null, "3", payload);
-            } catch (IllegalArgumentException e) {
-                String m = e.getMessage();
-                assertEquals("Commerce Case ID is required", m);
-            }
+            });
+            m = e.getMessage();
+            assertEquals("Commerce Case ID is required", m);
 
-            try {
+            e = assertThrows(IllegalArgumentException.class, () -> {
                 orderManagementCheckoutActionsApiClient.returnOrder("1", "2", null, payload);
-            } catch (IllegalArgumentException e) {
-                String m = e.getMessage();
-                assertEquals("Checkout ID is required", m);
-            }
+            });
+            m = e.getMessage();
+            assertEquals("Checkout ID is required", m);
 
-            try {
+            e = assertThrows(IllegalArgumentException.class, () -> {
                 orderManagementCheckoutActionsApiClient.returnOrder("1", "2", "3", null);
-            } catch (IllegalArgumentException e) {
-                String m = e.getMessage();
-                assertEquals("Payload is required", m);
-            }
+            });
+            m = e.getMessage();
+            assertEquals("Payload is required", m);
         }
     }
 
@@ -328,7 +322,7 @@ public class OrderManagementCheckoutActionsApiClientTest {
     class CancelOrderTests {
         @Test
         @DisplayName("given request was successful, then return response")
-        void cancelOrderSuccessful() throws InvalidKeyException, ApiResponseException, IOException {
+        void cancelOrderSuccessful() throws InvalidKeyException, ApiException, IOException {
 
             OrderManagementCheckoutActionsApiClient orderManagementCheckoutActionsApiClient = spy(
                     new OrderManagementCheckoutActionsApiClient(TestConfig.COMMUNICATOR_CONFIGURATION));
@@ -347,7 +341,7 @@ public class OrderManagementCheckoutActionsApiClientTest {
 
         @Test
         @DisplayName("given request was unsuccessful (400), then throw exception")
-        void cancelOrderUnsuccessful() throws InvalidKeyException, ApiResponseException, IOException {
+        void cancelOrderUnsuccessful() throws InvalidKeyException, ApiException, IOException {
 
             OrderManagementCheckoutActionsApiClient orderManagementCheckoutActionsApiClient = spy(
                     new OrderManagementCheckoutActionsApiClient(TestConfig.COMMUNICATOR_CONFIGURATION));
@@ -356,68 +350,65 @@ public class OrderManagementCheckoutActionsApiClientTest {
             doReturn(response).when(orderManagementCheckoutActionsApiClient).getResponse(any());
 
             CancelRequest payload = new CancelRequest();
-            try {
+            ApiErrorResponseException e = assertThrows(ApiErrorResponseException.class, () -> {
                 orderManagementCheckoutActionsApiClient.cancelOrder("1", "2", "3", payload);
-            } catch (ApiResponseException e) {
-                int s = e.getResponse().getErrors().get(0).getHttpStatusCode();
-                assertEquals(400, s);
-            }
+            });
+            int s = e.getErrors().get(0).getHttpStatusCode();
+            assertEquals(400, s);
         }
 
         @Test
-        @DisplayName("given request was unsuccessful (500), then throw exception")
-        void cancelOrderUnsuccessful500() throws InvalidKeyException, ApiResponseException, IOException {
+        @DisplayName("given request was unsuccessful (500) with empty body, then throw exception")
+        void cancelOrderUnsuccessful500() throws InvalidKeyException, ApiException, IOException {
 
             OrderManagementCheckoutActionsApiClient orderManagementCheckoutActionsApiClient = spy(
                     new OrderManagementCheckoutActionsApiClient(TestConfig.COMMUNICATOR_CONFIGURATION));
-            Response response = ApiResponseMocks.createErrorResponse(500);
+            Response response = ApiResponseMocks.createEmptyErrorResponse(500);
 
             doReturn(response).when(orderManagementCheckoutActionsApiClient).getResponse(any());
 
             CancelRequest payload = new CancelRequest();
-            try {
+            ApiResponseRetrievalException e = assertThrows(ApiResponseRetrievalException.class, () -> {
                 orderManagementCheckoutActionsApiClient.cancelOrder("1", "2", "3", payload);
-            } catch (RuntimeException e) {
-                String m = e.getMessage();
-                assertEquals("Api error: 500", m);
-            }
+            });
+            int code = e.getStatusCode();
+            assertEquals(500, code);
         }
 
         @Test
         @DisplayName("given some params are null, then throw exception")
-        void cancelOrderNullParams() throws InvalidKeyException, ApiResponseException, IOException {
+        void cancelOrderNullParams() throws InvalidKeyException, ApiException, IOException {
 
             OrderManagementCheckoutActionsApiClient orderManagementCheckoutActionsApiClient = spy(
                     new OrderManagementCheckoutActionsApiClient(TestConfig.COMMUNICATOR_CONFIGURATION));
             CancelRequest payload = new CancelRequest();
 
-            try {
+            IllegalArgumentException e;
+            String m;
+
+            e = assertThrows(IllegalArgumentException.class, () -> {
                 orderManagementCheckoutActionsApiClient.cancelOrder(null, "2", "3", payload);
-            } catch (IllegalArgumentException e) {
-                String m = e.getMessage();
-                assertEquals("Merchant ID is required", m);
-            }
+            });
+            m = e.getMessage();
+            assertEquals("Merchant ID is required", m);
 
-            try {
+            e = assertThrows(IllegalArgumentException.class, () -> {
                 orderManagementCheckoutActionsApiClient.cancelOrder("1", null, "3", payload);
-            } catch (IllegalArgumentException e) {
-                String m = e.getMessage();
-                assertEquals("Commerce Case ID is required", m);
-            }
+            });
+            m = e.getMessage();
+            assertEquals("Commerce Case ID is required", m);
 
-            try {
+            e = assertThrows(IllegalArgumentException.class, () -> {
                 orderManagementCheckoutActionsApiClient.cancelOrder("1", "2", null, payload);
-            } catch (IllegalArgumentException e) {
-                String m = e.getMessage();
-                assertEquals("Checkout ID is required", m);
-            }
+            });
+            m = e.getMessage();
+            assertEquals("Checkout ID is required", m);
 
-            try {
+            e = assertThrows(IllegalArgumentException.class, () -> {
                 orderManagementCheckoutActionsApiClient.cancelOrder("1", "2", "3", null);
-            } catch (IllegalArgumentException e) {
-                String m = e.getMessage();
-                assertEquals("Payload is required", m);
-            }
+            });
+            m = e.getMessage();
+            assertEquals("Payload is required", m);
         }
     }
 

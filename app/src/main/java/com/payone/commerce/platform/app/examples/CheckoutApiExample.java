@@ -3,7 +3,7 @@ package com.payone.commerce.platform.app.examples;
 import java.io.IOException;
 import java.security.InvalidKeyException;
 
-import com.payone.commerce.platform.lib.ApiResponseException;
+import com.payone.commerce.platform.lib.errors.ApiException;
 import com.payone.commerce.platform.lib.CommunicatorConfiguration;
 import com.payone.commerce.platform.lib.endpoints.CheckoutApiClient;
 import com.payone.commerce.platform.lib.models.AmountOfMoney;
@@ -23,7 +23,7 @@ public class CheckoutApiExample {
         this.client = new CheckoutApiClient(config);
     }
 
-    public void runPostOne() throws ApiResponseException, IOException {
+    public void runPostOne() throws ApiException, IOException {
         CreateCheckoutRequest payload = new CreateCheckoutRequest();
         AmountOfMoney amount = new AmountOfMoney();
         amount.setAmount(1000l);
@@ -38,7 +38,7 @@ public class CheckoutApiExample {
 
     }
 
-    public void runGetAll() throws ApiResponseException, IOException {
+    public void runGetAll() throws ApiException, IOException {
         // List<CheckoutResponse> res = client.getAllCheckouts(merchantId,
         // null);
 
@@ -46,14 +46,14 @@ public class CheckoutApiExample {
 
     }
 
-    public void runGetOne() throws ApiResponseException, IOException {
+    public void runGetOne() throws ApiException, IOException {
         CheckoutResponse res = client.getCheckoutRequest(merchantId, commerceCaseId,
                 checkoutId);
 
         System.out.println(res.toString());
     }
 
-    public void runUpdateOne() throws ApiResponseException, IOException {
+    public void runUpdateOne() throws ApiException, IOException {
         PatchCheckoutRequest patch = new PatchCheckoutRequest();
         AmountOfMoney amount = new AmountOfMoney();
 
@@ -66,7 +66,7 @@ public class CheckoutApiExample {
 
     }
 
-    public void runDeleteOne() throws ApiResponseException, IOException {
+    public void runDeleteOne() throws ApiException, IOException {
         client.removeCheckoutRequest(merchantId, commerceCaseId, createdCheckoutId);
     }
 }

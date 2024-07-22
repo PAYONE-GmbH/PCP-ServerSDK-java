@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.security.InvalidKeyException;
 import java.util.List;
 
-import com.payone.commerce.platform.lib.ApiResponseException;
+import com.payone.commerce.platform.lib.errors.ApiException;
 import com.payone.commerce.platform.lib.CommunicatorConfiguration;
 import com.payone.commerce.platform.lib.endpoints.CommerceCaseApiClient;
 import com.payone.commerce.platform.lib.models.Address;
@@ -12,7 +12,7 @@ import com.payone.commerce.platform.lib.models.CommerceCaseResponse;
 import com.payone.commerce.platform.lib.models.CreateCommerceCaseRequest;
 import com.payone.commerce.platform.lib.models.CreateCommerceCaseResponse;
 import com.payone.commerce.platform.lib.models.Customer;
-import com.payone.commerce.platform.lib.models.GetCommerceCasesQuery;
+import com.payone.commerce.platform.lib.queries.GetCommerceCasesQuery;
 
 public class CommerceCaseApiExample {
     CommerceCaseApiClient client;
@@ -23,7 +23,7 @@ public class CommerceCaseApiExample {
         this.client = new CommerceCaseApiClient(config);
     }
 
-    public void runPostOne() throws ApiResponseException, IOException {
+    public void runPostOne() throws ApiException, IOException {
 
         CreateCommerceCaseResponse res = client.createCommerceCaseRequest(merchantId,
                 new CreateCommerceCaseRequest());
@@ -32,10 +32,10 @@ public class CommerceCaseApiExample {
 
     }
 
-    public void runGetAll() throws ApiResponseException, IOException {
+    public void runGetAll() throws ApiException, IOException {
         GetCommerceCasesQuery query = new GetCommerceCasesQuery();
         query.setOffset(2);
-        query.setSize("1");
+        query.setSize(1);
         // Set<StatusCheckout> status = Set.of(StatusCheckout.COMPLETED);
         // query.setIncludeCheckoutStatus(status);
 
@@ -45,14 +45,14 @@ public class CommerceCaseApiExample {
 
     }
 
-    public void runGetOne() throws ApiResponseException, IOException {
+    public void runGetOne() throws ApiException, IOException {
         CommerceCaseResponse res = client.getCommerceCaseRequest(merchantId,
                 commerceCaseId);
 
         System.out.println(res.toString());
     }
 
-    public void runUpdateOne() throws ApiResponseException, IOException {
+    public void runUpdateOne() throws ApiException, IOException {
         CommerceCaseResponse responseGetOne = client.getCommerceCaseRequest(merchantId,
                 commerceCaseId);
 
