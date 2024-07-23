@@ -33,21 +33,9 @@ Welcome to the Java SDK for the PayOne PCP platform! This repository contains a 
 
 ## Usage
 
-// TODO
+You can find examples and detailed usage in the [examples](./app/src/main/java/com/payone/commerce/platform/app/examples/) directory.
 
-### Run the example app
-
-```sh
-API_KEY=api_key API_SECRET=api_secret MERCHANT_ID=123 COMMERCE_CASE_ID=234 CHECKOUT_ID=345 ./gradlew :app:run
-```
-
-### Build the library
-
-```sh
-./gradlew :lib:build
-```
-
-## Configuration
+### Configuration
 
 You need to configure the SDK with your API key and secret key. You can obtain these from your payment gateway provider.
 
@@ -57,9 +45,15 @@ import com.payone.commerce.platform.lib.CommunicatorConfiguration;
 CommunicatorConfiguration config = new CommunicatorConfiguration(API_KEY, API_SECRET, "preprod.commerce-api.payone.com");
 ```
 
-## Examples
 
-You can find more examples and detailed usage in the [examples](./app/src/main/java/com/payone/commerce/platform/app/examples/) directory.
+
+
+### Run the example app
+
+```sh
+API_KEY=api_key API_SECRET=api_secret MERCHANT_ID=123 COMMERCE_CASE_ID=234 CHECKOUT_ID=345 ./gradlew :app:run
+```
+
 
 ## Contributing
 
@@ -72,6 +66,36 @@ Commit your changes (`git commit -am 'Add new feature'`).
 Push to the branch (`git push origin feature-branch`).
 Create a new Pull Request.
 Please make sure to follow the coding standards and write appropriate tests for your changes.
+
+
+### Build the library
+
+```sh
+./gradlew :lib:build
+```
+
+### Run tests
+
+```sh
+./gradlew :lib:test
+# or for coverage
+./gradlew :lib:jacocoTestReport
+```
+
+### Releasing the library
+
+- Checkout develop branch
+- Create release branch (release/0.1.0)
+```sh
+git checkout -b release/0.1.0
+```
+- Run prepare-release.sh script to set correct version
+```sh
+./prepare-release.sh
+```
+- Create PR on develop branch
+- Merge develop in main branch
+
 
 ## License
 
