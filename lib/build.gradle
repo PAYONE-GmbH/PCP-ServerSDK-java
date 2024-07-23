@@ -1,3 +1,13 @@
+buildscript {
+    repositories {
+        mavenCentral()
+        gradlePluginPortal()
+    }
+    dependencies {
+        classpath 'com.vanniktech:gradle-maven-publish-plugin:0.29.0'
+    }
+}
+
 plugins {
     id 'java-library'
     id 'jacoco'
@@ -19,20 +29,10 @@ if (isJavaVersion(8)) {
     println 'Plugin applied for Java version other than 8'
 }
 
-buildscript {
-    repositories {
-        mavenCentral()
-        gradlePluginPortal()
-    }
-    dependencies {
-        classpath 'com.vanniktech:gradle-maven-publish-plugin:0.29.0'
-    }
-}
 
 version = '0.0.1'
 
 repositories {
-    // Use Maven Central for resolving dependencies.
     mavenCentral()
 }
 
