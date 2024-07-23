@@ -62,34 +62,36 @@ tasks.jacocoTestReport {
     }
 }
 
-mavenPublishing {
-  publishToMavenCentral("CENTRAL_PORTAL")
+if (JavaVersion.current().majorVersion != "8") {
+  mavenPublishing {
+    publishToMavenCentral("CENTRAL_PORTAL")
 
-  signAllPublications()
+    signAllPublications()
 
-  coordinates("io.github.payone-gmbh", "pcp-serversdk-java", version)
+    coordinates("io.github.payone-gmbh", "pcp-serversdk-java", version)
 
-  pom {
-    name = "PCP-SERVERSDK-JAVA"
-    description = "The PayOne PCP Java SDK."
-    inceptionYear = "2024"
-    url = "https://github.com/PAYONE-GmbH/PCP-ServerSDK-java"
-    licenses {
-      license {
-        name = "MIT"     
-      }
-    }
-    developers {
-      developer {
-        id = "username"
-        name = "PayOne-GmbH"
-        url = "https://github.com/PAYONE-GmbH"
-      }
-    }
-    scm {
+    pom {
+      name = "PCP-SERVERSDK-JAVA"
+      description = "The PayOne PCP Java SDK."
+      inceptionYear = "2024"
       url = "https://github.com/PAYONE-GmbH/PCP-ServerSDK-java"
-      connection = "scm:git:git://github.com/PAYONE-GmbH/PCP-ServerSDK-java.git"
-      developerConnection = "scm:git:ssh://git@github.com/PAYONE-GmbH/PCP-ServerSDK-java.git"
+      licenses {
+        license {
+          name = "MIT"     
+        }
+      }
+      developers {
+        developer {
+          id = "username"
+          name = "PayOne-GmbH"
+          url = "https://github.com/PAYONE-GmbH"
+        }
+      }
+      scm {
+        url = "https://github.com/PAYONE-GmbH/PCP-ServerSDK-java"
+        connection = "scm:git:git://github.com/PAYONE-GmbH/PCP-ServerSDK-java.git"
+        developerConnection = "scm:git:ssh://git@github.com/PAYONE-GmbH/PCP-ServerSDK-java.git"
+      }
     }
   }
 }
