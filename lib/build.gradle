@@ -1,11 +1,21 @@
-buildscript {
-    repositories {
-        mavenCentral()
-        gradlePluginPortal()
-    }
-    dependencies {
-        classpath 'com.vanniktech:gradle-maven-publish-plugin:0.29.0'
-    }
+def isJavaVersion(int version) {
+    return JavaVersion.current().majorVersion == version.toString()
+}
+
+if (!isJavaVersion(8)) {
+  buildscript {
+      repositories {
+          mavenCentral()
+          gradlePluginPortal()
+      }
+      dependencies {
+          classpath 'com.vanniktech:gradle-maven-publish-plugin:0.29.0'
+      }
+  }
+}
+
+if (!isJavaVersion(8)) {
+   apply plugin: 'com.vanniktech.maven.publish'
 }
 
 plugins {
@@ -14,21 +24,6 @@ plugins {
     id 'checkstyle'
     id "io.github.kmbisset89.changelog.plugin" version "1.0.4"
 }
-
-def isJavaVersion(int version) {
-    return JavaVersion.current().majorVersion == version.toString()
-}
-
-if (isJavaVersion(8)) {
-    // Apply configurations specific to Java 8
-    // configurations, dependencies, tasks, etc.
-    println 'Java 8 specific configuration applied'
-} else {
-    // Apply the plugin for other Java versions
-    apply plugin: 'com.vanniktech.maven.publish'
-    println 'Plugin applied for Java version other than 8'
-}
-
 
 version = '0.0.1'
 
