@@ -10,8 +10,9 @@ import java.util.Map;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.payone.commerce.platform.lib.ApiResponseException;
 import com.payone.commerce.platform.lib.CommunicatorConfiguration;
+import com.payone.commerce.platform.lib.errors.ApiErrorResponseException;
+import com.payone.commerce.platform.lib.errors.ApiResponseRetrievalException;
 import com.payone.commerce.platform.lib.models.CommerceCaseResponse;
 import com.payone.commerce.platform.lib.models.CreateCommerceCaseRequest;
 import com.payone.commerce.platform.lib.models.CreateCommerceCaseResponse;
@@ -29,7 +30,7 @@ public class CommerceCaseApiClient extends BaseApiClient {
     }
 
     public CreateCommerceCaseResponse createCommerceCaseRequest(String merchantId, CreateCommerceCaseRequest payload)
-            throws ApiResponseException, IOException {
+            throws ApiErrorResponseException, ApiResponseRetrievalException, IOException {
         if (merchantId == null) {
             throw new IllegalArgumentException("Merchant ID is required");
         }
@@ -62,7 +63,7 @@ public class CommerceCaseApiClient extends BaseApiClient {
     }
 
     public CommerceCaseResponse getCommerceCaseRequest(String merchantId,
-            String commerceCaseId) throws ApiResponseException, IOException {
+            String commerceCaseId) throws ApiErrorResponseException, ApiResponseRetrievalException, IOException {
         if (merchantId == null) {
             throw new IllegalArgumentException("Merchant ID is required");
         }
@@ -92,12 +93,13 @@ public class CommerceCaseApiClient extends BaseApiClient {
     }
 
     public List<CommerceCaseResponse> getCommerceCasesRequest(String merchantId)
-            throws ApiResponseException, IOException {
+            throws ApiErrorResponseException, ApiResponseRetrievalException, IOException {
         return getCommerceCasesRequest(merchantId, null);
     }
 
     public List<CommerceCaseResponse> getCommerceCasesRequest(String merchantId,
-            GetCommerceCasesQuery queryParams) throws ApiResponseException, IOException {
+            GetCommerceCasesQuery queryParams)
+            throws ApiErrorResponseException, ApiResponseRetrievalException, IOException {
         if (merchantId == null) {
             throw new IllegalArgumentException("Merchant ID is required");
         }
@@ -129,7 +131,7 @@ public class CommerceCaseApiClient extends BaseApiClient {
     }
 
     public void updateCommerceCaseRequest(String merchantId, String commerceCaseId,
-            Customer payload) throws IOException, ApiResponseException {
+            Customer payload) throws ApiErrorResponseException, ApiResponseRetrievalException, IOException {
         if (merchantId == null) {
             throw new IllegalArgumentException("Merchant ID is required");
         }

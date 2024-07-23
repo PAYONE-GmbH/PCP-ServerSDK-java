@@ -7,8 +7,9 @@ import java.util.Map;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.payone.commerce.platform.lib.ApiResponseException;
 import com.payone.commerce.platform.lib.CommunicatorConfiguration;
+import com.payone.commerce.platform.lib.errors.ApiErrorResponseException;
+import com.payone.commerce.platform.lib.errors.ApiResponseRetrievalException;
 import com.payone.commerce.platform.lib.models.CheckoutResponse;
 import com.payone.commerce.platform.lib.models.CreateCheckoutRequest;
 import com.payone.commerce.platform.lib.models.CreateCheckoutResponse;
@@ -29,7 +30,8 @@ public class CheckoutApiClient extends BaseApiClient {
     }
 
     public CreateCheckoutResponse createCheckoutRequest(String merchantId, String commerceCaseId,
-            CreateCheckoutRequest payload) throws ApiResponseException, IOException {
+            CreateCheckoutRequest payload)
+            throws ApiErrorResponseException, ApiResponseRetrievalException, IOException {
         if (merchantId == null) {
             throw new IllegalArgumentException("Merchant ID is required");
         }
@@ -70,7 +72,7 @@ public class CheckoutApiClient extends BaseApiClient {
     }
 
     public CheckoutResponse getCheckoutRequest(String merchantId, String commerceCaseId, String checkoutId)
-            throws ApiResponseException, IOException {
+            throws ApiErrorResponseException, ApiResponseRetrievalException, IOException {
         if (merchantId == null) {
             throw new IllegalArgumentException("Merchant ID is required");
         }
@@ -104,12 +106,12 @@ public class CheckoutApiClient extends BaseApiClient {
     }
 
     public List<CheckoutResponse> getCheckoutsRequest(String merchantID)
-            throws ApiResponseException, IOException {
+            throws ApiErrorResponseException, ApiResponseRetrievalException, IOException {
         return getCheckoutsRequest(merchantID, null);
     }
 
     public List<CheckoutResponse> getCheckoutsRequest(String merchantId, GetCheckoutsQuery queryParams)
-            throws ApiResponseException, IOException {
+            throws ApiErrorResponseException, ApiResponseRetrievalException, IOException {
         if (merchantId == null) {
             throw new IllegalArgumentException("Merchant ID is required");
         }
@@ -140,7 +142,8 @@ public class CheckoutApiClient extends BaseApiClient {
     }
 
     public void updateCheckoutRequest(String merchantId, String commerceCaseId, String checkoutId,
-            PatchCheckoutRequest payload) throws ApiResponseException, IOException {
+            PatchCheckoutRequest payload)
+            throws ApiErrorResponseException, ApiResponseRetrievalException, IOException {
         if (merchantId == null) {
             throw new IllegalArgumentException("Merchant ID is required");
         }
@@ -185,7 +188,7 @@ public class CheckoutApiClient extends BaseApiClient {
     }
 
     public void removeCheckoutRequest(String merchantId, String commerceCaseId, String checkoutId)
-            throws ApiResponseException, IOException {
+            throws ApiErrorResponseException, ApiResponseRetrievalException, IOException {
         if (merchantId == null) {
             throw new IllegalArgumentException("Merchant ID is required");
         }

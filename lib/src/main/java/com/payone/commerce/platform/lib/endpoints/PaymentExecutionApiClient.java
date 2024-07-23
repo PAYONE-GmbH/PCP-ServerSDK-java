@@ -3,7 +3,8 @@ package com.payone.commerce.platform.lib.endpoints;
 import java.io.IOException;
 import java.security.InvalidKeyException;
 
-import com.payone.commerce.platform.lib.ApiResponseException;
+import com.payone.commerce.platform.lib.errors.ApiErrorResponseException;
+import com.payone.commerce.platform.lib.errors.ApiResponseRetrievalException;
 import com.payone.commerce.platform.lib.CommunicatorConfiguration;
 import com.payone.commerce.platform.lib.models.CancelPaymentRequest;
 import com.payone.commerce.platform.lib.models.CancelPaymentResponse;
@@ -28,7 +29,7 @@ public class PaymentExecutionApiClient extends BaseApiClient {
 
     public CreatePaymentResponse createPayment(String merchantId, String commerceCaseId,
             String checkoutId, PaymentExecutionRequest payload)
-            throws ApiResponseException, IOException {
+            throws ApiErrorResponseException, ApiResponseRetrievalException, IOException {
         if (merchantId == null) {
             throw new IllegalArgumentException("Merchant ID is required");
         }
@@ -72,7 +73,7 @@ public class PaymentExecutionApiClient extends BaseApiClient {
 
     public CapturePaymentResponse capturePayment(String merchantId, String commerceCaseId,
             String checkoutId, String paymentExecutionId, CapturePaymentRequest payload)
-            throws ApiResponseException, IOException {
+            throws ApiErrorResponseException, ApiResponseRetrievalException, IOException {
         if (merchantId == null) {
             throw new IllegalArgumentException("Merchant ID is required");
         }
@@ -121,7 +122,7 @@ public class PaymentExecutionApiClient extends BaseApiClient {
 
     public CancelPaymentResponse cancelPayment(String merchantId, String commerceCaseId,
             String checkoutId, String paymentExecutionId, CancelPaymentRequest payload)
-            throws ApiResponseException, IOException {
+            throws ApiErrorResponseException, ApiResponseRetrievalException, IOException {
         if (merchantId == null) {
             throw new IllegalArgumentException("Merchant ID is required");
         }
@@ -170,7 +171,7 @@ public class PaymentExecutionApiClient extends BaseApiClient {
 
     public RefundPaymentResponse refundPayment(String merchantId, String commerceCaseId,
             String checkoutId, String paymentExecutionId, RefundRequest payload)
-            throws ApiResponseException, IOException {
+            throws ApiErrorResponseException, ApiResponseRetrievalException, IOException {
         if (merchantId == null) {
             throw new IllegalArgumentException("Merchant ID is required");
         }
@@ -219,7 +220,7 @@ public class PaymentExecutionApiClient extends BaseApiClient {
 
     public CompletePaymentResponse completePayment(String merchantId, String commerceCaseId,
             String checkoutId, String paymentExecutionId, CompletePaymentRequest payload)
-            throws ApiResponseException, IOException {
+            throws ApiErrorResponseException, ApiResponseRetrievalException, IOException {
         if (merchantId == null) {
             throw new IllegalArgumentException("Merchant ID is required");
         }

@@ -6,7 +6,8 @@ package com.payone.commerce.platform.lib.endpoints;
 import java.io.IOException;
 import java.security.InvalidKeyException;
 
-import com.payone.commerce.platform.lib.ApiResponseException;
+import com.payone.commerce.platform.lib.errors.ApiErrorResponseException;
+import com.payone.commerce.platform.lib.errors.ApiResponseRetrievalException;
 import com.payone.commerce.platform.lib.CommunicatorConfiguration;
 import com.payone.commerce.platform.lib.models.CancelRequest;
 import com.payone.commerce.platform.lib.models.CancelResponse;
@@ -29,7 +30,7 @@ public class OrderManagementCheckoutActionsApiClient extends BaseApiClient {
 
     public OrderResponse createOrder(String merchantId, String commerceCaseId,
             String checkoutId, OrderRequest payload)
-            throws ApiResponseException, IOException {
+            throws ApiErrorResponseException, ApiResponseRetrievalException, IOException {
         if (merchantId == null) {
             throw new IllegalArgumentException("Merchant ID is required");
         }
@@ -73,7 +74,7 @@ public class OrderManagementCheckoutActionsApiClient extends BaseApiClient {
 
     public DeliverResponse deliverOrder(String merchantId, String commerceCaseId,
             String checkoutId, DeliverRequest payload)
-            throws ApiResponseException, IOException {
+            throws ApiErrorResponseException, ApiResponseRetrievalException, IOException {
         if (merchantId == null) {
             throw new IllegalArgumentException("Merchant ID is required");
         }
@@ -117,7 +118,7 @@ public class OrderManagementCheckoutActionsApiClient extends BaseApiClient {
 
     public ReturnResponse returnOrder(String merchantId, String commerceCaseId,
             String checkoutId, ReturnRequest payload)
-            throws ApiResponseException, IOException {
+            throws ApiErrorResponseException, ApiResponseRetrievalException, IOException {
         if (merchantId == null) {
             throw new IllegalArgumentException("Merchant ID is required");
         }
@@ -161,7 +162,7 @@ public class OrderManagementCheckoutActionsApiClient extends BaseApiClient {
 
     public CancelResponse cancelOrder(String merchantId, String commerceCaseId,
             String checkoutId, CancelRequest payload)
-            throws ApiResponseException, IOException {
+            throws ApiErrorResponseException, ApiResponseRetrievalException, IOException {
         if (merchantId == null) {
             throw new IllegalArgumentException("Merchant ID is required");
         }

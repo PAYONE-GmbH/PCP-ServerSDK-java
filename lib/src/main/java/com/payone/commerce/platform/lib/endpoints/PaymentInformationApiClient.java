@@ -3,7 +3,7 @@ package com.payone.commerce.platform.lib.endpoints;
 import java.io.IOException;
 import java.security.InvalidKeyException;
 
-import com.payone.commerce.platform.lib.ApiResponseException;
+import com.payone.commerce.platform.lib.errors.ApiException;
 import com.payone.commerce.platform.lib.CommunicatorConfiguration;
 import com.payone.commerce.platform.lib.models.PaymentInformationRequest;
 import com.payone.commerce.platform.lib.models.PaymentInformationResponse;
@@ -20,7 +20,7 @@ public class PaymentInformationApiClient extends BaseApiClient {
 
     public PaymentInformationResponse createPaymentInformation(String merchantId, String commerceCaseId,
             String checkoutId, PaymentInformationRequest payload)
-            throws ApiResponseException, IOException {
+            throws ApiException, IOException {
         if (merchantId == null) {
             throw new IllegalArgumentException("Merchant ID is required");
         }
@@ -64,7 +64,7 @@ public class PaymentInformationApiClient extends BaseApiClient {
 
     public PaymentInformationResponse getPaymentInformation(String merchantId, String commerceCaseId,
             String checkoutId, String paymentInformationId)
-            throws ApiResponseException, IOException {
+            throws ApiException, IOException {
         if (merchantId == null) {
             throw new IllegalArgumentException("Merchant ID is required");
         }
