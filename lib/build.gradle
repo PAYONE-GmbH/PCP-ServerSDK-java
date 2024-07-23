@@ -4,8 +4,12 @@ plugins {
     id 'java-library'
     id 'jacoco'
     id 'checkstyle'
-    id "com.vanniktech.maven.publish" version "0.29.0"
-    id("io.github.kmbisset89.changelog.plugin") version "1.0.4"
+    id "com.vanniktech.maven.publish" version "0.29.0" apply false
+    id "io.github.kmbisset89.changelog.plugin" version "1.0.4"
+}
+
+if (JavaVersion.current() != JavaVersion.VERSION_1_8) {
+    apply plugin: 'com.vanniktech.maven.publish'
 }
 
 version = '0.0.1'
