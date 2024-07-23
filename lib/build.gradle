@@ -1,5 +1,3 @@
-import com.vanniktech.maven.publish.SonatypeHost
-
 plugins {
     id 'java-library'
     id 'jacoco'
@@ -54,7 +52,7 @@ tasks.jacocoTestReport {
 }
 
 mavenPublishing {
-  publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL)
+  publishToMavenCentral("CENTRAL_PORTAL")
 
   signAllPublications()
 
