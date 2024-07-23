@@ -14,16 +14,17 @@ if (!isJavaVersion(8)) {
   }
 }
 
-if (!isJavaVersion(8)) {
-   apply plugin: 'com.vanniktech.maven.publish'
-}
-
 plugins {
     id 'java-library'
     id 'jacoco'
     id 'checkstyle'
     id "io.github.kmbisset89.changelog.plugin" version "1.0.4"
 }
+
+if (!isJavaVersion(8)) {
+   apply plugin: 'com.vanniktech.maven.publish'
+}
+
 
 version = '0.0.1'
 
