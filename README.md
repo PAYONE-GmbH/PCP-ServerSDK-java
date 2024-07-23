@@ -14,8 +14,7 @@ Welcome to the Java SDK for the PayOne PCP platform! This repository contains a 
 - [Features](#features)
 - [Installation](#installation)
 - [Usage](#usage)
-- [Configuration](#configuration)
-- [Examples](#examples)
+    - [Configuration](#configuration)
 - [Contributing](#contributing)
 - [License](#license)
 
