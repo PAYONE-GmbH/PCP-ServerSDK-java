@@ -9,6 +9,8 @@ import static org.mockito.Mockito.when;
 
 import java.io.IOException;
 import java.security.InvalidKeyException;
+import java.util.Arrays;
+import java.util.List;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
@@ -194,6 +196,80 @@ public class CheckoutApiClientTest {
                 String m = e.getMessage();
                 assertEquals("Checkout ID is required", m);
             }
+        }
+    }
+
+    @Nested
+    @DisplayName("getCheckoutsRequest")
+    class getCheckoutsRequestTests {
+        @Test
+        @DisplayName("given request was successful, then return response")
+        void getCheckoutsRequestSuccessful() throws InvalidKeyException, ApiResponseException, IOException {
+
+            CheckoutApiClient checkoutApiClient = spy(
+                    new CheckoutApiClient(TestConfig.COMMUNICATOR_CONFIGURATION));
+            List<CheckoutResponse> expected = Arrays.asList(new CheckoutResponse());
+            Response response = ApiResponseMocks.createResponse(200, Arrays.asList(new CheckoutResponse()));
+
+            doReturn(response).when(checkoutApiClient).getResponse(any());
+            when(checkoutApiClient.getResponse(any())).thenReturn(response);
+
+            List<CheckoutResponse> res = checkoutApiClient.getCheckoutsRequest("1");
+
+            assertEquals(expected, res);
+
+        }
+
+        @Test
+        @DisplayName("given request was unsuccessful (400), then throw exception")
+        void getCheckoutsRequestUnsuccessful() throws InvalidKeyException, ApiResponseException, IOException {
+
+            CheckoutApiClient checkoutApiClient = spy(
+                    new CheckoutApiClient(TestConfig.COMMUNICATOR_CONFIGURATION));
+            Response response = ApiResponseMocks.createErrorResponse(400);
+
+            doReturn(response).when(checkoutApiClient).getResponse(any());
+
+            try {
+                checkoutApiClient.getCheckoutsRequest("1");
+            } catch (ApiResponseException e) {
+                int s = e.getResponse().getErrors().get(0).getHttpStatusCode();
+                assertEquals(400, s);
+            }
+        }
+
+        @Test
+        @DisplayName("given request was unsuccessful (500), then throw exception")
+        void getCheckoutsRequestUnsuccessful500() throws InvalidKeyException, ApiResponseException, IOException {
+
+            CheckoutApiClient checkoutApiClient = spy(
+                    new CheckoutApiClient(TestConfig.COMMUNICATOR_CONFIGURATION));
+            Response response = ApiResponseMocks.createErrorResponse(500);
+
+            doReturn(response).when(checkoutApiClient).getResponse(any());
+
+            try {
+                checkoutApiClient.getCheckoutsRequest("1");
+            } catch (RuntimeException e) {
+                String m = e.getMessage();
+                assertEquals("Api error: 500", m);
+            }
+        }
+
+        @Test
+        @DisplayName("given some params are null, then throw exception")
+        void getCheckoutsRequestNullParams() throws InvalidKeyException, ApiResponseException, IOException {
+
+            CheckoutApiClient checkoutApiClient = spy(
+                    new CheckoutApiClient(TestConfig.COMMUNICATOR_CONFIGURATION));
+
+            try {
+                checkoutApiClient.getCheckoutsRequest(null);
+            } catch (IllegalArgumentException e) {
+                String m = e.getMessage();
+                assertEquals("Merchant ID is required", m);
+            }
+
         }
     }
 

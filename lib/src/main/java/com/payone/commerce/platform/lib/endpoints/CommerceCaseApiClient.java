@@ -61,12 +61,42 @@ public class CommerceCaseApiClient extends BaseApiClient {
 
     }
 
-    public List<CommerceCaseResponse> getAllCommerceCaseRequest(String merchantId)
-            throws ApiResponseException, IOException {
-        return getAllCommerceCaseRequest(merchantId, null);
+    public CommerceCaseResponse getCommerceCaseRequest(String merchantId,
+            String commerceCaseId) throws ApiResponseException, IOException {
+        if (merchantId == null) {
+            throw new IllegalArgumentException("Merchant ID is required");
+        }
+        if (commerceCaseId == null) {
+            throw new IllegalArgumentException("Commerce Case ID is required");
+        }
+
+        HttpUrl.Builder urlBuilder = new HttpUrl.Builder()
+                .scheme("https")
+                .host(this.getConfig().getHost())
+                .addPathSegment("v1")
+                .addPathSegment(merchantId)
+                .addPathSegment("commerce-cases")
+                .addPathSegment(commerceCaseId);
+
+        HttpUrl url = urlBuilder.build();
+
+        Request request = new Request.Builder()
+                .url(url)
+                .get()
+                .build();
+
+        request = this.getRequestHeaderGenerator().generateAdditionalRequestHeaders(request);
+
+        return this.makeApiCall(request, CommerceCaseResponse.class);
+
     }
 
-    public List<CommerceCaseResponse> getAllCommerceCaseRequest(String merchantId,
+    public List<CommerceCaseResponse> getCommerceCasesRequest(String merchantId)
+            throws ApiResponseException, IOException {
+        return getCommerceCasesRequest(merchantId, null);
+    }
+
+    public List<CommerceCaseResponse> getCommerceCasesRequest(String merchantId,
             GetCommerceCasesQuery queryParams) throws ApiResponseException, IOException {
         if (merchantId == null) {
             throw new IllegalArgumentException("Merchant ID is required");
@@ -95,36 +125,6 @@ public class CommerceCaseApiClient extends BaseApiClient {
 
         return this.makeApiCall(request, new TypeReference<List<CommerceCaseResponse>>() {
         });
-
-    }
-
-    public CommerceCaseResponse getCommerceCaseRequest(String merchantId,
-            String commerceCaseId) throws ApiResponseException, IOException {
-        if (merchantId == null) {
-            throw new IllegalArgumentException("Merchant ID is required");
-        }
-        if (commerceCaseId == null) {
-            throw new IllegalArgumentException("Commerce Case ID is required");
-        }
-
-        HttpUrl.Builder urlBuilder = new HttpUrl.Builder()
-                .scheme("https")
-                .host(this.getConfig().getHost())
-                .addPathSegment("v1")
-                .addPathSegment(merchantId)
-                .addPathSegment("commerce-cases")
-                .addPathSegment(commerceCaseId);
-
-        HttpUrl url = urlBuilder.build();
-
-        Request request = new Request.Builder()
-                .url(url)
-                .get()
-                .build();
-
-        request = this.getRequestHeaderGenerator().generateAdditionalRequestHeaders(request);
-
-        return this.makeApiCall(request, CommerceCaseResponse.class);
 
     }
 

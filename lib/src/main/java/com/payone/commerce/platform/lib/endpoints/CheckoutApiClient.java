@@ -3,8 +3,10 @@ package com.payone.commerce.platform.lib.endpoints;
 import java.io.IOException;
 import java.security.InvalidKeyException;
 import java.util.List;
+import java.util.Map;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.payone.commerce.platform.lib.ApiResponseException;
 import com.payone.commerce.platform.lib.CommunicatorConfiguration;
 import com.payone.commerce.platform.lib.models.CheckoutResponse;
@@ -101,9 +103,40 @@ public class CheckoutApiClient extends BaseApiClient {
 
     }
 
-    public List<CheckoutResponse> getAllCheckouts(String merchantId, GetCheckoutsQuery query)
+    public List<CheckoutResponse> getCheckoutsRequest(String merchantID)
             throws ApiResponseException, IOException {
-        throw new RuntimeException("Not implemented");
+        return getCheckoutsRequest(merchantID, null);
+    }
+
+    public List<CheckoutResponse> getCheckoutsRequest(String merchantId, GetCheckoutsQuery queryParams)
+            throws ApiResponseException, IOException {
+        if (merchantId == null) {
+            throw new IllegalArgumentException("Merchant ID is required");
+        }
+
+        HttpUrl.Builder urlBuilder = new HttpUrl.Builder()
+                .scheme("https")
+                .host(this.getConfig().getHost())
+                .addPathSegment("v1")
+                .addPathSegment(merchantId)
+                .addPathSegment("checkouts");
+
+        if (queryParams != null) {
+            for (Map.Entry<String, String> entry : queryParams.toQueryMap().entrySet()) {
+                urlBuilder.addQueryParameter(entry.getKey(), entry.getValue());
+            }
+        }
+        HttpUrl url = urlBuilder.build();
+
+        Request request = new Request.Builder()
+                .url(url)
+                .get()
+                .build();
+
+        request = this.getRequestHeaderGenerator().generateAdditionalRequestHeaders(request);
+
+        return this.makeApiCall(request, new TypeReference<List<CheckoutResponse>>() {
+        });
     }
 
     public void updateCheckoutRequest(String merchantId, String commerceCaseId, String checkoutId,
