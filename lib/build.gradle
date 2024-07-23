@@ -2,16 +2,16 @@ def isJavaVersion(int version) {
     return JavaVersion.current().majorVersion == version.toString()
 }
 
-if (!isJavaVersion(8)) {
-  buildscript {
-      repositories {
-          mavenCentral()
-          gradlePluginPortal()
+buildscript {
+    repositories {
+        mavenCentral()
+        gradlePluginPortal()
+    }
+    dependencies {
+      if (!isJavaVersion(8)) {
+        classpath 'com.vanniktech:gradle-maven-publish-plugin:0.29.0'
       }
-      dependencies {
-          classpath 'com.vanniktech:gradle-maven-publish-plugin:0.29.0'
-      }
-  }
+    }
 }
 
 plugins {
