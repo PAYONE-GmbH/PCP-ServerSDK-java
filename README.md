@@ -28,7 +28,7 @@ Welcome to the Java SDK for the PayOne PCP platform! This repository contains a 
 
 ```groovy
 dependencies {
-    implementation group: 'io.github.payone-gmbh', name: 'pcp-serversdk-java', version: '0.0.1'
+    implementation group: 'io.github.payone-gmbh', name: 'pcp-serversdk-java', version: '0.0.2'
 }
 ```
 
