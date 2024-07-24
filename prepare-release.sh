@@ -26,9 +26,9 @@ sed -i '' "s/version = '[0-9]*\.[0-9]*\.[0-9]*'/version = '$VERSION'/" ./lib/bui
 sed -i '' "s/JavaServerSDK\/v[0-9]*\.[0-9]*\.[0-9]*/JavaServerSDK\/v$VERSION/" ./lib/src/main/java/com/payone/commerce/platform/lib/utils/ServerMetaInfo.java
 
 # # Tag the current commit with the new version
-# git tag -a v$VERSION -m "Release version $VERSION"
+git tag -a v$VERSION -m "Release version $VERSION"
 
 # # Push the tag to the remote repository
-# git push origin v$VERSION
+git push origin v$VERSION
 
 echo "Version updated to $VERSION and tagged in Git."
