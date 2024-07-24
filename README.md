@@ -7,7 +7,6 @@ Welcome to the Java SDK for the PayOne PCP platform! This repository contains a 
 ### TODOS
 - [ ] Setup changelog
 - [ ] Setup sonarcloud
-- [ ] Setup CI (build, test coverage, sonar, publish on mvncentral)
 
 ## Table of Contents
 
@@ -27,8 +26,11 @@ Welcome to the Java SDK for the PayOne PCP platform! This repository contains a 
 
 ## Installation
 
-// TODO
-
+```groovy
+dependencies {
+    implementation group: 'io.github.payone-gmbh', name: 'pcp-serversdk-java', version: '0.0.1'
+}
+```
 
 ## Usage
 
