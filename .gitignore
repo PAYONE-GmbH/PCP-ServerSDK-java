@@ -1,6 +1,16 @@
 # Ignore Gradle project-specific cache directory
 .gradle
+.DS_Store
 
 # Ignore Gradle build output directory
 build
 bin
+
+# Eclipse Gradle plugin generated files
+# Eclipse Core
+.settings/
+.project
+# JDT-specific (Eclipse Java Development Tools)
+.classpath
+
+test_release.sh

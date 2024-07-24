@@ -3,17 +3,160 @@
  */
 package com.payone.commerce.platform.lib.endpoints;
 
+import java.io.IOException;
+import java.security.InvalidKeyException;
+import java.util.List;
+import java.util.Map;
+
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.payone.commerce.platform.lib.CommunicatorConfiguration;
+import com.payone.commerce.platform.lib.errors.ApiErrorResponseException;
+import com.payone.commerce.platform.lib.errors.ApiResponseRetrievalException;
+import com.payone.commerce.platform.lib.models.CommerceCaseResponse;
 import com.payone.commerce.platform.lib.models.CreateCommerceCaseRequest;
+import com.payone.commerce.platform.lib.models.CreateCommerceCaseResponse;
+import com.payone.commerce.platform.lib.models.Customer;
+import com.payone.commerce.platform.lib.queries.GetCommerceCasesQuery;
 
-public class CommerceCaseApiClient {
+import okhttp3.HttpUrl;
+import okhttp3.Request;
+import okhttp3.RequestBody;
 
-    String apiKey;
+public class CommerceCaseApiClient extends BaseApiClient {
 
-    public CommerceCaseApiClient(String apiKey) {
-        this.apiKey = apiKey;
+    public CommerceCaseApiClient(CommunicatorConfiguration config) throws InvalidKeyException {
+        super(config);
     }
 
-    public String createCommerceCaseRequest(String merchantId, CreateCommerceCaseRequest payload) {
-        return "Hello, World!";
+    public CreateCommerceCaseResponse createCommerceCaseRequest(String merchantId, CreateCommerceCaseRequest payload)
+            throws ApiErrorResponseException, ApiResponseRetrievalException, IOException {
+        if (merchantId == null) {
+            throw new IllegalArgumentException("Merchant ID is required");
+        }
+        if (payload == null) {
+            throw new IllegalArgumentException("Payload is required");
+        }
+
+        HttpUrl url = new HttpUrl.Builder()
+                .scheme("https")
+                .host(this.getConfig().getHost())
+                .addPathSegment("v1")
+                .addPathSegment(merchantId)
+                .addPathSegment("commerce-cases")
+                .build();
+
+        String jsonString = getJsonMapper().writeValueAsString(payload);
+
+        RequestBody formBody = RequestBody.create(jsonString, JSON);
+
+        Request request = new Request.Builder()
+                .url(url)
+                .post(formBody)
+                .header("Content-Type", formBody.contentType().toString())
+                .build();
+
+        return this.makeApiCall(request, CreateCommerceCaseResponse.class);
+
+    }
+
+    public CommerceCaseResponse getCommerceCaseRequest(String merchantId,
+            String commerceCaseId) throws ApiErrorResponseException, ApiResponseRetrievalException, IOException {
+        if (merchantId == null) {
+            throw new IllegalArgumentException("Merchant ID is required");
+        }
+        if (commerceCaseId == null) {
+            throw new IllegalArgumentException("Commerce Case ID is required");
+        }
+
+        HttpUrl.Builder urlBuilder = new HttpUrl.Builder()
+                .scheme("https")
+                .host(this.getConfig().getHost())
+                .addPathSegment("v1")
+                .addPathSegment(merchantId)
+                .addPathSegment("commerce-cases")
+                .addPathSegment(commerceCaseId);
+
+        HttpUrl url = urlBuilder.build();
+
+        Request request = new Request.Builder()
+                .url(url)
+                .get()
+                .build();
+
+        return this.makeApiCall(request, CommerceCaseResponse.class);
+
+    }
+
+    public List<CommerceCaseResponse> getCommerceCasesRequest(String merchantId)
+            throws ApiErrorResponseException, ApiResponseRetrievalException, IOException {
+        return getCommerceCasesRequest(merchantId, null);
+    }
+
+    public List<CommerceCaseResponse> getCommerceCasesRequest(String merchantId,
+            GetCommerceCasesQuery queryParams)
+            throws ApiErrorResponseException, ApiResponseRetrievalException, IOException {
+        if (merchantId == null) {
+            throw new IllegalArgumentException("Merchant ID is required");
+        }
+
+        HttpUrl.Builder urlBuilder = new HttpUrl.Builder()
+                .scheme("https")
+                .host(this.getConfig().getHost())
+                .addPathSegment("v1")
+                .addPathSegment(merchantId)
+                .addPathSegment("commerce-cases");
+
+        if (queryParams != null) {
+            for (Map.Entry<String, String> entry : queryParams.toQueryMap().entrySet()) {
+                urlBuilder.addQueryParameter(entry.getKey(), entry.getValue());
+            }
+        }
+        HttpUrl url = urlBuilder.build();
+
+        Request request = new Request.Builder()
+                .url(url)
+                .get()
+                .build();
+
+        return this.makeApiCall(request, new TypeReference<List<CommerceCaseResponse>>() {
+        });
+
+    }
+
+    public void updateCommerceCaseRequest(String merchantId, String commerceCaseId,
+            Customer payload) throws ApiErrorResponseException, ApiResponseRetrievalException, IOException {
+        if (merchantId == null) {
+            throw new IllegalArgumentException("Merchant ID is required");
+        }
+        if (commerceCaseId == null) {
+            throw new IllegalArgumentException("Commerce Case ID is required");
+        }
+        if (payload == null) {
+            throw new IllegalArgumentException("Payload is required");
+        }
+
+        HttpUrl url = new HttpUrl.Builder()
+                .scheme("https")
+                .host(this.getConfig().getHost())
+                .addPathSegment("v1")
+                .addPathSegment(merchantId)
+                .addPathSegment("commerce-cases")
+                .addPathSegment(commerceCaseId)
+                .build();
+
+        String jsonString = null;
+
+        jsonString = getJsonMapper().writeValueAsString(payload);
+
+        RequestBody formBody = RequestBody.create("{\"customer\":" + jsonString + "}", JSON);
+
+        Request request = new Request.Builder()
+                .url(url)
+                .patch(formBody)
+                .header("Content-Type", formBody.contentType().toString())
+                .build();
+
+        this.makeApiCall(request);
+
     }
 }
