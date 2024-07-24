@@ -5,7 +5,6 @@ import java.security.InvalidKeyException;
 import java.util.List;
 import java.util.Map;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.payone.commerce.platform.lib.CommunicatorConfiguration;
 import com.payone.commerce.platform.lib.errors.ApiErrorResponseException;
@@ -53,11 +52,8 @@ public class CheckoutApiClient extends BaseApiClient {
                 .build();
 
         String jsonString = null;
-        try {
-            jsonString = getJsonMapper().writeValueAsString(payload);
-        } catch (JsonProcessingException e) {
-            throw new RuntimeException("Failed to encode payload as json", e);
-        }
+
+        jsonString = getJsonMapper().writeValueAsString(payload);
 
         Request request = new Request.Builder()
                 .url(url)
@@ -163,11 +159,8 @@ public class CheckoutApiClient extends BaseApiClient {
                 .build();
 
         String jsonString = null;
-        try {
-            jsonString = getJsonMapper().writeValueAsString(payload);
-        } catch (JsonProcessingException e) {
-            throw new RuntimeException("Failed to encode payload as json", e);
-        }
+
+        jsonString = getJsonMapper().writeValueAsString(payload);
 
         Request request = new Request.Builder()
                 .url(url)
