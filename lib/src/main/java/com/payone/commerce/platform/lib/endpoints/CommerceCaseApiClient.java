@@ -56,8 +56,6 @@ public class CommerceCaseApiClient extends BaseApiClient {
                 .header("Content-Type", formBody.contentType().toString())
                 .build();
 
-        request = this.getRequestHeaderGenerator().generateAdditionalRequestHeaders(request);
-
         return this.makeApiCall(request, CreateCommerceCaseResponse.class);
 
     }
@@ -85,8 +83,6 @@ public class CommerceCaseApiClient extends BaseApiClient {
                 .url(url)
                 .get()
                 .build();
-
-        request = this.getRequestHeaderGenerator().generateAdditionalRequestHeaders(request);
 
         return this.makeApiCall(request, CommerceCaseResponse.class);
 
@@ -122,8 +118,6 @@ public class CommerceCaseApiClient extends BaseApiClient {
                 .url(url)
                 .get()
                 .build();
-
-        request = this.getRequestHeaderGenerator().generateAdditionalRequestHeaders(request);
 
         return this.makeApiCall(request, new TypeReference<List<CommerceCaseResponse>>() {
         });
@@ -165,8 +159,6 @@ public class CommerceCaseApiClient extends BaseApiClient {
                 .patch(formBody)
                 .header("Content-Type", formBody.contentType().toString())
                 .build();
-
-        request = this.getRequestHeaderGenerator().generateAdditionalRequestHeaders(request);
 
         this.makeApiCall(request);
 

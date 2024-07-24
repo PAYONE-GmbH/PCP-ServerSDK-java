@@ -65,8 +65,6 @@ public class PaymentExecutionApiClient extends BaseApiClient {
                 .header("Content-Type", formBody.contentType().toString())
                 .build();
 
-        request = this.getRequestHeaderGenerator().generateAdditionalRequestHeaders(request);
-
         return this.makeApiCall(request, CreatePaymentResponse.class);
 
     }
@@ -113,8 +111,6 @@ public class PaymentExecutionApiClient extends BaseApiClient {
                 .post(formBody)
                 .header("Content-Type", formBody.contentType().toString())
                 .build();
-
-        request = this.getRequestHeaderGenerator().generateAdditionalRequestHeaders(request);
 
         return this.makeApiCall(request, CapturePaymentResponse.class);
 
@@ -163,8 +159,6 @@ public class PaymentExecutionApiClient extends BaseApiClient {
                 .header("Content-Type", formBody.contentType().toString())
                 .build();
 
-        request = this.getRequestHeaderGenerator().generateAdditionalRequestHeaders(request);
-
         return this.makeApiCall(request, CancelPaymentResponse.class);
 
     }
@@ -212,8 +206,6 @@ public class PaymentExecutionApiClient extends BaseApiClient {
                 .header("Content-Type", formBody.contentType().toString())
                 .build();
 
-        request = this.getRequestHeaderGenerator().generateAdditionalRequestHeaders(request);
-
         return this.makeApiCall(request, RefundPaymentResponse.class);
 
     }
@@ -260,8 +252,6 @@ public class PaymentExecutionApiClient extends BaseApiClient {
                 .post(formBody)
                 .header("Content-Type", formBody.contentType().toString())
                 .build();
-
-        request = this.getRequestHeaderGenerator().generateAdditionalRequestHeaders(request);
 
         return this.makeApiCall(request, CompletePaymentResponse.class);
 

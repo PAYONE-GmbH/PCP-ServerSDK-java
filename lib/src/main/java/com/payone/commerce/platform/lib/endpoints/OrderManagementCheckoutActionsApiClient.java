@@ -66,8 +66,6 @@ public class OrderManagementCheckoutActionsApiClient extends BaseApiClient {
                 .header("Content-Type", formBody.contentType().toString())
                 .build();
 
-        request = this.getRequestHeaderGenerator().generateAdditionalRequestHeaders(request);
-
         return this.makeApiCall(request, OrderResponse.class);
 
     }
@@ -109,8 +107,6 @@ public class OrderManagementCheckoutActionsApiClient extends BaseApiClient {
                 .post(formBody)
                 .header("Content-Type", formBody.contentType().toString())
                 .build();
-
-        request = this.getRequestHeaderGenerator().generateAdditionalRequestHeaders(request);
 
         return this.makeApiCall(request, DeliverResponse.class);
 
@@ -154,8 +150,6 @@ public class OrderManagementCheckoutActionsApiClient extends BaseApiClient {
                 .header("Content-Type", formBody.contentType().toString())
                 .build();
 
-        request = this.getRequestHeaderGenerator().generateAdditionalRequestHeaders(request);
-
         return this.makeApiCall(request, ReturnResponse.class);
 
     }
@@ -197,8 +191,6 @@ public class OrderManagementCheckoutActionsApiClient extends BaseApiClient {
                 .post(formBody)
                 .header("Content-Type", formBody.contentType().toString())
                 .build();
-
-        request = this.getRequestHeaderGenerator().generateAdditionalRequestHeaders(request);
 
         return this.makeApiCall(request, CancelResponse.class);
 

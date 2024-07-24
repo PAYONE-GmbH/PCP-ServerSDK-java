@@ -65,8 +65,6 @@ public class CheckoutApiClient extends BaseApiClient {
                 .header("Content-Type", JSON.toString())
                 .build();
 
-        request = this.getRequestHeaderGenerator().generateAdditionalRequestHeaders(request);
-
         return this.makeApiCall(request, CreateCheckoutResponse.class);
 
     }
@@ -98,8 +96,6 @@ public class CheckoutApiClient extends BaseApiClient {
                 .url(url)
                 .get()
                 .build();
-
-        request = this.getRequestHeaderGenerator().generateAdditionalRequestHeaders(request);
 
         return this.makeApiCall(request, CheckoutResponse.class);
 
@@ -134,8 +130,6 @@ public class CheckoutApiClient extends BaseApiClient {
                 .url(url)
                 .get()
                 .build();
-
-        request = this.getRequestHeaderGenerator().generateAdditionalRequestHeaders(request);
 
         return this.makeApiCall(request, new TypeReference<List<CheckoutResponse>>() {
         });
@@ -181,8 +175,6 @@ public class CheckoutApiClient extends BaseApiClient {
                 .header("Content-Type", JSON.toString())
                 .build();
 
-        request = this.getRequestHeaderGenerator().generateAdditionalRequestHeaders(request);
-
         this.makeApiCall(request);
 
     }
@@ -215,7 +207,6 @@ public class CheckoutApiClient extends BaseApiClient {
                 .delete()
                 .build();
 
-        request = this.getRequestHeaderGenerator().generateAdditionalRequestHeaders(request);
         this.makeApiCall(request);
     }
 }

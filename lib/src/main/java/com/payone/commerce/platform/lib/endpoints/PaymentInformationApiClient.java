@@ -56,8 +56,6 @@ public class PaymentInformationApiClient extends BaseApiClient {
                 .header("Content-Type", formBody.contentType().toString())
                 .build();
 
-        request = this.getRequestHeaderGenerator().generateAdditionalRequestHeaders(request);
-
         return this.makeApiCall(request, PaymentInformationResponse.class);
 
     }
@@ -95,8 +93,6 @@ public class PaymentInformationApiClient extends BaseApiClient {
                 .url(url)
                 .get()
                 .build();
-
-        request = this.getRequestHeaderGenerator().generateAdditionalRequestHeaders(request);
 
         return this.makeApiCall(request, PaymentInformationResponse.class);
 

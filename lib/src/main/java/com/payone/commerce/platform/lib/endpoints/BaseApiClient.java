@@ -59,12 +59,14 @@ public class BaseApiClient {
 
     protected void makeApiCall(Request request)
             throws IOException, ApiErrorResponseException, ApiResponseRetrievalException {
+        request = this.getRequestHeaderGenerator().generateAdditionalRequestHeaders(request);
         Response response = getResponse(request);
         handleError(response);
     }
 
     protected <T> T makeApiCall(Request request, TypeReference<T> valueTypeRef)
             throws IOException, ApiErrorResponseException, ApiResponseRetrievalException {
+        request = this.getRequestHeaderGenerator().generateAdditionalRequestHeaders(request);
         Response response = getResponse(request);
         handleError(response);
         try {
@@ -76,6 +78,7 @@ public class BaseApiClient {
 
     protected <T> T makeApiCall(Request request, Class<T> clazz)
             throws IOException, ApiErrorResponseException, ApiResponseRetrievalException {
+        request = this.getRequestHeaderGenerator().generateAdditionalRequestHeaders(request);
         Response response = getResponse(request);
         handleError(response);
         try {
