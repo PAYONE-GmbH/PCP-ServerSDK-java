@@ -19,16 +19,20 @@ else
 fi
 
 # Assign the provided version to a variable
+TAG=v$VERSION
+
+BUILD_GRADLE_PATH="./lib/build.gradle"
+SERVER_META_INFO_PATH="./lib/src/main/java/com/payone/commerce/platform/lib/utils/ServerMetaInfo.java"
 
 # Update the version in the build.gradle file
-sed -i '' "s/version = '[0-9]*\.[0-9]*\.[0-9]*'/version = '$VERSION'/" ./lib/build.gradle
+sed -i '' "s/version = '[0-9]*\.[0-9]*\.[0-9]*'/version = '$VERSION'/" $BUILD_GRADLE_PATH
 # Update the version in the ServerMetaInfo.java file
-sed -i '' "s/JavaServerSDK\/v[0-9]*\.[0-9]*\.[0-9]*/JavaServerSDK\/v$VERSION/" ./lib/src/main/java/com/payone/commerce/platform/lib/utils/ServerMetaInfo.java
+sed -i '' "s/JavaServerSDK\/v[0-9]*\.[0-9]*\.[0-9]*/JavaServerSDK\/$TAG/" $SERVER_META_INFO_PATH
 
-# # Tag the current commit with the new version
-git tag -a v$VERSION -m "Release version $VERSION"
-
-# # Push the tag to the remote repository
-git push origin v$VERSION
+git add $BUILD_GRADLE_PATH
+git add $SERVER_META_INFO_PATH
+git commit -m "Update version to $VERSION"
+git tag -a $TAG -m "Release version $VERSION"
+git push origin $TAG
 
 echo "Version updated to $VERSION and tagged in Git."
