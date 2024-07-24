@@ -21,6 +21,7 @@ import com.payone.commerce.platform.lib.errors.ApiErrorResponseException;
 import com.payone.commerce.platform.lib.errors.ApiException;
 import com.payone.commerce.platform.lib.errors.ApiResponseRetrievalException;
 import com.payone.commerce.platform.lib.models.CheckoutResponse;
+import com.payone.commerce.platform.lib.models.CheckoutsResponse;
 import com.payone.commerce.platform.lib.models.CreateCheckoutRequest;
 import com.payone.commerce.platform.lib.models.CreateCheckoutResponse;
 import com.payone.commerce.platform.lib.models.PatchCheckoutRequest;
@@ -196,13 +197,13 @@ public class CheckoutApiClientTest {
 
             CheckoutApiClient checkoutApiClient = spy(
                     new CheckoutApiClient(TestConfig.COMMUNICATOR_CONFIGURATION));
-            List<CheckoutResponse> expected = Arrays.asList(new CheckoutResponse());
-            Response response = ApiResponseMocks.createResponse(200, Arrays.asList(new CheckoutResponse()));
+            CheckoutsResponse expected = new CheckoutsResponse();
+            Response response = ApiResponseMocks.createResponse(200, new CheckoutsResponse());
 
             doReturn(response).when(checkoutApiClient).getResponse(any());
             when(checkoutApiClient.getResponse(any())).thenReturn(response);
 
-            List<CheckoutResponse> res = checkoutApiClient.getCheckoutsRequest("1");
+            CheckoutsResponse res = checkoutApiClient.getCheckoutsRequest("1");
 
             assertEquals(expected, res);
 

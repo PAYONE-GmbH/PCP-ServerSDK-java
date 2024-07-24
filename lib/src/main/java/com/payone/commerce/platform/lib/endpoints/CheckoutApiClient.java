@@ -2,14 +2,13 @@ package com.payone.commerce.platform.lib.endpoints;
 
 import java.io.IOException;
 import java.security.InvalidKeyException;
-import java.util.List;
 import java.util.Map;
 
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.payone.commerce.platform.lib.CommunicatorConfiguration;
 import com.payone.commerce.platform.lib.errors.ApiErrorResponseException;
 import com.payone.commerce.platform.lib.errors.ApiResponseRetrievalException;
 import com.payone.commerce.platform.lib.models.CheckoutResponse;
+import com.payone.commerce.platform.lib.models.CheckoutsResponse;
 import com.payone.commerce.platform.lib.models.CreateCheckoutRequest;
 import com.payone.commerce.platform.lib.models.CreateCheckoutResponse;
 import com.payone.commerce.platform.lib.models.PatchCheckoutRequest;
@@ -97,12 +96,12 @@ public class CheckoutApiClient extends BaseApiClient {
 
     }
 
-    public List<CheckoutResponse> getCheckoutsRequest(String merchantID)
+    public CheckoutsResponse getCheckoutsRequest(String merchantID)
             throws ApiErrorResponseException, ApiResponseRetrievalException, IOException {
         return getCheckoutsRequest(merchantID, null);
     }
 
-    public List<CheckoutResponse> getCheckoutsRequest(String merchantId, GetCheckoutsQuery queryParams)
+    public CheckoutsResponse getCheckoutsRequest(String merchantId, GetCheckoutsQuery queryParams)
             throws ApiErrorResponseException, ApiResponseRetrievalException, IOException {
         if (merchantId == null) {
             throw new IllegalArgumentException("Merchant ID is required");
@@ -127,8 +126,7 @@ public class CheckoutApiClient extends BaseApiClient {
                 .get()
                 .build();
 
-        return this.makeApiCall(request, new TypeReference<List<CheckoutResponse>>() {
-        });
+        return this.makeApiCall(request, CheckoutsResponse.class);
     }
 
     public void updateCheckoutRequest(String merchantId, String commerceCaseId, String checkoutId,
