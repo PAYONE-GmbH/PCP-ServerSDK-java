@@ -10,8 +10,8 @@ public class ServerMetaInfo {
     public ServerMetaInfo() {
         this.platformIdentifier = String.format("%s, java version is: %s", System.getProperty("os.name"),
                 System.getProperty("java.version"));
-        // TODO: get version
-        this.sdkIdentifier = "JavaServerSDK/v0.1.0";
+        // version gets updated with the prepare-release.sh script
+        this.sdkIdentifier = "JavaServerSDK/v0.0.1";
         this.sdkCreator = "PAYONE GmbH";
 
         // TODO: what about integrator?

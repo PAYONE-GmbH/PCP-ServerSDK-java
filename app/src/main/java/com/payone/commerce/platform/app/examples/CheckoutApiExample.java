@@ -2,15 +2,17 @@ package com.payone.commerce.platform.app.examples;
 
 import java.io.IOException;
 import java.security.InvalidKeyException;
+import java.util.List;
 
-import com.payone.commerce.platform.lib.errors.ApiException;
 import com.payone.commerce.platform.lib.CommunicatorConfiguration;
 import com.payone.commerce.platform.lib.endpoints.CheckoutApiClient;
+import com.payone.commerce.platform.lib.errors.ApiException;
 import com.payone.commerce.platform.lib.models.AmountOfMoney;
 import com.payone.commerce.platform.lib.models.CheckoutResponse;
 import com.payone.commerce.platform.lib.models.CreateCheckoutRequest;
 import com.payone.commerce.platform.lib.models.CreateCheckoutResponse;
 import com.payone.commerce.platform.lib.models.PatchCheckoutRequest;
+import com.payone.commerce.platform.lib.queries.GetCheckoutsQuery;
 
 public class CheckoutApiExample {
     CheckoutApiClient client;
@@ -39,10 +41,11 @@ public class CheckoutApiExample {
     }
 
     public void runGetAll() throws ApiException, IOException {
-        // List<CheckoutResponse> res = client.getAllCheckouts(merchantId,
-        // null);
+        GetCheckoutsQuery query = new GetCheckoutsQuery();
+        List<CheckoutResponse> res = client.getCheckoutsRequest(merchantId,
+                query);
 
-        // System.out.println(res.toString());
+        System.out.println(res.toString());
 
     }
 
