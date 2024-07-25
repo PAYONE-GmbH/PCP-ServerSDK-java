@@ -50,9 +50,7 @@ public class CheckoutApiClient extends BaseApiClient {
                 .addPathSegment("checkouts")
                 .build();
 
-        String jsonString = null;
-
-        jsonString = getJsonMapper().writeValueAsString(payload);
+        String jsonString = getJsonMapper().writeValueAsString(payload);
 
         Request request = new Request.Builder()
                 .url(url)
@@ -156,9 +154,7 @@ public class CheckoutApiClient extends BaseApiClient {
                 .addPathSegment(checkoutId)
                 .build();
 
-        String jsonString = null;
-
-        jsonString = getJsonMapper().writeValueAsString(payload);
+        String jsonString = getJsonMapper().writeValueAsString(payload);
 
         Request request = new Request.Builder()
                 .url(url)

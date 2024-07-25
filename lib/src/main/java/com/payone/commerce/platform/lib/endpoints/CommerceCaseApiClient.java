@@ -144,9 +144,7 @@ public class CommerceCaseApiClient extends BaseApiClient {
                 .addPathSegment(commerceCaseId)
                 .build();
 
-        String jsonString = null;
-
-        jsonString = getJsonMapper().writeValueAsString(payload);
+        String jsonString = getJsonMapper().writeValueAsString(payload);
 
         RequestBody formBody = RequestBody.create("{\"customer\":" + jsonString + "}", JSON);
 
