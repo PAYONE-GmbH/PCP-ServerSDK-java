@@ -333,6 +333,7 @@ public class App {
     public static void main(String[] args) {
         App app = initFromEnv();
 
+        // creates a checkout and executes the payment in one go
         try {
             app.runCheckoutWithPaymentExecution("comc1a5");
         } catch (ApiErrorResponseException e) {
@@ -344,6 +345,8 @@ public class App {
             throw new RuntimeException(e);
         }
 
+        // see: https://docs.payone.com/pcp/checkout-flows/step-by-step-checkout
+        // not that the given reference must be unique and has to renewed after each run
         try {
             app.runMultiStepCheckout("comc1a1");
         } catch (ApiErrorResponseException e) {
@@ -354,6 +357,8 @@ public class App {
             throw new RuntimeException(e);
         }
 
+        // see: https://docs.payone.com/pcp/checkout-flows/one-step-checkout
+        // not that the given reference must be unique and has to renewed after each run
         try {
             app.runSingleStepCheckout("comc1a1");
         } catch (ApiErrorResponseException e) {
