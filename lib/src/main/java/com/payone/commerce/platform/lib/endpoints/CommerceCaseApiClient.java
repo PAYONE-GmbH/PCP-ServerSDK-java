@@ -32,10 +32,10 @@ public class CommerceCaseApiClient extends BaseApiClient {
     public CreateCommerceCaseResponse createCommerceCaseRequest(String merchantId, CreateCommerceCaseRequest payload)
             throws ApiErrorResponseException, ApiResponseRetrievalException, IOException {
         if (merchantId == null) {
-            throw new IllegalArgumentException("Merchant ID is required");
+            throw new IllegalArgumentException(MERCHANT_ID_REQUIRED_ERROR);
         }
         if (payload == null) {
-            throw new IllegalArgumentException("Payload is required");
+            throw new IllegalArgumentException(PAYLOAD_REQUIRED_ERROR);
         }
 
         HttpUrl url = new HttpUrl.Builder()
@@ -63,10 +63,10 @@ public class CommerceCaseApiClient extends BaseApiClient {
     public CommerceCaseResponse getCommerceCaseRequest(String merchantId,
             String commerceCaseId) throws ApiErrorResponseException, ApiResponseRetrievalException, IOException {
         if (merchantId == null) {
-            throw new IllegalArgumentException("Merchant ID is required");
+            throw new IllegalArgumentException(MERCHANT_ID_REQUIRED_ERROR);
         }
         if (commerceCaseId == null) {
-            throw new IllegalArgumentException("Commerce Case ID is required");
+            throw new IllegalArgumentException(COMMERCE_CASE_ID_REQUIRED_ERROR);
         }
 
         HttpUrl.Builder urlBuilder = new HttpUrl.Builder()
@@ -97,7 +97,7 @@ public class CommerceCaseApiClient extends BaseApiClient {
             GetCommerceCasesQuery queryParams)
             throws ApiErrorResponseException, ApiResponseRetrievalException, IOException {
         if (merchantId == null) {
-            throw new IllegalArgumentException("Merchant ID is required");
+            throw new IllegalArgumentException(MERCHANT_ID_REQUIRED_ERROR);
         }
 
         HttpUrl.Builder urlBuilder = new HttpUrl.Builder()
@@ -127,13 +127,13 @@ public class CommerceCaseApiClient extends BaseApiClient {
     public void updateCommerceCaseRequest(String merchantId, String commerceCaseId,
             Customer payload) throws ApiErrorResponseException, ApiResponseRetrievalException, IOException {
         if (merchantId == null) {
-            throw new IllegalArgumentException("Merchant ID is required");
+            throw new IllegalArgumentException(MERCHANT_ID_REQUIRED_ERROR);
         }
         if (commerceCaseId == null) {
-            throw new IllegalArgumentException("Commerce Case ID is required");
+            throw new IllegalArgumentException(COMMERCE_CASE_ID_REQUIRED_ERROR);
         }
         if (payload == null) {
-            throw new IllegalArgumentException("Payload is required");
+            throw new IllegalArgumentException(PAYLOAD_REQUIRED_ERROR);
         }
 
         HttpUrl url = new HttpUrl.Builder()
