@@ -13,6 +13,7 @@ import com.payone.commerce.platform.lib.models.CreateCheckoutRequest;
 import com.payone.commerce.platform.lib.models.CreateCheckoutResponse;
 import com.payone.commerce.platform.lib.models.PatchCheckoutRequest;
 import com.payone.commerce.platform.lib.queries.GetCheckoutsQuery;
+import com.payone.commerce.platform.lib.serializer.JsonSerializer;
 
 import okhttp3.HttpUrl;
 import okhttp3.Request;
@@ -52,7 +53,7 @@ public class CheckoutApiClient extends BaseApiClient {
 
         String jsonString = null;
 
-        jsonString = getJsonMapper().writeValueAsString(payload);
+        jsonString = JsonSerializer.serializeToJson(payload);
 
         Request request = new Request.Builder()
                 .url(url)
@@ -158,7 +159,7 @@ public class CheckoutApiClient extends BaseApiClient {
 
         String jsonString = null;
 
-        jsonString = getJsonMapper().writeValueAsString(payload);
+        jsonString = JsonSerializer.serializeToJson(payload);
 
         Request request = new Request.Builder()
                 .url(url)

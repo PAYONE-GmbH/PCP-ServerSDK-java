@@ -16,6 +16,7 @@ import com.payone.commerce.platform.lib.models.CreatePaymentResponse;
 import com.payone.commerce.platform.lib.models.PaymentExecutionRequest;
 import com.payone.commerce.platform.lib.models.RefundPaymentResponse;
 import com.payone.commerce.platform.lib.models.RefundRequest;
+import com.payone.commerce.platform.lib.serializer.JsonSerializer;
 
 import okhttp3.HttpUrl;
 import okhttp3.Request;
@@ -55,7 +56,7 @@ public class PaymentExecutionApiClient extends BaseApiClient {
                 .addPathSegment("payment-executions")
                 .build();
 
-        String jsonString = getJsonMapper().writeValueAsString(payload);
+        String jsonString = JsonSerializer.serializeToJson(payload);
 
         RequestBody formBody = RequestBody.create(jsonString, JSON);
 
@@ -102,7 +103,7 @@ public class PaymentExecutionApiClient extends BaseApiClient {
                 .addPathSegment("capture")
                 .build();
 
-        String jsonString = getJsonMapper().writeValueAsString(payload);
+        String jsonString = JsonSerializer.serializeToJson(payload);
 
         RequestBody formBody = RequestBody.create(jsonString, JSON);
 
@@ -149,7 +150,7 @@ public class PaymentExecutionApiClient extends BaseApiClient {
                 .addPathSegment("cancel")
                 .build();
 
-        String jsonString = getJsonMapper().writeValueAsString(payload);
+        String jsonString = JsonSerializer.serializeToJson(payload);
 
         RequestBody formBody = RequestBody.create(jsonString, JSON);
 
@@ -196,7 +197,7 @@ public class PaymentExecutionApiClient extends BaseApiClient {
                 .addPathSegment("refund")
                 .build();
 
-        String jsonString = getJsonMapper().writeValueAsString(payload);
+        String jsonString = JsonSerializer.serializeToJson(payload);
 
         RequestBody formBody = RequestBody.create(jsonString, JSON);
 
@@ -243,7 +244,7 @@ public class PaymentExecutionApiClient extends BaseApiClient {
                 .addPathSegment("complete")
                 .build();
 
-        String jsonString = getJsonMapper().writeValueAsString(payload);
+        String jsonString = JsonSerializer.serializeToJson(payload);
 
         RequestBody formBody = RequestBody.create(jsonString, JSON);
 

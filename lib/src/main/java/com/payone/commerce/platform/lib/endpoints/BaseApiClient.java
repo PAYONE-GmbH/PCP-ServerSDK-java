@@ -6,13 +6,12 @@ import java.security.InvalidKeyException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.json.JsonMapper;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.payone.commerce.platform.lib.CommunicatorConfiguration;
 import com.payone.commerce.platform.lib.RequestHeaderGenerator;
 import com.payone.commerce.platform.lib.errors.ApiErrorResponseException;
 import com.payone.commerce.platform.lib.errors.ApiResponseRetrievalException;
 import com.payone.commerce.platform.lib.models.ErrorResponse;
+import com.payone.commerce.platform.lib.serializer.JsonSerializer;
 
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
@@ -20,10 +19,8 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 public class BaseApiClient {
-
     private final OkHttpClient client = new OkHttpClient();
     private final String JSON_PARSE_ERROR = "Excepted valid JSON response, but failed to parse";
-    protected final JsonMapper JSON_MAPPER = new JsonMapper();
     protected final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
 
     private final RequestHeaderGenerator requestHeaderGenerator;
@@ -32,8 +29,6 @@ public class BaseApiClient {
     public BaseApiClient(CommunicatorConfiguration config) throws InvalidKeyException {
         this.config = config;
         this.requestHeaderGenerator = new RequestHeaderGenerator(config);
-        JSON_MAPPER.registerModule(new JavaTimeModule());
-
     }
 
     public BaseApiClient() {
@@ -53,10 +48,6 @@ public class BaseApiClient {
         return config;
     }
 
-    protected JsonMapper getJsonMapper() {
-        return JSON_MAPPER;
-    }
-
     protected void makeApiCall(Request request)
             throws IOException, ApiErrorResponseException, ApiResponseRetrievalException {
         request = this.getRequestHeaderGenerator().generateAdditionalRequestHeaders(request);
@@ -70,7 +61,7 @@ public class BaseApiClient {
         Response response = getResponse(request);
         handleError(response);
         try {
-            return getJsonMapper().readValue(response.body().string(), valueTypeRef);
+            return JsonSerializer.deserializeFromJson(response.body().string(), valueTypeRef);
         } catch (JsonMappingException e) {
             throw new RuntimeException(JSON_PARSE_ERROR, e);
         }
@@ -82,7 +73,7 @@ public class BaseApiClient {
         Response response = getResponse(request);
         handleError(response);
         try {
-            return getJsonMapper().readValue(response.body().string(), clazz);
+            return JsonSerializer.deserializeFromJson(response.body().string(), clazz);
         } catch (JsonMappingException e) {
             throw new RuntimeException(JSON_PARSE_ERROR, e);
         }
@@ -99,7 +90,7 @@ public class BaseApiClient {
             throw new ApiResponseRetrievalException(response.code(), responseBody);
         }
         try {
-            ErrorResponse error = getJsonMapper().readValue(responseBody, ErrorResponse.class);
+            ErrorResponse error = JsonSerializer.deserializeFromJson(responseBody, ErrorResponse.class);
             throw new ApiErrorResponseException(response.code(), responseBody, error.getErrors());
         } catch (JsonProcessingException e) {
             throw new ApiResponseRetrievalException(response.code(), responseBody, e);

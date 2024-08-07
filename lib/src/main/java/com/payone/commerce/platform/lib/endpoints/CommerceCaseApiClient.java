@@ -17,6 +17,7 @@ import com.payone.commerce.platform.lib.models.CreateCommerceCaseRequest;
 import com.payone.commerce.platform.lib.models.CreateCommerceCaseResponse;
 import com.payone.commerce.platform.lib.models.Customer;
 import com.payone.commerce.platform.lib.queries.GetCommerceCasesQuery;
+import com.payone.commerce.platform.lib.serializer.JsonSerializer;
 
 import okhttp3.HttpUrl;
 import okhttp3.Request;
@@ -45,7 +46,7 @@ public class CommerceCaseApiClient extends BaseApiClient {
                 .addPathSegment("commerce-cases")
                 .build();
 
-        String jsonString = getJsonMapper().writeValueAsString(payload);
+        String jsonString = JsonSerializer.serializeToJson(payload);
 
         RequestBody formBody = RequestBody.create(jsonString, JSON);
 
@@ -146,7 +147,7 @@ public class CommerceCaseApiClient extends BaseApiClient {
 
         String jsonString = null;
 
-        jsonString = getJsonMapper().writeValueAsString(payload);
+        jsonString = JsonSerializer.serializeToJson(payload);
 
         RequestBody formBody = RequestBody.create("{\"customer\":" + jsonString + "}", JSON);
 

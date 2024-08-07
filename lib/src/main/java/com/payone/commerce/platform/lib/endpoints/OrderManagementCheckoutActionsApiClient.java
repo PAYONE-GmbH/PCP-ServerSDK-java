@@ -17,6 +17,7 @@ import com.payone.commerce.platform.lib.models.OrderRequest;
 import com.payone.commerce.platform.lib.models.OrderResponse;
 import com.payone.commerce.platform.lib.models.ReturnRequest;
 import com.payone.commerce.platform.lib.models.ReturnResponse;
+import com.payone.commerce.platform.lib.serializer.JsonSerializer;
 
 import okhttp3.HttpUrl;
 import okhttp3.Request;
@@ -56,7 +57,7 @@ public class OrderManagementCheckoutActionsApiClient extends BaseApiClient {
                 .addPathSegment("order")
                 .build();
 
-        String jsonString = getJsonMapper().writeValueAsString(payload);
+        String jsonString = JsonSerializer.serializeToJson(payload);
 
         RequestBody formBody = RequestBody.create(jsonString, JSON);
 
@@ -98,7 +99,7 @@ public class OrderManagementCheckoutActionsApiClient extends BaseApiClient {
                 .addPathSegment("deliver")
                 .build();
 
-        String jsonString = getJsonMapper().writeValueAsString(payload);
+        String jsonString = JsonSerializer.serializeToJson(payload);
 
         RequestBody formBody = RequestBody.create(jsonString, JSON);
 
@@ -140,7 +141,7 @@ public class OrderManagementCheckoutActionsApiClient extends BaseApiClient {
                 .addPathSegment("return")
                 .build();
 
-        String jsonString = getJsonMapper().writeValueAsString(payload);
+        String jsonString = JsonSerializer.serializeToJson(payload);
 
         RequestBody formBody = RequestBody.create(jsonString, JSON);
 
@@ -182,7 +183,7 @@ public class OrderManagementCheckoutActionsApiClient extends BaseApiClient {
                 .addPathSegment("cancel")
                 .build();
 
-        String jsonString = getJsonMapper().writeValueAsString(payload);
+        String jsonString = JsonSerializer.serializeToJson(payload);
 
         RequestBody formBody = RequestBody.create(jsonString, JSON);
 
