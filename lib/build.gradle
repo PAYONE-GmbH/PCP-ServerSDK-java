@@ -6,6 +6,7 @@ buildscript {
     dependencies {
       if (JavaVersion.current().majorVersion != '8') {
         classpath 'com.vanniktech:gradle-maven-publish-plugin:0.29.0'
+        classpath 'org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:5.1.0.4882'
       }
     }
 }
@@ -19,7 +20,7 @@ plugins {
 
 if (JavaVersion.current().majorVersion != '8') {
    apply plugin: 'com.vanniktech.maven.publish'
-   apply plugin: 'org.sonarqube' version '5.1.0.4882'
+   apply plugin: 'org.sonarqube'
 }
 
 version = '0.0.2'
