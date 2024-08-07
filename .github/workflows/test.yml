@@ -1,4 +1,4 @@
-name: Run Tests
+name: Run Tests and SonarCloud Scan
 
 on:
   push:
@@ -33,3 +33,7 @@ jobs:
       - name: Test
         run: |
           ./gradlew :lib:test
+      - name: Run SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@master
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
