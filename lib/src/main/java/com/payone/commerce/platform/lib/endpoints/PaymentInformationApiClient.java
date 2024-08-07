@@ -26,13 +26,13 @@ public class PaymentInformationApiClient extends BaseApiClient {
             throw new IllegalArgumentException("Merchant ID is required");
         }
         if (commerceCaseId == null) {
-            throw new IllegalArgumentException("Commerce Case ID is required");
+            throw new IllegalArgumentException(COMMERCE_CASE_ID_REQUIRED_ERROR);
         }
         if (checkoutId == null) {
-            throw new IllegalArgumentException("Checkout ID is required");
+            throw new IllegalArgumentException(CHECKOUT_ID_REQUIRED_ERROR);
         }
         if (payload == null) {
-            throw new IllegalArgumentException("Payload is required");
+            throw new IllegalArgumentException(PAYLOAD_REQUIRED_ERROR);
         }
 
         HttpUrl url = new HttpUrl.Builder()
@@ -68,10 +68,10 @@ public class PaymentInformationApiClient extends BaseApiClient {
             throw new IllegalArgumentException("Merchant ID is required");
         }
         if (commerceCaseId == null) {
-            throw new IllegalArgumentException("Commerce Case ID is required");
+            throw new IllegalArgumentException(COMMERCE_CASE_ID_REQUIRED_ERROR);
         }
         if (checkoutId == null) {
-            throw new IllegalArgumentException("Checkout ID is required");
+            throw new IllegalArgumentException(CHECKOUT_ID_REQUIRED_ERROR);
         }
         if (paymentInformationId == null) {
             throw new IllegalArgumentException("Payment Information ID is required");

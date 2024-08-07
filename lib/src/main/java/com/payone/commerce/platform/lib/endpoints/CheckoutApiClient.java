@@ -32,13 +32,13 @@ public class CheckoutApiClient extends BaseApiClient {
             CreateCheckoutRequest payload)
             throws ApiErrorResponseException, ApiResponseRetrievalException, IOException {
         if (merchantId == null) {
-            throw new IllegalArgumentException("Merchant ID is required");
+            throw new IllegalArgumentException(MERCHANT_ID_REQUIRED_ERROR);
         }
         if (commerceCaseId == null) {
-            throw new IllegalArgumentException("Commerce Case ID is required");
+            throw new IllegalArgumentException(COMMERCE_CASE_ID_REQUIRED_ERROR);
         }
         if (payload == null) {
-            throw new IllegalArgumentException("Payload is required");
+            throw new IllegalArgumentException(PAYLOAD_REQUIRED_ERROR);
         }
 
         HttpUrl url = new HttpUrl.Builder()
@@ -68,13 +68,13 @@ public class CheckoutApiClient extends BaseApiClient {
     public CheckoutResponse getCheckoutRequest(String merchantId, String commerceCaseId, String checkoutId)
             throws ApiErrorResponseException, ApiResponseRetrievalException, IOException {
         if (merchantId == null) {
-            throw new IllegalArgumentException("Merchant ID is required");
+            throw new IllegalArgumentException(MERCHANT_ID_REQUIRED_ERROR);
         }
         if (commerceCaseId == null) {
-            throw new IllegalArgumentException("Commerce Case ID is required");
+            throw new IllegalArgumentException(COMMERCE_CASE_ID_REQUIRED_ERROR);
         }
         if (checkoutId == null) {
-            throw new IllegalArgumentException("Checkout ID is required");
+            throw new IllegalArgumentException(CHECKOUT_ID_REQUIRED_ERROR);
         }
 
         HttpUrl url = new HttpUrl.Builder()
@@ -105,7 +105,7 @@ public class CheckoutApiClient extends BaseApiClient {
     public CheckoutsResponse getCheckoutsRequest(String merchantId, GetCheckoutsQuery queryParams)
             throws ApiErrorResponseException, ApiResponseRetrievalException, IOException {
         if (merchantId == null) {
-            throw new IllegalArgumentException("Merchant ID is required");
+            throw new IllegalArgumentException(MERCHANT_ID_REQUIRED_ERROR);
         }
 
         HttpUrl.Builder urlBuilder = new HttpUrl.Builder()
@@ -134,16 +134,16 @@ public class CheckoutApiClient extends BaseApiClient {
             PatchCheckoutRequest payload)
             throws ApiErrorResponseException, ApiResponseRetrievalException, IOException {
         if (merchantId == null) {
-            throw new IllegalArgumentException("Merchant ID is required");
+            throw new IllegalArgumentException(MERCHANT_ID_REQUIRED_ERROR);
         }
         if (commerceCaseId == null) {
-            throw new IllegalArgumentException("Commerce Case ID is required");
+            throw new IllegalArgumentException(COMMERCE_CASE_ID_REQUIRED_ERROR);
         }
         if (checkoutId == null) {
-            throw new IllegalArgumentException("Checkout ID is required");
+            throw new IllegalArgumentException(CHECKOUT_ID_REQUIRED_ERROR);
         }
         if (payload == null) {
-            throw new IllegalArgumentException("Payload is required");
+            throw new IllegalArgumentException(PAYLOAD_REQUIRED_ERROR);
         }
 
         HttpUrl url = new HttpUrl.Builder()
@@ -172,13 +172,13 @@ public class CheckoutApiClient extends BaseApiClient {
     public void removeCheckoutRequest(String merchantId, String commerceCaseId, String checkoutId)
             throws ApiErrorResponseException, ApiResponseRetrievalException, IOException {
         if (merchantId == null) {
-            throw new IllegalArgumentException("Merchant ID is required");
+            throw new IllegalArgumentException(MERCHANT_ID_REQUIRED_ERROR);
         }
         if (commerceCaseId == null) {
-            throw new IllegalArgumentException("Commerce Case ID is required");
+            throw new IllegalArgumentException(COMMERCE_CASE_ID_REQUIRED_ERROR);
         }
         if (checkoutId == null) {
-            throw new IllegalArgumentException("Checkout ID is required");
+            throw new IllegalArgumentException(CHECKOUT_ID_REQUIRED_ERROR);
         }
 
         HttpUrl url = new HttpUrl.Builder()
