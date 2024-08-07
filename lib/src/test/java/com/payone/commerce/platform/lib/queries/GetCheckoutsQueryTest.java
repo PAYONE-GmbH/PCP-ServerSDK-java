@@ -11,7 +11,7 @@ import com.payone.commerce.platform.lib.models.ExtendedCheckoutStatus;
 import com.payone.commerce.platform.lib.models.PaymentChannel;
 import com.payone.commerce.platform.lib.models.StatusCheckout;
 
-public class GetCheckoutsQueryTest {
+class GetCheckoutsQueryTest {
 
     @Test
     void toQueryMap() {

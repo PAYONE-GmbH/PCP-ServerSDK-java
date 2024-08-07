@@ -25,81 +25,81 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 import java.util.Arrays;
 
-public class JsonSerializerTest {
-    @Test
-    public void testSerializeJson() {
-        CreateCheckoutRequest object = new CreateCheckoutRequest()
-                .amountOfMoney(new AmountOfMoney()
-                        .amount(6099L)
-                        .currencyCode("USD"))
-                .shipping(new Shipping()
-                        .address(
-                                new AddressPersonal()
-                                        .countryCode("DE")
-                                        .zip("12105")
-                                        .city("Berlin")
-                                        .street("Alarichstraße")
-                                        .houseNumber("12")))
-                .shoppingCart(new ShoppingCartInput()
-                        .addItemsItem(new CartItemInput()
-                                .invoiceData(new CartItemInvoiceData()
-                                        .description("Learn PHP the hard way - Hardcover"))
-                                .orderLineDetails(new OrderLineDetailsInput()
-                                        .productPrice(6099L)
-                                        .quantity(1L)
-                                        .productType(ProductType.GOODS))))
-                .orderRequest(new OrderRequest())
-                .creationDateTime(null)
-                .autoExecuteOrder(false);
-        String expected = "{\"amountOfMoney\":{\"amount\":6099,\"currencyCode\":\"USD\"},\"shipping\":{\"address\":{\"city\":\"Berlin\",\"countryCode\":\"DE\",\"houseNumber\":\"12\",\"street\":\"Alarichstra\u00dfe\",\"zip\":\"12105\"}},\"shoppingCart\":{\"items\":[{\"invoiceData\":{\"description\":\"Learn PHP the hard way - Hardcover\"},\"orderLineDetails\":{\"productPrice\":6099,\"productType\":\"GOODS\",\"quantity\":1}}]},\"orderRequest\":{},\"autoExecuteOrder\":false}";
+class JsonSerializerTest {
+        @Test
+        void testSerializeJson() {
+                CreateCheckoutRequest object = new CreateCheckoutRequest()
+                                .amountOfMoney(new AmountOfMoney()
+                                                .amount(6099L)
+                                                .currencyCode("USD"))
+                                .shipping(new Shipping()
+                                                .address(
+                                                                new AddressPersonal()
+                                                                                .countryCode("DE")
+                                                                                .zip("12105")
+                                                                                .city("Berlin")
+                                                                                .street("Alarichstraße")
+                                                                                .houseNumber("12")))
+                                .shoppingCart(new ShoppingCartInput()
+                                                .addItemsItem(new CartItemInput()
+                                                                .invoiceData(new CartItemInvoiceData()
+                                                                                .description("Learn PHP the hard way - Hardcover"))
+                                                                .orderLineDetails(new OrderLineDetailsInput()
+                                                                                .productPrice(6099L)
+                                                                                .quantity(1L)
+                                                                                .productType(ProductType.GOODS))))
+                                .orderRequest(new OrderRequest())
+                                .creationDateTime(null)
+                                .autoExecuteOrder(false);
+                String expected = "{\"amountOfMoney\":{\"amount\":6099,\"currencyCode\":\"USD\"},\"shipping\":{\"address\":{\"city\":\"Berlin\",\"countryCode\":\"DE\",\"houseNumber\":\"12\",\"street\":\"Alarichstra\u00dfe\",\"zip\":\"12105\"}},\"shoppingCart\":{\"items\":[{\"invoiceData\":{\"description\":\"Learn PHP the hard way - Hardcover\"},\"orderLineDetails\":{\"productPrice\":6099,\"productType\":\"GOODS\",\"quantity\":1}}]},\"orderRequest\":{},\"autoExecuteOrder\":false}";
 
-        try {
-            assertEquals(expected, JsonSerializer.serializeToJson(object));
-        } catch (Exception e) {
-            fail(e);
+                try {
+                        assertEquals(expected, JsonSerializer.serializeToJson(object));
+                } catch (Exception e) {
+                        fail(e);
+                }
         }
-    }
 
-    @Test
-    public void testDeserializeJson() {
-        ApplePayPayment applePayPayment = new ApplePayPayment()
-                .token(new ApplePayPaymentToken()
-                        .paymentData(
-                                new ApplePayPaymentData()
-                                        .data("data")
-                                        .header(new ApplePayPaymentDataHeader()
-                                                .wrappedKey("foobar")
-                                                .transactionId("transaction-101")
-                                                .applicationData(null)))
-                        .paymentMethod(
-                                new ApplePayPaymentMethod()
-                                        .displayName("The name is...")
-                                        .network("MasterCard")
-                                        .type(ApplePayPaymentMethodType.CREDIT)
-                                        .paymentPass(null)
-                                        .billingContact(null))
-                        .transactionIdentifier("transaction-101-cc"))
-                .billingContact(
-                        new ApplePayPaymentContact()
-                                .phoneNumber("+1239452324")
-                                .emailAddress("mail@imail.com")
-                                .givenName("John")
-                                .familyName("Michell")
-                                .phoneticGivenName("")
-                                .phoneticFamilyName("")
-                                .addressLines(Arrays.asList("Alarichstraße 12"))
-                                .locality("Berlin")
-                                .postalCode("12105")
-                                .subAdministrativeArea(""))
-                .shippingContact(null);
+        @Test
+        void testDeserializeJson() {
+                ApplePayPayment applePayPayment = new ApplePayPayment()
+                                .token(new ApplePayPaymentToken()
+                                                .paymentData(
+                                                                new ApplePayPaymentData()
+                                                                                .data("data")
+                                                                                .header(new ApplePayPaymentDataHeader()
+                                                                                                .wrappedKey("foobar")
+                                                                                                .transactionId("transaction-101")
+                                                                                                .applicationData(null)))
+                                                .paymentMethod(
+                                                                new ApplePayPaymentMethod()
+                                                                                .displayName("The name is...")
+                                                                                .network("MasterCard")
+                                                                                .type(ApplePayPaymentMethodType.CREDIT)
+                                                                                .paymentPass(null)
+                                                                                .billingContact(null))
+                                                .transactionIdentifier("transaction-101-cc"))
+                                .billingContact(
+                                                new ApplePayPaymentContact()
+                                                                .phoneNumber("+1239452324")
+                                                                .emailAddress("mail@imail.com")
+                                                                .givenName("John")
+                                                                .familyName("Michell")
+                                                                .phoneticGivenName("")
+                                                                .phoneticFamilyName("")
+                                                                .addressLines(Arrays.asList("Alarichstraße 12"))
+                                                                .locality("Berlin")
+                                                                .postalCode("12105")
+                                                                .subAdministrativeArea(""))
+                                .shippingContact(null);
 
-        String json = "{\"token\":{\"paymentData\":{\"data\":\"data\",\"header\":{\"wrappedKey\":\"foobar\",\"transactionId\":\"transaction-101\"}},\"paymentMethod\":{\"displayName\":\"The name is...\",\"network\":\"MasterCard\",\"type\":\"credit\",\"billingContact\":null},\"transactionIdentifier\":\"transaction-101-cc\"},\"billingContact\":{\"phoneNumber\":\"+1239452324\",\"emailAddress\":\"mail@imail.com\",\"givenName\":\"John\",\"familyName\":\"Michell\",\"phoneticGivenName\":\"\",\"phoneticFamilyName\":\"\",\"addressLines\":[\"Alarichstraße 12\"],\"locality\":\"Berlin\",\"postalCode\":\"12105\",\"subAdministrativeArea\":\"\"},\"spam\":\"IGNORE THIS\"}";
+                String json = "{\"token\":{\"paymentData\":{\"data\":\"data\",\"header\":{\"wrappedKey\":\"foobar\",\"transactionId\":\"transaction-101\"}},\"paymentMethod\":{\"displayName\":\"The name is...\",\"network\":\"MasterCard\",\"type\":\"credit\",\"billingContact\":null},\"transactionIdentifier\":\"transaction-101-cc\"},\"billingContact\":{\"phoneNumber\":\"+1239452324\",\"emailAddress\":\"mail@imail.com\",\"givenName\":\"John\",\"familyName\":\"Michell\",\"phoneticGivenName\":\"\",\"phoneticFamilyName\":\"\",\"addressLines\":[\"Alarichstraße 12\"],\"locality\":\"Berlin\",\"postalCode\":\"12105\",\"subAdministrativeArea\":\"\"},\"spam\":\"IGNORE THIS\"}";
 
-        try {
-            ApplePayPayment deserialized = JsonSerializer.deserializeFromJson(json, ApplePayPayment.class);
-            assertEquals(applePayPayment, deserialized);
-        } catch (Exception e) {
-            fail(e);
+                try {
+                        ApplePayPayment deserialized = JsonSerializer.deserializeFromJson(json, ApplePayPayment.class);
+                        assertEquals(applePayPayment, deserialized);
+                } catch (Exception e) {
+                        fail(e);
+                }
         }
-    }
 }
