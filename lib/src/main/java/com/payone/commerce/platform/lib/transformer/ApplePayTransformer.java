@@ -57,4 +57,7 @@ public class ApplePayTransformer {
         input.setPaymentProduct302SpecificInput(paymentProduct320SpecificInput);
         return input;
     }
+
+    private ApplePayTransformer() {
+    }
 }
