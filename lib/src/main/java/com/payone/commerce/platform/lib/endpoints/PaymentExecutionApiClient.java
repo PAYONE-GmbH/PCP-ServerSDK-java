@@ -23,6 +23,8 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 
 public class PaymentExecutionApiClient extends BaseApiClient {
+    private static final String PAYMENT_EXECUTION_ID_REQUIRED_ERROR = "Payment Execution ID is required";
+    private static final String PCP_PATH_SEGMENT_PAYMENT_EXECUTIONS = "payment-executions";
 
     public PaymentExecutionApiClient(CommunicatorConfiguration config) throws InvalidKeyException {
         super(config);
@@ -53,7 +55,7 @@ public class PaymentExecutionApiClient extends BaseApiClient {
                 .addPathSegment(commerceCaseId)
                 .addPathSegment(PCP_PATH_SEGMENT_CHECKOUTS)
                 .addPathSegment(checkoutId)
-                .addPathSegment("payment-executions")
+                .addPathSegment(PCP_PATH_SEGMENT_PAYMENT_EXECUTIONS)
                 .build();
 
         String jsonString = JsonSerializer.serializeToJson(payload);
@@ -83,7 +85,7 @@ public class PaymentExecutionApiClient extends BaseApiClient {
             throw new IllegalArgumentException(CHECKOUT_ID_REQUIRED_ERROR);
         }
         if (paymentExecutionId == null) {
-            throw new IllegalArgumentException("Payment Execution ID is required");
+            throw new IllegalArgumentException(PAYMENT_EXECUTION_ID_REQUIRED_ERROR);
         }
         if (payload == null) {
             throw new IllegalArgumentException(PAYLOAD_REQUIRED_ERROR);
@@ -98,7 +100,7 @@ public class PaymentExecutionApiClient extends BaseApiClient {
                 .addPathSegment(commerceCaseId)
                 .addPathSegment(PCP_PATH_SEGMENT_CHECKOUTS)
                 .addPathSegment(checkoutId)
-                .addPathSegment("payment-executions")
+                .addPathSegment(PCP_PATH_SEGMENT_PAYMENT_EXECUTIONS)
                 .addPathSegment(paymentExecutionId)
                 .addPathSegment("capture")
                 .build();
@@ -130,7 +132,7 @@ public class PaymentExecutionApiClient extends BaseApiClient {
             throw new IllegalArgumentException(CHECKOUT_ID_REQUIRED_ERROR);
         }
         if (paymentExecutionId == null) {
-            throw new IllegalArgumentException("Payment Execution ID is required");
+            throw new IllegalArgumentException(PAYMENT_EXECUTION_ID_REQUIRED_ERROR);
         }
         if (payload == null) {
             throw new IllegalArgumentException(PAYLOAD_REQUIRED_ERROR);
@@ -145,7 +147,7 @@ public class PaymentExecutionApiClient extends BaseApiClient {
                 .addPathSegment(commerceCaseId)
                 .addPathSegment(PCP_PATH_SEGMENT_CHECKOUTS)
                 .addPathSegment(checkoutId)
-                .addPathSegment("payment-executions")
+                .addPathSegment(PCP_PATH_SEGMENT_PAYMENT_EXECUTIONS)
                 .addPathSegment(paymentExecutionId)
                 .addPathSegment("cancel")
                 .build();
@@ -177,7 +179,7 @@ public class PaymentExecutionApiClient extends BaseApiClient {
             throw new IllegalArgumentException(CHECKOUT_ID_REQUIRED_ERROR);
         }
         if (paymentExecutionId == null) {
-            throw new IllegalArgumentException("Payment Execution ID is required");
+            throw new IllegalArgumentException(PAYMENT_EXECUTION_ID_REQUIRED_ERROR);
         }
         if (payload == null) {
             throw new IllegalArgumentException(PAYLOAD_REQUIRED_ERROR);
@@ -192,7 +194,7 @@ public class PaymentExecutionApiClient extends BaseApiClient {
                 .addPathSegment(commerceCaseId)
                 .addPathSegment(PCP_PATH_SEGMENT_CHECKOUTS)
                 .addPathSegment(checkoutId)
-                .addPathSegment("payment-executions")
+                .addPathSegment(PCP_PATH_SEGMENT_PAYMENT_EXECUTIONS)
                 .addPathSegment(paymentExecutionId)
                 .addPathSegment("refund")
                 .build();
@@ -224,7 +226,7 @@ public class PaymentExecutionApiClient extends BaseApiClient {
             throw new IllegalArgumentException(CHECKOUT_ID_REQUIRED_ERROR);
         }
         if (paymentExecutionId == null) {
-            throw new IllegalArgumentException("Payment Execution ID is required");
+            throw new IllegalArgumentException(PAYMENT_EXECUTION_ID_REQUIRED_ERROR);
         }
         if (payload == null) {
             throw new IllegalArgumentException(PAYLOAD_REQUIRED_ERROR);
@@ -239,7 +241,7 @@ public class PaymentExecutionApiClient extends BaseApiClient {
                 .addPathSegment(commerceCaseId)
                 .addPathSegment(PCP_PATH_SEGMENT_CHECKOUTS)
                 .addPathSegment(checkoutId)
-                .addPathSegment("payment-executions")
+                .addPathSegment(PCP_PATH_SEGMENT_PAYMENT_EXECUTIONS)
                 .addPathSegment(paymentExecutionId)
                 .addPathSegment("complete")
                 .build();
