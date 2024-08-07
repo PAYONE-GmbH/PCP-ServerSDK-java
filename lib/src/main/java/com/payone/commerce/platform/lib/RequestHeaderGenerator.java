@@ -39,7 +39,7 @@ public class RequestHeaderGenerator {
                     ALGORITHM);
             this.mac.init(secretKeySpec);
         } catch (NoSuchAlgorithmException e) {
-            throw new RuntimeException("HmacSHA256 must be available to use the PCP Java SDK", e);
+            throw new AssertionError("HmacSHA256 must be available to use the PCP Java SDK", e);
         }
     }
 
@@ -114,7 +114,7 @@ public class RequestHeaderGenerator {
             jsonString = JsonSerializer.serializeToJson(meta);
             return Base64.getEncoder().encodeToString(jsonString.getBytes(StandardCharsets.UTF_8));
         } catch (JsonProcessingException e) {
-            throw new RuntimeException(
+            throw new AssertionError(
                     "Server Meta Info must be encodable as JSON, this is likely an internal bug of the java PCP SDK",
                     e);
         }
