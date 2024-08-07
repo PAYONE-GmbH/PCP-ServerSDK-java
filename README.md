@@ -178,7 +178,7 @@ class App {
 
 This repo contains a demo app that showcases how to implement common use cases, like a [Step-by-Step Checkout](https://docs.payone.com/pcp/checkout-flows/step-by-step-checkout) and an [One-Stop-Checkout](https://docs.payone.com/pcp/checkout-flows/one-step-checkout). For each use case the demo app contains a private method in the top level class `App`. You can run the app to execute the code within in the sandbox API. This is a good way to test, if your setup is correct.
 
-If you're using grald can run it within the demo app directory via:
+If you're using gradle can run it within the demo app directory via:
 
 ```sh
 API_KEY=api_key API_SECRET=api_secret MERCHANT_ID=123 COMMERCE_CASE_ID=234 CHECKOUT_ID=345 ./gradlew :app:run
