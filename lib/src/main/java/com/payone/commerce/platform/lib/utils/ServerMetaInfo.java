@@ -15,13 +15,12 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 })
 public class ServerMetaInfo implements Serializable {
     public static ServerMetaInfo withDefaults(String integrator) {
-        ServerMetaInfo serverMetaInfo = new ServerMetaInfo()
+        return new ServerMetaInfo()
                 .platformIdentifier(String.format("%s, java version is: %s", System.getProperty("os.name"),
                         System.getProperty("java.version")))
                 .sdkIdentifier("JavaServerSDK/v0.0.2")
                 .sdkCreator("PAYONE GmbH")
                 .integrator(integrator);
-        return serverMetaInfo;
     }
 
     public static ServerMetaInfo withDefaults() {
@@ -41,6 +40,8 @@ public class ServerMetaInfo implements Serializable {
     private String integrator;
 
     public ServerMetaInfo() {
+        // empty constructor
+        // required for Jackson deserialization
     }
 
     public ServerMetaInfo platformIdentifier(String platformIdentifier) {

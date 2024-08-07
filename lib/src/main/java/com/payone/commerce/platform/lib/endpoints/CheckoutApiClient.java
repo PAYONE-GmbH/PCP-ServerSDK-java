@@ -58,7 +58,7 @@ public class CheckoutApiClient extends BaseApiClient {
         Request request = new Request.Builder()
                 .url(url)
                 .post(RequestBody.create(jsonString, JSON))
-                .header("Content-Type", JSON.toString())
+                .header(CONTENT_TYPE_HEADER_NAME, JSON.toString())
                 .build();
 
         return this.makeApiCall(request, CreateCheckoutResponse.class);
@@ -164,7 +164,7 @@ public class CheckoutApiClient extends BaseApiClient {
         Request request = new Request.Builder()
                 .url(url)
                 .patch(RequestBody.create(jsonString, JSON))
-                .header("Content-Type", JSON.toString())
+                .header(CONTENT_TYPE_HEADER_NAME, JSON.toString())
                 .build();
 
         this.makeApiCall(request);
