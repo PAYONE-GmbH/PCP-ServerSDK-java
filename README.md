@@ -15,6 +15,7 @@ Welcome to the Java SDK for the PayOne PCP platform! This repository contains a 
   - [Error Handling](#error-handling)
   - [Client Side](#client-side)
   - [Apple Pay](#apple-pay)
+- [Demo App](#demo-app)
 - [Contributing](#contributing)
 - [License](#license)
 
