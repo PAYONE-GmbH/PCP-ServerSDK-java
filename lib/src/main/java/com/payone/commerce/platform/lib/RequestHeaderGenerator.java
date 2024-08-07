@@ -91,7 +91,7 @@ public class RequestHeaderGenerator {
                     .append("\n");
         }
         // 5. Canonicalized Resource (has to include query parameters)
-        stringToSign.append(request.url().encodedPath().toString());
+        stringToSign.append(request.url().encodedPath());
         if (request.url().encodedQuery() != null) {
             stringToSign.append("?")
                     .append(request.url().encodedQuery());
