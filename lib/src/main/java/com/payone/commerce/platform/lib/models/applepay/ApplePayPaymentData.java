@@ -43,6 +43,11 @@ public class ApplePayPaymentData implements Serializable {
         this.version = version;
     }
 
+    public ApplePayPaymentData data(String data) {
+        this.data = data;
+        return this;
+    }
+
     @JsonProperty(JSON_PROPERTY_DATA)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public String getData() {
@@ -53,6 +58,11 @@ public class ApplePayPaymentData implements Serializable {
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public void setData(String data) {
         this.data = data;
+    }
+
+    public ApplePayPaymentData header(ApplePayPaymentDataHeader header) {
+        this.header = header;
+        return this;
     }
 
     @JsonProperty(JSON_PROPERTY_HEADER)
@@ -67,6 +77,11 @@ public class ApplePayPaymentData implements Serializable {
         this.header = header;
     }
 
+    public ApplePayPaymentData signature(String signature) {
+        this.signature = signature;
+        return this;
+    }
+
     @JsonProperty(JSON_PROPERTY_SIGNATURE)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public String getSignature() {
@@ -77,6 +92,11 @@ public class ApplePayPaymentData implements Serializable {
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public void setSignature(String signature) {
         this.signature = signature;
+    }
+
+    public ApplePayPaymentData version(String version) {
+        this.version = version;
+        return this;
     }
 
     @JsonProperty(JSON_PROPERTY_VERSION)

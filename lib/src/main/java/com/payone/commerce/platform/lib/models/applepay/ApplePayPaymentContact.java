@@ -94,6 +94,11 @@ public class ApplePayPaymentContact implements Serializable {
         this.countryCode = countryCode;
     }
 
+    public ApplePayPaymentContact phoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+        return this;
+    }
+
     @JsonProperty(JSON_PROPERTY_PHONE_NUMBER)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public String getPhoneNumber() {
@@ -104,6 +109,11 @@ public class ApplePayPaymentContact implements Serializable {
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public ApplePayPaymentContact emailAddress(String emailAddress) {
+        this.emailAddress = emailAddress;
+        return this;
     }
 
     @JsonProperty(JSON_PROPERTY_EMAIL_ADDRESS)
@@ -118,6 +128,11 @@ public class ApplePayPaymentContact implements Serializable {
         this.emailAddress = emailAddress;
     }
 
+    public ApplePayPaymentContact givenName(String givenName) {
+        this.givenName = givenName;
+        return this;
+    }
+
     @JsonProperty(JSON_PROPERTY_GIVEN_NAME)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public String getGivenName() {
@@ -128,6 +143,11 @@ public class ApplePayPaymentContact implements Serializable {
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public void setGivenName(String givenName) {
         this.givenName = givenName;
+    }
+
+    public ApplePayPaymentContact familyName(String familyName) {
+        this.familyName = familyName;
+        return this;
     }
 
     @JsonProperty(JSON_PROPERTY_FAMILY_NAME)
@@ -142,6 +162,11 @@ public class ApplePayPaymentContact implements Serializable {
         this.familyName = familyName;
     }
 
+    public ApplePayPaymentContact phoneticGivenName(String phoneticGivenName) {
+        this.phoneticGivenName = phoneticGivenName;
+        return this;
+    }
+
     @JsonProperty(JSON_PROPERTY_PHONETIC_GIVEN_NAME)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public String getPhoneticGivenName() {
@@ -152,6 +177,11 @@ public class ApplePayPaymentContact implements Serializable {
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public void setPhoneticGivenName(String phoneticGivenName) {
         this.phoneticGivenName = phoneticGivenName;
+    }
+
+    public ApplePayPaymentContact phoneticFamilyName(String phoneticFamilyName) {
+        this.phoneticFamilyName = phoneticFamilyName;
+        return this;
     }
 
     @JsonProperty(JSON_PROPERTY_PHONETIC_FAMILY_NAME)
@@ -166,6 +196,11 @@ public class ApplePayPaymentContact implements Serializable {
         this.phoneticFamilyName = phoneticFamilyName;
     }
 
+    public ApplePayPaymentContact addressLines(List<String> addressLines) {
+        this.addressLines = addressLines;
+        return this;
+    }
+
     @JsonProperty(JSON_PROPERTY_ADDRESS_LINES)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public List<String> getAddressLines() {
@@ -176,6 +211,11 @@ public class ApplePayPaymentContact implements Serializable {
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public void setAddressLines(List<String> addressLines) {
         this.addressLines = addressLines;
+    }
+
+    public ApplePayPaymentContact locality(String locality) {
+        this.locality = locality;
+        return this;
     }
 
     @JsonProperty(JSON_PROPERTY_LOCALITY)
@@ -190,6 +230,11 @@ public class ApplePayPaymentContact implements Serializable {
         this.locality = locality;
     }
 
+    public ApplePayPaymentContact postalCode(String postalCode) {
+        this.postalCode = postalCode;
+        return this;
+    }
+
     @JsonProperty(JSON_PROPERTY_POSTAL_CODE)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public String getPostalCode() {
@@ -200,6 +245,11 @@ public class ApplePayPaymentContact implements Serializable {
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public void setPostalCode(String postalCode) {
         this.postalCode = postalCode;
+    }
+
+    public ApplePayPaymentContact administrativeArea(String administrativeArea) {
+        this.administrativeArea = administrativeArea;
+        return this;
     }
 
     @JsonProperty(JSON_PROPERTY_ADMINISTRATIVE_AREA)
@@ -214,6 +264,11 @@ public class ApplePayPaymentContact implements Serializable {
         this.administrativeArea = administrativeArea;
     }
 
+    public ApplePayPaymentContact subAdministrativeArea(String subAdministrativeArea) {
+        this.subAdministrativeArea = subAdministrativeArea;
+        return this;
+    }
+
     @JsonProperty(JSON_PROPERTY_SUB_ADMINISTRATIVE_AREA)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public String getSubAdministrativeArea() {
@@ -226,6 +281,11 @@ public class ApplePayPaymentContact implements Serializable {
         this.subAdministrativeArea = subAdministrativeArea;
     }
 
+    public ApplePayPaymentContact country(String country) {
+        this.country = country;
+        return this;
+    }
+
     @JsonProperty(JSON_PROPERTY_COUNTRY)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public String getCountry() {
@@ -236,6 +296,11 @@ public class ApplePayPaymentContact implements Serializable {
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public void setCountry(String country) {
         this.country = country;
+    }
+
+    public ApplePayPaymentContact countryCode(String countryCode) {
+        this.countryCode = countryCode;
+        return this;
     }
 
     @JsonProperty(JSON_PROPERTY_COUNTRY_CODE)

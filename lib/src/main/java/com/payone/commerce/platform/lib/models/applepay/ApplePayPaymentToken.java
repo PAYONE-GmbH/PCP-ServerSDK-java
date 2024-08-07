@@ -40,6 +40,11 @@ public class ApplePayPaymentToken implements Serializable {
         this.transactionIdentifier = transactionIdentifier;
     }
 
+    public ApplePayPaymentToken paymentData(ApplePayPaymentData paymentData) {
+        this.paymentData = paymentData;
+        return this;
+    }
+
     @JsonProperty(JSON_PROPERTY_PAYMENT_DATA)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public ApplePayPaymentData getPaymentData() {
@@ -52,6 +57,11 @@ public class ApplePayPaymentToken implements Serializable {
         this.paymentData = paymentData;
     }
 
+    public ApplePayPaymentToken paymentMethod(ApplePayPaymentMethod paymentMethod) {
+        this.paymentMethod = paymentMethod;
+        return this;
+    }
+
     @JsonProperty(JSON_PROPERTY_PAYMENT_METHOD)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public ApplePayPaymentMethod getPaymentMethod() {
@@ -62,6 +72,11 @@ public class ApplePayPaymentToken implements Serializable {
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public void setPaymentMethod(ApplePayPaymentMethod paymentMethod) {
         this.paymentMethod = paymentMethod;
+    }
+
+    public ApplePayPaymentToken transactionIdentifier(String transactionIdentifier) {
+        this.transactionIdentifier = transactionIdentifier;
+        return this;
     }
 
     @JsonProperty(JSON_PROPERTY_TRANSACTION_IDENTIFIER)

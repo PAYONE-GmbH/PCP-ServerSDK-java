@@ -49,6 +49,11 @@ public class ApplePayPaymentDataHeader implements Serializable {
         this.transactionId = transactionId;
     }
 
+    public ApplePayPaymentDataHeader applicationData(String applicationData) {
+        this.applicationData = applicationData;
+        return this;
+    }
+
     @JsonProperty(JSON_PROPERTY_APPLICATION_DATA)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public String getApplicationData() {
@@ -59,6 +64,11 @@ public class ApplePayPaymentDataHeader implements Serializable {
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public void setApplicationData(String applicationData) {
         this.applicationData = applicationData;
+    }
+
+    public ApplePayPaymentDataHeader ephemeralPublicKey(String ephemeralPublicKey) {
+        this.ephemeralPublicKey = ephemeralPublicKey;
+        return this;
     }
 
     @JsonProperty(JSON_PROPERTY_EPHEMERAL_PUBLIC_KEY)
@@ -73,6 +83,11 @@ public class ApplePayPaymentDataHeader implements Serializable {
         this.ephemeralPublicKey = ephemeralPublicKey;
     }
 
+    public ApplePayPaymentDataHeader wrappedKey(String wrappedKey) {
+        this.wrappedKey = wrappedKey;
+        return this;
+    }
+
     @JsonProperty(JSON_PROPERTY_WRAPPED_KEY)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public String getWrappedKey() {
@@ -85,6 +100,11 @@ public class ApplePayPaymentDataHeader implements Serializable {
         this.wrappedKey = wrappedKey;
     }
 
+    public ApplePayPaymentDataHeader publicKeyHash(String publicKeyHash) {
+        this.publicKeyHash = publicKeyHash;
+        return this;
+    }
+
     @JsonProperty(JSON_PROPERTY_PUBLIC_KEY_HASH)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public String getPublicKeyHash() {
@@ -95,6 +115,11 @@ public class ApplePayPaymentDataHeader implements Serializable {
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public void setPublicKeyHash(String publicKeyHash) {
         this.publicKeyHash = publicKeyHash;
+    }
+
+    public ApplePayPaymentDataHeader transactionId(String transactionId) {
+        this.transactionId = transactionId;
+        return this;
     }
 
     @JsonProperty(JSON_PROPERTY_TRANSACTION_ID)
