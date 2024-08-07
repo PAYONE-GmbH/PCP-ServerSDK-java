@@ -7,6 +7,7 @@ import com.payone.commerce.platform.lib.errors.ApiException;
 import com.payone.commerce.platform.lib.CommunicatorConfiguration;
 import com.payone.commerce.platform.lib.models.PaymentInformationRequest;
 import com.payone.commerce.platform.lib.models.PaymentInformationResponse;
+import com.payone.commerce.platform.lib.serializer.JsonSerializer;
 
 import okhttp3.HttpUrl;
 import okhttp3.Request;
@@ -46,7 +47,7 @@ public class PaymentInformationApiClient extends BaseApiClient {
                 .addPathSegment("payment-informations")
                 .build();
 
-        String jsonString = getJsonMapper().writeValueAsString(payload);
+        String jsonString = JsonSerializer.serializeToJson(payload);
 
         RequestBody formBody = RequestBody.create(jsonString, JSON);
 
