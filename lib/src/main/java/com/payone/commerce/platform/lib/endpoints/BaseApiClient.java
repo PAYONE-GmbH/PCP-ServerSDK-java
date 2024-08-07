@@ -86,7 +86,7 @@ public class BaseApiClient {
         }
 
         String responseBody = response.body().string();
-        if (responseBody == null || responseBody.isEmpty()) {
+        if (responseBody.isEmpty()) {
             throw new ApiResponseRetrievalException(response.code(), responseBody);
         }
         try {
