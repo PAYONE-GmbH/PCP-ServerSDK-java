@@ -63,7 +63,7 @@ public class PaymentExecutionApiClient extends BaseApiClient {
         Request request = new Request.Builder()
                 .url(url)
                 .post(formBody)
-                .header("Content-Type", formBody.contentType().toString())
+                .header(CONTENT_TYPE_HEADER_NAME, formBody.contentType().toString())
                 .build();
 
         return this.makeApiCall(request, CreatePaymentResponse.class);
@@ -110,7 +110,7 @@ public class PaymentExecutionApiClient extends BaseApiClient {
         Request request = new Request.Builder()
                 .url(url)
                 .post(formBody)
-                .header("Content-Type", formBody.contentType().toString())
+                .header(CONTENT_TYPE_HEADER_NAME, formBody.contentType().toString())
                 .build();
 
         return this.makeApiCall(request, CapturePaymentResponse.class);
@@ -157,7 +157,7 @@ public class PaymentExecutionApiClient extends BaseApiClient {
         Request request = new Request.Builder()
                 .url(url)
                 .post(formBody)
-                .header("Content-Type", formBody.contentType().toString())
+                .header(CONTENT_TYPE_HEADER_NAME, formBody.contentType().toString())
                 .build();
 
         return this.makeApiCall(request, CancelPaymentResponse.class);
@@ -204,7 +204,7 @@ public class PaymentExecutionApiClient extends BaseApiClient {
         Request request = new Request.Builder()
                 .url(url)
                 .post(formBody)
-                .header("Content-Type", formBody.contentType().toString())
+                .header(CONTENT_TYPE_HEADER_NAME, formBody.contentType().toString())
                 .build();
 
         return this.makeApiCall(request, RefundPaymentResponse.class);
@@ -251,7 +251,7 @@ public class PaymentExecutionApiClient extends BaseApiClient {
         Request request = new Request.Builder()
                 .url(url)
                 .post(formBody)
-                .header("Content-Type", formBody.contentType().toString())
+                .header(CONTENT_TYPE_HEADER_NAME, formBody.contentType().toString())
                 .build();
 
         return this.makeApiCall(request, CompletePaymentResponse.class);

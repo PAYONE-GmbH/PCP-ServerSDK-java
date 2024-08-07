@@ -17,14 +17,14 @@ import okhttp3.Headers.Builder;
 import okhttp3.Request;
 
 public class RequestHeaderGenerator {
-
-    public static final String SERVER_META_INFO_HEADER_NAME = "X-GCS-ServerMetaInfo";
+    private static final String AUTHORIZATION_HEADER_NAME = "Authorization";
+    private static final String CONTENT_TYPE_HEADER_NAME = "Content-Type";
+    private static final String DATE_HEADER_NAME = "Date";
     public static final String CLIENT_META_INFO_HEADER_NAME = "X-GCS-ClientMetaInfo";
+    public static final String SERVER_META_INFO_HEADER_NAME = "X-GCS-ServerMetaInfo";
 
     private static final String ALGORITHM = "HmacSHA256";
     private static final String WHITESPACE_REGEX = "\\r?\\n[\\h]*";
-    private final String DATE_HEADER_NAME = "Date";
-    private final String AUTHORIZATION_HEADER_NAME = "Authorization";
 
     private final CommunicatorConfiguration config;
     private final Mac mac;
@@ -69,8 +69,8 @@ public class RequestHeaderGenerator {
         StringBuilder stringToSign = new StringBuilder(request.method());
         stringToSign.append("\n");
         // 2. Content-Type
-        if (headersBuilder.get("Content-Type") != null) {
-            stringToSign.append(headersBuilder.get("Content-Type"));
+        if (headersBuilder.get(CONTENT_TYPE_HEADER_NAME) != null) {
+            stringToSign.append(headersBuilder.get(CONTENT_TYPE_HEADER_NAME));
         }
         stringToSign.append("\n");
         // 3. Date
