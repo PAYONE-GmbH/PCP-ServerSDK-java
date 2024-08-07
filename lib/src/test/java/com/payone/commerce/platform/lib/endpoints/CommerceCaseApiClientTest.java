@@ -55,7 +55,7 @@ public class CommerceCaseApiClientTest {
 
         @Test
         @DisplayName("given request was unsuccessful (400), then throw exception")
-        void createCommerceCaseRequestUnsuccessful() throws InvalidKeyException, ApiException, IOException {
+        void createCommerceCaseRequestUnsuccessful() throws InvalidKeyException, IOException {
 
             CommerceCaseApiClient commerceCaseApiClient = spy(
                     new CommerceCaseApiClient(TestConfig.COMMUNICATOR_CONFIGURATION));
@@ -73,7 +73,7 @@ public class CommerceCaseApiClientTest {
 
         @Test
         @DisplayName("given request was unsuccessful (500) with empty body, then throw exception")
-        void createCommerceCaseRequestUnsuccessful500() throws InvalidKeyException, ApiException, IOException {
+        void createCommerceCaseRequestUnsuccessful500() throws InvalidKeyException, IOException {
 
             CommerceCaseApiClient commerceCaseApiClient = spy(
                     new CommerceCaseApiClient(TestConfig.COMMUNICATOR_CONFIGURATION));
@@ -91,7 +91,7 @@ public class CommerceCaseApiClientTest {
 
         @Test
         @DisplayName("given some params are null, then throw exception")
-        void createCommerceCaseRequestNullParams() throws InvalidKeyException, ApiException, IOException {
+        void createCommerceCaseRequestNullParams() throws InvalidKeyException {
 
             CommerceCaseApiClient commerceCaseApiClient = spy(
                     new CommerceCaseApiClient(TestConfig.COMMUNICATOR_CONFIGURATION));
@@ -137,7 +137,7 @@ public class CommerceCaseApiClientTest {
 
         @Test
         @DisplayName("given request was unsuccessful (400), then throw exception")
-        void getCommerceCaseRequestUnsuccessful() throws InvalidKeyException, ApiException, IOException {
+        void getCommerceCaseRequestUnsuccessful() throws InvalidKeyException, IOException {
 
             CommerceCaseApiClient commerceCaseApiClient = spy(
                     new CommerceCaseApiClient(TestConfig.COMMUNICATOR_CONFIGURATION));
@@ -154,7 +154,7 @@ public class CommerceCaseApiClientTest {
 
         @Test
         @DisplayName("given request was unsuccessful (500) with empty body, then throw exception")
-        void getCommerceCaseRequestUnsuccessful500() throws InvalidKeyException, ApiException, IOException {
+        void getCommerceCaseRequestUnsuccessful500() throws InvalidKeyException, IOException {
 
             CommerceCaseApiClient commerceCaseApiClient = spy(
                     new CommerceCaseApiClient(TestConfig.COMMUNICATOR_CONFIGURATION));
@@ -171,7 +171,7 @@ public class CommerceCaseApiClientTest {
 
         @Test
         @DisplayName("given some params are null, then throw exception")
-        void getCommerceCaseRequestNullParams() throws InvalidKeyException, ApiException, IOException {
+        void getCommerceCaseRequestNullParams() throws InvalidKeyException {
 
             CommerceCaseApiClient commerceCaseApiClient = spy(
                     new CommerceCaseApiClient(TestConfig.COMMUNICATOR_CONFIGURATION));
@@ -216,7 +216,7 @@ public class CommerceCaseApiClientTest {
 
         @Test
         @DisplayName("given request was unsuccessful (400), then throw exception")
-        void getCommerceCasesRequestUnsuccessful() throws InvalidKeyException, ApiException, IOException {
+        void getCommerceCasesRequestUnsuccessful() throws InvalidKeyException, IOException {
 
             CommerceCaseApiClient commerceCaseApiClient = spy(
                     new CommerceCaseApiClient(TestConfig.COMMUNICATOR_CONFIGURATION));
@@ -234,7 +234,7 @@ public class CommerceCaseApiClientTest {
 
         @Test
         @DisplayName("given request was unsuccessful (500), then throw exception")
-        void getCommerceCasesRequestUnsuccessful500() throws InvalidKeyException, ApiException, IOException {
+        void getCommerceCasesRequestUnsuccessful500() throws InvalidKeyException, IOException {
 
             CommerceCaseApiClient commerceCaseApiClient = spy(
                     new CommerceCaseApiClient(TestConfig.COMMUNICATOR_CONFIGURATION));
@@ -252,7 +252,7 @@ public class CommerceCaseApiClientTest {
 
         @Test
         @DisplayName("given some params are null, then throw exception")
-        void getCommerceCasesRequestNullParams() throws InvalidKeyException, ApiException, IOException {
+        void getCommerceCasesRequestNullParams() throws InvalidKeyException {
 
             CommerceCaseApiClient commerceCaseApiClient = spy(
                     new CommerceCaseApiClient(TestConfig.COMMUNICATOR_CONFIGURATION));
@@ -271,7 +271,7 @@ public class CommerceCaseApiClientTest {
     class UpdateCommerceCaseRequestTests {
         @Test
         @DisplayName("given request was successful, then throw no exception")
-        void updateCommerceCaseRequestSuccessful() throws InvalidKeyException, ApiException, IOException {
+        void updateCommerceCaseRequestSuccessful() throws InvalidKeyException, IOException {
 
             CommerceCaseApiClient commerceCaseApiClient = spy(
                     new CommerceCaseApiClient(TestConfig.COMMUNICATOR_CONFIGURATION));
@@ -288,7 +288,7 @@ public class CommerceCaseApiClientTest {
 
         @Test
         @DisplayName("given request was unsuccessful (400), then throw exception")
-        void updateCommerceCaseRequestUnsuccessful() throws InvalidKeyException, ApiException, IOException {
+        void updateCommerceCaseRequestUnsuccessful() throws InvalidKeyException, IOException {
 
             CommerceCaseApiClient commerceCaseApiClient = spy(
                     new CommerceCaseApiClient(TestConfig.COMMUNICATOR_CONFIGURATION));
@@ -306,7 +306,7 @@ public class CommerceCaseApiClientTest {
 
         @Test
         @DisplayName("given request was unsuccessful (500) with empty body, then throw exception")
-        void updateCommerceCaseRequestUnsuccessful500() throws InvalidKeyException, ApiException, IOException {
+        void updateCommerceCaseRequestUnsuccessful500() throws InvalidKeyException, IOException {
 
             CommerceCaseApiClient commerceCaseApiClient = spy(
                     new CommerceCaseApiClient(TestConfig.COMMUNICATOR_CONFIGURATION));
@@ -324,7 +324,7 @@ public class CommerceCaseApiClientTest {
 
         @Test
         @DisplayName("given some params are null, then throw exception")
-        void updateCommerceCaseRequestNullParams() throws InvalidKeyException, ApiException, IOException {
+        void updateCommerceCaseRequestNullParams() throws InvalidKeyException {
 
             CommerceCaseApiClient commerceCaseApiClient = spy(
                     new CommerceCaseApiClient(TestConfig.COMMUNICATOR_CONFIGURATION));

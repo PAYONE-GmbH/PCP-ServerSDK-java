@@ -20,11 +20,12 @@ public class RequestHeaderGenerator {
 
     public static final String SERVER_META_INFO_HEADER_NAME = "X-GCS-ServerMetaInfo";
     public static final String CLIENT_META_INFO_HEADER_NAME = "X-GCS-ClientMetaInfo";
+    private static final String DATE_HEADER_NAME = "Date";
+    private static final String AUTHORIZATION_HEADER_NAME = "Authorization";
+    private static final String CONTENT_TYPE_HEADER_NAME = "Content-Type";
 
     private static final String ALGORITHM = "HmacSHA256";
     private static final String WHITESPACE_REGEX = "\\r?\\n[\\h]*";
-    private final String DATE_HEADER_NAME = "Date";
-    private final String AUTHORIZATION_HEADER_NAME = "Authorization";
 
     private final CommunicatorConfiguration config;
     private final Mac mac;
@@ -38,7 +39,7 @@ public class RequestHeaderGenerator {
                     ALGORITHM);
             this.mac.init(secretKeySpec);
         } catch (NoSuchAlgorithmException e) {
-            throw new RuntimeException("HmacSHA256 must be available to use the PCP Java SDK", e);
+            throw new AssertionError("HmacSHA256 must be available to use the PCP Java SDK", e);
         }
     }
 
@@ -69,8 +70,8 @@ public class RequestHeaderGenerator {
         StringBuilder stringToSign = new StringBuilder(request.method());
         stringToSign.append("\n");
         // 2. Content-Type
-        if (headersBuilder.get("Content-Type") != null) {
-            stringToSign.append(headersBuilder.get("Content-Type"));
+        if (headersBuilder.get(CONTENT_TYPE_HEADER_NAME) != null) {
+            stringToSign.append(headersBuilder.get(CONTENT_TYPE_HEADER_NAME));
         }
         stringToSign.append("\n");
         // 3. Date
@@ -90,7 +91,7 @@ public class RequestHeaderGenerator {
                     .append("\n");
         }
         // 5. Canonicalized Resource (has to include query parameters)
-        stringToSign.append(request.url().encodedPath().toString());
+        stringToSign.append(request.url().encodedPath());
         if (request.url().encodedQuery() != null) {
             stringToSign.append("?")
                     .append(request.url().encodedQuery());
@@ -106,14 +107,14 @@ public class RequestHeaderGenerator {
     }
 
     private String getServerMetaInfo() {
-        ServerMetaInfo meta = new ServerMetaInfo();
+        ServerMetaInfo meta = config.getServerMetaInfo();
         String jsonString;
 
         try {
             jsonString = JsonSerializer.serializeToJson(meta);
             return Base64.getEncoder().encodeToString(jsonString.getBytes(StandardCharsets.UTF_8));
         } catch (JsonProcessingException e) {
-            throw new RuntimeException(
+            throw new AssertionError(
                     "Server Meta Info must be encodable as JSON, this is likely an internal bug of the java PCP SDK",
                     e);
         }

@@ -18,59 +18,58 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.Arrays;
 
-public class ApplePayTransformerTest {
+class ApplePayTransformerTest {
     @Test
     void testApplePayPaymentToMobilePaymentMethodSpecificInput() {
-        ApplePayPayment payment = new ApplePayPayment();
+        ApplePayPayment payment = new ApplePayPayment()
+                .token(
+                        new ApplePayPaymentToken()
+                                .paymentData(
+                                        new ApplePayPaymentData()
+                                                .data("data")
+                                                .header(
+                                                        new ApplePayPaymentDataHeader()
+                                                                .applicationData(null)
+                                                                .publicKeyHash("hashhashhash")
+                                                                .transactionId("transaction-101"))
+                                                .signature(null)
+                                                .version(null))
+                                .paymentMethod(
+                                        new ApplePayPaymentMethod()
+                                                .displayName("The name is...")
+                                                .network("MasterCard")
+                                                .type(ApplePayPaymentMethodType.CREDIT)
+                                                .paymentPass(null)
+                                                .billingContact(null))
+                                .transactionIdentifier("transaction-101-cc"))
+                .billingContact(
+                        new ApplePayPaymentContact()
+                                .phoneNumber("+1239452324")
+                                .emailAddress("mail@imail.com")
+                                .givenName("John")
+                                .familyName("Michell")
+                                .phoneticGivenName("")
+                                .phoneticFamilyName("")
+                                .addressLines(Arrays.asList("Alarichtstraße 12"))
+                                .locality("Berlin")
+                                .postalCode("12105")
+                                .subAdministrativeArea(""))
+                .shippingContact(null);
 
-        ApplePayPaymentContact billingContact = new ApplePayPaymentContact();
-        billingContact.setPhoneNumber("+1239452324");
-        billingContact.setEmailAddress("mail@imail.com");
-        billingContact.setGivenName("John");
-        billingContact.setFamilyName("Michell");
-        billingContact.setPhoneticGivenName("");
-        billingContact.setPhoneticFamilyName("");
-        billingContact.setAddressLines(Arrays.asList("Alarichtstraße 12"));
-        billingContact.setLocality("Berlin");
-        billingContact.setPostalCode("12105");
-        billingContact.setSubAdministrativeArea("");
-
-        ApplePayPaymentToken token = new ApplePayPaymentToken();
-        ApplePayPaymentData paymentData = new ApplePayPaymentData();
-        ApplePayPaymentDataHeader paymentDataHeader = new ApplePayPaymentDataHeader();
-        ApplePayPaymentMethod paymentMethod = new ApplePayPaymentMethod();
-        paymentDataHeader.setApplicationData(null);
-        paymentDataHeader.setPublicKeyHash("hashhashhash");
-        paymentDataHeader.setTransactionId("transaction-101");
-        paymentData.setData("data");
-        paymentData.setHeader(paymentDataHeader);
-        paymentMethod.setDisplayName("The name is...");
-        paymentMethod.setNetwork("MasterCard");
-        paymentMethod.setType(ApplePayPaymentMethodType.CREDIT);
-        paymentMethod.setPaymentPass(null);
-        paymentMethod.setBillingContact(null);
-        token.setPaymentData(paymentData);
-        token.setPaymentMethod(paymentMethod);
-        token.setTransactionIdentifier("transaction-101-cc");
-
-        payment.setToken(token);
-        payment.setBillingContact(new ApplePayPaymentContact());
-        payment.setShippingContact(null);
-
-        MobilePaymentMethodSpecificInput expected = new MobilePaymentMethodSpecificInput();
-        PaymentProduct320SpecificInput paymentProduct320SpecificInput = new PaymentProduct320SpecificInput();
-        ApplePaymentDataTokenInformation applePaymentDataTokenInformation = new ApplePaymentDataTokenInformation();
-        ApplePaymentDataTokenHeaderInformation applePaymentDataTokenHeaderInformation = new ApplePaymentDataTokenHeaderInformation();
-        applePaymentDataTokenHeaderInformation.setTransactionId("transaction-101");
-        applePaymentDataTokenHeaderInformation.setApplicationData(null);
-        applePaymentDataTokenInformation.setHeader(applePaymentDataTokenHeaderInformation);
-        paymentProduct320SpecificInput.setNetwork(PaymentProduct320SpecificInput.NetworkEnum.MASTERCARD);
-        paymentProduct320SpecificInput.setToken(applePaymentDataTokenInformation);
-
-        expected.setPaymentProductId(302);
-        expected.setPublicKeyHash("hashhashhash");
-        expected.setEphemeralKey(null);
-        expected.setPaymentProduct302SpecificInput(paymentProduct320SpecificInput);
+        MobilePaymentMethodSpecificInput expected = new MobilePaymentMethodSpecificInput()
+                .paymentProductId(302)
+                .publicKeyHash("hashhashhash")
+                .ephemeralKey(null)
+                .paymentProduct302SpecificInput(
+                        new PaymentProduct320SpecificInput()
+                                .network(PaymentProduct320SpecificInput.NetworkEnum.MASTERCARD)
+                                .token(
+                                        new ApplePaymentDataTokenInformation()
+                                                .signature(null)
+                                                .header(
+                                                        new ApplePaymentDataTokenHeaderInformation()
+                                                                .transactionId("transaction-101")
+                                                                .applicationData(null))));
 
         assertEquals(expected, ApplePayTransformer.transformApplePayPaymentToMobilePaymentMethodSpecificInput(payment));
     }

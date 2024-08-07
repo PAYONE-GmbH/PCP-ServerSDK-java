@@ -5,7 +5,6 @@ Welcome to the Java SDK for the PayOne PCP platform! This repository contains a 
 ### TODOS
 
 - [ ] Setup changelog
-- [ ] Setup sonarcloud
 
 ## Table of Contents
 

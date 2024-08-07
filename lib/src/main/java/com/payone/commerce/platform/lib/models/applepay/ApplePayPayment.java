@@ -41,6 +41,11 @@ public class ApplePayPayment implements Serializable {
         this.shippingContact = shippingContact;
     }
 
+    public ApplePayPayment token(ApplePayPaymentToken token) {
+        this.token = token;
+        return this;
+    }
+
     @JsonProperty(JSON_PROPERTY_TOKEN)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public ApplePayPaymentToken getToken() {
@@ -53,6 +58,11 @@ public class ApplePayPayment implements Serializable {
         this.token = token;
     }
 
+    public ApplePayPayment billingContact(ApplePayPaymentContact billingContact) {
+        this.billingContact = billingContact;
+        return this;
+    }
+
     @JsonProperty(JSON_PROPERTY_BILLING_CONTACT)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public ApplePayPaymentContact getBillingContact() {
@@ -63,6 +73,11 @@ public class ApplePayPayment implements Serializable {
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public void setBillingContact(ApplePayPaymentContact billingContact) {
         this.billingContact = billingContact;
+    }
+
+    public ApplePayPayment shippingContact(ApplePayPaymentContact shippingContact) {
+        this.shippingContact = shippingContact;
+        return this;
     }
 
     @JsonProperty(JSON_PROPERTY_SHIPPING_CONTACT)

@@ -19,10 +19,20 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 public class BaseApiClient {
-    private final OkHttpClient client = new OkHttpClient();
-    private final String JSON_PARSE_ERROR = "Excepted valid JSON response, but failed to parse";
-    protected final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+    private static final String JSON_PARSE_ERROR = "Excepted valid JSON response, but failed to parse";
+    protected static final String MERCHANT_ID_REQUIRED_ERROR = "Merchant ID is required";
+    protected static final String COMMERCE_CASE_ID_REQUIRED_ERROR = "Commerce Case ID is required";
+    protected static final String CHECKOUT_ID_REQUIRED_ERROR = "Checkout ID is required";
+    protected static final String PAYLOAD_REQUIRED_ERROR = "Payload is required";
 
+    protected static final String HTTPS_SCHEME = "https";
+    protected static final String PCP_PATH_SEGMENT_VERSION = "v1";
+    protected static final String PCP_PATH_SEGMENT_COMMERCE_CASES = "commerce-cases";
+    protected static final String PCP_PATH_SEGMENT_CHECKOUTS = "checkouts";
+
+    protected static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+
+    private final OkHttpClient client = new OkHttpClient();
     private final RequestHeaderGenerator requestHeaderGenerator;
     private final CommunicatorConfiguration config;
 
@@ -63,7 +73,7 @@ public class BaseApiClient {
         try {
             return JsonSerializer.deserializeFromJson(response.body().string(), valueTypeRef);
         } catch (JsonMappingException e) {
-            throw new RuntimeException(JSON_PARSE_ERROR, e);
+            throw new AssertionError(JSON_PARSE_ERROR, e);
         }
     }
 
@@ -75,7 +85,7 @@ public class BaseApiClient {
         try {
             return JsonSerializer.deserializeFromJson(response.body().string(), clazz);
         } catch (JsonMappingException e) {
-            throw new RuntimeException(JSON_PARSE_ERROR, e);
+            throw new AssertionError(JSON_PARSE_ERROR, e);
         }
     }
 
@@ -86,7 +96,7 @@ public class BaseApiClient {
         }
 
         String responseBody = response.body().string();
-        if (responseBody == null || responseBody.isEmpty()) {
+        if (responseBody.isEmpty()) {
             throw new ApiResponseRetrievalException(response.code(), responseBody);
         }
         try {

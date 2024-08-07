@@ -47,6 +47,11 @@ public class ApplePayPaymentMethod implements Serializable {
         this.billingContact = billingContact;
     }
 
+    public ApplePayPaymentMethod displayName(String displayName) {
+        this.displayName = displayName;
+        return this;
+    }
+
     @JsonProperty(JSON_PROPERTY_DISPLAY_NAME)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public String getDisplayName() {
@@ -57,6 +62,11 @@ public class ApplePayPaymentMethod implements Serializable {
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public void setDisplayName(String displayName) {
         this.displayName = displayName;
+    }
+
+    public ApplePayPaymentMethod network(String network) {
+        this.network = network;
+        return this;
     }
 
     @JsonProperty(JSON_PROPERTY_NETWORK)
@@ -71,6 +81,11 @@ public class ApplePayPaymentMethod implements Serializable {
         this.network = network;
     }
 
+    public ApplePayPaymentMethod type(ApplePayPaymentMethodType type) {
+        this.type = type;
+        return this;
+    }
+
     @JsonProperty(JSON_PROPERTY_TYPE)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public ApplePayPaymentMethodType getType() {
@@ -83,6 +98,11 @@ public class ApplePayPaymentMethod implements Serializable {
         this.type = type;
     }
 
+    public ApplePayPaymentMethod paymentPass(String paymentPass) {
+        this.paymentPass = paymentPass;
+        return this;
+    }
+
     @JsonProperty(JSON_PROPERTY_PAYMENT_PASS)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public String getPaymentPass() {
@@ -93,6 +113,11 @@ public class ApplePayPaymentMethod implements Serializable {
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public void setPaymentPass(String paymentPass) {
         this.paymentPass = paymentPass;
+    }
+
+    public ApplePayPaymentMethod billingContact(ApplePayPaymentContact billingContact) {
+        this.billingContact = billingContact;
+        return this;
     }
 
     @JsonProperty(JSON_PROPERTY_BILLING_CONTACT)
