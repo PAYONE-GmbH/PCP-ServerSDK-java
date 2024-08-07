@@ -44,6 +44,8 @@ public class GetCheckoutsQuery implements QueryConfig {
   private String companyInformation;
 
   public GetCheckoutsQuery() {
+    // Empty constructor
+    // GetCheckoutsQuery should be populated using the setter methods
   }
 
   public GetCheckoutsQuery setOffset(Integer offset) {
