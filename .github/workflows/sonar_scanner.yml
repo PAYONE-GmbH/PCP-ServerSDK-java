@@ -1,35 +1,25 @@
 name: Run Tests
 
 on:
-  push:
-    branches:
-      - main
-      - develop
-  pull_request:
-    branches:
-      - main
-      - develop
-  workflow_dispatch:
   workflow_call:
+  workflow_dispatch:
 
 jobs:
-  test:
+  sonar-scan:
     runs-on: ubuntu-20.04
-    strategy:
-      matrix:
-        java: ['8', '11', '17', '21']
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
       - name: Set up JDK
         uses: actions/setup-java@v4
         with:
-          java-version: ${{ matrix.java }}
+          java-version: '17'
           distribution: 'adopt'
       - name: Setup Gradle 8.9
         uses: gradle/actions/setup-gradle@v3
         with:
           gradle-version: 8.9
-      - name: Test
-        run: |
-          ./gradlew :lib:test
+      - name: Run SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@master
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
