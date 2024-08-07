@@ -1,4 +1,4 @@
-name: Run Tests
+name: Run SonarCloud Scan
 
 on:
   workflow_call:
