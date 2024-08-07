@@ -19,9 +19,11 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 public class BaseApiClient {
+    private static final String JSON_PARSE_ERROR = "Excepted valid JSON response, but failed to parse";
+    protected static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+    protected static final String CONTENT_TYPE_HEADER_NAME = "Content-Type";
+
     private final OkHttpClient client = new OkHttpClient();
-    private final String JSON_PARSE_ERROR = "Excepted valid JSON response, but failed to parse";
-    protected final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
 
     private final RequestHeaderGenerator requestHeaderGenerator;
     private final CommunicatorConfiguration config;
