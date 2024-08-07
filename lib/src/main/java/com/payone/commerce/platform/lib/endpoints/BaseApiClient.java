@@ -20,6 +20,10 @@ import okhttp3.Response;
 
 public class BaseApiClient {
     private static final String JSON_PARSE_ERROR = "Excepted valid JSON response, but failed to parse";
+    protected static final String MERCHANT_ID_REQUIRED_ERROR = "Merchant ID is required";
+    protected static final String COMMERCE_CASE_ID_REQUIRED_ERROR = "Commerce Case ID is required";
+    protected static final String CHECKOUT_ID_REQUIRED_ERROR = "Checkout ID is required";
+    protected static final String PAYLOAD_REQUIRED_ERROR = "Payload is required";
     protected static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
     protected static final String CONTENT_TYPE_HEADER_NAME = "Content-Type";
 

@@ -35,7 +35,7 @@ public class CommerceCaseApiClient extends BaseApiClient {
             throw new IllegalArgumentException("Merchant ID is required");
         }
         if (payload == null) {
-            throw new IllegalArgumentException("Payload is required");
+            throw new IllegalArgumentException(PAYLOAD_REQUIRED_ERROR);
         }
 
         HttpUrl url = new HttpUrl.Builder()
@@ -66,7 +66,7 @@ public class CommerceCaseApiClient extends BaseApiClient {
             throw new IllegalArgumentException("Merchant ID is required");
         }
         if (commerceCaseId == null) {
-            throw new IllegalArgumentException("Commerce Case ID is required");
+            throw new IllegalArgumentException(COMMERCE_CASE_ID_REQUIRED_ERROR);
         }
 
         HttpUrl.Builder urlBuilder = new HttpUrl.Builder()
@@ -130,10 +130,10 @@ public class CommerceCaseApiClient extends BaseApiClient {
             throw new IllegalArgumentException("Merchant ID is required");
         }
         if (commerceCaseId == null) {
-            throw new IllegalArgumentException("Commerce Case ID is required");
+            throw new IllegalArgumentException(COMMERCE_CASE_ID_REQUIRED_ERROR);
         }
         if (payload == null) {
-            throw new IllegalArgumentException("Payload is required");
+            throw new IllegalArgumentException(PAYLOAD_REQUIRED_ERROR);
         }
 
         HttpUrl url = new HttpUrl.Builder()
