@@ -25,7 +25,7 @@ public class RequestHeaderGeneratorTest {
     private static final String TEST_KEY = "KEY";
     private static final String TEST_SECRET = "Super duper Ethan Hunt level secret";
     private static final CommunicatorConfiguration CONFIG = new CommunicatorConfiguration(TEST_KEY, TEST_SECRET,
-            "awesome-api.com");
+            "awesome-api.com", null);
     private static final RequestHeaderGenerator HEADER_GENERATOR;
     static {
         try {
@@ -119,7 +119,7 @@ public class RequestHeaderGeneratorTest {
             serverMetaInfoAsJson = new String(Base64.getDecoder().decode(serverMetaInfoBase64),
                     StandardCharsets.UTF_8);
             ServerMetaInfo serverMetaInfo = objectMapper.readValue(serverMetaInfoAsJson, ServerMetaInfo.class);
-            assertEquals(serverMetaInfo, new ServerMetaInfo());
+            assertEquals(serverMetaInfo, ServerMetaInfo.withDefaults());
         } catch (JsonProcessingException e) {
             fail(String.format("Decoded meta info '%s', should have been valid json", serverMetaInfoAsJson), e);
         } catch (Exception e) {

@@ -6,5 +6,5 @@ public abstract class TestConfig {
 
     public static final CommunicatorConfiguration COMMUNICATOR_CONFIGURATION = new CommunicatorConfiguration("KEY",
             "Super duper Ethan Hunt level secret",
-            "awesome-api.com");
+            "awesome-api.com", null);
 }

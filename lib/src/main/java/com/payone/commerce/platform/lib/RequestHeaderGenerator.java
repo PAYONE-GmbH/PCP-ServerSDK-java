@@ -107,7 +107,7 @@ public class RequestHeaderGenerator {
     }
 
     private String getServerMetaInfo() {
-        ServerMetaInfo meta = new ServerMetaInfo();
+        ServerMetaInfo meta = config.getServerMetaInfo();
         String jsonString;
 
         try {
