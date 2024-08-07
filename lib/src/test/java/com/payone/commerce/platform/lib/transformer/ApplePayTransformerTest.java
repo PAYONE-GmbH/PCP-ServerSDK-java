@@ -32,8 +32,8 @@ public class ApplePayTransformerTest {
                                 .applicationData(null)
                                 .publicKeyHash("hashhashhash")
                                 .transactionId("transaction-101"))
-                        .signature("signature")
-                        .version("version"))
+                        .signature(null)
+                        .version(null))
                 .paymentMethod(
                     new ApplePayPaymentMethod()
                         .displayName("The name is...")
@@ -65,6 +65,7 @@ public class ApplePayTransformerTest {
                 .network(PaymentProduct320SpecificInput.NetworkEnum.MASTERCARD)
                 .token(
                     new ApplePaymentDataTokenInformation()
+                        .signature(null)
                         .header(
                             new ApplePaymentDataTokenHeaderInformation()
                                 .transactionId("transaction-101")
