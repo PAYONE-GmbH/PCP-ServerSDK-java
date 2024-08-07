@@ -106,7 +106,7 @@ public class RequestHeaderGenerator {
     }
 
     private String getServerMetaInfo() {
-        ServerMetaInfo meta = new ServerMetaInfo();
+        ServerMetaInfo meta = new ServerMetaInfo(this.config.getIntegrator());
         String jsonString;
 
         try {

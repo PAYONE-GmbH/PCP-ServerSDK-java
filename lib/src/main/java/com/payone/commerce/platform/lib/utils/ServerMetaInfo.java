@@ -6,6 +6,7 @@ public class ServerMetaInfo {
     public String platformIdentifier;
     public String sdkIdentifier;
     public String sdkCreator;
+    public String integrator;
 
     public ServerMetaInfo() {
         this.platformIdentifier = String.format("%s, java version is: %s", System.getProperty("os.name"),
@@ -13,8 +14,16 @@ public class ServerMetaInfo {
         // version gets updated with the prepare-release.sh script
         this.sdkIdentifier = "JavaServerSDK/v0.0.2";
         this.sdkCreator = "PAYONE GmbH";
+        this.integrator = null;
+    }
 
-        // TODO: what about integrator?
+    public ServerMetaInfo(String integrator) {
+        this.platformIdentifier = String.format("%s, java version is: %s", System.getProperty("os.name"),
+                System.getProperty("java.version"));
+        // version gets updated with the prepare-release.sh script
+        this.sdkIdentifier = "JavaServerSDK/v0.0.2";
+        this.sdkCreator = "PAYONE GmbH";
+        this.integrator = integrator;
     }
 
     @Override
