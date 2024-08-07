@@ -63,7 +63,7 @@ public class BaseApiClient {
         try {
             return JsonSerializer.deserializeFromJson(response.body().string(), valueTypeRef);
         } catch (JsonMappingException e) {
-            throw new RuntimeException(JSON_PARSE_ERROR, e);
+            throw new AssertionError(JSON_PARSE_ERROR, e);
         }
     }
 
@@ -75,7 +75,7 @@ public class BaseApiClient {
         try {
             return JsonSerializer.deserializeFromJson(response.body().string(), clazz);
         } catch (JsonMappingException e) {
-            throw new RuntimeException(JSON_PARSE_ERROR, e);
+            throw new AssertionError(JSON_PARSE_ERROR, e);
         }
     }
 
