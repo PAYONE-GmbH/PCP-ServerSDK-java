@@ -17,6 +17,9 @@ Welcome to the Java SDK for the PayOne PCP platform! This repository contains a 
   - [Apple Pay](#apple-pay)
 - [Demo App](#demo-app)
 - [Contributing](#contributing)
+  - [Build the library](#build-the-library)
+  - [Run tests](#run-tests)
+  - [Releasing the library](#releasing-the-library)
 - [License](#license)
 
 ## Features
@@ -186,6 +189,8 @@ Make sure to provide all necessary environment variables:
 1. `API_KEY` a valid api key for the PAYONE Commerce Platform
 1. `API_SECRET` a valid api secret for the PAYONE Commerce Platform
 1. `MERCHANT_ID` the merchant id which is needed to identify entities, e.g. commerce cases and checkouts, that belong to you.
+
+[Jump to the demo app](./app/src/main/java/com/payone/commerce/platform/app/App.java)
 
 ## Contributing
 
