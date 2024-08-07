@@ -1,4 +1,4 @@
-name: Run Tests and SonarCloud Scan
+name: Run Tests
 
 on:
   push:
@@ -29,11 +29,7 @@ jobs:
       - name: Setup Gradle 8.8
         uses: gradle/actions/setup-gradle@v3
         with:
-          gradle-version: 8.8
+          gradle-version: 8.9
       - name: Test
         run: |
           ./gradlew :lib:test
-      - name: Run SonarCloud Scan
-        uses: SonarSource/sonarcloud-github-action@master
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
