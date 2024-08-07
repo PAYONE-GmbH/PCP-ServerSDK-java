@@ -24,6 +24,12 @@ public class BaseApiClient {
     protected static final String COMMERCE_CASE_ID_REQUIRED_ERROR = "Commerce Case ID is required";
     protected static final String CHECKOUT_ID_REQUIRED_ERROR = "Checkout ID is required";
     protected static final String PAYLOAD_REQUIRED_ERROR = "Payload is required";
+
+    protected static final String HTTPS_SCHEME = "https";
+    protected static final String PCP_PATH_SEGMENT_VERSION = "v1";
+    protected static final String PCP_PATH_SEGMENT_COMMERCE_CASES = "commerce-cases";
+    protected static final String PCP_PATH_SEGMENT_CHECKOUTS = "checkouts";
+
     protected static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
 
     private final OkHttpClient client = new OkHttpClient();

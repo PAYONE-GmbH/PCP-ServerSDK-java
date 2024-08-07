@@ -46,13 +46,13 @@ public class OrderManagementCheckoutActionsApiClient extends BaseApiClient {
         }
 
         HttpUrl url = new HttpUrl.Builder()
-                .scheme("https")
+                .scheme(HTTPS_SCHEME)
                 .host(this.getConfig().getHost())
-                .addPathSegment("v1")
+                .addPathSegment(PCP_PATH_SEGMENT_VERSION)
                 .addPathSegment(merchantId)
-                .addPathSegment("commerce-cases")
+                .addPathSegment(PCP_PATH_SEGMENT_COMMERCE_CASES)
                 .addPathSegment(commerceCaseId)
-                .addPathSegment("checkouts")
+                .addPathSegment(PCP_PATH_SEGMENT_CHECKOUTS)
                 .addPathSegment(checkoutId)
                 .addPathSegment("order")
                 .build();
@@ -88,13 +88,13 @@ public class OrderManagementCheckoutActionsApiClient extends BaseApiClient {
         }
 
         HttpUrl url = new HttpUrl.Builder()
-                .scheme("https")
+                .scheme(HTTPS_SCHEME)
                 .host(this.getConfig().getHost())
-                .addPathSegment("v1")
+                .addPathSegment(PCP_PATH_SEGMENT_VERSION)
                 .addPathSegment(merchantId)
-                .addPathSegment("commerce-cases")
+                .addPathSegment(PCP_PATH_SEGMENT_COMMERCE_CASES)
                 .addPathSegment(commerceCaseId)
-                .addPathSegment("checkouts")
+                .addPathSegment(PCP_PATH_SEGMENT_CHECKOUTS)
                 .addPathSegment(checkoutId)
                 .addPathSegment("deliver")
                 .build();
@@ -130,13 +130,13 @@ public class OrderManagementCheckoutActionsApiClient extends BaseApiClient {
         }
 
         HttpUrl url = new HttpUrl.Builder()
-                .scheme("https")
+                .scheme(HTTPS_SCHEME)
                 .host(this.getConfig().getHost())
-                .addPathSegment("v1")
+                .addPathSegment(PCP_PATH_SEGMENT_VERSION)
                 .addPathSegment(merchantId)
-                .addPathSegment("commerce-cases")
+                .addPathSegment(PCP_PATH_SEGMENT_COMMERCE_CASES)
                 .addPathSegment(commerceCaseId)
-                .addPathSegment("checkouts")
+                .addPathSegment(PCP_PATH_SEGMENT_CHECKOUTS)
                 .addPathSegment(checkoutId)
                 .addPathSegment("return")
                 .build();
@@ -172,13 +172,13 @@ public class OrderManagementCheckoutActionsApiClient extends BaseApiClient {
         }
 
         HttpUrl url = new HttpUrl.Builder()
-                .scheme("https")
+                .scheme(HTTPS_SCHEME)
                 .host(this.getConfig().getHost())
-                .addPathSegment("v1")
+                .addPathSegment(PCP_PATH_SEGMENT_VERSION)
                 .addPathSegment(merchantId)
-                .addPathSegment("commerce-cases")
+                .addPathSegment(PCP_PATH_SEGMENT_COMMERCE_CASES)
                 .addPathSegment(commerceCaseId)
-                .addPathSegment("checkouts")
+                .addPathSegment(PCP_PATH_SEGMENT_CHECKOUTS)
                 .addPathSegment(checkoutId)
                 .addPathSegment("cancel")
                 .build();

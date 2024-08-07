@@ -36,13 +36,13 @@ public class PaymentInformationApiClient extends BaseApiClient {
         }
 
         HttpUrl url = new HttpUrl.Builder()
-                .scheme("https")
+                .scheme(HTTPS_SCHEME)
                 .host(this.getConfig().getHost())
-                .addPathSegment("v1")
+                .addPathSegment(PCP_PATH_SEGMENT_VERSION)
                 .addPathSegment(merchantId)
-                .addPathSegment("commerce-cases")
+                .addPathSegment(PCP_PATH_SEGMENT_COMMERCE_CASES)
                 .addPathSegment(commerceCaseId)
-                .addPathSegment("checkouts")
+                .addPathSegment(PCP_PATH_SEGMENT_CHECKOUTS)
                 .addPathSegment(checkoutId)
                 .addPathSegment("payment-informations")
                 .build();
@@ -78,13 +78,13 @@ public class PaymentInformationApiClient extends BaseApiClient {
         }
 
         HttpUrl url = new HttpUrl.Builder()
-                .scheme("https")
+                .scheme(HTTPS_SCHEME)
                 .host(this.getConfig().getHost())
-                .addPathSegment("v1")
+                .addPathSegment(PCP_PATH_SEGMENT_VERSION)
                 .addPathSegment(merchantId)
-                .addPathSegment("commerce-cases")
+                .addPathSegment(PCP_PATH_SEGMENT_COMMERCE_CASES)
                 .addPathSegment(commerceCaseId)
-                .addPathSegment("checkouts")
+                .addPathSegment(PCP_PATH_SEGMENT_CHECKOUTS)
                 .addPathSegment(checkoutId)
                 .addPathSegment("payment-informations")
                 .addPathSegment(paymentInformationId)

@@ -39,11 +39,11 @@ public class CommerceCaseApiClient extends BaseApiClient {
         }
 
         HttpUrl url = new HttpUrl.Builder()
-                .scheme("https")
+                .scheme(HTTPS_SCHEME)
                 .host(this.getConfig().getHost())
-                .addPathSegment("v1")
+                .addPathSegment(PCP_PATH_SEGMENT_VERSION)
                 .addPathSegment(merchantId)
-                .addPathSegment("commerce-cases")
+                .addPathSegment(PCP_PATH_SEGMENT_COMMERCE_CASES)
                 .build();
 
         String jsonString = JsonSerializer.serializeToJson(payload);
@@ -70,11 +70,11 @@ public class CommerceCaseApiClient extends BaseApiClient {
         }
 
         HttpUrl.Builder urlBuilder = new HttpUrl.Builder()
-                .scheme("https")
+                .scheme(HTTPS_SCHEME)
                 .host(this.getConfig().getHost())
-                .addPathSegment("v1")
+                .addPathSegment(PCP_PATH_SEGMENT_VERSION)
                 .addPathSegment(merchantId)
-                .addPathSegment("commerce-cases")
+                .addPathSegment(PCP_PATH_SEGMENT_COMMERCE_CASES)
                 .addPathSegment(commerceCaseId);
 
         HttpUrl url = urlBuilder.build();
@@ -101,11 +101,11 @@ public class CommerceCaseApiClient extends BaseApiClient {
         }
 
         HttpUrl.Builder urlBuilder = new HttpUrl.Builder()
-                .scheme("https")
+                .scheme(HTTPS_SCHEME)
                 .host(this.getConfig().getHost())
-                .addPathSegment("v1")
+                .addPathSegment(PCP_PATH_SEGMENT_VERSION)
                 .addPathSegment(merchantId)
-                .addPathSegment("commerce-cases");
+                .addPathSegment(PCP_PATH_SEGMENT_COMMERCE_CASES);
 
         if (queryParams != null) {
             for (Map.Entry<String, String> entry : queryParams.toQueryMap().entrySet()) {
@@ -137,11 +137,11 @@ public class CommerceCaseApiClient extends BaseApiClient {
         }
 
         HttpUrl url = new HttpUrl.Builder()
-                .scheme("https")
+                .scheme(HTTPS_SCHEME)
                 .host(this.getConfig().getHost())
-                .addPathSegment("v1")
+                .addPathSegment(PCP_PATH_SEGMENT_VERSION)
                 .addPathSegment(merchantId)
-                .addPathSegment("commerce-cases")
+                .addPathSegment(PCP_PATH_SEGMENT_COMMERCE_CASES)
                 .addPathSegment(commerceCaseId)
                 .build();
 
