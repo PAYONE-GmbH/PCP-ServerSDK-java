@@ -21,7 +21,7 @@ import java.security.InvalidKeyException;
 import java.util.Base64;
 import java.util.Date;
 
-public class RequestHeaderGeneratorTest {
+class RequestHeaderGeneratorTest {
     private static final String TEST_KEY = "KEY";
     private static final String TEST_SECRET = "Super duper Ethan Hunt level secret";
     private static final CommunicatorConfiguration CONFIG = new CommunicatorConfiguration(TEST_KEY, TEST_SECRET,
@@ -51,8 +51,8 @@ public class RequestHeaderGeneratorTest {
         try {
             Request updatedRequest = HEADER_GENERATOR.generateAdditionalRequestHeaders(request);
 
-            assertEquals(updatedRequest.header("Authorization"),
-                    "GCS v1HMAC:KEY:ZSq7H19dyhyNGSPY5UgyPwITc5n4QG+zHnNDExIa6A8=");
+            assertEquals("GCS v1HMAC:KEY:ZSq7H19dyhyNGSPY5UgyPwITc5n4QG+zHnNDExIa6A8=",
+                    updatedRequest.header("Authorization"));
         } catch (Exception e) {
             fail(e);
         }
@@ -78,8 +78,9 @@ public class RequestHeaderGeneratorTest {
         try {
             Request updatedRequest = HEADER_GENERATOR.generateAdditionalRequestHeaders(request);
 
-            assertEquals(updatedRequest.header("Authorization"),
-                    "GCS v1HMAC:KEY:c5aNDw4AUxRChugRyN0OmTCs38YLA9E/tR+k0bOQzyk=");
+            assertEquals(
+                    "GCS v1HMAC:KEY:c5aNDw4AUxRChugRyN0OmTCs38YLA9E/tR+k0bOQzyk=",
+                    updatedRequest.header("Authorization"));
         } catch (Exception e) {
             fail(e);
         }
@@ -96,7 +97,7 @@ public class RequestHeaderGeneratorTest {
             Request updatedRequest = HEADER_GENERATOR.generateAdditionalRequestHeaders(request);
 
             assertNotNull(updatedRequest.headers().get("Date"));
-            assertNotEquals(updatedRequest.headers().get("Date"), "");
+            assertNotEquals("", updatedRequest.headers().get("Date"));
         } catch (Exception e) {
             fail(e);
         }
@@ -140,7 +141,7 @@ public class RequestHeaderGeneratorTest {
             assertNotNull(clientMetaInfo);
 
             String metaInfoAsJson = new String(Base64.getDecoder().decode(clientMetaInfo), StandardCharsets.UTF_8);
-            assertEquals(metaInfoAsJson, "\"[]\"");
+            assertEquals("\"[]\"", metaInfoAsJson);
         } catch (Exception e) {
             fail(e);
         }
