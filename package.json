@@ -1,0 +1,11 @@
+{
+  "scripts": {
+    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "19.4.0",
+    "@commitlint/config-conventional": "19.2.2",
+    "conventional-changelog-cli": "5.0.0",
+    "lefthook": "1.7.11"
+  }
+}
