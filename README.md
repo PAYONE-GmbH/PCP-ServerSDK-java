@@ -19,6 +19,7 @@ Welcome to the Java SDK for the PayOne PCP platform! This repository contains a 
   - [Build the library](#build-the-library)
   - [Run tests](#run-tests)
   - [Releasing the library](#releasing-the-library)
+  - [Changelog Generation with Conventional Changelog](#changelog-generation-with-conventional-changelog)
 - [License](#license)
 
 ## Features
@@ -196,10 +197,10 @@ Make sure to provide all necessary environment variables:
 We welcome contributions from the community. If you want to contribute, please follow these steps:
 
 Fork the repository.
-Create a new branch (`git checkout -b feature-branch`).
+Create a new branch (`git checkout -b feature/feature-branch`).
 Make your changes.
-Commit your changes (`git commit -am 'Add new feature'`).
-Push to the branch (`git push origin feature-branch`).
+Commit your changes (`git commit -am 'feat: add new feature'`).
+Push to the branch (`git push origin feature/feature-branch`).
 Create a new Pull Request.
 Please make sure to follow the coding standards and write appropriate tests for your changes.
 
@@ -234,6 +235,27 @@ git checkout -b release/0.1.0
 
 - Create PR on develop branch
 - Merge develop in main branch
+
+### Changelog Generation with Conventional Changelog
+
+Before calling the `prepare_release.sh` script, it is recommended to manually trigger the changelog generation script (which uses [conventional-changelog](https://github.com/conventional-changelog/conventional-changelog)).
+
+1. **Conventional Commit Messages**:
+
+   - Ensure all commit messages follow the conventional commit format, which helps in automatic changelog generation.
+   - Commit messages should be in the format: `type(scope): subject`.
+
+2. **Enforcing Commit Messages**:
+
+   - We enforce conventional commit messages using [Lefthook](https://github.com/evilmartians/lefthook) with [commitlint](https://github.com/conventional-changelog/commitlint).
+   - This setup ensures that all commit messages are validated before they are committed.
+
+3. **Generate Changelog**:
+   - Run the changelog generation script to update the `CHANGELOG.md` file:
+     ```sh
+     npm run changelog
+     ```
+   - Review and commit the updated changelog before proceeding with the release script.
 
 ## License
 
