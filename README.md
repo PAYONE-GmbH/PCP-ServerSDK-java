@@ -19,7 +19,9 @@ Welcome to the Java SDK for the PayOne PCP platform! This repository contains a 
   - [Build the library](#build-the-library)
   - [Run tests](#run-tests)
   - [Releasing the library](#releasing-the-library)
-  - [Changelog Generation with Conventional Changelog](#changelog-generation-with-conventional-changelog)
+    - [Preparing the Release](#preparing-the-release)
+    - [Changelog Generation with Conventional Changelog](#changelog-generation-with-conventional-changelog)
+    - [Merging the Release Branch](#merging-the-release-branch)
 - [License](#license)
 
 ## Features
@@ -220,6 +222,8 @@ Please make sure to follow the coding standards and write appropriate tests for 
 
 ### Releasing the library
 
+#### Preparing the Release
+
 - Checkout develop branch
 - Create release branch (release/0.1.0)
 
@@ -233,12 +237,9 @@ git checkout -b release/0.1.0
 ./prepare-release.sh
 ```
 
-- Create PR on develop branch
-- Merge develop in main branch
+#### Changelog Generation with Conventional Changelog
 
-### Changelog Generation with Conventional Changelog
-
-Before calling the `prepare_release.sh` script, it is recommended to manually trigger the changelog generation script (which uses [conventional-changelog](https://github.com/conventional-changelog/conventional-changelog)).
+After calling the `prepare_release.sh` script, it is recommended to manually trigger the changelog generation script (which uses [conventional-changelog](https://github.com/conventional-changelog/conventional-changelog)).
 
 1. **Conventional Commit Messages**:
 
@@ -255,7 +256,12 @@ Before calling the `prepare_release.sh` script, it is recommended to manually tr
      ```sh
      npm run changelog
      ```
-   - Review and commit the updated changelog before proceeding with the release script.
+   - Review and commit the updated changelog before proceeding with the release.
+
+#### Merging the Release Branch
+
+- Create PR on develop branch
+- Merge develop in main branch
 
 ## License
 
