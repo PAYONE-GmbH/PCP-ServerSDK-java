@@ -108,7 +108,7 @@ if (JavaVersion.current().majorVersion != '8') {
       property 'sonar.sources', 'src/main'
       property 'sonar.tests', 'src/test'
       property 'sonar.coverage.exclusions', '**/models/**'
-      property 'sonar.exclusions', '**/models/*'
+      property 'sonar.exclusions', '**/models/**'
     }
   }
 }
