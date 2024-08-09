@@ -29,13 +29,8 @@ module.exports = {
     groupBy: 'customGroup',
     commitGroupsSort: 'title',
     commitsSort: ['scope', 'subject'],
-    mainTemplate: `
-{{> header}}
-
-{{log commitGroups}}
-
+    mainTemplate: `{{> header}}
 {{#each commitGroups}}
-
 {{#if title}}
 ### {{title}}
 
@@ -47,8 +42,7 @@ module.exports = {
 {{/each}}
 {{> footer}}
 `,
-    headerPartial: `
-{{#if isPatch~}}
+    headerPartial: `{{#if isPatch~}}
   ##
 {{~else~}}
   #
