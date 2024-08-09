@@ -1,8 +1,13 @@
 {
   "name": "pcp-serversdk-java",
   "version": "0.0.1",
+  "type": "commonjs",
   "scripts": {
-    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0"
+    "changelog": "conventional-changelog -i CHANGELOG.md -s -r 0 --config ./changelog.config.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/PAYONE-GmbH/PCP-ServerSDK-java.git"
   },
   "devDependencies": {
     "@commitlint/cli": "19.4.0",
