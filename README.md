@@ -1,6 +1,6 @@
-# PayOne Java SDK
+# PAYONE Commerce Platform Java SDK
 
-Welcome to the Java SDK for the PayOne PCP platform! This repository contains a powerful, easy-to-use software development kit (SDK) designed to simplify the integration of online payment processing into your applications.
+Welcome to the Java SDK for the PAYONE Commerce Platform! This repository contains a powerful, easy-to-use software development kit (SDK) designed to simplify the integration of online payment processing into your applications.
 
 ### TODOS
 
@@ -19,6 +19,9 @@ Welcome to the Java SDK for the PayOne PCP platform! This repository contains a 
   - [Build the library](#build-the-library)
   - [Run tests](#run-tests)
   - [Releasing the library](#releasing-the-library)
+    - [Preparing the Release](#preparing-the-release)
+    - [Changelog Generation with Conventional Changelog](#changelog-generation-with-conventional-changelog)
+    - [Merging the Release Branch](#merging-the-release-branch)
 - [License](#license)
 
 ## Features
@@ -113,7 +116,7 @@ Network errors are not wrap, you can should handle the standard `IOExeption`.
 
 ### Client Side
 
-For most [payment methods](https://docs.payone.com/pcp/commerce-platform-payment-methods) some information from the client is needed, e.g. payment information given by Apple when a payment via ApplePay suceeds. PAYONE provides client side SDKs which helps you interact the third party payment providers. You can find the SDKs under the [Payone GitHub organization](https://github.com/PAYONE-GmbH). Either way ensure to never store or even send credit card information to your server. The PAYONE Commerce Platform never needs access to the credit card information. The client side is responsible for safely retrieving a credit card token. This token must be used with this SDK.
+For most [payment methods](https://docs.payone.com/pcp/commerce-platform-payment-methods) some information from the client is needed, e.g. payment information given by Apple when a payment via ApplePay suceeds. PAYONE provides client side SDKs which helps you interact the third party payment providers. You can find the SDKs under the [PAYONE GitHub organization](https://github.com/PAYONE-GmbH). Either way ensure to never store or even send credit card information to your server. The PAYONE Commerce Platform never needs access to the credit card information. The client side is responsible for safely retrieving a credit card token. This token must be used with this SDK.
 
 This SDKs makes no assumption about how the networking between the client and your PHP server is done. If need to serialize a model to JSON or deserialize a client side request from a JSON string to a model you can use the static `serializeToJson()` and `deserializeFromJson()` methods on the `JsonSerializer` class:
 
@@ -196,10 +199,10 @@ Make sure to provide all necessary environment variables:
 We welcome contributions from the community. If you want to contribute, please follow these steps:
 
 Fork the repository.
-Create a new branch (`git checkout -b feature-branch`).
+Create a new branch (`git checkout -b feature/feature-branch`).
 Make your changes.
-Commit your changes (`git commit -am 'Add new feature'`).
-Push to the branch (`git push origin feature-branch`).
+Commit your changes (`git commit -am 'feat: add new feature'`).
+Push to the branch (`git push origin feature/feature-branch`).
 Create a new Pull Request.
 Please make sure to follow the coding standards and write appropriate tests for your changes.
 
@@ -219,6 +222,8 @@ Please make sure to follow the coding standards and write appropriate tests for 
 
 ### Releasing the library
 
+#### Preparing the Release
+
 - Checkout develop branch
 - Create release branch (release/0.1.0)
 
@@ -231,6 +236,29 @@ git checkout -b release/0.1.0
 ```sh
 ./prepare-release.sh
 ```
+
+#### Changelog Generation with Conventional Changelog
+
+After calling the `prepare_release.sh` script, it is recommended to manually trigger the changelog generation script (which uses [conventional-changelog](https://github.com/conventional-changelog/conventional-changelog)).
+
+1. **Conventional Commit Messages**:
+
+   - Ensure all commit messages follow the conventional commit format, which helps in automatic changelog generation.
+   - Commit messages should be in the format: `type(scope): subject`.
+
+2. **Enforcing Commit Messages**:
+
+   - We enforce conventional commit messages using [Lefthook](https://github.com/evilmartians/lefthook) with [commitlint](https://github.com/conventional-changelog/commitlint).
+   - This setup ensures that all commit messages are validated before they are committed.
+
+3. **Generate Changelog**:
+   - Run the changelog generation script to update the `CHANGELOG.md` file:
+     ```sh
+     npm run changelog
+     ```
+   - Review and commit the updated changelog before proceeding with the release.
+
+#### Merging the Release Branch
 
 - Create PR on develop branch
 - Merge develop in main branch
