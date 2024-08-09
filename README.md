@@ -1,6 +1,6 @@
-# PayOne Java SDK
+# PAYONE Commerce Platform Java SDK
 
-Welcome to the Java SDK for the PayOne PCP platform! This repository contains a powerful, easy-to-use software development kit (SDK) designed to simplify the integration of online payment processing into your applications.
+Welcome to the Java SDK for the PAYONE Commerce Platform! This repository contains a powerful, easy-to-use software development kit (SDK) designed to simplify the integration of online payment processing into your applications.
 
 ### TODOS
 
@@ -116,7 +116,7 @@ Network errors are not wrap, you can should handle the standard `IOExeption`.
 
 ### Client Side
 
-For most [payment methods](https://docs.payone.com/pcp/commerce-platform-payment-methods) some information from the client is needed, e.g. payment information given by Apple when a payment via ApplePay suceeds. PAYONE provides client side SDKs which helps you interact the third party payment providers. You can find the SDKs under the [Payone GitHub organization](https://github.com/PAYONE-GmbH). Either way ensure to never store or even send credit card information to your server. The PAYONE Commerce Platform never needs access to the credit card information. The client side is responsible for safely retrieving a credit card token. This token must be used with this SDK.
+For most [payment methods](https://docs.payone.com/pcp/commerce-platform-payment-methods) some information from the client is needed, e.g. payment information given by Apple when a payment via ApplePay suceeds. PAYONE provides client side SDKs which helps you interact the third party payment providers. You can find the SDKs under the [PAYONE GitHub organization](https://github.com/PAYONE-GmbH). Either way ensure to never store or even send credit card information to your server. The PAYONE Commerce Platform never needs access to the credit card information. The client side is responsible for safely retrieving a credit card token. This token must be used with this SDK.
 
 This SDKs makes no assumption about how the networking between the client and your PHP server is done. If need to serialize a model to JSON or deserialize a client side request from a JSON string to a model you can use the static `serializeToJson()` and `deserializeFromJson()` methods on the `JsonSerializer` class:
 
