@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 import com.payone.commerce.platform.lib.models.PaymentChannel;
 import com.payone.commerce.platform.lib.models.StatusCheckout;
 
-public class GetCommerceCasesQueryTest {
+class GetCommerceCasesQueryTest {
 
     @Test
     void toQueryMap() {

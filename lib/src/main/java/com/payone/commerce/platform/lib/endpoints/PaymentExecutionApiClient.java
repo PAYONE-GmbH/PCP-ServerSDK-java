@@ -16,12 +16,15 @@ import com.payone.commerce.platform.lib.models.CreatePaymentResponse;
 import com.payone.commerce.platform.lib.models.PaymentExecutionRequest;
 import com.payone.commerce.platform.lib.models.RefundPaymentResponse;
 import com.payone.commerce.platform.lib.models.RefundRequest;
+import com.payone.commerce.platform.lib.serializer.JsonSerializer;
 
 import okhttp3.HttpUrl;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 
 public class PaymentExecutionApiClient extends BaseApiClient {
+    private static final String PAYMENT_EXECUTION_ID_REQUIRED_ERROR = "Payment Execution ID is required";
+    private static final String PCP_PATH_SEGMENT_PAYMENT_EXECUTIONS = "payment-executions";
 
     public PaymentExecutionApiClient(CommunicatorConfiguration config) throws InvalidKeyException {
         super(config);
@@ -31,38 +34,38 @@ public class PaymentExecutionApiClient extends BaseApiClient {
             String checkoutId, PaymentExecutionRequest payload)
             throws ApiErrorResponseException, ApiResponseRetrievalException, IOException {
         if (merchantId == null) {
-            throw new IllegalArgumentException("Merchant ID is required");
+            throw new IllegalArgumentException(MERCHANT_ID_REQUIRED_ERROR);
         }
         if (commerceCaseId == null) {
-            throw new IllegalArgumentException("Commerce Case ID is required");
+            throw new IllegalArgumentException(COMMERCE_CASE_ID_REQUIRED_ERROR);
         }
         if (checkoutId == null) {
-            throw new IllegalArgumentException("Checkout ID is required");
+            throw new IllegalArgumentException(CHECKOUT_ID_REQUIRED_ERROR);
         }
         if (payload == null) {
-            throw new IllegalArgumentException("Payload is required");
+            throw new IllegalArgumentException(PAYLOAD_REQUIRED_ERROR);
         }
 
         HttpUrl url = new HttpUrl.Builder()
-                .scheme("https")
+                .scheme(HTTPS_SCHEME)
                 .host(this.getConfig().getHost())
-                .addPathSegment("v1")
+                .addPathSegment(PCP_PATH_SEGMENT_VERSION)
                 .addPathSegment(merchantId)
-                .addPathSegment("commerce-cases")
+                .addPathSegment(PCP_PATH_SEGMENT_COMMERCE_CASES)
                 .addPathSegment(commerceCaseId)
-                .addPathSegment("checkouts")
+                .addPathSegment(PCP_PATH_SEGMENT_CHECKOUTS)
                 .addPathSegment(checkoutId)
-                .addPathSegment("payment-executions")
+                .addPathSegment(PCP_PATH_SEGMENT_PAYMENT_EXECUTIONS)
                 .build();
 
-        String jsonString = getJsonMapper().writeValueAsString(payload);
+        String jsonString = JsonSerializer.serializeToJson(payload);
 
         RequestBody formBody = RequestBody.create(jsonString, JSON);
 
         Request request = new Request.Builder()
                 .url(url)
                 .post(formBody)
-                .header("Content-Type", formBody.contentType().toString())
+                .header(CONTENT_TYPE_HEADER_NAME, formBody.contentType().toString())
                 .build();
 
         return this.makeApiCall(request, CreatePaymentResponse.class);
@@ -73,43 +76,43 @@ public class PaymentExecutionApiClient extends BaseApiClient {
             String checkoutId, String paymentExecutionId, CapturePaymentRequest payload)
             throws ApiErrorResponseException, ApiResponseRetrievalException, IOException {
         if (merchantId == null) {
-            throw new IllegalArgumentException("Merchant ID is required");
+            throw new IllegalArgumentException(MERCHANT_ID_REQUIRED_ERROR);
         }
         if (commerceCaseId == null) {
-            throw new IllegalArgumentException("Commerce Case ID is required");
+            throw new IllegalArgumentException(COMMERCE_CASE_ID_REQUIRED_ERROR);
         }
         if (checkoutId == null) {
-            throw new IllegalArgumentException("Checkout ID is required");
+            throw new IllegalArgumentException(CHECKOUT_ID_REQUIRED_ERROR);
         }
         if (paymentExecutionId == null) {
-            throw new IllegalArgumentException("Payment Execution ID is required");
+            throw new IllegalArgumentException(PAYMENT_EXECUTION_ID_REQUIRED_ERROR);
         }
         if (payload == null) {
-            throw new IllegalArgumentException("Payload is required");
+            throw new IllegalArgumentException(PAYLOAD_REQUIRED_ERROR);
         }
 
         HttpUrl url = new HttpUrl.Builder()
-                .scheme("https")
+                .scheme(HTTPS_SCHEME)
                 .host(this.getConfig().getHost())
-                .addPathSegment("v1")
+                .addPathSegment(PCP_PATH_SEGMENT_VERSION)
                 .addPathSegment(merchantId)
-                .addPathSegment("commerce-cases")
+                .addPathSegment(PCP_PATH_SEGMENT_COMMERCE_CASES)
                 .addPathSegment(commerceCaseId)
-                .addPathSegment("checkouts")
+                .addPathSegment(PCP_PATH_SEGMENT_CHECKOUTS)
                 .addPathSegment(checkoutId)
-                .addPathSegment("payment-executions")
+                .addPathSegment(PCP_PATH_SEGMENT_PAYMENT_EXECUTIONS)
                 .addPathSegment(paymentExecutionId)
                 .addPathSegment("capture")
                 .build();
 
-        String jsonString = getJsonMapper().writeValueAsString(payload);
+        String jsonString = JsonSerializer.serializeToJson(payload);
 
         RequestBody formBody = RequestBody.create(jsonString, JSON);
 
         Request request = new Request.Builder()
                 .url(url)
                 .post(formBody)
-                .header("Content-Type", formBody.contentType().toString())
+                .header(CONTENT_TYPE_HEADER_NAME, formBody.contentType().toString())
                 .build();
 
         return this.makeApiCall(request, CapturePaymentResponse.class);
@@ -120,43 +123,43 @@ public class PaymentExecutionApiClient extends BaseApiClient {
             String checkoutId, String paymentExecutionId, CancelPaymentRequest payload)
             throws ApiErrorResponseException, ApiResponseRetrievalException, IOException {
         if (merchantId == null) {
-            throw new IllegalArgumentException("Merchant ID is required");
+            throw new IllegalArgumentException(MERCHANT_ID_REQUIRED_ERROR);
         }
         if (commerceCaseId == null) {
-            throw new IllegalArgumentException("Commerce Case ID is required");
+            throw new IllegalArgumentException(COMMERCE_CASE_ID_REQUIRED_ERROR);
         }
         if (checkoutId == null) {
-            throw new IllegalArgumentException("Checkout ID is required");
+            throw new IllegalArgumentException(CHECKOUT_ID_REQUIRED_ERROR);
         }
         if (paymentExecutionId == null) {
-            throw new IllegalArgumentException("Payment Execution ID is required");
+            throw new IllegalArgumentException(PAYMENT_EXECUTION_ID_REQUIRED_ERROR);
         }
         if (payload == null) {
-            throw new IllegalArgumentException("Payload is required");
+            throw new IllegalArgumentException(PAYLOAD_REQUIRED_ERROR);
         }
 
         HttpUrl url = new HttpUrl.Builder()
-                .scheme("https")
+                .scheme(HTTPS_SCHEME)
                 .host(this.getConfig().getHost())
-                .addPathSegment("v1")
+                .addPathSegment(PCP_PATH_SEGMENT_VERSION)
                 .addPathSegment(merchantId)
-                .addPathSegment("commerce-cases")
+                .addPathSegment(PCP_PATH_SEGMENT_COMMERCE_CASES)
                 .addPathSegment(commerceCaseId)
-                .addPathSegment("checkouts")
+                .addPathSegment(PCP_PATH_SEGMENT_CHECKOUTS)
                 .addPathSegment(checkoutId)
-                .addPathSegment("payment-executions")
+                .addPathSegment(PCP_PATH_SEGMENT_PAYMENT_EXECUTIONS)
                 .addPathSegment(paymentExecutionId)
                 .addPathSegment("cancel")
                 .build();
 
-        String jsonString = getJsonMapper().writeValueAsString(payload);
+        String jsonString = JsonSerializer.serializeToJson(payload);
 
         RequestBody formBody = RequestBody.create(jsonString, JSON);
 
         Request request = new Request.Builder()
                 .url(url)
                 .post(formBody)
-                .header("Content-Type", formBody.contentType().toString())
+                .header(CONTENT_TYPE_HEADER_NAME, formBody.contentType().toString())
                 .build();
 
         return this.makeApiCall(request, CancelPaymentResponse.class);
@@ -167,43 +170,43 @@ public class PaymentExecutionApiClient extends BaseApiClient {
             String checkoutId, String paymentExecutionId, RefundRequest payload)
             throws ApiErrorResponseException, ApiResponseRetrievalException, IOException {
         if (merchantId == null) {
-            throw new IllegalArgumentException("Merchant ID is required");
+            throw new IllegalArgumentException(MERCHANT_ID_REQUIRED_ERROR);
         }
         if (commerceCaseId == null) {
-            throw new IllegalArgumentException("Commerce Case ID is required");
+            throw new IllegalArgumentException(COMMERCE_CASE_ID_REQUIRED_ERROR);
         }
         if (checkoutId == null) {
-            throw new IllegalArgumentException("Checkout ID is required");
+            throw new IllegalArgumentException(CHECKOUT_ID_REQUIRED_ERROR);
         }
         if (paymentExecutionId == null) {
-            throw new IllegalArgumentException("Payment Execution ID is required");
+            throw new IllegalArgumentException(PAYMENT_EXECUTION_ID_REQUIRED_ERROR);
         }
         if (payload == null) {
-            throw new IllegalArgumentException("Payload is required");
+            throw new IllegalArgumentException(PAYLOAD_REQUIRED_ERROR);
         }
 
         HttpUrl url = new HttpUrl.Builder()
-                .scheme("https")
+                .scheme(HTTPS_SCHEME)
                 .host(this.getConfig().getHost())
-                .addPathSegment("v1")
+                .addPathSegment(PCP_PATH_SEGMENT_VERSION)
                 .addPathSegment(merchantId)
-                .addPathSegment("commerce-cases")
+                .addPathSegment(PCP_PATH_SEGMENT_COMMERCE_CASES)
                 .addPathSegment(commerceCaseId)
-                .addPathSegment("checkouts")
+                .addPathSegment(PCP_PATH_SEGMENT_CHECKOUTS)
                 .addPathSegment(checkoutId)
-                .addPathSegment("payment-executions")
+                .addPathSegment(PCP_PATH_SEGMENT_PAYMENT_EXECUTIONS)
                 .addPathSegment(paymentExecutionId)
                 .addPathSegment("refund")
                 .build();
 
-        String jsonString = getJsonMapper().writeValueAsString(payload);
+        String jsonString = JsonSerializer.serializeToJson(payload);
 
         RequestBody formBody = RequestBody.create(jsonString, JSON);
 
         Request request = new Request.Builder()
                 .url(url)
                 .post(formBody)
-                .header("Content-Type", formBody.contentType().toString())
+                .header(CONTENT_TYPE_HEADER_NAME, formBody.contentType().toString())
                 .build();
 
         return this.makeApiCall(request, RefundPaymentResponse.class);
@@ -214,43 +217,43 @@ public class PaymentExecutionApiClient extends BaseApiClient {
             String checkoutId, String paymentExecutionId, CompletePaymentRequest payload)
             throws ApiErrorResponseException, ApiResponseRetrievalException, IOException {
         if (merchantId == null) {
-            throw new IllegalArgumentException("Merchant ID is required");
+            throw new IllegalArgumentException(MERCHANT_ID_REQUIRED_ERROR);
         }
         if (commerceCaseId == null) {
-            throw new IllegalArgumentException("Commerce Case ID is required");
+            throw new IllegalArgumentException(COMMERCE_CASE_ID_REQUIRED_ERROR);
         }
         if (checkoutId == null) {
-            throw new IllegalArgumentException("Checkout ID is required");
+            throw new IllegalArgumentException(CHECKOUT_ID_REQUIRED_ERROR);
         }
         if (paymentExecutionId == null) {
-            throw new IllegalArgumentException("Payment Execution ID is required");
+            throw new IllegalArgumentException(PAYMENT_EXECUTION_ID_REQUIRED_ERROR);
         }
         if (payload == null) {
-            throw new IllegalArgumentException("Payload is required");
+            throw new IllegalArgumentException(PAYLOAD_REQUIRED_ERROR);
         }
 
         HttpUrl url = new HttpUrl.Builder()
-                .scheme("https")
+                .scheme(HTTPS_SCHEME)
                 .host(this.getConfig().getHost())
-                .addPathSegment("v1")
+                .addPathSegment(PCP_PATH_SEGMENT_VERSION)
                 .addPathSegment(merchantId)
-                .addPathSegment("commerce-cases")
+                .addPathSegment(PCP_PATH_SEGMENT_COMMERCE_CASES)
                 .addPathSegment(commerceCaseId)
-                .addPathSegment("checkouts")
+                .addPathSegment(PCP_PATH_SEGMENT_CHECKOUTS)
                 .addPathSegment(checkoutId)
-                .addPathSegment("payment-executions")
+                .addPathSegment(PCP_PATH_SEGMENT_PAYMENT_EXECUTIONS)
                 .addPathSegment(paymentExecutionId)
                 .addPathSegment("complete")
                 .build();
 
-        String jsonString = getJsonMapper().writeValueAsString(payload);
+        String jsonString = JsonSerializer.serializeToJson(payload);
 
         RequestBody formBody = RequestBody.create(jsonString, JSON);
 
         Request request = new Request.Builder()
                 .url(url)
                 .post(formBody)
-                .header("Content-Type", formBody.contentType().toString())
+                .header(CONTENT_TYPE_HEADER_NAME, formBody.contentType().toString())
                 .build();
 
         return this.makeApiCall(request, CompletePaymentResponse.class);

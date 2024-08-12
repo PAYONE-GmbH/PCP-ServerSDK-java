@@ -32,6 +32,15 @@ sed -i '' "s/JavaServerSDK\/v[0-9]*\.[0-9]*\.[0-9]*/JavaServerSDK\/$TAG/" $SERVE
 # update the version in the readme file
 sed -i '' "s/version: '[0-9]*\.[0-9]*\.[0-9]*'/version: '$VERSION'/g" $README_PATH
 
+# Update the version number in the package.json file for changelog generation
+sed -i '' -e "s/\"version\": \".*\"/\"version\": \"$VERSION\"/" package.json
+
+# Update the version number in the package-lock.json file for changelog generation
+jq --arg version "$VERSION" '
+  .version = $version |
+  .packages[""].version = $version
+' package-lock.json >tmp.json && mv tmp.json package-lock.json
+
 git add $BUILD_GRADLE_PATH
 git add $SERVER_META_INFO_PATH
 git add $README_PATH

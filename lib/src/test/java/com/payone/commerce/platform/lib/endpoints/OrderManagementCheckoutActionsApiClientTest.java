@@ -56,7 +56,7 @@ public class OrderManagementCheckoutActionsApiClientTest {
 
         @Test
         @DisplayName("given request was unsuccessful (400), then throw exception")
-        void createOrderUnsuccessful() throws InvalidKeyException, ApiException, IOException {
+        void createOrderUnsuccessful() throws InvalidKeyException, IOException {
 
             OrderManagementCheckoutActionsApiClient orderManagementCheckoutActionsApiClient = spy(
                     new OrderManagementCheckoutActionsApiClient(TestConfig.COMMUNICATOR_CONFIGURATION));
@@ -74,7 +74,7 @@ public class OrderManagementCheckoutActionsApiClientTest {
 
         @Test
         @DisplayName("given request was unsuccessful (500) with empty body, then throw exception")
-        void createOrderUnsuccessful500() throws InvalidKeyException, ApiException, IOException {
+        void createOrderUnsuccessful500() throws InvalidKeyException, IOException {
 
             OrderManagementCheckoutActionsApiClient orderManagementCheckoutActionsApiClient = spy(
                     new OrderManagementCheckoutActionsApiClient(TestConfig.COMMUNICATOR_CONFIGURATION));
@@ -92,7 +92,7 @@ public class OrderManagementCheckoutActionsApiClientTest {
 
         @Test
         @DisplayName("given some params are null, then throw exception")
-        void createOrderNullParams() throws InvalidKeyException, ApiException, IOException {
+        void createOrderNullParams() throws InvalidKeyException {
 
             OrderManagementCheckoutActionsApiClient orderManagementCheckoutActionsApiClient = spy(
                     new OrderManagementCheckoutActionsApiClient(TestConfig.COMMUNICATOR_CONFIGURATION));
@@ -151,7 +151,7 @@ public class OrderManagementCheckoutActionsApiClientTest {
 
         @Test
         @DisplayName("given request was unsuccessful (400), then throw exception")
-        void deliverOrderUnsuccessful() throws InvalidKeyException, ApiException, IOException {
+        void deliverOrderUnsuccessful() throws InvalidKeyException, IOException {
 
             OrderManagementCheckoutActionsApiClient orderManagementCheckoutActionsApiClient = spy(
                     new OrderManagementCheckoutActionsApiClient(TestConfig.COMMUNICATOR_CONFIGURATION));
@@ -169,7 +169,7 @@ public class OrderManagementCheckoutActionsApiClientTest {
 
         @Test
         @DisplayName("given request was unsuccessful (500) with empty body, then throw exception")
-        void deliverOrderUnsuccessful500() throws InvalidKeyException, ApiException, IOException {
+        void deliverOrderUnsuccessful500() throws InvalidKeyException, IOException {
 
             OrderManagementCheckoutActionsApiClient orderManagementCheckoutActionsApiClient = spy(
                     new OrderManagementCheckoutActionsApiClient(TestConfig.COMMUNICATOR_CONFIGURATION));
@@ -187,7 +187,7 @@ public class OrderManagementCheckoutActionsApiClientTest {
 
         @Test
         @DisplayName("given some params are null, then throw exception")
-        void deliverOrderNullParams() throws InvalidKeyException, ApiException, IOException {
+        void deliverOrderNullParams() throws InvalidKeyException {
 
             OrderManagementCheckoutActionsApiClient orderManagementCheckoutActionsApiClient = spy(
                     new OrderManagementCheckoutActionsApiClient(TestConfig.COMMUNICATOR_CONFIGURATION));
@@ -246,7 +246,7 @@ public class OrderManagementCheckoutActionsApiClientTest {
 
         @Test
         @DisplayName("given request was unsuccessful (400), then throw exception")
-        void returnOrderUnsuccessful() throws InvalidKeyException, ApiException, IOException {
+        void returnOrderUnsuccessful() throws InvalidKeyException, IOException {
 
             OrderManagementCheckoutActionsApiClient orderManagementCheckoutActionsApiClient = spy(
                     new OrderManagementCheckoutActionsApiClient(TestConfig.COMMUNICATOR_CONFIGURATION));
@@ -264,7 +264,7 @@ public class OrderManagementCheckoutActionsApiClientTest {
 
         @Test
         @DisplayName("given request was unsuccessful (500) with empty body, then throw exception")
-        void returnOrderUnsuccessful500() throws InvalidKeyException, ApiException, IOException {
+        void returnOrderUnsuccessful500() throws InvalidKeyException, IOException {
 
             OrderManagementCheckoutActionsApiClient orderManagementCheckoutActionsApiClient = spy(
                     new OrderManagementCheckoutActionsApiClient(TestConfig.COMMUNICATOR_CONFIGURATION));
@@ -282,7 +282,7 @@ public class OrderManagementCheckoutActionsApiClientTest {
 
         @Test
         @DisplayName("given some params are null, then throw exception")
-        void returnOrderNullParams() throws InvalidKeyException, ApiException, IOException {
+        void returnOrderNullParams() throws InvalidKeyException {
 
             OrderManagementCheckoutActionsApiClient orderManagementCheckoutActionsApiClient = spy(
                     new OrderManagementCheckoutActionsApiClient(TestConfig.COMMUNICATOR_CONFIGURATION));
@@ -341,7 +341,7 @@ public class OrderManagementCheckoutActionsApiClientTest {
 
         @Test
         @DisplayName("given request was unsuccessful (400), then throw exception")
-        void cancelOrderUnsuccessful() throws InvalidKeyException, ApiException, IOException {
+        void cancelOrderUnsuccessful() throws InvalidKeyException, IOException {
 
             OrderManagementCheckoutActionsApiClient orderManagementCheckoutActionsApiClient = spy(
                     new OrderManagementCheckoutActionsApiClient(TestConfig.COMMUNICATOR_CONFIGURATION));
@@ -359,7 +359,7 @@ public class OrderManagementCheckoutActionsApiClientTest {
 
         @Test
         @DisplayName("given request was unsuccessful (500) with empty body, then throw exception")
-        void cancelOrderUnsuccessful500() throws InvalidKeyException, ApiException, IOException {
+        void cancelOrderUnsuccessful500() throws InvalidKeyException, IOException {
 
             OrderManagementCheckoutActionsApiClient orderManagementCheckoutActionsApiClient = spy(
                     new OrderManagementCheckoutActionsApiClient(TestConfig.COMMUNICATOR_CONFIGURATION));
@@ -377,7 +377,7 @@ public class OrderManagementCheckoutActionsApiClientTest {
 
         @Test
         @DisplayName("given some params are null, then throw exception")
-        void cancelOrderNullParams() throws InvalidKeyException, ApiException, IOException {
+        void cancelOrderNullParams() throws InvalidKeyException {
 
             OrderManagementCheckoutActionsApiClient orderManagementCheckoutActionsApiClient = spy(
                     new OrderManagementCheckoutActionsApiClient(TestConfig.COMMUNICATOR_CONFIGURATION));

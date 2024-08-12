@@ -13,6 +13,7 @@ import com.payone.commerce.platform.lib.models.CreateCheckoutRequest;
 import com.payone.commerce.platform.lib.models.CreateCheckoutResponse;
 import com.payone.commerce.platform.lib.models.PatchCheckoutRequest;
 import com.payone.commerce.platform.lib.queries.GetCheckoutsQuery;
+import com.payone.commerce.platform.lib.serializer.JsonSerializer;
 
 import okhttp3.HttpUrl;
 import okhttp3.Request;
@@ -31,31 +32,31 @@ public class CheckoutApiClient extends BaseApiClient {
             CreateCheckoutRequest payload)
             throws ApiErrorResponseException, ApiResponseRetrievalException, IOException {
         if (merchantId == null) {
-            throw new IllegalArgumentException("Merchant ID is required");
+            throw new IllegalArgumentException(MERCHANT_ID_REQUIRED_ERROR);
         }
         if (commerceCaseId == null) {
-            throw new IllegalArgumentException("Commerce Case ID is required");
+            throw new IllegalArgumentException(COMMERCE_CASE_ID_REQUIRED_ERROR);
         }
         if (payload == null) {
-            throw new IllegalArgumentException("Payload is required");
+            throw new IllegalArgumentException(PAYLOAD_REQUIRED_ERROR);
         }
 
         HttpUrl url = new HttpUrl.Builder()
-                .scheme("https")
+                .scheme(HTTPS_SCHEME)
                 .host(this.getConfig().getHost())
-                .addPathSegment("v1")
+                .addPathSegment(PCP_PATH_SEGMENT_VERSION)
                 .addPathSegment(merchantId)
-                .addPathSegment("commerce-cases")
+                .addPathSegment(PCP_PATH_SEGMENT_COMMERCE_CASES)
                 .addPathSegment(commerceCaseId)
-                .addPathSegment("checkouts")
+                .addPathSegment(PCP_PATH_SEGMENT_CHECKOUTS)
                 .build();
 
-        String jsonString = getJsonMapper().writeValueAsString(payload);
+        String jsonString = JsonSerializer.serializeToJson(payload);
 
         Request request = new Request.Builder()
                 .url(url)
                 .post(RequestBody.create(jsonString, JSON))
-                .header("Content-Type", JSON.toString())
+                .header(CONTENT_TYPE_HEADER_NAME, JSON.toString())
                 .build();
 
         return this.makeApiCall(request, CreateCheckoutResponse.class);
@@ -65,23 +66,23 @@ public class CheckoutApiClient extends BaseApiClient {
     public CheckoutResponse getCheckoutRequest(String merchantId, String commerceCaseId, String checkoutId)
             throws ApiErrorResponseException, ApiResponseRetrievalException, IOException {
         if (merchantId == null) {
-            throw new IllegalArgumentException("Merchant ID is required");
+            throw new IllegalArgumentException(MERCHANT_ID_REQUIRED_ERROR);
         }
         if (commerceCaseId == null) {
-            throw new IllegalArgumentException("Commerce Case ID is required");
+            throw new IllegalArgumentException(COMMERCE_CASE_ID_REQUIRED_ERROR);
         }
         if (checkoutId == null) {
-            throw new IllegalArgumentException("Checkout ID is required");
+            throw new IllegalArgumentException(CHECKOUT_ID_REQUIRED_ERROR);
         }
 
         HttpUrl url = new HttpUrl.Builder()
-                .scheme("https")
+                .scheme(HTTPS_SCHEME)
                 .host(this.getConfig().getHost())
-                .addPathSegment("v1")
+                .addPathSegment(PCP_PATH_SEGMENT_VERSION)
                 .addPathSegment(merchantId)
-                .addPathSegment("commerce-cases")
+                .addPathSegment(PCP_PATH_SEGMENT_COMMERCE_CASES)
                 .addPathSegment(commerceCaseId)
-                .addPathSegment("checkouts")
+                .addPathSegment(PCP_PATH_SEGMENT_CHECKOUTS)
                 .addPathSegment(checkoutId)
                 .build();
 
@@ -102,15 +103,15 @@ public class CheckoutApiClient extends BaseApiClient {
     public CheckoutsResponse getCheckoutsRequest(String merchantId, GetCheckoutsQuery queryParams)
             throws ApiErrorResponseException, ApiResponseRetrievalException, IOException {
         if (merchantId == null) {
-            throw new IllegalArgumentException("Merchant ID is required");
+            throw new IllegalArgumentException(MERCHANT_ID_REQUIRED_ERROR);
         }
 
         HttpUrl.Builder urlBuilder = new HttpUrl.Builder()
-                .scheme("https")
+                .scheme(HTTPS_SCHEME)
                 .host(this.getConfig().getHost())
-                .addPathSegment("v1")
+                .addPathSegment(PCP_PATH_SEGMENT_VERSION)
                 .addPathSegment(merchantId)
-                .addPathSegment("checkouts");
+                .addPathSegment(PCP_PATH_SEGMENT_CHECKOUTS);
 
         if (queryParams != null) {
             for (Map.Entry<String, String> entry : queryParams.toQueryMap().entrySet()) {
@@ -131,35 +132,35 @@ public class CheckoutApiClient extends BaseApiClient {
             PatchCheckoutRequest payload)
             throws ApiErrorResponseException, ApiResponseRetrievalException, IOException {
         if (merchantId == null) {
-            throw new IllegalArgumentException("Merchant ID is required");
+            throw new IllegalArgumentException(MERCHANT_ID_REQUIRED_ERROR);
         }
         if (commerceCaseId == null) {
-            throw new IllegalArgumentException("Commerce Case ID is required");
+            throw new IllegalArgumentException(COMMERCE_CASE_ID_REQUIRED_ERROR);
         }
         if (checkoutId == null) {
-            throw new IllegalArgumentException("Checkout ID is required");
+            throw new IllegalArgumentException(CHECKOUT_ID_REQUIRED_ERROR);
         }
         if (payload == null) {
-            throw new IllegalArgumentException("Payload is required");
+            throw new IllegalArgumentException(PAYLOAD_REQUIRED_ERROR);
         }
 
         HttpUrl url = new HttpUrl.Builder()
-                .scheme("https")
+                .scheme(HTTPS_SCHEME)
                 .host(this.getConfig().getHost())
-                .addPathSegment("v1")
+                .addPathSegment(PCP_PATH_SEGMENT_VERSION)
                 .addPathSegment(merchantId)
-                .addPathSegment("commerce-cases")
+                .addPathSegment(PCP_PATH_SEGMENT_COMMERCE_CASES)
                 .addPathSegment(commerceCaseId)
-                .addPathSegment("checkouts")
+                .addPathSegment(PCP_PATH_SEGMENT_CHECKOUTS)
                 .addPathSegment(checkoutId)
                 .build();
 
-        String jsonString = getJsonMapper().writeValueAsString(payload);
+        String jsonString = JsonSerializer.serializeToJson(payload);
 
         Request request = new Request.Builder()
                 .url(url)
                 .patch(RequestBody.create(jsonString, JSON))
-                .header("Content-Type", JSON.toString())
+                .header(CONTENT_TYPE_HEADER_NAME, JSON.toString())
                 .build();
 
         this.makeApiCall(request);
@@ -169,23 +170,23 @@ public class CheckoutApiClient extends BaseApiClient {
     public void removeCheckoutRequest(String merchantId, String commerceCaseId, String checkoutId)
             throws ApiErrorResponseException, ApiResponseRetrievalException, IOException {
         if (merchantId == null) {
-            throw new IllegalArgumentException("Merchant ID is required");
+            throw new IllegalArgumentException(MERCHANT_ID_REQUIRED_ERROR);
         }
         if (commerceCaseId == null) {
-            throw new IllegalArgumentException("Commerce Case ID is required");
+            throw new IllegalArgumentException(COMMERCE_CASE_ID_REQUIRED_ERROR);
         }
         if (checkoutId == null) {
-            throw new IllegalArgumentException("Checkout ID is required");
+            throw new IllegalArgumentException(CHECKOUT_ID_REQUIRED_ERROR);
         }
 
         HttpUrl url = new HttpUrl.Builder()
-                .scheme("https")
+                .scheme(HTTPS_SCHEME)
                 .host(this.getConfig().getHost())
-                .addPathSegment("v1")
+                .addPathSegment(PCP_PATH_SEGMENT_VERSION)
                 .addPathSegment(merchantId)
-                .addPathSegment("commerce-cases")
+                .addPathSegment(PCP_PATH_SEGMENT_COMMERCE_CASES)
                 .addPathSegment(commerceCaseId)
-                .addPathSegment("checkouts")
+                .addPathSegment(PCP_PATH_SEGMENT_CHECKOUTS)
                 .addPathSegment(checkoutId)
                 .build();
 

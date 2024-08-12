@@ -21,7 +21,8 @@ public class GetCommerceCasesQuery implements QueryConfig {
     private List<PaymentChannel> includePaymentChannel = null;
 
     public GetCommerceCasesQuery() {
-
+      // Empty constructor
+      // GetCommerceCasesQuery should be populated using the setter methods
     }
 
     public GetCommerceCasesQuery setOffset(Integer offset) {
