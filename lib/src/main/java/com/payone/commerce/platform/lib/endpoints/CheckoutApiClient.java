@@ -51,9 +51,7 @@ public class CheckoutApiClient extends BaseApiClient {
                 .addPathSegment(PCP_PATH_SEGMENT_CHECKOUTS)
                 .build();
 
-        String jsonString = null;
-
-        jsonString = JsonSerializer.serializeToJson(payload);
+        String jsonString = JsonSerializer.serializeToJson(payload);
 
         Request request = new Request.Builder()
                 .url(url)
@@ -157,9 +155,7 @@ public class CheckoutApiClient extends BaseApiClient {
                 .addPathSegment(checkoutId)
                 .build();
 
-        String jsonString = null;
-
-        jsonString = JsonSerializer.serializeToJson(payload);
+        String jsonString = JsonSerializer.serializeToJson(payload);
 
         Request request = new Request.Builder()
                 .url(url)
