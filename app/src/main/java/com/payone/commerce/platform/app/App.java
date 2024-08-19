@@ -61,7 +61,7 @@ public class App {
 
         public App(String API_KEY, String API_SECRET, String MERCHANT_ID) {
                 this.MERCHANT_ID = MERCHANT_ID;
-                this.config = new CommunicatorConfiguration(API_KEY, API_SECRET, "preprod.commerce-api.payone.com",
+                this.config = new CommunicatorConfiguration(API_KEY, API_SECRET, "api.preprod.commerce.payone.com",
                                 "YOUR_SHOP_NAME");
                 try {
                         this.commerceCaseClient = new CommerceCaseApiClient(config);

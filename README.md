@@ -58,7 +58,7 @@ class App {
         String apiSecret = System.getenv("API_SECRET");
         this.merchantId = System.getenv("MERCHANT_ID");
 
-        this.config = new CommunicatorConfiguration(apiKey, apiSecret, "preprod.commerce-api.payone.com");
+        this.config = new CommunicatorConfiguration(apiKey, apiSecret, "api.preprod.commerce.payone.com");
     }
 }
 ```
