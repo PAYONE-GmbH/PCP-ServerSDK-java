@@ -18,7 +18,7 @@ public class ServerMetaInfo implements Serializable {
         return new ServerMetaInfo()
                 .platformIdentifier(String.format("%s, java version is: %s", System.getProperty("os.name"),
                         System.getProperty("java.version")))
-                .sdkIdentifier("JavaServerSDK/v0.0.2")
+                .sdkIdentifier("JavaServerSDK/v0.0.3")
                 .sdkCreator("PAYONE GmbH")
                 .integrator(integrator);
     }
