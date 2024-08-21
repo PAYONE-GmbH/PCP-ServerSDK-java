@@ -23,7 +23,7 @@ if (JavaVersion.current().majorVersion != '8') {
    apply plugin: 'org.sonarqube'
 }
 
-version = '0.0.2'
+version = '0.0.3'
 
 repositories {
     mavenCentral()

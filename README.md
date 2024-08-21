@@ -37,7 +37,7 @@ Welcome to the Java SDK for the PAYONE Commerce Platform! This repository contai
 
 ```groovy
 dependencies {
-    implementation group: 'io.github.payone-gmbh', name: 'pcp-serversdk-java', version: '0.0.2'
+    implementation group: 'io.github.payone-gmbh', name: 'pcp-serversdk-java', version: '0.0.3'
 }
 ```
 
@@ -236,7 +236,7 @@ git checkout -b release/0.1.0
 - Run prepare-release.sh script to set correct version
 
 ```sh
-./prepare-release.sh
+./prepare-release.sh 0.1.0
 ```
 
 #### Changelog Generation with Conventional Changelog

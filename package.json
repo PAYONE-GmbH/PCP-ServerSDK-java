@@ -1,6 +1,6 @@
 {
   "name": "pcp-serversdk-java",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "type": "commonjs",
   "scripts": {
     "changelog": "conventional-changelog -i CHANGELOG.md -s -r 0 --config ./changelog.config.js"
