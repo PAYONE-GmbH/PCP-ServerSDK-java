@@ -17,7 +17,6 @@ import org.junit.jupiter.api.Test;
 import com.payone.commerce.platform.lib.errors.ApiErrorResponseException;
 import com.payone.commerce.platform.lib.errors.ApiException;
 import com.payone.commerce.platform.lib.errors.ApiResponseRetrievalException;
-import com.payone.commerce.platform.lib.CommunicatorConfiguration;
 import com.payone.commerce.platform.lib.models.PaymentExecutionRequest;
 import com.payone.commerce.platform.lib.models.RefundPaymentResponse;
 import com.payone.commerce.platform.lib.models.RefundRequest;
@@ -29,15 +28,11 @@ import com.payone.commerce.platform.lib.models.CompletePaymentRequest;
 import com.payone.commerce.platform.lib.models.CompletePaymentResponse;
 import com.payone.commerce.platform.lib.models.CreatePaymentResponse;
 import com.payone.commerce.platform.lib.testutils.ApiResponseMocks;
+import com.payone.commerce.platform.lib.testutils.TestConfig;
 
 import okhttp3.Response;
 
 public class PaymentExecutionApiClientTest {
-    private final String TEST_KEY = "KEY";
-    private final String TEST_SECRET = "Super duper Ethan Hunt level secret";
-    private final CommunicatorConfiguration CONFIG = new CommunicatorConfiguration(TEST_KEY, TEST_SECRET,
-            "awesome-api.com");
-
     @Nested
     @DisplayName("createPaymentRequest")
     class createPayment {
@@ -45,7 +40,8 @@ public class PaymentExecutionApiClientTest {
         @DisplayName("given request was successful, then return response")
         void createPaymentRequestSuccessful() throws InvalidKeyException, ApiException, IOException {
 
-            PaymentExecutionApiClient paymentExecutionApiClient = spy(new PaymentExecutionApiClient(CONFIG));
+            PaymentExecutionApiClient paymentExecutionApiClient = spy(
+                    new PaymentExecutionApiClient(TestConfig.COMMUNICATOR_CONFIGURATION));
             CreatePaymentResponse expected = new CreatePaymentResponse();
             Response response = ApiResponseMocks.createResponse(200, new CreatePaymentResponse());
 
@@ -60,9 +56,10 @@ public class PaymentExecutionApiClientTest {
 
         @Test
         @DisplayName("given request was unsuccessful (400), then throw exception")
-        void createPaymentRequestUnsuccessful() throws InvalidKeyException, ApiException, IOException {
+        void createPaymentRequestUnsuccessful() throws InvalidKeyException, IOException {
 
-            PaymentExecutionApiClient paymentExecutionApiClient = spy(new PaymentExecutionApiClient(CONFIG));
+            PaymentExecutionApiClient paymentExecutionApiClient = spy(
+                    new PaymentExecutionApiClient(TestConfig.COMMUNICATOR_CONFIGURATION));
             Response response = ApiResponseMocks.createErrorResponse(400);
 
             doReturn(response).when(paymentExecutionApiClient).getResponse(any());
@@ -78,9 +75,10 @@ public class PaymentExecutionApiClientTest {
 
         @Test
         @DisplayName("given request was unsuccessful (500) with empty body, then throw exception")
-        void createPaymentRequestUnsuccessful500() throws InvalidKeyException, ApiException, IOException {
+        void createPaymentRequestUnsuccessful500() throws InvalidKeyException, IOException {
 
-            PaymentExecutionApiClient paymentExecutionApiClient = spy(new PaymentExecutionApiClient(CONFIG));
+            PaymentExecutionApiClient paymentExecutionApiClient = spy(
+                    new PaymentExecutionApiClient(TestConfig.COMMUNICATOR_CONFIGURATION));
             Response response = ApiResponseMocks.createEmptyErrorResponse(500);
 
             doReturn(response).when(paymentExecutionApiClient).getResponse(any());
@@ -96,9 +94,10 @@ public class PaymentExecutionApiClientTest {
 
         @Test
         @DisplayName("Given required params are null, then throw exception")
-        void createPaymentRequestNullParams() throws InvalidKeyException, ApiException, IOException {
+        void createPaymentRequestNullParams() throws InvalidKeyException {
 
-            PaymentExecutionApiClient paymentExecutionApiClient = spy(new PaymentExecutionApiClient(CONFIG));
+            PaymentExecutionApiClient paymentExecutionApiClient = spy(
+                    new PaymentExecutionApiClient(TestConfig.COMMUNICATOR_CONFIGURATION));
             PaymentExecutionRequest payload = new PaymentExecutionRequest();
 
             IllegalArgumentException e;
@@ -137,7 +136,8 @@ public class PaymentExecutionApiClientTest {
         @DisplayName("given request was successful, then return response")
         void capturePaymentRequestSuccessful() throws InvalidKeyException, ApiException, IOException {
 
-            PaymentExecutionApiClient paymentExecutionApiClient = spy(new PaymentExecutionApiClient(CONFIG));
+            PaymentExecutionApiClient paymentExecutionApiClient = spy(
+                    new PaymentExecutionApiClient(TestConfig.COMMUNICATOR_CONFIGURATION));
             CapturePaymentResponse expected = new CapturePaymentResponse();
             Response response = ApiResponseMocks.createResponse(200, new CapturePaymentResponse());
 
@@ -152,9 +152,10 @@ public class PaymentExecutionApiClientTest {
 
         @Test
         @DisplayName("given request unsuccessful (400), then throw exception")
-        void capturePaymentRequestUnsuccessful400() throws InvalidKeyException, ApiException, IOException {
+        void capturePaymentRequestUnsuccessful400() throws InvalidKeyException, IOException {
 
-            PaymentExecutionApiClient paymentExecutionApiClient = spy(new PaymentExecutionApiClient(CONFIG));
+            PaymentExecutionApiClient paymentExecutionApiClient = spy(
+                    new PaymentExecutionApiClient(TestConfig.COMMUNICATOR_CONFIGURATION));
             Response response = ApiResponseMocks.createErrorResponse(400);
 
             doReturn(response).when(paymentExecutionApiClient).getResponse(any());
@@ -170,9 +171,10 @@ public class PaymentExecutionApiClientTest {
 
         @Test
         @DisplayName("given request unsuccessful (500) with empty body, then throw exception")
-        void capturePaymentRequestUnsuccessful500() throws InvalidKeyException, ApiException, IOException {
+        void capturePaymentRequestUnsuccessful500() throws InvalidKeyException, IOException {
 
-            PaymentExecutionApiClient paymentExecutionApiClient = spy(new PaymentExecutionApiClient(CONFIG));
+            PaymentExecutionApiClient paymentExecutionApiClient = spy(
+                    new PaymentExecutionApiClient(TestConfig.COMMUNICATOR_CONFIGURATION));
             Response response = ApiResponseMocks.createEmptyErrorResponse(500);
 
             doReturn(response).when(paymentExecutionApiClient).getResponse(any());
@@ -188,9 +190,10 @@ public class PaymentExecutionApiClientTest {
 
         @Test
         @DisplayName("Given required params are null, then throw exception")
-        void capturePaymentRequestParamsNull() throws InvalidKeyException, ApiException, IOException {
+        void capturePaymentRequestParamsNull() throws InvalidKeyException {
 
-            PaymentExecutionApiClient paymentExecutionApiClient = spy(new PaymentExecutionApiClient(CONFIG));
+            PaymentExecutionApiClient paymentExecutionApiClient = spy(
+                    new PaymentExecutionApiClient(TestConfig.COMMUNICATOR_CONFIGURATION));
             CapturePaymentRequest payload = new CapturePaymentRequest();
 
             IllegalArgumentException e;
@@ -235,7 +238,8 @@ public class PaymentExecutionApiClientTest {
         @DisplayName("given request was successful, then return response")
         void cancelPaymentRequestSuccessful() throws InvalidKeyException, ApiException, IOException {
 
-            PaymentExecutionApiClient paymentExecutionApiClient = spy(new PaymentExecutionApiClient(CONFIG));
+            PaymentExecutionApiClient paymentExecutionApiClient = spy(
+                    new PaymentExecutionApiClient(TestConfig.COMMUNICATOR_CONFIGURATION));
             CancelPaymentResponse expected = new CancelPaymentResponse();
             Response response = ApiResponseMocks.createResponse(200, new CancelPayment());
 
@@ -250,9 +254,10 @@ public class PaymentExecutionApiClientTest {
 
         @Test
         @DisplayName("given request unsuccessful (400), then throw exception")
-        void cancelPaymentRequestUnsuccessful400() throws InvalidKeyException, ApiException, IOException {
+        void cancelPaymentRequestUnsuccessful400() throws InvalidKeyException, IOException {
 
-            PaymentExecutionApiClient paymentExecutionApiClient = spy(new PaymentExecutionApiClient(CONFIG));
+            PaymentExecutionApiClient paymentExecutionApiClient = spy(
+                    new PaymentExecutionApiClient(TestConfig.COMMUNICATOR_CONFIGURATION));
             Response response = ApiResponseMocks.createErrorResponse(400);
 
             doReturn(response).when(paymentExecutionApiClient).getResponse(any());
@@ -268,9 +273,10 @@ public class PaymentExecutionApiClientTest {
 
         @Test
         @DisplayName("given request unsuccessful (500) with empty body, then throw exception")
-        void cancelPaymentRequestUnsuccessful500() throws InvalidKeyException, ApiException, IOException {
+        void cancelPaymentRequestUnsuccessful500() throws InvalidKeyException, IOException {
 
-            PaymentExecutionApiClient paymentExecutionApiClient = spy(new PaymentExecutionApiClient(CONFIG));
+            PaymentExecutionApiClient paymentExecutionApiClient = spy(
+                    new PaymentExecutionApiClient(TestConfig.COMMUNICATOR_CONFIGURATION));
             Response response = ApiResponseMocks.createEmptyErrorResponse(500);
 
             doReturn(response).when(paymentExecutionApiClient).getResponse(any());
@@ -286,9 +292,10 @@ public class PaymentExecutionApiClientTest {
 
         @Test
         @DisplayName("Given required params are null, then throw exception")
-        void cancelPaymentRequestParamsNull() throws InvalidKeyException, ApiException, IOException {
+        void cancelPaymentRequestParamsNull() throws InvalidKeyException {
 
-            PaymentExecutionApiClient paymentExecutionApiClient = spy(new PaymentExecutionApiClient(CONFIG));
+            PaymentExecutionApiClient paymentExecutionApiClient = spy(
+                    new PaymentExecutionApiClient(TestConfig.COMMUNICATOR_CONFIGURATION));
             CancelPaymentRequest payload = new CancelPaymentRequest();
 
             IllegalArgumentException e;
@@ -333,7 +340,8 @@ public class PaymentExecutionApiClientTest {
         @DisplayName("given request was successful, then return response")
         void completePaymentRequestSuccessful() throws InvalidKeyException, ApiException, IOException {
 
-            PaymentExecutionApiClient paymentExecutionApiClient = spy(new PaymentExecutionApiClient(CONFIG));
+            PaymentExecutionApiClient paymentExecutionApiClient = spy(
+                    new PaymentExecutionApiClient(TestConfig.COMMUNICATOR_CONFIGURATION));
             CompletePaymentResponse expected = new CompletePaymentResponse();
             Response response = ApiResponseMocks.createResponse(200, new CompletePaymentResponse());
 
@@ -348,9 +356,10 @@ public class PaymentExecutionApiClientTest {
 
         @Test
         @DisplayName("given request unsuccessful (400), then throw exception")
-        void completePaymentRequestUnsuccessful400() throws InvalidKeyException, ApiException, IOException {
+        void completePaymentRequestUnsuccessful400() throws InvalidKeyException, IOException {
 
-            PaymentExecutionApiClient paymentExecutionApiClient = spy(new PaymentExecutionApiClient(CONFIG));
+            PaymentExecutionApiClient paymentExecutionApiClient = spy(
+                    new PaymentExecutionApiClient(TestConfig.COMMUNICATOR_CONFIGURATION));
             Response response = ApiResponseMocks.createErrorResponse(400);
 
             doReturn(response).when(paymentExecutionApiClient).getResponse(any());
@@ -366,9 +375,10 @@ public class PaymentExecutionApiClientTest {
 
         @Test
         @DisplayName("given request unsuccessful (500) with empty body, then throw exception")
-        void completePaymentRequestUnsuccessful500() throws InvalidKeyException, ApiException, IOException {
+        void completePaymentRequestUnsuccessful500() throws InvalidKeyException, IOException {
 
-            PaymentExecutionApiClient paymentExecutionApiClient = spy(new PaymentExecutionApiClient(CONFIG));
+            PaymentExecutionApiClient paymentExecutionApiClient = spy(
+                    new PaymentExecutionApiClient(TestConfig.COMMUNICATOR_CONFIGURATION));
             Response response = ApiResponseMocks.createEmptyErrorResponse(500);
 
             doReturn(response).when(paymentExecutionApiClient).getResponse(any());
@@ -384,9 +394,10 @@ public class PaymentExecutionApiClientTest {
 
         @Test
         @DisplayName("Given required params are null, then throw exception")
-        void completePaymentRequestParamsNull() throws InvalidKeyException, ApiException, IOException {
+        void completePaymentRequestParamsNull() throws InvalidKeyException {
 
-            PaymentExecutionApiClient paymentExecutionApiClient = spy(new PaymentExecutionApiClient(CONFIG));
+            PaymentExecutionApiClient paymentExecutionApiClient = spy(
+                    new PaymentExecutionApiClient(TestConfig.COMMUNICATOR_CONFIGURATION));
             CompletePaymentRequest payload = new CompletePaymentRequest();
 
             IllegalArgumentException e;
@@ -431,7 +442,8 @@ public class PaymentExecutionApiClientTest {
         @DisplayName("given request was successful, then return response")
         void refundPaymentRequestSuccessful() throws InvalidKeyException, ApiException, IOException {
 
-            PaymentExecutionApiClient paymentExecutionApiClient = spy(new PaymentExecutionApiClient(CONFIG));
+            PaymentExecutionApiClient paymentExecutionApiClient = spy(
+                    new PaymentExecutionApiClient(TestConfig.COMMUNICATOR_CONFIGURATION));
             RefundPaymentResponse expected = new RefundPaymentResponse();
             Response response = ApiResponseMocks.createResponse(200, new RefundPaymentResponse());
 
@@ -446,9 +458,10 @@ public class PaymentExecutionApiClientTest {
 
         @Test
         @DisplayName("given request unsuccessful (400), then throw exception")
-        void refundPaymentRequestUnsuccessful400() throws InvalidKeyException, ApiException, IOException {
+        void refundPaymentRequestUnsuccessful400() throws InvalidKeyException, IOException {
 
-            PaymentExecutionApiClient paymentExecutionApiClient = spy(new PaymentExecutionApiClient(CONFIG));
+            PaymentExecutionApiClient paymentExecutionApiClient = spy(
+                    new PaymentExecutionApiClient(TestConfig.COMMUNICATOR_CONFIGURATION));
             Response response = ApiResponseMocks.createErrorResponse(400);
 
             doReturn(response).when(paymentExecutionApiClient).getResponse(any());
@@ -464,9 +477,10 @@ public class PaymentExecutionApiClientTest {
 
         @Test
         @DisplayName("given request unsuccessful (500) with empty body, then throw exception")
-        void refundPaymentRequestUnsuccessful500() throws InvalidKeyException, ApiException, IOException {
+        void refundPaymentRequestUnsuccessful500() throws InvalidKeyException, IOException {
 
-            PaymentExecutionApiClient paymentExecutionApiClient = spy(new PaymentExecutionApiClient(CONFIG));
+            PaymentExecutionApiClient paymentExecutionApiClient = spy(
+                    new PaymentExecutionApiClient(TestConfig.COMMUNICATOR_CONFIGURATION));
             Response response = ApiResponseMocks.createEmptyErrorResponse(500);
 
             doReturn(response).when(paymentExecutionApiClient).getResponse(any());
@@ -482,9 +496,10 @@ public class PaymentExecutionApiClientTest {
 
         @Test
         @DisplayName("Given required params are null, then throw exception")
-        void refundPaymentRequestParamsNull() throws InvalidKeyException, ApiException, IOException {
+        void refundPaymentRequestParamsNull() throws InvalidKeyException {
 
-            PaymentExecutionApiClient paymentExecutionApiClient = spy(new PaymentExecutionApiClient(CONFIG));
+            PaymentExecutionApiClient paymentExecutionApiClient = spy(
+                    new PaymentExecutionApiClient(TestConfig.COMMUNICATOR_CONFIGURATION));
             RefundRequest payload = new RefundRequest();
 
             IllegalArgumentException e;

@@ -17,6 +17,7 @@ import com.payone.commerce.platform.lib.models.OrderRequest;
 import com.payone.commerce.platform.lib.models.OrderResponse;
 import com.payone.commerce.platform.lib.models.ReturnRequest;
 import com.payone.commerce.platform.lib.models.ReturnResponse;
+import com.payone.commerce.platform.lib.serializer.JsonSerializer;
 
 import okhttp3.HttpUrl;
 import okhttp3.Request;
@@ -32,38 +33,38 @@ public class OrderManagementCheckoutActionsApiClient extends BaseApiClient {
             String checkoutId, OrderRequest payload)
             throws ApiErrorResponseException, ApiResponseRetrievalException, IOException {
         if (merchantId == null) {
-            throw new IllegalArgumentException("Merchant ID is required");
+            throw new IllegalArgumentException(MERCHANT_ID_REQUIRED_ERROR);
         }
         if (commerceCaseId == null) {
-            throw new IllegalArgumentException("Commerce Case ID is required");
+            throw new IllegalArgumentException(COMMERCE_CASE_ID_REQUIRED_ERROR);
         }
         if (checkoutId == null) {
-            throw new IllegalArgumentException("Checkout ID is required");
+            throw new IllegalArgumentException(CHECKOUT_ID_REQUIRED_ERROR);
         }
         if (payload == null) {
-            throw new IllegalArgumentException("Payload is required");
+            throw new IllegalArgumentException(PAYLOAD_REQUIRED_ERROR);
         }
 
         HttpUrl url = new HttpUrl.Builder()
-                .scheme("https")
+                .scheme(HTTPS_SCHEME)
                 .host(this.getConfig().getHost())
-                .addPathSegment("v1")
+                .addPathSegment(PCP_PATH_SEGMENT_VERSION)
                 .addPathSegment(merchantId)
-                .addPathSegment("commerce-cases")
+                .addPathSegment(PCP_PATH_SEGMENT_COMMERCE_CASES)
                 .addPathSegment(commerceCaseId)
-                .addPathSegment("checkouts")
+                .addPathSegment(PCP_PATH_SEGMENT_CHECKOUTS)
                 .addPathSegment(checkoutId)
                 .addPathSegment("order")
                 .build();
 
-        String jsonString = getJsonMapper().writeValueAsString(payload);
+        String jsonString = JsonSerializer.serializeToJson(payload);
 
         RequestBody formBody = RequestBody.create(jsonString, JSON);
 
         Request request = new Request.Builder()
                 .url(url)
                 .post(formBody)
-                .header("Content-Type", formBody.contentType().toString())
+                .header(CONTENT_TYPE_HEADER_NAME, formBody.contentType().toString())
                 .build();
 
         return this.makeApiCall(request, OrderResponse.class);
@@ -74,38 +75,38 @@ public class OrderManagementCheckoutActionsApiClient extends BaseApiClient {
             String checkoutId, DeliverRequest payload)
             throws ApiErrorResponseException, ApiResponseRetrievalException, IOException {
         if (merchantId == null) {
-            throw new IllegalArgumentException("Merchant ID is required");
+            throw new IllegalArgumentException(MERCHANT_ID_REQUIRED_ERROR);
         }
         if (commerceCaseId == null) {
-            throw new IllegalArgumentException("Commerce Case ID is required");
+            throw new IllegalArgumentException(COMMERCE_CASE_ID_REQUIRED_ERROR);
         }
         if (checkoutId == null) {
-            throw new IllegalArgumentException("Checkout ID is required");
+            throw new IllegalArgumentException(CHECKOUT_ID_REQUIRED_ERROR);
         }
         if (payload == null) {
-            throw new IllegalArgumentException("Payload is required");
+            throw new IllegalArgumentException(PAYLOAD_REQUIRED_ERROR);
         }
 
         HttpUrl url = new HttpUrl.Builder()
-                .scheme("https")
+                .scheme(HTTPS_SCHEME)
                 .host(this.getConfig().getHost())
-                .addPathSegment("v1")
+                .addPathSegment(PCP_PATH_SEGMENT_VERSION)
                 .addPathSegment(merchantId)
-                .addPathSegment("commerce-cases")
+                .addPathSegment(PCP_PATH_SEGMENT_COMMERCE_CASES)
                 .addPathSegment(commerceCaseId)
-                .addPathSegment("checkouts")
+                .addPathSegment(PCP_PATH_SEGMENT_CHECKOUTS)
                 .addPathSegment(checkoutId)
                 .addPathSegment("deliver")
                 .build();
 
-        String jsonString = getJsonMapper().writeValueAsString(payload);
+        String jsonString = JsonSerializer.serializeToJson(payload);
 
         RequestBody formBody = RequestBody.create(jsonString, JSON);
 
         Request request = new Request.Builder()
                 .url(url)
                 .post(formBody)
-                .header("Content-Type", formBody.contentType().toString())
+                .header(CONTENT_TYPE_HEADER_NAME, formBody.contentType().toString())
                 .build();
 
         return this.makeApiCall(request, DeliverResponse.class);
@@ -116,38 +117,38 @@ public class OrderManagementCheckoutActionsApiClient extends BaseApiClient {
             String checkoutId, ReturnRequest payload)
             throws ApiErrorResponseException, ApiResponseRetrievalException, IOException {
         if (merchantId == null) {
-            throw new IllegalArgumentException("Merchant ID is required");
+            throw new IllegalArgumentException(MERCHANT_ID_REQUIRED_ERROR);
         }
         if (commerceCaseId == null) {
-            throw new IllegalArgumentException("Commerce Case ID is required");
+            throw new IllegalArgumentException(COMMERCE_CASE_ID_REQUIRED_ERROR);
         }
         if (checkoutId == null) {
-            throw new IllegalArgumentException("Checkout ID is required");
+            throw new IllegalArgumentException(CHECKOUT_ID_REQUIRED_ERROR);
         }
         if (payload == null) {
-            throw new IllegalArgumentException("Payload is required");
+            throw new IllegalArgumentException(PAYLOAD_REQUIRED_ERROR);
         }
 
         HttpUrl url = new HttpUrl.Builder()
-                .scheme("https")
+                .scheme(HTTPS_SCHEME)
                 .host(this.getConfig().getHost())
-                .addPathSegment("v1")
+                .addPathSegment(PCP_PATH_SEGMENT_VERSION)
                 .addPathSegment(merchantId)
-                .addPathSegment("commerce-cases")
+                .addPathSegment(PCP_PATH_SEGMENT_COMMERCE_CASES)
                 .addPathSegment(commerceCaseId)
-                .addPathSegment("checkouts")
+                .addPathSegment(PCP_PATH_SEGMENT_CHECKOUTS)
                 .addPathSegment(checkoutId)
                 .addPathSegment("return")
                 .build();
 
-        String jsonString = getJsonMapper().writeValueAsString(payload);
+        String jsonString = JsonSerializer.serializeToJson(payload);
 
         RequestBody formBody = RequestBody.create(jsonString, JSON);
 
         Request request = new Request.Builder()
                 .url(url)
                 .post(formBody)
-                .header("Content-Type", formBody.contentType().toString())
+                .header(CONTENT_TYPE_HEADER_NAME, formBody.contentType().toString())
                 .build();
 
         return this.makeApiCall(request, ReturnResponse.class);
@@ -158,38 +159,38 @@ public class OrderManagementCheckoutActionsApiClient extends BaseApiClient {
             String checkoutId, CancelRequest payload)
             throws ApiErrorResponseException, ApiResponseRetrievalException, IOException {
         if (merchantId == null) {
-            throw new IllegalArgumentException("Merchant ID is required");
+            throw new IllegalArgumentException(MERCHANT_ID_REQUIRED_ERROR);
         }
         if (commerceCaseId == null) {
-            throw new IllegalArgumentException("Commerce Case ID is required");
+            throw new IllegalArgumentException(COMMERCE_CASE_ID_REQUIRED_ERROR);
         }
         if (checkoutId == null) {
-            throw new IllegalArgumentException("Checkout ID is required");
+            throw new IllegalArgumentException(CHECKOUT_ID_REQUIRED_ERROR);
         }
         if (payload == null) {
-            throw new IllegalArgumentException("Payload is required");
+            throw new IllegalArgumentException(PAYLOAD_REQUIRED_ERROR);
         }
 
         HttpUrl url = new HttpUrl.Builder()
-                .scheme("https")
+                .scheme(HTTPS_SCHEME)
                 .host(this.getConfig().getHost())
-                .addPathSegment("v1")
+                .addPathSegment(PCP_PATH_SEGMENT_VERSION)
                 .addPathSegment(merchantId)
-                .addPathSegment("commerce-cases")
+                .addPathSegment(PCP_PATH_SEGMENT_COMMERCE_CASES)
                 .addPathSegment(commerceCaseId)
-                .addPathSegment("checkouts")
+                .addPathSegment(PCP_PATH_SEGMENT_CHECKOUTS)
                 .addPathSegment(checkoutId)
                 .addPathSegment("cancel")
                 .build();
 
-        String jsonString = getJsonMapper().writeValueAsString(payload);
+        String jsonString = JsonSerializer.serializeToJson(payload);
 
         RequestBody formBody = RequestBody.create(jsonString, JSON);
 
         Request request = new Request.Builder()
                 .url(url)
                 .post(formBody)
-                .header("Content-Type", formBody.contentType().toString())
+                .header(CONTENT_TYPE_HEADER_NAME, formBody.contentType().toString())
                 .build();
 
         return this.makeApiCall(request, CancelResponse.class);

@@ -4,8 +4,9 @@ buildscript {
         gradlePluginPortal()
     }
     dependencies {
-      if (JavaVersion.current().majorVersion != "8") {
+      if (JavaVersion.current().majorVersion != '8') {
         classpath 'com.vanniktech:gradle-maven-publish-plugin:0.29.0'
+        classpath 'org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:5.1.0.4882'
       }
     }
 }
@@ -14,13 +15,13 @@ plugins {
     id 'java-library'
     id 'jacoco'
     id 'checkstyle'
-    id "io.github.kmbisset89.changelog.plugin" version "1.0.4"
+    id 'io.github.kmbisset89.changelog.plugin' version '1.0.4'
 }
 
-if (JavaVersion.current().majorVersion != "8") {
+if (JavaVersion.current().majorVersion != '8') {
    apply plugin: 'com.vanniktech.maven.publish'
+   apply plugin: 'org.sonarqube'
 }
-
 
 version = '0.0.2'
 
@@ -39,7 +40,7 @@ dependencies {
 }
 
 jacoco {
-    toolVersion = "0.8.8" // Specify the version of JaCoCo you want to use
+    toolVersion = '0.8.8' // Specify the version of JaCoCo you want to use
 }
 
 tasks.test {
@@ -56,42 +57,59 @@ tasks.jacocoTestReport {
     afterEvaluate {
         classDirectories.setFrom(files(classDirectories.files.collect {
             fileTree(dir: it, exclude: [
-                "com/payone/**/models/*"
+                'com/payone/**/models/*'
             ])
         }))    
     }
 }
 
-if (JavaVersion.current().majorVersion != "8") {
+
+if (JavaVersion.current().majorVersion != '8') {
   mavenPublishing {
-    publishToMavenCentral("CENTRAL_PORTAL")
+    publishToMavenCentral('CENTRAL_PORTAL')
 
     signAllPublications()
 
-    coordinates("io.github.payone-gmbh", "pcp-serversdk-java", version)
+    coordinates('io.github.payone-gmbh', 'pcp-serversdk-java', version)
 
     pom {
-      name = "PCP-SERVERSDK-JAVA"
-      description = "The PayOne PCP Java SDK."
-      inceptionYear = "2024"
-      url = "https://github.com/PAYONE-GmbH/PCP-ServerSDK-java"
+      name = 'PCP-SERVERSDK-JAVA'
+      description = 'The PAYONE Commerce Platform Java SDK.'
+      inceptionYear = '2024'
+      url = 'https://github.com/PAYONE-GmbH/PCP-ServerSDK-java'
       licenses {
         license {
-          name = "MIT"     
+          name = 'MIT'     
         }
       }
       developers {
         developer {
-          id = "username"
-          name = "PayOne-GmbH"
-          url = "https://github.com/PAYONE-GmbH"
+          id = 'username'
+          name = 'PAYONE-GmbH'
+          url = 'https://github.com/PAYONE-GmbH'
         }
       }
       scm {
-        url = "https://github.com/PAYONE-GmbH/PCP-ServerSDK-java"
-        connection = "scm:git:git://github.com/PAYONE-GmbH/PCP-ServerSDK-java.git"
-        developerConnection = "scm:git:ssh://git@github.com/PAYONE-GmbH/PCP-ServerSDK-java.git"
+        url = 'https://github.com/PAYONE-GmbH/PCP-ServerSDK-java'
+        connection = 'scm:git:git://github.com/PAYONE-GmbH/PCP-ServerSDK-java.git'
+        developerConnection = 'scm:git:ssh://git@github.com/PAYONE-GmbH/PCP-ServerSDK-java.git'
       }
+    }
+  }
+
+  tasks['sonar'].dependsOn 'jacocoTestReport'
+
+  sonar {
+    properties {
+      property 'sonar.projectKey', 'PAYONE-GmbH_PCP-ServerSDK-java'
+      property 'sonar.projectName', 'PCP-ServerSDK-java'
+      property 'sonar.organization', 'payone-gmbh'
+      property 'sonar.host.url', 'https://sonarcloud.io'
+      property 'sonar.sources', 'src/main'
+      property 'sonar.tests', 'src/test'
+      property 'sonar.coverage.exclusions', '**/models/**'
+      property 'sonar.exclusions', '**/models/**'
+      property 'sonar.cpd.exclusions', '**/endpoints/**'
     }
   }
 }
