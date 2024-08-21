@@ -74,7 +74,7 @@ if (JavaVersion.current().majorVersion != '8') {
 
     pom {
       name = 'PCP-SERVERSDK-JAVA'
-      description = 'The PayOne PCP Java SDK.'
+      description = 'The PAYONE Commerce Platform Java SDK.'
       inceptionYear = '2024'
       url = 'https://github.com/PAYONE-GmbH/PCP-ServerSDK-java'
       licenses {
@@ -85,7 +85,7 @@ if (JavaVersion.current().majorVersion != '8') {
       developers {
         developer {
           id = 'username'
-          name = 'PayOne-GmbH'
+          name = 'PAYONE-GmbH'
           url = 'https://github.com/PAYONE-GmbH'
         }
       }
