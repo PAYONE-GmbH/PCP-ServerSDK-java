@@ -1,4 +1,4 @@
-## [0.0.1](https://github.com/PAYONE-GmbH/PCP-ServerSDK-java/compare/v0.0.2...v0.0.1) (2024-08-09)
+## [0.0.1](https://github.com/PAYONE-GmbH/PCP-ServerSDK-java/compare/v0.0.2...v0.0.1) (2024-08-21)
 
 ### Bug Fixes
 
@@ -8,6 +8,8 @@
 
 * docs: add documentation on how to generate the changelog ([6a58c9544f11d01028b5fd637aed171211e878cb](https://github.com/PAYONE-GmbH/PCP-ServerSDK-java/commit/6a58c9544f11d01028b5fd637aed171211e878cb))
 * docs: add installation ([e24166aa9b46250efe86cf3866dc18867d348c93](https://github.com/PAYONE-GmbH/PCP-ServerSDK-java/commit/e24166aa9b46250efe86cf3866dc18867d348c93))
+* docs: add status badges ([ad01ef75ed6358b8325a010c8f96d9412ce4b27c](https://github.com/PAYONE-GmbH/PCP-ServerSDK-java/commit/ad01ef75ed6358b8325a010c8f96d9412ce4b27c))
+* docs: adjust naming ([4a658161c3dfd5a9615c6b6d779c44442ba6b48b](https://github.com/PAYONE-GmbH/PCP-ServerSDK-java/commit/4a658161c3dfd5a9615c6b6d779c44442ba6b48b))
 * docs: init readme skeleton ([7af41adabab6c55c064e159bd6a900b498df0885](https://github.com/PAYONE-GmbH/PCP-ServerSDK-java/commit/7af41adabab6c55c064e159bd6a900b498df0885))
 * docs: update readme ([06d9063f1ccbdffb8fa8050ae6eb22a4f0d93455](https://github.com/PAYONE-GmbH/PCP-ServerSDK-java/commit/06d9063f1ccbdffb8fa8050ae6eb22a4f0d93455))
 * docs: update readme ([6414a0731c34898c28e7e9be1e18fbbc90837ef2](https://github.com/PAYONE-GmbH/PCP-ServerSDK-java/commit/6414a0731c34898c28e7e9be1e18fbbc90837ef2))
