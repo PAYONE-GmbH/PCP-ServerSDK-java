@@ -22,6 +22,8 @@ Welcome to the Java SDK for the PAYONE Commerce Platform! This repository contai
     - [Preparing the Release](#preparing-the-release)
     - [Changelog Generation with Conventional Changelog](#changelog-generation-with-conventional-changelog)
     - [Merging the Release Branch](#merging-the-release-branch)
+    - [GitHub Action for Release](#github-action-for-release)
+    - [Optional: Creating a GitHub Release](#optional-creating-a-github-release)
 - [License](#license)
 
 ## Features
@@ -260,8 +262,31 @@ After calling the `prepare_release.sh` script, it is recommended to manually tri
 
 #### Merging the Release Branch
 
-- Create PR on develop branch
-- Merge develop in main branch
+- Create PR on `develop` branch
+- Merge `develop` in `main` branch
+
+#### GitHub Action for Release
+
+After successfully merging all changes to the `main` branch, an admin can trigger a GitHub Action to finalize and publish the release. This action ensures that the release process is automated, consistent, and deploys the new release from the `main` branch.
+
+**Triggering the GitHub Action**:
+
+- Only admins can trigger the release action.
+- Ensure that all changes are committed to the `main` branch.
+- Navigate to the Actions tab on your GitHub repository and manually trigger the release action for the `main` branch.
+
+#### Optional: Creating a GitHub Release
+
+Once the release has been published to maven central, developers can start using the latest version of the SDK. However, if you want to make the release more visible and include detailed release notes, you can optionally create a GitHub release.
+
+1. **Navigate to the Releases Page**: Go to the "Releases" section of your repository on GitHub.
+2. **Draft a New Release**: Click "Draft a new release".
+3. **Tag the Release**: Select the version tag that corresponds to the version you just published on npm (e.g., `v0.1.0`).
+4. **Release Title**: Add a descriptive title for the release (e.g., `v0.1.0 - Initial Release`).
+5. **Auto-Generated Release Notes**: GitHub can automatically generate release notes based on merged pull requests and commit history. You can review these notes, adjust the content, and highlight important changes.
+6. **Publish the Release**: Once you're satisfied with the release notes, click "Publish release".
+
+Creating a GitHub release is optional, but it can provide additional context and visibility for your users. For detailed guidance, refer to the [GitHub documentation on managing releases](https://docs.github.com/en/repositories/releasing-projects-on-github/managing-releases-in-a-repository).
 
 ## License
 

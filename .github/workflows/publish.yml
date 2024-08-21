@@ -1,4 +1,4 @@
-name: Run Tests and build
+name: Publish package to maven central
 
 on:
   push:
