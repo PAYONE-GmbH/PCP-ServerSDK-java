@@ -24,6 +24,8 @@ TAG=v$VERSION
 BUILD_GRADLE_PATH="./lib/build.gradle"
 SERVER_META_INFO_PATH="./lib/src/main/java/com/payone/commerce/platform/lib/utils/ServerMetaInfo.java"
 README_PATH="./README.md"
+PACKAGE_JSON_PATH="./package.json"
+PACKAGE_LOCK_JSON_PATH="./package-lock.json"
 
 # Update the version in the build.gradle file
 sed -i '' "s/version = '[0-9]*\.[0-9]*\.[0-9]*'/version = '$VERSION'/" $BUILD_GRADLE_PATH
@@ -44,6 +46,8 @@ jq --arg version "$VERSION" '
 git add $BUILD_GRADLE_PATH
 git add $SERVER_META_INFO_PATH
 git add $README_PATH
+git add $PACKAGE_JSON_PATH
+git add $PACKAGE_LOCK_JSON_PATH
 git commit -m "Update version to $VERSION"
 git tag -a $TAG -m "Release version $VERSION"
 git push origin $TAG
