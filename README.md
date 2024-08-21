@@ -236,7 +236,7 @@ git checkout -b release/0.1.0
 - Run prepare-release.sh script to set correct version
 
 ```sh
-./prepare-release.sh
+./prepare-release.sh 0.1.0
 ```
 
 #### Changelog Generation with Conventional Changelog
