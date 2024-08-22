@@ -11,19 +11,18 @@ Welcome to the Java SDK for the PAYONE Commerce Platform! This repository contai
 - [Features](#features)
 - [Installation](#installation)
 - [Usage](#usage)
+  - [General](#general)
   - [Error Handling](#error-handling)
   - [Client Side](#client-side)
   - [Apple Pay](#apple-pay)
 - [Demo App](#demo-app)
 - [Contributing](#contributing)
-  - [Build the library](#build-the-library)
-  - [Run tests](#run-tests)
-  - [Releasing the library](#releasing-the-library)
-    - [Preparing the Release](#preparing-the-release)
-    - [Changelog Generation with Conventional Changelog](#changelog-generation-with-conventional-changelog)
-    - [Merging the Release Branch](#merging-the-release-branch)
-    - [GitHub Action for Release](#github-action-for-release)
-    - [Optional: Creating a GitHub Release](#optional-creating-a-github-release)
+- [Releasing the library](#releasing-the-library)
+  - [Preparing the Release](#preparing-the-release)
+  - [Changelog Generation with Conventional Changelog](#changelog-generation-with-conventional-changelog)
+  - [Merging the Release Branch](#merging-the-release-branch)
+  - [GitHub Action for Release](#github-action-for-release)
+  - [Optional: Creating a GitHub Release](#optional-creating-a-github-release)
 - [License](#license)
 
 ## Features
@@ -41,9 +40,13 @@ dependencies {
 }
 ```
 
+**[back to top](#table-of-contents)**
+
 ## Usage
 
 You can find examples and detailed usage in the [examples](./app/src/main/java/com/payone/commerce/platform/app/examples/) directory.
+
+### General
 
 To use this SDK you need to construct a `CommunicatorConfiguration` which encapsulate everything needed to connect to the PAYONE Commerce Platform.
 
@@ -178,6 +181,8 @@ class App {
 }
 ```
 
+**[back to top](#table-of-contents)**
+
 ## Demo App
 
 This repo contains a demo app that showcases how to implement common use cases, like a [Step-by-Step Checkout](https://docs.payone.com/pcp/checkout-flows/step-by-step-checkout) and an [One-Stop-Checkout](https://docs.payone.com/pcp/checkout-flows/one-step-checkout). For each use case the demo app contains a private method in the top level class `App`. You can run the app to execute the code within in the sandbox API. This is a good way to test, if your setup is correct.
@@ -196,35 +201,17 @@ Make sure to provide all necessary environment variables:
 
 [Jump to the demo app](./app/src/main/java/com/payone/commerce/platform/app/App.java)
 
+**[back to top](#table-of-contents)**
+
 ## Contributing
 
-We welcome contributions from the community. If you want to contribute, please follow these steps:
+See [Contributing](./CONTRIBUTING.md)
 
-Fork the repository.
-Create a new branch (`git checkout -b feature/feature-branch`).
-Make your changes.
-Commit your changes (`git commit -am 'feat: add new feature'`).
-Push to the branch (`git push origin feature/feature-branch`).
-Create a new Pull Request.
-Please make sure to follow the coding standards and write appropriate tests for your changes.
+**[back to top](#table-of-contents)**
 
-### Build the library
+## Releasing the library
 
-```sh
-./gradlew :lib:build
-```
-
-### Run tests
-
-```sh
-./gradlew :lib:test
-# or for coverage
-./gradlew :lib:jacocoTestReport
-```
-
-### Releasing the library
-
-#### Preparing the Release
+### Preparing the Release
 
 - Checkout develop branch
 - Create release branch (release/0.1.0)
@@ -239,7 +226,7 @@ git checkout -b release/0.1.0
 ./prepare-release.sh 0.1.0
 ```
 
-#### Changelog Generation with Conventional Changelog
+### Changelog Generation with Conventional Changelog
 
 After calling the `prepare_release.sh` script, it is recommended to manually trigger the changelog generation script (which uses [conventional-changelog](https://github.com/conventional-changelog/conventional-changelog)).
 
@@ -260,12 +247,12 @@ After calling the `prepare_release.sh` script, it is recommended to manually tri
      ```
    - Review and commit the updated changelog before proceeding with the release.
 
-#### Merging the Release Branch
+### Merging the Release Branch
 
 - Create PR on `develop` branch
 - Merge `develop` in `main` branch
 
-#### GitHub Action for Release
+### GitHub Action for Release
 
 After successfully merging all changes to the `main` branch, an admin can trigger a GitHub Action to finalize and publish the release. This action ensures that the release process is automated, consistent, and deploys the new release from the `main` branch.
 
@@ -275,7 +262,7 @@ After successfully merging all changes to the `main` branch, an admin can trigge
 - Ensure that all changes are committed to the `main` branch.
 - Navigate to the Actions tab on your GitHub repository and manually trigger the release action for the `main` branch.
 
-#### Optional: Creating a GitHub Release
+### Optional: Creating a GitHub Release
 
 Once the release has been published to maven central, developers can start using the latest version of the SDK. However, if you want to make the release more visible and include detailed release notes, you can optionally create a GitHub release.
 
@@ -287,6 +274,8 @@ Once the release has been published to maven central, developers can start using
 6. **Publish the Release**: Once you're satisfied with the release notes, click "Publish release".
 
 Creating a GitHub release is optional, but it can provide additional context and visibility for your users. For detailed guidance, refer to the [GitHub documentation on managing releases](https://docs.github.com/en/repositories/releasing-projects-on-github/managing-releases-in-a-repository).
+
+**[back to top](#table-of-contents)**
 
 ## License
 
