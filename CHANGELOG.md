@@ -1,4 +1,10 @@
-## [0.0.1](https://github.com/PAYONE-GmbH/PCP-ServerSDK-java/compare/v0.0.2...v0.0.1) (2024-08-21)
+# [1.0.0](https://github.com/PAYONE-GmbH/PCP-ServerSDK-java/compare/v0.0.3...v1.0.0) (2024-08-22)
+
+### Documentation
+
+* docs: add contributing guidelines and update readme ([c9c7210c6b7655761851ff5564c09ad10c6a0b4a](https://github.com/PAYONE-GmbH/PCP-ServerSDK-java/commit/c9c7210c6b7655761851ff5564c09ad10c6a0b4a))
+
+## [0.0.3](https://github.com/PAYONE-GmbH/PCP-ServerSDK-java/compare/v0.0.2...v0.0.3) (2024-08-21)
 
 ### Bug Fixes
 
