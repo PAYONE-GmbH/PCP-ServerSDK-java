@@ -42,6 +42,7 @@ jq --arg version "$VERSION" '
   .version = $version |
   .packages[""].version = $version
 ' package-lock.json >tmp.json && mv tmp.json package-lock.json
+rm -f tmp.json
 
 git add $BUILD_GRADLE_PATH
 git add $SERVER_META_INFO_PATH
