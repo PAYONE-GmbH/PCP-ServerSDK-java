@@ -51,5 +51,6 @@ git add $PACKAGE_LOCK_JSON_PATH
 git commit -m "Update version to $VERSION"
 git tag -a $TAG -m "Release version $VERSION"
 git push origin $TAG
+git push --tags
 
 echo "Version updated to $VERSION and tagged in Git."
