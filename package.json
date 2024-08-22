@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "type": "commonjs",
   "scripts": {
-    "changelog": "conventional-changelog -i CHANGELOG.md -s -r 0 --config ./changelog.config.js"
+    "changelog": "conventional-changelog -i CHANGELOG.md -s --config ./changelog.config.js"
   },
   "repository": {
     "type": "git",
