@@ -48,12 +48,12 @@ git add $SERVER_META_INFO_PATH
 git add $README_PATH
 git add $PACKAGE_JSON_PATH
 git add $PACKAGE_LOCK_JSON_PATH
-git commit -m "Update version to $VERSION"
 git tag -a $TAG -m "Release version $VERSION"
+npm install
 npm run changelog
 git add CHANGELOG.md
-git commit -m "Update changelog for version $VERSION"
-git push origin $TAG
-git push origin release/$VERSION
+git commit -m "Update version to $VERSION"
+git push --tags
+git push origin HEAD
 
 echo "Version updated to $VERSION and tagged in Git."
