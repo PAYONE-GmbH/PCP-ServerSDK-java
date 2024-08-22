@@ -10,6 +10,7 @@ jobs:
   sonar-scan:
     needs: [test]
     uses: ./.github/workflows/sonar_scanner.yml
+    secrets: inherit
 
   build-and-publish:
     needs: [test, sonar-scan]
