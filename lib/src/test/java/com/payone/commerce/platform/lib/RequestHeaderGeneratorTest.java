@@ -40,7 +40,7 @@ class RequestHeaderGeneratorTest {
     @Test
     void testSignatureGenerationForGet() {
         Date date = new Date(1720520499000l);
-        Headers headers = new Headers.Builder().add("Date", date)
+        Headers headers = new Headers.Builder().add(RequestHeaderGenerator.DATE_HEADER_NAME, date)
                 // the meta info is normally generated internally, but fields and output may
                 // change overtime, so we pin it for the test
                 .add(RequestHeaderGenerator.SERVER_META_INFO_HEADER_NAME, "server fixed")
@@ -63,7 +63,7 @@ class RequestHeaderGeneratorTest {
         Date date = new Date(1720520499000l);
         MediaType mediaType = MediaType.parse("application/json; charset=utf-8");
         Headers headers = new Headers.Builder()
-                .add("Content-Type", mediaType.toString())
+                .add(RequestHeaderGenerator.CONTENT_TYPE_HEADER_NAME, mediaType.toString())
                 .add("Date", date)
                 // the meta info is normally generated internally, but fields and output may
                 // change overtime, so we pin it for the test
@@ -96,8 +96,8 @@ class RequestHeaderGeneratorTest {
         try {
             Request updatedRequest = HEADER_GENERATOR.generateAdditionalRequestHeaders(request);
 
-            assertNotNull(updatedRequest.headers().get("Date"));
-            assertNotEquals("", updatedRequest.headers().get("Date"));
+            assertNotNull(updatedRequest.headers().get(RequestHeaderGenerator.DATE_HEADER_NAME));
+            assertNotEquals("", updatedRequest.headers().get(RequestHeaderGenerator.DATE_HEADER_NAME));
         } catch (Exception e) {
             fail(e);
         }

@@ -20,9 +20,9 @@ public class RequestHeaderGenerator {
 
     public static final String SERVER_META_INFO_HEADER_NAME = "X-GCS-ServerMetaInfo";
     public static final String CLIENT_META_INFO_HEADER_NAME = "X-GCS-ClientMetaInfo";
-    private static final String DATE_HEADER_NAME = "Date";
-    private static final String AUTHORIZATION_HEADER_NAME = "Authorization";
-    private static final String CONTENT_TYPE_HEADER_NAME = "Content-Type";
+    public static final String DATE_HEADER_NAME = "Date";
+    public static final String AUTHORIZATION_HEADER_NAME = "Authorization";
+    public static final String CONTENT_TYPE_HEADER_NAME = "Content-Type";
 
     private static final String ALGORITHM = "HmacSHA256";
     private static final String WHITESPACE_REGEX = "\\r?\\n[\\h]*";
