@@ -42,14 +42,19 @@ jq --arg version "$VERSION" '
   .version = $version |
   .packages[""].version = $version
 ' package-lock.json >tmp.json && mv tmp.json package-lock.json
+rm -f tmp.json
 
 git add $BUILD_GRADLE_PATH
 git add $SERVER_META_INFO_PATH
 git add $README_PATH
 git add $PACKAGE_JSON_PATH
 git add $PACKAGE_LOCK_JSON_PATH
+npm install
+npm run changelog
+git add CHANGELOG.md
+git tag -a v$NEW_VERSION -m "Version $NEW_VERSION"
 git commit -m "Update version to $VERSION"
-git tag -a $TAG -m "Release version $VERSION"
-git push origin $TAG
+git push origin tag v$NEW_VERSION
+git push origin HEAD
 
 echo "Version updated to $VERSION and tagged in Git."
