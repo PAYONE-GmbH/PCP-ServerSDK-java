@@ -34,6 +34,7 @@
 #     "any.go":
 #       runner: go run
 commit-msg:
-  scripts:
+  parallel: true
+  commands:
     commitlint:
-      runner: npx commitlint --edit
+      run: npx commitlint --edit $1
