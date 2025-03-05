@@ -17,7 +17,7 @@ jobs:
     runs-on: ubuntu-20.04
     strategy:
       matrix:
-        java: ['8', '11', '17', '21']
+        java: ['8', '11', '17', '21', '23']
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -26,10 +26,10 @@ jobs:
         with:
           java-version: ${{ matrix.java }}
           distribution: 'adopt'
-      - name: Setup Gradle 8.9
+      - name: Setup Gradle 8.10
         uses: gradle/actions/setup-gradle@v3
         with:
-          gradle-version: 8.9
+          gradle-version: '8.10'
       - name: Test
         run: |
           ./gradlew :lib:test
