@@ -237,6 +237,7 @@ public class PaymentInformationApiClientTest {
 
             PaymentInformationRefundRequest payload = new PaymentInformationRefundRequest();
             PaymentInformationRefundResponse res = paymentInformationApiClient.refundPaymentInformation("1", "2", "3",
+                    "4",
                     payload);
 
             assertEquals(expected, res);
@@ -255,7 +256,7 @@ public class PaymentInformationApiClientTest {
 
             PaymentInformationRefundRequest payload = new PaymentInformationRefundRequest();
             ApiErrorResponseException e = assertThrows(ApiErrorResponseException.class, () -> {
-                paymentInformationApiClient.refundPaymentInformation("1", "2", "3", payload);
+                paymentInformationApiClient.refundPaymentInformation("1", "2", "3", "4", payload);
             });
             int code = e.getErrors().get(0).getHttpStatusCode();
             assertEquals(400, code);
@@ -274,7 +275,7 @@ public class PaymentInformationApiClientTest {
 
             ApiResponseRetrievalException e = assertThrows(ApiResponseRetrievalException.class, () -> {
                 PaymentInformationRefundRequest payload = new PaymentInformationRefundRequest();
-                paymentInformationApiClient.refundPaymentInformation("1", "2", "3", payload);
+                paymentInformationApiClient.refundPaymentInformation("1", "2", "3", "4", payload);
             });
             int code = e.getStatusCode();
             assertEquals(500, code);
@@ -292,25 +293,31 @@ public class PaymentInformationApiClientTest {
             String m;
 
             e = assertThrows(IllegalArgumentException.class, () -> {
-                paymentInformationApiClient.refundPaymentInformation(null, "2", "3", payload);
+                paymentInformationApiClient.refundPaymentInformation(null, "2", "3", "4", payload);
             });
             m = e.getMessage();
             assertEquals("Merchant ID is required", m);
 
             e = assertThrows(IllegalArgumentException.class, () -> {
-                paymentInformationApiClient.refundPaymentInformation("1", null, "3", payload);
+                paymentInformationApiClient.refundPaymentInformation("1", null, "3", "4", payload);
             });
             m = e.getMessage();
             assertEquals("Commerce Case ID is required", m);
 
             e = assertThrows(IllegalArgumentException.class, () -> {
-                paymentInformationApiClient.refundPaymentInformation("1", "2", null, payload);
+                paymentInformationApiClient.refundPaymentInformation("1", "2", null, "4", payload);
             });
             m = e.getMessage();
             assertEquals("Checkout ID is required", m);
 
             e = assertThrows(IllegalArgumentException.class, () -> {
-                paymentInformationApiClient.refundPaymentInformation("1", "2", "checkout it out", null);
+                paymentInformationApiClient.refundPaymentInformation("1", "2", "3", null, payload);
+            });
+            m = e.getMessage();
+            assertEquals("Payment Information ID is required", m);
+
+            e = assertThrows(IllegalArgumentException.class, () -> {
+                paymentInformationApiClient.refundPaymentInformation("1", "2", "3", "4", null);
             });
             m = e.getMessage();
             assertEquals("Payload is required", m);

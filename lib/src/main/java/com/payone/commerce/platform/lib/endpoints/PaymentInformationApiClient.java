@@ -46,7 +46,7 @@ public class PaymentInformationApiClient extends BaseApiClient {
                 .addPathSegment(commerceCaseId)
                 .addPathSegment(PCP_PATH_SEGMENT_CHECKOUTS)
                 .addPathSegment(checkoutId)
-                .addPathSegment("payment-informations")
+                .addPathSegment("payment-information")
                 .build();
 
         String jsonString = JsonSerializer.serializeToJson(payload);
@@ -88,7 +88,7 @@ public class PaymentInformationApiClient extends BaseApiClient {
                 .addPathSegment(commerceCaseId)
                 .addPathSegment(PCP_PATH_SEGMENT_CHECKOUTS)
                 .addPathSegment(checkoutId)
-                .addPathSegment("payment-informations")
+                .addPathSegment("payment-information")
                 .addPathSegment(paymentInformationId)
                 .build();
 
@@ -102,7 +102,7 @@ public class PaymentInformationApiClient extends BaseApiClient {
     }
 
     public PaymentInformationRefundResponse refundPaymentInformation(String merchantId, String commerceCaseId,
-            String checkoutId, PaymentInformationRefundRequest payload)
+            String checkoutId, String paymentInformationId, PaymentInformationRefundRequest payload)
             throws ApiException, IOException {
         if (merchantId == null) {
             throw new IllegalArgumentException(MERCHANT_ID_REQUIRED_ERROR);
@@ -112,6 +112,9 @@ public class PaymentInformationApiClient extends BaseApiClient {
         }
         if (checkoutId == null) {
             throw new IllegalArgumentException(CHECKOUT_ID_REQUIRED_ERROR);
+        }
+        if (paymentInformationId == null) {
+            throw new IllegalArgumentException("Payment Information ID is required");
         }
         if (payload == null) {
             throw new IllegalArgumentException(PAYLOAD_REQUIRED_ERROR);
@@ -126,7 +129,9 @@ public class PaymentInformationApiClient extends BaseApiClient {
                 .addPathSegment(commerceCaseId)
                 .addPathSegment(PCP_PATH_SEGMENT_CHECKOUTS)
                 .addPathSegment(checkoutId)
-                .addPathSegment("payment-informations")
+                .addPathSegment("payment-information")
+                .addPathSegment(paymentInformationId)
+                .addPathSegment("refund")
                 .build();
 
         String jsonString = JsonSerializer.serializeToJson(payload);

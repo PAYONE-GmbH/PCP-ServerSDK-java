@@ -294,7 +294,7 @@ public class PaymentExecutionApiClient extends BaseApiClient {
                 .addPathSegment(checkoutId)
                 .addPathSegment(PCP_PATH_SEGMENT_PAYMENT_EXECUTIONS)
                 .addPathSegment(paymentExecutionId)
-                .addPathSegment("complete")
+                .addPathSegment("pause")
                 .build();
 
         String jsonString = JsonSerializer.serializeToJson(payload);
