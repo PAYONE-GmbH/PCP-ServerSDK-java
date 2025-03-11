@@ -16,6 +16,10 @@ public enum StatusValue {
 
   REJECTED_CAPTURE("REJECTED_CAPTURE"),
 
+  REJECTED_PAUSE("REJECTED_PAUSE"),
+
+  REJECTED_UPDATE("REJECTED_UPDATE"),
+
   REDIRECTED("REDIRECTED"),
 
   PENDING_PAYMENT("PENDING_PAYMENT"),
@@ -48,7 +52,13 @@ public enum StatusValue {
 
   ACCOUNT_CREDITED("ACCOUNT_CREDITED"),
 
-  ACCOUNT_DEBITED("ACCOUNT_DEBITED");
+  ACCOUNT_DEBITED("ACCOUNT_DEBITED"),
+
+  PAYOUT_REQUESTED("PAYOUT_REQUESTED"),
+
+  REJECTED_CREDIT("REJECTED_CREDIT"),
+
+  UPDATED("UPDATED");
 
   private String value;
 
@@ -74,6 +84,6 @@ public enum StatusValue {
       }
     }
     throw new IllegalArgumentException("Unexpected value '" + value + "'");
-
   }
+
 }

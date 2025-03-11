@@ -8,38 +8,47 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 /**
- * Detailed information regarding an ocurred payment event.
+ * Detailed information regarding an occurred payment event.
  */
 @JsonPropertyOrder({
     PaymentEvent.JSON_PROPERTY_TYPE,
     PaymentEvent.JSON_PROPERTY_AMOUNT_OF_MONEY,
     PaymentEvent.JSON_PROPERTY_PAYMENT_STATUS,
     PaymentEvent.JSON_PROPERTY_CANCELLATION_REASON,
-    PaymentEvent.JSON_PROPERTY_RETURN_REASON
+    PaymentEvent.JSON_PROPERTY_RETURN_REASON,
+    PaymentEvent.JSON_PROPERTY_PAYMENT_INSTRUCTIONS
 })
+
 public class PaymentEvent implements Serializable {
   private static final long serialVersionUID = 1L;
-
   public static final String JSON_PROPERTY_TYPE = "type";
+
   private PaymentType type;
 
   public static final String JSON_PROPERTY_AMOUNT_OF_MONEY = "amountOfMoney";
+
   private AmountOfMoney amountOfMoney;
 
   public static final String JSON_PROPERTY_PAYMENT_STATUS = "paymentStatus";
+
   private StatusValue paymentStatus;
 
   public static final String JSON_PROPERTY_CANCELLATION_REASON = "cancellationReason";
+
   private CancellationReason cancellationReason;
 
   public static final String JSON_PROPERTY_RETURN_REASON = "returnReason";
+
   private String returnReason;
+
+  public static final String JSON_PROPERTY_PAYMENT_INSTRUCTIONS = "paymentInstructions";
+
+  private PaymentInstructions paymentInstructions;
 
   public PaymentEvent() {
   }
 
   public PaymentEvent type(PaymentType type) {
-
     this.type = type;
     return this;
   }
@@ -48,11 +57,10 @@ public class PaymentEvent implements Serializable {
    * Get type
    * 
    * @return type
-   **/
+   */
 
   @JsonProperty(JSON_PROPERTY_TYPE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public PaymentType getType() {
     return type;
   }
@@ -64,7 +72,6 @@ public class PaymentEvent implements Serializable {
   }
 
   public PaymentEvent amountOfMoney(AmountOfMoney amountOfMoney) {
-
     this.amountOfMoney = amountOfMoney;
     return this;
   }
@@ -73,11 +80,10 @@ public class PaymentEvent implements Serializable {
    * Get amountOfMoney
    * 
    * @return amountOfMoney
-   **/
+   */
 
   @JsonProperty(JSON_PROPERTY_AMOUNT_OF_MONEY)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public AmountOfMoney getAmountOfMoney() {
     return amountOfMoney;
   }
@@ -89,7 +95,6 @@ public class PaymentEvent implements Serializable {
   }
 
   public PaymentEvent paymentStatus(StatusValue paymentStatus) {
-
     this.paymentStatus = paymentStatus;
     return this;
   }
@@ -98,11 +103,10 @@ public class PaymentEvent implements Serializable {
    * Get paymentStatus
    * 
    * @return paymentStatus
-   **/
+   */
 
   @JsonProperty(JSON_PROPERTY_PAYMENT_STATUS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public StatusValue getPaymentStatus() {
     return paymentStatus;
   }
@@ -114,7 +118,6 @@ public class PaymentEvent implements Serializable {
   }
 
   public PaymentEvent cancellationReason(CancellationReason cancellationReason) {
-
     this.cancellationReason = cancellationReason;
     return this;
   }
@@ -123,11 +126,10 @@ public class PaymentEvent implements Serializable {
    * Get cancellationReason
    * 
    * @return cancellationReason
-   **/
+   */
 
   @JsonProperty(JSON_PROPERTY_CANCELLATION_REASON)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public CancellationReason getCancellationReason() {
     return cancellationReason;
   }
@@ -139,7 +141,6 @@ public class PaymentEvent implements Serializable {
   }
 
   public PaymentEvent returnReason(String returnReason) {
-
     this.returnReason = returnReason;
     return this;
   }
@@ -148,11 +149,10 @@ public class PaymentEvent implements Serializable {
    * Reason of the Refund (e.g. communicated by or to the costumer).
    * 
    * @return returnReason
-   **/
+   */
 
   @JsonProperty(JSON_PROPERTY_RETURN_REASON)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public String getReturnReason() {
     return returnReason;
   }
@@ -163,6 +163,32 @@ public class PaymentEvent implements Serializable {
     this.returnReason = returnReason;
   }
 
+  public PaymentEvent paymentInstructions(PaymentInstructions paymentInstructions) {
+    this.paymentInstructions = paymentInstructions;
+    return this;
+  }
+
+  /**
+   * Get paymentInstructions
+   * 
+   * @return paymentInstructions
+   */
+
+  @JsonProperty(JSON_PROPERTY_PAYMENT_INSTRUCTIONS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public PaymentInstructions getPaymentInstructions() {
+    return paymentInstructions;
+  }
+
+  @JsonProperty(JSON_PROPERTY_PAYMENT_INSTRUCTIONS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setPaymentInstructions(PaymentInstructions paymentInstructions) {
+    this.paymentInstructions = paymentInstructions;
+  }
+
+  /**
+   * Return true if this PaymentEvent object is equal to o.
+   */
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -176,12 +202,13 @@ public class PaymentEvent implements Serializable {
         Objects.equals(this.amountOfMoney, paymentEvent.amountOfMoney) &&
         Objects.equals(this.paymentStatus, paymentEvent.paymentStatus) &&
         Objects.equals(this.cancellationReason, paymentEvent.cancellationReason) &&
-        Objects.equals(this.returnReason, paymentEvent.returnReason);
+        Objects.equals(this.returnReason, paymentEvent.returnReason) &&
+        Objects.equals(this.paymentInstructions, paymentEvent.paymentInstructions);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(type, amountOfMoney, paymentStatus, cancellationReason, returnReason);
+    return Objects.hash(type, amountOfMoney, paymentStatus, cancellationReason, returnReason, paymentInstructions);
   }
 
   @Override
@@ -193,6 +220,7 @@ public class PaymentEvent implements Serializable {
     sb.append("    paymentStatus: ").append(toIndentedString(paymentStatus)).append("\n");
     sb.append("    cancellationReason: ").append(toIndentedString(cancellationReason)).append("\n");
     sb.append("    returnReason: ").append(toIndentedString(returnReason)).append("\n");
+    sb.append("    paymentInstructions: ").append(toIndentedString(paymentInstructions)).append("\n");
     sb.append("}");
     return sb.toString();
   }

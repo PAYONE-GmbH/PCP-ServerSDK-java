@@ -1,6 +1,7 @@
 package com.payone.commerce.platform.lib.models;
 
 import java.io.Serializable;
+import java.net.URI;
 import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -17,46 +18,60 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
     OrderLineDetailsInput.JSON_PROPERTY_PRODUCT_TYPE,
     OrderLineDetailsInput.JSON_PROPERTY_QUANTITY,
     OrderLineDetailsInput.JSON_PROPERTY_TAX_AMOUNT,
+    OrderLineDetailsInput.JSON_PROPERTY_TAX_AMOUNT_PER_UNIT,
     OrderLineDetailsInput.JSON_PROPERTY_PRODUCT_URL,
     OrderLineDetailsInput.JSON_PROPERTY_PRODUCT_IMAGE_URL,
     OrderLineDetailsInput.JSON_PROPERTY_PRODUCT_CATEGORY_PATH,
     OrderLineDetailsInput.JSON_PROPERTY_MERCHANT_SHOP_DELIVERY_REFERENCE
 })
+
 public class OrderLineDetailsInput implements Serializable {
   private static final long serialVersionUID = 1L;
 
   public static final String JSON_PROPERTY_PRODUCT_CODE = "productCode";
+
   private String productCode;
 
   public static final String JSON_PROPERTY_PRODUCT_PRICE = "productPrice";
+
   private Long productPrice;
 
   public static final String JSON_PROPERTY_PRODUCT_TYPE = "productType";
+
   private ProductType productType;
 
   public static final String JSON_PROPERTY_QUANTITY = "quantity";
+
   private Long quantity;
 
   public static final String JSON_PROPERTY_TAX_AMOUNT = "taxAmount";
+
   private Long taxAmount;
 
+  public static final String JSON_PROPERTY_TAX_AMOUNT_PER_UNIT = "taxAmountPerUnit";
+
+  private Boolean taxAmountPerUnit = false;
+
   public static final String JSON_PROPERTY_PRODUCT_URL = "productUrl";
-  private String productUrl;
+
+  private URI productUrl;
 
   public static final String JSON_PROPERTY_PRODUCT_IMAGE_URL = "productImageUrl";
-  private String productImageUrl;
+
+  private URI productImageUrl;
 
   public static final String JSON_PROPERTY_PRODUCT_CATEGORY_PATH = "productCategoryPath";
+
   private String productCategoryPath;
 
   public static final String JSON_PROPERTY_MERCHANT_SHOP_DELIVERY_REFERENCE = "merchantShopDeliveryReference";
+
   private String merchantShopDeliveryReference;
 
   public OrderLineDetailsInput() {
   }
 
   public OrderLineDetailsInput productCode(String productCode) {
-
     this.productCode = productCode;
     return this;
   }
@@ -65,11 +80,10 @@ public class OrderLineDetailsInput implements Serializable {
    * Product or UPC Code
    * 
    * @return productCode
-   **/
+   */
 
   @JsonProperty(JSON_PROPERTY_PRODUCT_CODE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public String getProductCode() {
     return productCode;
   }
@@ -81,7 +95,6 @@ public class OrderLineDetailsInput implements Serializable {
   }
 
   public OrderLineDetailsInput productPrice(Long productPrice) {
-
     this.productPrice = productPrice;
     return this;
   }
@@ -92,11 +105,10 @@ public class OrderLineDetailsInput implements Serializable {
    * maximum: 2147483647
    * 
    * @return productPrice
-   **/
+   */
 
   @JsonProperty(JSON_PROPERTY_PRODUCT_PRICE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
-
   public Long getProductPrice() {
     return productPrice;
   }
@@ -108,7 +120,6 @@ public class OrderLineDetailsInput implements Serializable {
   }
 
   public OrderLineDetailsInput productType(ProductType productType) {
-
     this.productType = productType;
     return this;
   }
@@ -117,11 +128,10 @@ public class OrderLineDetailsInput implements Serializable {
    * Get productType
    * 
    * @return productType
-   **/
+   */
 
   @JsonProperty(JSON_PROPERTY_PRODUCT_TYPE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public ProductType getProductType() {
     return productType;
   }
@@ -133,7 +143,6 @@ public class OrderLineDetailsInput implements Serializable {
   }
 
   public OrderLineDetailsInput quantity(Long quantity) {
-
     this.quantity = quantity;
     return this;
   }
@@ -145,11 +154,10 @@ public class OrderLineDetailsInput implements Serializable {
    * maximum: 9999
    * 
    * @return quantity
-   **/
+   */
 
   @JsonProperty(JSON_PROPERTY_QUANTITY)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
-
   public Long getQuantity() {
     return quantity;
   }
@@ -161,22 +169,20 @@ public class OrderLineDetailsInput implements Serializable {
   }
 
   public OrderLineDetailsInput taxAmount(Long taxAmount) {
-
     this.taxAmount = taxAmount;
     return this;
   }
 
   /**
-   * Tax on the line item, with the last two digits implied as decimal places
+   * Tax on the line item, with the last two digits implied as decimal places.
    * minimum: 0
    * maximum: 2147483647
    * 
    * @return taxAmount
-   **/
+   */
 
   @JsonProperty(JSON_PROPERTY_TAX_AMOUNT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public Long getTaxAmount() {
     return taxAmount;
   }
@@ -187,8 +193,31 @@ public class OrderLineDetailsInput implements Serializable {
     this.taxAmount = taxAmount;
   }
 
-  public OrderLineDetailsInput productUrl(String productUrl) {
+  public OrderLineDetailsInput taxAmountPerUnit(Boolean taxAmountPerUnit) {
+    this.taxAmountPerUnit = taxAmountPerUnit;
+    return this;
+  }
 
+  /**
+   * If this is set to true, &#x60;taxAmount&#x60; will be interpreted as the tax
+   * amount per unit as opposed to the tax amount per line item.
+   * 
+   * @return taxAmountPerUnit
+   */
+
+  @JsonProperty(JSON_PROPERTY_TAX_AMOUNT_PER_UNIT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public Boolean getTaxAmountPerUnit() {
+    return taxAmountPerUnit;
+  }
+
+  @JsonProperty(JSON_PROPERTY_TAX_AMOUNT_PER_UNIT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setTaxAmountPerUnit(Boolean taxAmountPerUnit) {
+    this.taxAmountPerUnit = taxAmountPerUnit;
+  }
+
+  public OrderLineDetailsInput productUrl(URI productUrl) {
     this.productUrl = productUrl;
     return this;
   }
@@ -197,23 +226,21 @@ public class OrderLineDetailsInput implements Serializable {
    * URL of the product in shop. Used for PAYONE Buy Now, Pay Later (BNPL).
    * 
    * @return productUrl
-   **/
+   */
 
   @JsonProperty(JSON_PROPERTY_PRODUCT_URL)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-  public String getProductUrl() {
+  public URI getProductUrl() {
     return productUrl;
   }
 
   @JsonProperty(JSON_PROPERTY_PRODUCT_URL)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setProductUrl(String productUrl) {
+  public void setProductUrl(URI productUrl) {
     this.productUrl = productUrl;
   }
 
-  public OrderLineDetailsInput productImageUrl(String productImageUrl) {
-
+  public OrderLineDetailsInput productImageUrl(URI productImageUrl) {
     this.productImageUrl = productImageUrl;
     return this;
   }
@@ -222,23 +249,21 @@ public class OrderLineDetailsInput implements Serializable {
    * URL of a product image. Used for PAYONE Buy Now, Pay Later (BNPL).
    * 
    * @return productImageUrl
-   **/
+   */
 
   @JsonProperty(JSON_PROPERTY_PRODUCT_IMAGE_URL)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-  public String getProductImageUrl() {
+  public URI getProductImageUrl() {
     return productImageUrl;
   }
 
   @JsonProperty(JSON_PROPERTY_PRODUCT_IMAGE_URL)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setProductImageUrl(String productImageUrl) {
+  public void setProductImageUrl(URI productImageUrl) {
     this.productImageUrl = productImageUrl;
   }
 
   public OrderLineDetailsInput productCategoryPath(String productCategoryPath) {
-
     this.productCategoryPath = productCategoryPath;
     return this;
   }
@@ -247,11 +272,10 @@ public class OrderLineDetailsInput implements Serializable {
    * Category path of the item. Used for PAYONE Buy Now, Pay Later (BNPL).
    * 
    * @return productCategoryPath
-   **/
+   */
 
   @JsonProperty(JSON_PROPERTY_PRODUCT_CATEGORY_PATH)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public String getProductCategoryPath() {
     return productCategoryPath;
   }
@@ -263,7 +287,6 @@ public class OrderLineDetailsInput implements Serializable {
   }
 
   public OrderLineDetailsInput merchantShopDeliveryReference(String merchantShopDeliveryReference) {
-
     this.merchantShopDeliveryReference = merchantShopDeliveryReference;
     return this;
   }
@@ -273,11 +296,10 @@ public class OrderLineDetailsInput implements Serializable {
    * has been collected (e.g. for Click &amp; Collect or Click &amp; Reserve).
    * 
    * @return merchantShopDeliveryReference
-   **/
+   */
 
   @JsonProperty(JSON_PROPERTY_MERCHANT_SHOP_DELIVERY_REFERENCE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public String getMerchantShopDeliveryReference() {
     return merchantShopDeliveryReference;
   }
@@ -288,6 +310,9 @@ public class OrderLineDetailsInput implements Serializable {
     this.merchantShopDeliveryReference = merchantShopDeliveryReference;
   }
 
+  /**
+   * Return true if this OrderLineDetailsInput object is equal to o.
+   */
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -302,6 +327,7 @@ public class OrderLineDetailsInput implements Serializable {
         Objects.equals(this.productType, orderLineDetailsInput.productType) &&
         Objects.equals(this.quantity, orderLineDetailsInput.quantity) &&
         Objects.equals(this.taxAmount, orderLineDetailsInput.taxAmount) &&
+        Objects.equals(this.taxAmountPerUnit, orderLineDetailsInput.taxAmountPerUnit) &&
         Objects.equals(this.productUrl, orderLineDetailsInput.productUrl) &&
         Objects.equals(this.productImageUrl, orderLineDetailsInput.productImageUrl) &&
         Objects.equals(this.productCategoryPath, orderLineDetailsInput.productCategoryPath) &&
@@ -310,8 +336,8 @@ public class OrderLineDetailsInput implements Serializable {
 
   @Override
   public int hashCode() {
-    return Objects.hash(productCode, productPrice, productType, quantity, taxAmount, productUrl, productImageUrl,
-        productCategoryPath, merchantShopDeliveryReference);
+    return Objects.hash(productCode, productPrice, productType, quantity, taxAmount, taxAmountPerUnit, productUrl,
+        productImageUrl, productCategoryPath, merchantShopDeliveryReference);
   }
 
   @Override
@@ -323,6 +349,7 @@ public class OrderLineDetailsInput implements Serializable {
     sb.append("    productType: ").append(toIndentedString(productType)).append("\n");
     sb.append("    quantity: ").append(toIndentedString(quantity)).append("\n");
     sb.append("    taxAmount: ").append(toIndentedString(taxAmount)).append("\n");
+    sb.append("    taxAmountPerUnit: ").append(toIndentedString(taxAmountPerUnit)).append("\n");
     sb.append("    productUrl: ").append(toIndentedString(productUrl)).append("\n");
     sb.append("    productImageUrl: ").append(toIndentedString(productImageUrl)).append("\n");
     sb.append("    productCategoryPath: ").append(toIndentedString(productCategoryPath)).append("\n");
