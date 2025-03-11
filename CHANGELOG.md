@@ -9,17 +9,6 @@
 
 * feat: update SDK to API 1.28.0 ([518a177487dc26139313eb385af6029b1f034275](https://github.com/PAYONE-GmbH/PCP-ServerSDK-java/commit/518a177487dc26139313eb385af6029b1f034275))
 
-# [1.1.0](https://github.com/PAYONE-GmbH/PCP-ServerSDK-java/compare/v1.0.0...v1.1.0) (2025-03-11)
-
-### Documentation
-
-* docs: add changelog ([02364d5b907f712c0d9714286168bfcba723f76f](https://github.com/PAYONE-GmbH/PCP-ServerSDK-java/commit/02364d5b907f712c0d9714286168bfcba723f76f))
-* docs: add maven link to readme ([0cc0e443c9670dab7abb30f538c77f77f91758a6](https://github.com/PAYONE-GmbH/PCP-ServerSDK-java/commit/0cc0e443c9670dab7abb30f538c77f77f91758a6))
-
-### Features
-
-* feat: update SDK to API 1.28.0 ([518a177487dc26139313eb385af6029b1f034275](https://github.com/PAYONE-GmbH/PCP-ServerSDK-java/commit/518a177487dc26139313eb385af6029b1f034275))
-
 # [1.0.0](https://github.com/PAYONE-GmbH/PCP-ServerSDK-java/compare/v0.0.3...v1.0.0) (2024-08-22)
 
 ### Documentation
