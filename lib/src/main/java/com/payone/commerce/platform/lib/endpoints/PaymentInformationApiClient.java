@@ -5,6 +5,8 @@ import java.security.InvalidKeyException;
 
 import com.payone.commerce.platform.lib.errors.ApiException;
 import com.payone.commerce.platform.lib.CommunicatorConfiguration;
+import com.payone.commerce.platform.lib.models.PaymentInformationRefundRequest;
+import com.payone.commerce.platform.lib.models.PaymentInformationRefundResponse;
 import com.payone.commerce.platform.lib.models.PaymentInformationRequest;
 import com.payone.commerce.platform.lib.models.PaymentInformationResponse;
 import com.payone.commerce.platform.lib.serializer.JsonSerializer;
@@ -44,7 +46,7 @@ public class PaymentInformationApiClient extends BaseApiClient {
                 .addPathSegment(commerceCaseId)
                 .addPathSegment(PCP_PATH_SEGMENT_CHECKOUTS)
                 .addPathSegment(checkoutId)
-                .addPathSegment("payment-informations")
+                .addPathSegment("payment-information")
                 .build();
 
         String jsonString = JsonSerializer.serializeToJson(payload);
@@ -86,7 +88,7 @@ public class PaymentInformationApiClient extends BaseApiClient {
                 .addPathSegment(commerceCaseId)
                 .addPathSegment(PCP_PATH_SEGMENT_CHECKOUTS)
                 .addPathSegment(checkoutId)
-                .addPathSegment("payment-informations")
+                .addPathSegment("payment-information")
                 .addPathSegment(paymentInformationId)
                 .build();
 
@@ -96,6 +98,53 @@ public class PaymentInformationApiClient extends BaseApiClient {
                 .build();
 
         return this.makeApiCall(request, PaymentInformationResponse.class);
+
+    }
+
+    public PaymentInformationRefundResponse refundPaymentInformation(String merchantId, String commerceCaseId,
+            String checkoutId, String paymentInformationId, PaymentInformationRefundRequest payload)
+            throws ApiException, IOException {
+        if (merchantId == null) {
+            throw new IllegalArgumentException(MERCHANT_ID_REQUIRED_ERROR);
+        }
+        if (commerceCaseId == null) {
+            throw new IllegalArgumentException(COMMERCE_CASE_ID_REQUIRED_ERROR);
+        }
+        if (checkoutId == null) {
+            throw new IllegalArgumentException(CHECKOUT_ID_REQUIRED_ERROR);
+        }
+        if (paymentInformationId == null) {
+            throw new IllegalArgumentException("Payment Information ID is required");
+        }
+        if (payload == null) {
+            throw new IllegalArgumentException(PAYLOAD_REQUIRED_ERROR);
+        }
+
+        HttpUrl url = new HttpUrl.Builder()
+                .scheme(HTTPS_SCHEME)
+                .host(this.getConfig().getHost())
+                .addPathSegment(PCP_PATH_SEGMENT_VERSION)
+                .addPathSegment(merchantId)
+                .addPathSegment(PCP_PATH_SEGMENT_COMMERCE_CASES)
+                .addPathSegment(commerceCaseId)
+                .addPathSegment(PCP_PATH_SEGMENT_CHECKOUTS)
+                .addPathSegment(checkoutId)
+                .addPathSegment("payment-information")
+                .addPathSegment(paymentInformationId)
+                .addPathSegment("refund")
+                .build();
+
+        String jsonString = JsonSerializer.serializeToJson(payload);
+
+        RequestBody formBody = RequestBody.create(jsonString, JSON);
+
+        Request request = new Request.Builder()
+                .url(url)
+                .post(formBody)
+                .header(CONTENT_TYPE_HEADER_NAME, formBody.contentType().toString())
+                .build();
+
+        return this.makeApiCall(request, PaymentInformationRefundResponse.class);
 
     }
 
