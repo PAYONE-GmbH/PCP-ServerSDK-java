@@ -51,7 +51,7 @@ class JsonSerializerTest {
                                 .orderRequest(new OrderRequest())
                                 .creationDateTime(null)
                                 .autoExecuteOrder(false);
-                String expected = "{\"amountOfMoney\":{\"amount\":6099,\"currencyCode\":\"USD\"},\"shipping\":{\"address\":{\"city\":\"Berlin\",\"countryCode\":\"DE\",\"houseNumber\":\"12\",\"street\":\"Alarichstra\u00dfe\",\"zip\":\"12105\"}},\"shoppingCart\":{\"items\":[{\"invoiceData\":{\"description\":\"Learn PHP the hard way - Hardcover\"},\"orderLineDetails\":{\"productPrice\":6099,\"productType\":\"GOODS\",\"quantity\":1}}]},\"orderRequest\":{},\"autoExecuteOrder\":false}";
+                String expected = "{\"amountOfMoney\":{\"amount\":6099,\"currencyCode\":\"USD\"},\"shipping\":{\"address\":{\"city\":\"Berlin\",\"countryCode\":\"DE\",\"houseNumber\":\"12\",\"street\":\"Alarichstra\u00dfe\",\"zip\":\"12105\"}},\"shoppingCart\":{\"items\":[{\"invoiceData\":{\"description\":\"Learn PHP the hard way - Hardcover\"},\"orderLineDetails\":{\"productPrice\":6099,\"productType\":\"GOODS\",\"quantity\":1,\"taxAmountPerUnit\":false}}]},\"orderRequest\":{},\"autoExecuteOrder\":false}";
 
                 try {
                         assertEquals(expected, JsonSerializer.serializeToJson(object));

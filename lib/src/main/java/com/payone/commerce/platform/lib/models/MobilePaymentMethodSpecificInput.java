@@ -16,34 +16,45 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
     MobilePaymentMethodSpecificInput.JSON_PROPERTY_ENCRYPTED_PAYMENT_DATA,
     MobilePaymentMethodSpecificInput.JSON_PROPERTY_PUBLIC_KEY_HASH,
     MobilePaymentMethodSpecificInput.JSON_PROPERTY_EPHEMERAL_KEY,
+    MobilePaymentMethodSpecificInput.JSON_PROPERTY_THREE_D_SECURE,
     MobilePaymentMethodSpecificInput.JSON_PROPERTY_PAYMENT_PRODUCT302_SPECIFIC_INPUT
 })
+
 public class MobilePaymentMethodSpecificInput implements Serializable {
   private static final long serialVersionUID = 1L;
 
   public static final String JSON_PROPERTY_PAYMENT_PRODUCT_ID = "paymentProductId";
+
   private Integer paymentProductId;
 
   public static final String JSON_PROPERTY_AUTHORIZATION_MODE = "authorizationMode";
+
   private AuthorizationMode authorizationMode;
 
   public static final String JSON_PROPERTY_ENCRYPTED_PAYMENT_DATA = "encryptedPaymentData";
+
   private String encryptedPaymentData;
 
   public static final String JSON_PROPERTY_PUBLIC_KEY_HASH = "publicKeyHash";
+
   private String publicKeyHash;
 
   public static final String JSON_PROPERTY_EPHEMERAL_KEY = "ephemeralKey";
+
   private String ephemeralKey;
 
+  public static final String JSON_PROPERTY_THREE_D_SECURE = "threeDSecure";
+
+  private MobilePaymentThreeDSecure threeDSecure;
+
   public static final String JSON_PROPERTY_PAYMENT_PRODUCT302_SPECIFIC_INPUT = "paymentProduct302SpecificInput";
-  private PaymentProduct320SpecificInput paymentProduct302SpecificInput;
+
+  private PaymentProduct302SpecificInput paymentProduct302SpecificInput;
 
   public MobilePaymentMethodSpecificInput() {
   }
 
   public MobilePaymentMethodSpecificInput paymentProductId(Integer paymentProductId) {
-
     this.paymentProductId = paymentProductId;
     return this;
   }
@@ -55,11 +66,10 @@ public class MobilePaymentMethodSpecificInput implements Serializable {
    * maximum: 99999
    * 
    * @return paymentProductId
-   **/
+   */
 
   @JsonProperty(JSON_PROPERTY_PAYMENT_PRODUCT_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public Integer getPaymentProductId() {
     return paymentProductId;
   }
@@ -71,7 +81,6 @@ public class MobilePaymentMethodSpecificInput implements Serializable {
   }
 
   public MobilePaymentMethodSpecificInput authorizationMode(AuthorizationMode authorizationMode) {
-
     this.authorizationMode = authorizationMode;
     return this;
   }
@@ -80,11 +89,10 @@ public class MobilePaymentMethodSpecificInput implements Serializable {
    * Get authorizationMode
    * 
    * @return authorizationMode
-   **/
+   */
 
   @JsonProperty(JSON_PROPERTY_AUTHORIZATION_MODE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public AuthorizationMode getAuthorizationMode() {
     return authorizationMode;
   }
@@ -96,7 +104,6 @@ public class MobilePaymentMethodSpecificInput implements Serializable {
   }
 
   public MobilePaymentMethodSpecificInput encryptedPaymentData(String encryptedPaymentData) {
-
     this.encryptedPaymentData = encryptedPaymentData;
     return this;
   }
@@ -107,11 +114,10 @@ public class MobilePaymentMethodSpecificInput implements Serializable {
    * payment request to provide the encrypted payment data instead.
    * 
    * @return encryptedPaymentData
-   **/
+   */
 
   @JsonProperty(JSON_PROPERTY_ENCRYPTED_PAYMENT_DATA)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public String getEncryptedPaymentData() {
     return encryptedPaymentData;
   }
@@ -123,7 +129,6 @@ public class MobilePaymentMethodSpecificInput implements Serializable {
   }
 
   public MobilePaymentMethodSpecificInput publicKeyHash(String publicKeyHash) {
-
     this.publicKeyHash = publicKeyHash;
     return this;
   }
@@ -133,11 +138,10 @@ public class MobilePaymentMethodSpecificInput implements Serializable {
    * information.
    * 
    * @return publicKeyHash
-   **/
+   */
 
   @JsonProperty(JSON_PROPERTY_PUBLIC_KEY_HASH)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public String getPublicKeyHash() {
     return publicKeyHash;
   }
@@ -149,7 +153,6 @@ public class MobilePaymentMethodSpecificInput implements Serializable {
   }
 
   public MobilePaymentMethodSpecificInput ephemeralKey(String ephemeralKey) {
-
     this.ephemeralKey = ephemeralKey;
     return this;
   }
@@ -158,11 +161,10 @@ public class MobilePaymentMethodSpecificInput implements Serializable {
    * Ephemeral Key A unique generated key used by Apple to encrypt data.
    * 
    * @return ephemeralKey
-   **/
+   */
 
   @JsonProperty(JSON_PROPERTY_EPHEMERAL_KEY)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public String getEphemeralKey() {
     return ephemeralKey;
   }
@@ -173,9 +175,31 @@ public class MobilePaymentMethodSpecificInput implements Serializable {
     this.ephemeralKey = ephemeralKey;
   }
 
-  public MobilePaymentMethodSpecificInput paymentProduct302SpecificInput(
-      PaymentProduct320SpecificInput paymentProduct302SpecificInput) {
+  public MobilePaymentMethodSpecificInput threeDSecure(MobilePaymentThreeDSecure threeDSecure) {
+    this.threeDSecure = threeDSecure;
+    return this;
+  }
 
+  /**
+   * Get threeDSecure
+   * 
+   * @return threeDSecure
+   */
+
+  @JsonProperty(JSON_PROPERTY_THREE_D_SECURE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public MobilePaymentThreeDSecure getThreeDSecure() {
+    return threeDSecure;
+  }
+
+  @JsonProperty(JSON_PROPERTY_THREE_D_SECURE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setThreeDSecure(MobilePaymentThreeDSecure threeDSecure) {
+    this.threeDSecure = threeDSecure;
+  }
+
+  public MobilePaymentMethodSpecificInput paymentProduct302SpecificInput(
+      PaymentProduct302SpecificInput paymentProduct302SpecificInput) {
     this.paymentProduct302SpecificInput = paymentProduct302SpecificInput;
     return this;
   }
@@ -184,21 +208,23 @@ public class MobilePaymentMethodSpecificInput implements Serializable {
    * Get paymentProduct302SpecificInput
    * 
    * @return paymentProduct302SpecificInput
-   **/
+   */
 
   @JsonProperty(JSON_PROPERTY_PAYMENT_PRODUCT302_SPECIFIC_INPUT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-  public PaymentProduct320SpecificInput getPaymentProduct302SpecificInput() {
+  public PaymentProduct302SpecificInput getPaymentProduct302SpecificInput() {
     return paymentProduct302SpecificInput;
   }
 
   @JsonProperty(JSON_PROPERTY_PAYMENT_PRODUCT302_SPECIFIC_INPUT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setPaymentProduct302SpecificInput(PaymentProduct320SpecificInput paymentProduct302SpecificInput) {
+  public void setPaymentProduct302SpecificInput(PaymentProduct302SpecificInput paymentProduct302SpecificInput) {
     this.paymentProduct302SpecificInput = paymentProduct302SpecificInput;
   }
 
+  /**
+   * Return true if this MobilePaymentMethodSpecificInput object is equal to o.
+   */
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -213,6 +239,7 @@ public class MobilePaymentMethodSpecificInput implements Serializable {
         Objects.equals(this.encryptedPaymentData, mobilePaymentMethodSpecificInput.encryptedPaymentData) &&
         Objects.equals(this.publicKeyHash, mobilePaymentMethodSpecificInput.publicKeyHash) &&
         Objects.equals(this.ephemeralKey, mobilePaymentMethodSpecificInput.ephemeralKey) &&
+        Objects.equals(this.threeDSecure, mobilePaymentMethodSpecificInput.threeDSecure) &&
         Objects.equals(this.paymentProduct302SpecificInput,
             mobilePaymentMethodSpecificInput.paymentProduct302SpecificInput);
   }
@@ -220,7 +247,7 @@ public class MobilePaymentMethodSpecificInput implements Serializable {
   @Override
   public int hashCode() {
     return Objects.hash(paymentProductId, authorizationMode, encryptedPaymentData, publicKeyHash, ephemeralKey,
-        paymentProduct302SpecificInput);
+        threeDSecure, paymentProduct302SpecificInput);
   }
 
   @Override
@@ -232,6 +259,7 @@ public class MobilePaymentMethodSpecificInput implements Serializable {
     sb.append("    encryptedPaymentData: ").append(toIndentedString(encryptedPaymentData)).append("\n");
     sb.append("    publicKeyHash: ").append(toIndentedString(publicKeyHash)).append("\n");
     sb.append("    ephemeralKey: ").append(toIndentedString(ephemeralKey)).append("\n");
+    sb.append("    threeDSecure: ").append(toIndentedString(threeDSecure)).append("\n");
     sb.append("    paymentProduct302SpecificInput: ").append(toIndentedString(paymentProduct302SpecificInput))
         .append("\n");
     sb.append("}");
@@ -248,5 +276,4 @@ public class MobilePaymentMethodSpecificInput implements Serializable {
     }
     return o.toString().replace("\n", "\n    ");
   }
-
 }

@@ -1,4 +1,3 @@
-
 package com.payone.commerce.platform.lib.models;
 
 import java.io.Serializable;
@@ -9,15 +8,15 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 /**
- * Object containing information about the end customer&#39;s bank account.
+ * Payee bank account details as part of the payment instructions
  */
 @JsonPropertyOrder({
-    BankAccountInformation.JSON_PROPERTY_IBAN,
-    BankAccountInformation.JSON_PROPERTY_BIC,
-    BankAccountInformation.JSON_PROPERTY_ACCOUNT_HOLDER
+    Payee.JSON_PROPERTY_IBAN,
+    Payee.JSON_PROPERTY_BIC,
+    Payee.JSON_PROPERTY_NAME
 })
 
-public class BankAccountInformation implements Serializable {
+public class Payee implements Serializable {
   private static final long serialVersionUID = 1L;
 
   public static final String JSON_PROPERTY_IBAN = "iban";
@@ -28,22 +27,22 @@ public class BankAccountInformation implements Serializable {
 
   private String bic;
 
-  public static final String JSON_PROPERTY_ACCOUNT_HOLDER = "accountHolder";
+  public static final String JSON_PROPERTY_NAME = "name";
 
-  private String accountHolder;
+  private String name;
 
-  public BankAccountInformation() {
+  public Payee() {
   }
 
-  public BankAccountInformation iban(String iban) {
+  public Payee iban(String iban) {
     this.iban = iban;
     return this;
   }
 
   /**
-   * IBAN of the end customer&#39;s bank account. The IBAN is the International
-   * Bank Account Number. It is an internationally agreed format for the BBAN and
-   * includes the ISO country code and two check digits.
+   * IBAN of the payee&#39;s or beneficiary&#39;s bank account. The IBAN is the
+   * International Bank Account Number. It is an internationally agreed format for
+   * the BBAN and includes the ISO country code and two check digits.
    * 
    * @return iban
    */
@@ -60,7 +59,7 @@ public class BankAccountInformation implements Serializable {
     this.iban = iban;
   }
 
-  public BankAccountInformation bic(String bic) {
+  public Payee bic(String bic) {
     this.bic = bic;
     return this;
   }
@@ -83,32 +82,31 @@ public class BankAccountInformation implements Serializable {
     this.bic = bic;
   }
 
-  public BankAccountInformation accountHolder(String accountHolder) {
-    this.accountHolder = accountHolder;
+  public Payee name(String name) {
+    this.name = name;
     return this;
   }
 
   /**
-   * Account holder of the bank account with the given IBAN. Does not necessarily
-   * have to be the end customer (e.g. joint accounts).
+   * Name of the payee
    * 
-   * @return accountHolder
+   * @return name
    */
 
-  @JsonProperty(JSON_PROPERTY_ACCOUNT_HOLDER)
+  @JsonProperty(JSON_PROPERTY_NAME)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  public String getAccountHolder() {
-    return accountHolder;
+  public String getName() {
+    return name;
   }
 
-  @JsonProperty(JSON_PROPERTY_ACCOUNT_HOLDER)
+  @JsonProperty(JSON_PROPERTY_NAME)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  public void setAccountHolder(String accountHolder) {
-    this.accountHolder = accountHolder;
+  public void setName(String name) {
+    this.name = name;
   }
 
   /**
-   * Return true if this BankAccountInformation object is equal to o.
+   * Return true if this Payee object is equal to o.
    */
   @Override
   public boolean equals(Object o) {
@@ -118,24 +116,24 @@ public class BankAccountInformation implements Serializable {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    BankAccountInformation bankAccountInformation = (BankAccountInformation) o;
-    return Objects.equals(this.iban, bankAccountInformation.iban) &&
-        Objects.equals(this.bic, bankAccountInformation.bic) &&
-        Objects.equals(this.accountHolder, bankAccountInformation.accountHolder);
+    Payee payee = (Payee) o;
+    return Objects.equals(this.iban, payee.iban) &&
+        Objects.equals(this.bic, payee.bic) &&
+        Objects.equals(this.name, payee.name);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(iban, bic, accountHolder);
+    return Objects.hash(iban, bic, name);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class BankAccountInformation {\n");
+    sb.append("class Payee {\n");
     sb.append("    iban: ").append(toIndentedString(iban)).append("\n");
     sb.append("    bic: ").append(toIndentedString(bic)).append("\n");
-    sb.append("    accountHolder: ").append(toIndentedString(accountHolder)).append("\n");
+    sb.append("    name: ").append(toIndentedString(name)).append("\n");
     sb.append("}");
     return sb.toString();
   }
@@ -150,5 +148,4 @@ public class BankAccountInformation implements Serializable {
     }
     return o.toString().replace("\n", "\n    ");
   }
-
 }

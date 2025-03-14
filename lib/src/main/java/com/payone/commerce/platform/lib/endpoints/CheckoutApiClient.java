@@ -9,6 +9,8 @@ import com.payone.commerce.platform.lib.errors.ApiErrorResponseException;
 import com.payone.commerce.platform.lib.errors.ApiResponseRetrievalException;
 import com.payone.commerce.platform.lib.models.CheckoutResponse;
 import com.payone.commerce.platform.lib.models.CheckoutsResponse;
+import com.payone.commerce.platform.lib.models.CompleteOrderRequest;
+import com.payone.commerce.platform.lib.models.CompletePaymentResponse;
 import com.payone.commerce.platform.lib.models.CreateCheckoutRequest;
 import com.payone.commerce.platform.lib.models.CreateCheckoutResponse;
 import com.payone.commerce.platform.lib.models.PatchCheckoutRequest;
@@ -196,5 +198,45 @@ public class CheckoutApiClient extends BaseApiClient {
                 .build();
 
         this.makeApiCall(request);
+    }
+
+    public CompletePaymentResponse completeCheckoutRequest(String merchantId, String commerceCaseId, String checkoutId,
+            CompleteOrderRequest payload)
+            throws ApiErrorResponseException, ApiResponseRetrievalException, IOException {
+        if (merchantId == null) {
+            throw new IllegalArgumentException(MERCHANT_ID_REQUIRED_ERROR);
+        }
+        if (commerceCaseId == null) {
+            throw new IllegalArgumentException(COMMERCE_CASE_ID_REQUIRED_ERROR);
+        }
+        if (checkoutId == null) {
+            throw new IllegalArgumentException(CHECKOUT_ID_REQUIRED_ERROR);
+        }
+        if (payload == null) {
+            throw new IllegalArgumentException(PAYLOAD_REQUIRED_ERROR);
+        }
+
+        HttpUrl url = new HttpUrl.Builder()
+                .scheme(HTTPS_SCHEME)
+                .host(this.getConfig().getHost())
+                .addPathSegment(PCP_PATH_SEGMENT_VERSION)
+                .addPathSegment(merchantId)
+                .addPathSegment(PCP_PATH_SEGMENT_COMMERCE_CASES)
+                .addPathSegment(commerceCaseId)
+                .addPathSegment(PCP_PATH_SEGMENT_CHECKOUTS)
+                .addPathSegment(checkoutId)
+                .addPathSegment("complete-order")
+                .build();
+
+        String jsonString = JsonSerializer.serializeToJson(payload);
+
+        Request request = new Request.Builder()
+                .url(url)
+                .post(RequestBody.create(jsonString, JSON))
+                .header(CONTENT_TYPE_HEADER_NAME, JSON.toString())
+                .build();
+
+        return this.makeApiCall(request, CompletePaymentResponse.class);
+
     }
 }

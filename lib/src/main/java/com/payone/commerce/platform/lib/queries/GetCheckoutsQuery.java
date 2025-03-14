@@ -42,6 +42,8 @@ public class GetCheckoutsQuery implements QueryConfig {
   private String phoneNumber;
   private String dateOfBirth;
   private String companyInformation;
+  private String terminalId;
+  private String reportingToken;
 
   public GetCheckoutsQuery() {
     // Empty constructor
@@ -204,6 +206,16 @@ public class GetCheckoutsQuery implements QueryConfig {
     return this;
   }
 
+  public GetCheckoutsQuery setTerminalId(String terminalId) {
+    this.terminalId = terminalId;
+    return this;
+  }
+
+  public GetCheckoutsQuery setReportingToken(String reportingToken) {
+    this.reportingToken = reportingToken;
+    return this;
+  }
+
   public Integer getOffset() {
     return this.offset;
   }
@@ -328,6 +340,14 @@ public class GetCheckoutsQuery implements QueryConfig {
     return this.companyInformation;
   }
 
+  public String getTerminalId() {
+    return this.terminalId;
+  }
+
+  public String getReportingToken() {
+    return this.reportingToken;
+  }
+
   public Map<String, String> toQueryMap() {
     Map<String, String> query = new HashMap<>();
 
@@ -439,6 +459,12 @@ public class GetCheckoutsQuery implements QueryConfig {
     }
     if (this.companyInformation != null) {
       query.put("companyInformation", this.companyInformation);
+    }
+    if (this.terminalId != null) {
+      query.put("terminalId", this.terminalId);
+    }
+    if (this.reportingToken != null) {
+      query.put("reportingToken", this.reportingToken);
     }
     return query;
   }

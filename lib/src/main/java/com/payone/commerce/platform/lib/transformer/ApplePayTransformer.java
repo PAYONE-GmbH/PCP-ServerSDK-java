@@ -3,9 +3,9 @@ package com.payone.commerce.platform.lib.transformer;
 import com.payone.commerce.platform.lib.models.ApplePaymentDataTokenHeaderInformation;
 import com.payone.commerce.platform.lib.models.ApplePaymentDataTokenInformation;
 import com.payone.commerce.platform.lib.models.MobilePaymentMethodSpecificInput;
-import com.payone.commerce.platform.lib.models.PaymentProduct320SpecificInput;
+import com.payone.commerce.platform.lib.models.PaymentProduct302SpecificInput;
 import com.payone.commerce.platform.lib.models.ApplePaymentDataTokenInformation.VersionEnum;
-import com.payone.commerce.platform.lib.models.PaymentProduct320SpecificInput.NetworkEnum;
+import com.payone.commerce.platform.lib.models.PaymentProduct302SpecificInput.NetworkEnum;
 import com.payone.commerce.platform.lib.models.applepay.ApplePayPayment;
 
 public class ApplePayTransformer {
@@ -38,10 +38,10 @@ public class ApplePayTransformer {
         }
 
         MobilePaymentMethodSpecificInput input = new MobilePaymentMethodSpecificInput();
-        PaymentProduct320SpecificInput paymentProduct320SpecificInput = new PaymentProduct320SpecificInput();
+        PaymentProduct302SpecificInput paymentProduct302SpecificInput = new PaymentProduct302SpecificInput();
         ApplePaymentDataTokenInformation applePaymentDataTokenInformation = new ApplePaymentDataTokenInformation();
         if (network != null) {
-            paymentProduct320SpecificInput.setNetwork(NetworkEnum.fromValue(network.toUpperCase()));
+            paymentProduct302SpecificInput.setNetwork(NetworkEnum.fromValue(network.toUpperCase()));
         }
         if (version != null) {
             applePaymentDataTokenInformation.setVersion(VersionEnum.fromValue(version));
@@ -49,12 +49,12 @@ public class ApplePayTransformer {
         applePaymentDataTokenInformation.setSignature(signature);
         applePaymentDataTokenInformation.setHeader(new ApplePaymentDataTokenHeaderInformation()
                 .transactionId(transactionId).applicationData(applicationData));
-        paymentProduct320SpecificInput.setToken(applePaymentDataTokenInformation);
+        paymentProduct302SpecificInput.setToken(applePaymentDataTokenInformation);
 
         input.setPaymentProductId(APPLE_PAY_PAYMENT_PRODUCT_ID);
         input.setPublicKeyHash(publicKeyHash);
         input.setEphemeralKey(ephemeralKey);
-        input.setPaymentProduct302SpecificInput(paymentProduct320SpecificInput);
+        input.setPaymentProduct302SpecificInput(paymentProduct302SpecificInput);
         return input;
     }
 
