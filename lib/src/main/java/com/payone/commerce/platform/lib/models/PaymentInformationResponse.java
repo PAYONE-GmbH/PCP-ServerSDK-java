@@ -1,6 +1,7 @@
 package com.payone.commerce.platform.lib.models;
 
 import java.io.Serializable;
+import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -23,50 +24,71 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
     PaymentInformationResponse.JSON_PROPERTY_TERMINAL_ID,
     PaymentInformationResponse.JSON_PROPERTY_CARD_ACCEPTOR_ID,
     PaymentInformationResponse.JSON_PROPERTY_MERCHANT_REFERENCE,
+    PaymentInformationResponse.JSON_PROPERTY_CREATION_DATE_TIME,
+    PaymentInformationResponse.JSON_PROPERTY_LAST_UPDATED,
     PaymentInformationResponse.JSON_PROPERTY_CARD_PAYMENT_DETAILS,
     PaymentInformationResponse.JSON_PROPERTY_EVENTS
 })
+
 public class PaymentInformationResponse implements Serializable {
   private static final long serialVersionUID = 1L;
 
   public static final String JSON_PROPERTY_COMMERCE_CASE_ID = "commerceCaseId";
+
   private UUID commerceCaseId;
 
   public static final String JSON_PROPERTY_CHECKOUT_ID = "checkoutId";
+
   private UUID checkoutId;
 
   public static final String JSON_PROPERTY_MERCHANT_CUSTOMER_ID = "merchantCustomerId";
+
   private String merchantCustomerId;
 
   public static final String JSON_PROPERTY_PAYMENT_INFORMATION_ID = "paymentInformationId";
+
   private UUID paymentInformationId;
 
   public static final String JSON_PROPERTY_PAYMENT_CHANNEL = "paymentChannel";
+
   private PaymentChannel paymentChannel;
 
   public static final String JSON_PROPERTY_PAYMENT_PRODUCT_ID = "paymentProductId";
+
   private Integer paymentProductId;
 
   public static final String JSON_PROPERTY_TERMINAL_ID = "terminalId";
+
   private String terminalId;
 
   public static final String JSON_PROPERTY_CARD_ACCEPTOR_ID = "cardAcceptorId";
+
   private String cardAcceptorId;
 
   public static final String JSON_PROPERTY_MERCHANT_REFERENCE = "merchantReference";
+
   private String merchantReference;
 
+  public static final String JSON_PROPERTY_CREATION_DATE_TIME = "creationDateTime";
+
+  private OffsetDateTime creationDateTime;
+
+  public static final String JSON_PROPERTY_LAST_UPDATED = "lastUpdated";
+
+  private OffsetDateTime lastUpdated;
+
   public static final String JSON_PROPERTY_CARD_PAYMENT_DETAILS = "cardPaymentDetails";
+
   private CardPaymentDetails cardPaymentDetails;
 
   public static final String JSON_PROPERTY_EVENTS = "events";
-  private List<PaymentEvent> events;
+
+  private List<PaymentEvent> events = new ArrayList<>();
 
   public PaymentInformationResponse() {
   }
 
   public PaymentInformationResponse commerceCaseId(UUID commerceCaseId) {
-
     this.commerceCaseId = commerceCaseId;
     return this;
   }
@@ -75,11 +97,10 @@ public class PaymentInformationResponse implements Serializable {
    * Unique ID of the Commerce Case.
    * 
    * @return commerceCaseId
-   **/
+   */
 
   @JsonProperty(JSON_PROPERTY_COMMERCE_CASE_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public UUID getCommerceCaseId() {
     return commerceCaseId;
   }
@@ -91,7 +112,6 @@ public class PaymentInformationResponse implements Serializable {
   }
 
   public PaymentInformationResponse checkoutId(UUID checkoutId) {
-
     this.checkoutId = checkoutId;
     return this;
   }
@@ -100,11 +120,10 @@ public class PaymentInformationResponse implements Serializable {
    * Unique ID of the Commerce Case.
    * 
    * @return checkoutId
-   **/
+   */
 
   @JsonProperty(JSON_PROPERTY_CHECKOUT_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public UUID getCheckoutId() {
     return checkoutId;
   }
@@ -116,7 +135,6 @@ public class PaymentInformationResponse implements Serializable {
   }
 
   public PaymentInformationResponse merchantCustomerId(String merchantCustomerId) {
-
     this.merchantCustomerId = merchantCustomerId;
     return this;
   }
@@ -125,11 +143,10 @@ public class PaymentInformationResponse implements Serializable {
    * Unique identifier of the customer.
    * 
    * @return merchantCustomerId
-   **/
+   */
 
   @JsonProperty(JSON_PROPERTY_MERCHANT_CUSTOMER_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public String getMerchantCustomerId() {
     return merchantCustomerId;
   }
@@ -141,7 +158,6 @@ public class PaymentInformationResponse implements Serializable {
   }
 
   public PaymentInformationResponse paymentInformationId(UUID paymentInformationId) {
-
     this.paymentInformationId = paymentInformationId;
     return this;
   }
@@ -150,11 +166,10 @@ public class PaymentInformationResponse implements Serializable {
    * Unique ID of the Payment Information.
    * 
    * @return paymentInformationId
-   **/
+   */
 
   @JsonProperty(JSON_PROPERTY_PAYMENT_INFORMATION_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public UUID getPaymentInformationId() {
     return paymentInformationId;
   }
@@ -166,7 +181,6 @@ public class PaymentInformationResponse implements Serializable {
   }
 
   public PaymentInformationResponse paymentChannel(PaymentChannel paymentChannel) {
-
     this.paymentChannel = paymentChannel;
     return this;
   }
@@ -175,11 +189,10 @@ public class PaymentInformationResponse implements Serializable {
    * Get paymentChannel
    * 
    * @return paymentChannel
-   **/
+   */
 
   @JsonProperty(JSON_PROPERTY_PAYMENT_CHANNEL)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public PaymentChannel getPaymentChannel() {
     return paymentChannel;
   }
@@ -191,7 +204,6 @@ public class PaymentInformationResponse implements Serializable {
   }
 
   public PaymentInformationResponse paymentProductId(Integer paymentProductId) {
-
     this.paymentProductId = paymentProductId;
     return this;
   }
@@ -203,11 +215,10 @@ public class PaymentInformationResponse implements Serializable {
    * maximum: 99999
    * 
    * @return paymentProductId
-   **/
+   */
 
   @JsonProperty(JSON_PROPERTY_PAYMENT_PRODUCT_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public Integer getPaymentProductId() {
     return paymentProductId;
   }
@@ -219,7 +230,6 @@ public class PaymentInformationResponse implements Serializable {
   }
 
   public PaymentInformationResponse terminalId(String terminalId) {
-
     this.terminalId = terminalId;
     return this;
   }
@@ -228,11 +238,10 @@ public class PaymentInformationResponse implements Serializable {
    * Unique identifier of the POS terminal of the payment transaction.
    * 
    * @return terminalId
-   **/
+   */
 
   @JsonProperty(JSON_PROPERTY_TERMINAL_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public String getTerminalId() {
     return terminalId;
   }
@@ -244,7 +253,6 @@ public class PaymentInformationResponse implements Serializable {
   }
 
   public PaymentInformationResponse cardAcceptorId(String cardAcceptorId) {
-
     this.cardAcceptorId = cardAcceptorId;
     return this;
   }
@@ -254,11 +262,10 @@ public class PaymentInformationResponse implements Serializable {
    * refers to the contract number of the merchant accepting the card.
    * 
    * @return cardAcceptorId
-   **/
+   */
 
   @JsonProperty(JSON_PROPERTY_CARD_ACCEPTOR_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public String getCardAcceptorId() {
     return cardAcceptorId;
   }
@@ -270,7 +277,6 @@ public class PaymentInformationResponse implements Serializable {
   }
 
   public PaymentInformationResponse merchantReference(String merchantReference) {
-
     this.merchantReference = merchantReference;
     return this;
   }
@@ -282,11 +288,10 @@ public class PaymentInformationResponse implements Serializable {
    * cash payments or payments processed by other payment providers).
    * 
    * @return merchantReference
-   **/
+   */
 
   @JsonProperty(JSON_PROPERTY_MERCHANT_REFERENCE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public String getMerchantReference() {
     return merchantReference;
   }
@@ -297,8 +302,57 @@ public class PaymentInformationResponse implements Serializable {
     this.merchantReference = merchantReference;
   }
 
-  public PaymentInformationResponse cardPaymentDetails(CardPaymentDetails cardPaymentDetails) {
+  public PaymentInformationResponse creationDateTime(OffsetDateTime creationDateTime) {
+    this.creationDateTime = creationDateTime;
+    return this;
+  }
 
+  /**
+   * The date and time when the payment was created. Format will be in one of the
+   * following formats: * YYYY-MM-DD&#39;T&#39;HH:mm:ss&#39;Z&#39; *
+   * YYYY-MM-DD&#39;T&#39;HH:mm:ss+XX:XX * YYYY-MM-DD&#39;T&#39;HH:mm:ss-XX:XX
+   * 
+   * @return creationDateTime
+   */
+
+  @JsonProperty(JSON_PROPERTY_CREATION_DATE_TIME)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public OffsetDateTime getCreationDateTime() {
+    return creationDateTime;
+  }
+
+  @JsonProperty(JSON_PROPERTY_CREATION_DATE_TIME)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setCreationDateTime(OffsetDateTime creationDateTime) {
+    this.creationDateTime = creationDateTime;
+  }
+
+  public PaymentInformationResponse lastUpdated(OffsetDateTime lastUpdated) {
+    this.lastUpdated = lastUpdated;
+    return this;
+  }
+
+  /**
+   * The date and time when the payment was last updated. Format will be in one of
+   * the following formats: * YYYY-MM-DD&#39;T&#39;HH:mm:ss&#39;Z&#39; *
+   * YYYY-MM-DD&#39;T&#39;HH:mm:ss+XX:XX * YYYY-MM-DD&#39;T&#39;HH:mm:ss-XX:XX
+   * 
+   * @return lastUpdated
+   */
+
+  @JsonProperty(JSON_PROPERTY_LAST_UPDATED)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public OffsetDateTime getLastUpdated() {
+    return lastUpdated;
+  }
+
+  @JsonProperty(JSON_PROPERTY_LAST_UPDATED)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setLastUpdated(OffsetDateTime lastUpdated) {
+    this.lastUpdated = lastUpdated;
+  }
+
+  public PaymentInformationResponse cardPaymentDetails(CardPaymentDetails cardPaymentDetails) {
     this.cardPaymentDetails = cardPaymentDetails;
     return this;
   }
@@ -307,11 +361,10 @@ public class PaymentInformationResponse implements Serializable {
    * Get cardPaymentDetails
    * 
    * @return cardPaymentDetails
-   **/
+   */
 
   @JsonProperty(JSON_PROPERTY_CARD_PAYMENT_DETAILS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public CardPaymentDetails getCardPaymentDetails() {
     return cardPaymentDetails;
   }
@@ -323,7 +376,6 @@ public class PaymentInformationResponse implements Serializable {
   }
 
   public PaymentInformationResponse events(List<PaymentEvent> events) {
-
     this.events = events;
     return this;
   }
@@ -340,11 +392,10 @@ public class PaymentInformationResponse implements Serializable {
    * Get events
    * 
    * @return events
-   **/
+   */
 
   @JsonProperty(JSON_PROPERTY_EVENTS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public List<PaymentEvent> getEvents() {
     return events;
   }
@@ -355,6 +406,9 @@ public class PaymentInformationResponse implements Serializable {
     this.events = events;
   }
 
+  /**
+   * Return true if this PaymentInformationResponse object is equal to o.
+   */
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -373,6 +427,8 @@ public class PaymentInformationResponse implements Serializable {
         Objects.equals(this.terminalId, paymentInformationResponse.terminalId) &&
         Objects.equals(this.cardAcceptorId, paymentInformationResponse.cardAcceptorId) &&
         Objects.equals(this.merchantReference, paymentInformationResponse.merchantReference) &&
+        Objects.equals(this.creationDateTime, paymentInformationResponse.creationDateTime) &&
+        Objects.equals(this.lastUpdated, paymentInformationResponse.lastUpdated) &&
         Objects.equals(this.cardPaymentDetails, paymentInformationResponse.cardPaymentDetails) &&
         Objects.equals(this.events, paymentInformationResponse.events);
   }
@@ -380,7 +436,8 @@ public class PaymentInformationResponse implements Serializable {
   @Override
   public int hashCode() {
     return Objects.hash(commerceCaseId, checkoutId, merchantCustomerId, paymentInformationId, paymentChannel,
-        paymentProductId, terminalId, cardAcceptorId, merchantReference, cardPaymentDetails, events);
+        paymentProductId, terminalId, cardAcceptorId, merchantReference, creationDateTime, lastUpdated,
+        cardPaymentDetails, events);
   }
 
   @Override
@@ -396,6 +453,8 @@ public class PaymentInformationResponse implements Serializable {
     sb.append("    terminalId: ").append(toIndentedString(terminalId)).append("\n");
     sb.append("    cardAcceptorId: ").append(toIndentedString(cardAcceptorId)).append("\n");
     sb.append("    merchantReference: ").append(toIndentedString(merchantReference)).append("\n");
+    sb.append("    creationDateTime: ").append(toIndentedString(creationDateTime)).append("\n");
+    sb.append("    lastUpdated: ").append(toIndentedString(lastUpdated)).append("\n");
     sb.append("    cardPaymentDetails: ").append(toIndentedString(cardPaymentDetails)).append("\n");
     sb.append("    events: ").append(toIndentedString(events)).append("\n");
     sb.append("}");

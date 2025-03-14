@@ -14,28 +14,37 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
     CaptureOutput.JSON_PROPERTY_AMOUNT_OF_MONEY,
     CaptureOutput.JSON_PROPERTY_MERCHANT_PARAMETERS,
     CaptureOutput.JSON_PROPERTY_REFERENCES,
-    CaptureOutput.JSON_PROPERTY_PAYMENT_METHOD
+    CaptureOutput.JSON_PROPERTY_PAYMENT_METHOD,
+    CaptureOutput.JSON_PROPERTY_PAYMENT_INSTRUCTIONS
 })
+
 public class CaptureOutput implements Serializable {
   private static final long serialVersionUID = 1L;
 
   public static final String JSON_PROPERTY_AMOUNT_OF_MONEY = "amountOfMoney";
+
   private AmountOfMoney amountOfMoney;
 
   public static final String JSON_PROPERTY_MERCHANT_PARAMETERS = "merchantParameters";
+
   private String merchantParameters;
 
   public static final String JSON_PROPERTY_REFERENCES = "references";
+
   private PaymentReferences references;
 
   public static final String JSON_PROPERTY_PAYMENT_METHOD = "paymentMethod";
+
   private String paymentMethod;
+
+  public static final String JSON_PROPERTY_PAYMENT_INSTRUCTIONS = "paymentInstructions";
+
+  private PaymentInstructions paymentInstructions;
 
   public CaptureOutput() {
   }
 
   public CaptureOutput amountOfMoney(AmountOfMoney amountOfMoney) {
-
     this.amountOfMoney = amountOfMoney;
     return this;
   }
@@ -44,11 +53,10 @@ public class CaptureOutput implements Serializable {
    * Get amountOfMoney
    * 
    * @return amountOfMoney
-   **/
+   */
 
   @JsonProperty(JSON_PROPERTY_AMOUNT_OF_MONEY)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public AmountOfMoney getAmountOfMoney() {
     return amountOfMoney;
   }
@@ -60,7 +68,6 @@ public class CaptureOutput implements Serializable {
   }
 
   public CaptureOutput merchantParameters(String merchantParameters) {
-
     this.merchantParameters = merchantParameters;
     return this;
   }
@@ -70,11 +77,10 @@ public class CaptureOutput implements Serializable {
    * format. This field must not contain any personal data.
    * 
    * @return merchantParameters
-   **/
+   */
 
   @JsonProperty(JSON_PROPERTY_MERCHANT_PARAMETERS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public String getMerchantParameters() {
     return merchantParameters;
   }
@@ -86,7 +92,6 @@ public class CaptureOutput implements Serializable {
   }
 
   public CaptureOutput references(PaymentReferences references) {
-
     this.references = references;
     return this;
   }
@@ -95,11 +100,10 @@ public class CaptureOutput implements Serializable {
    * Get references
    * 
    * @return references
-   **/
+   */
 
   @JsonProperty(JSON_PROPERTY_REFERENCES)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public PaymentReferences getReferences() {
     return references;
   }
@@ -111,7 +115,6 @@ public class CaptureOutput implements Serializable {
   }
 
   public CaptureOutput paymentMethod(String paymentMethod) {
-
     this.paymentMethod = paymentMethod;
     return this;
   }
@@ -120,11 +123,10 @@ public class CaptureOutput implements Serializable {
    * Payment method identifier used by our payment engine.
    * 
    * @return paymentMethod
-   **/
+   */
 
   @JsonProperty(JSON_PROPERTY_PAYMENT_METHOD)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public String getPaymentMethod() {
     return paymentMethod;
   }
@@ -135,6 +137,32 @@ public class CaptureOutput implements Serializable {
     this.paymentMethod = paymentMethod;
   }
 
+  public CaptureOutput paymentInstructions(PaymentInstructions paymentInstructions) {
+    this.paymentInstructions = paymentInstructions;
+    return this;
+  }
+
+  /**
+   * Get paymentInstructions
+   * 
+   * @return paymentInstructions
+   */
+
+  @JsonProperty(JSON_PROPERTY_PAYMENT_INSTRUCTIONS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public PaymentInstructions getPaymentInstructions() {
+    return paymentInstructions;
+  }
+
+  @JsonProperty(JSON_PROPERTY_PAYMENT_INSTRUCTIONS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setPaymentInstructions(PaymentInstructions paymentInstructions) {
+    this.paymentInstructions = paymentInstructions;
+  }
+
+  /**
+   * Return true if this CaptureOutput object is equal to o.
+   */
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -147,12 +175,13 @@ public class CaptureOutput implements Serializable {
     return Objects.equals(this.amountOfMoney, captureOutput.amountOfMoney) &&
         Objects.equals(this.merchantParameters, captureOutput.merchantParameters) &&
         Objects.equals(this.references, captureOutput.references) &&
-        Objects.equals(this.paymentMethod, captureOutput.paymentMethod);
+        Objects.equals(this.paymentMethod, captureOutput.paymentMethod) &&
+        Objects.equals(this.paymentInstructions, captureOutput.paymentInstructions);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(amountOfMoney, merchantParameters, references, paymentMethod);
+    return Objects.hash(amountOfMoney, merchantParameters, references, paymentMethod, paymentInstructions);
   }
 
   @Override
@@ -163,6 +192,7 @@ public class CaptureOutput implements Serializable {
     sb.append("    merchantParameters: ").append(toIndentedString(merchantParameters)).append("\n");
     sb.append("    references: ").append(toIndentedString(references)).append("\n");
     sb.append("    paymentMethod: ").append(toIndentedString(paymentMethod)).append("\n");
+    sb.append("    paymentInstructions: ").append(toIndentedString(paymentInstructions)).append("\n");
     sb.append("}");
     return sb.toString();
   }
