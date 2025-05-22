@@ -1,7 +1,7 @@
 openapi: "3.0.3"
 
 info:
-  version: 1.28.0
+  version: 1.35.0
   title: "Commerce Platform API"
   description: |
     RESTful API for the creation of Commerce Cases with Checkouts and the execution of Payments.
@@ -1948,7 +1948,6 @@ components:
             object.
       required:
         - transactionId
-        - applicationData
     APIError:
       description: Contains detailed information on one single error.
       type: object
@@ -1962,7 +1961,7 @@ components:
           type: string
           description: |-
             Category the error belongs to. The category should give an indication of the type of error you are dealing
-            with. Possible values:
+            with. Do not expect a finite set of possible categories, as they are subject to change. Common values are:
             * DIRECT_PLATFORM_ERROR - indicating that a functional error has occurred in the platform.
             * PAYMENT_PLATFORM_ERROR - indicating that a functional error has occurred in the payment platform.
             * IO_ERROR - indicating that a technical error has occurred within the payment platform or between the
@@ -2259,6 +2258,31 @@ components:
              * 0 - No service available
           example: A
           type: string
+          enum:
+            - A
+            - B
+            - C
+            - D
+            - E
+            - F
+            - G
+            - H
+            - I
+            - K
+            - L
+            - M
+            - N
+            - O
+            - P
+            - Q
+            - R
+            - S
+            - U
+            - W
+            - X
+            - Y
+            - Z
+            - "0"
     CardPaymentDetails:
       type: object
       description: Information for card payments realized at a POS.
@@ -2418,6 +2442,9 @@ components:
             Note: For any first of a recurring the system will automatically create a token as you will need to use a
             token for any subsequent recurring transactions. In case a token already exists this is indicated in the
             response with a value of False for the isNewToken property in the response.
+          enum:
+            - first
+            - recurring
     CartItemInput:
       type: object
       description: This object contains information of all items in the cart.
@@ -2825,6 +2852,9 @@ components:
             * 3390 - PAYONE Secured Invoice
             * 3391 - PAYONE Secured Installment
             * 3392 - PAYONE Secured Direct Debit
+          enum:
+            - B2C
+            - B2B
         locale:
           maxLength: 2
           type: string
@@ -2835,6 +2865,25 @@ components:
           example: de
         personalInformation:
           $ref: '#/components/schemas/PersonalInformation'
+        account:
+          $ref: '#/components/schemas/CustomerAccount'
+    CustomerAccount:
+      type: object
+      description: Object containing data related to the account the customer has with you.
+      properties:
+        createDate:
+          type: string
+          format: date-time
+          description: |
+            Creation date and time of the customer account in ISO 8601 format (UTC).
+            Accepted formats are:
+            * YYYY-MM-DD'T'HH:mm:ss'Z'
+            * YYYY-MM-DD'T'HH:mm:ss+XX:XX
+            * YYYY-MM-DD'T'HH:mm:ss-XX:XX
+            * YYYY-MM-DD'T'HH:mm'Z'
+            * YYYY-MM-DD'T'HH:mm+XX:XX
+            * YYYY-MM-DD'T'HH:mm-XX:XX
+          example: 2023-10-05T14:30:15.123Z
 
     CustomerDevice:
       type: object
@@ -3144,6 +3193,13 @@ components:
             to be provided to the EMVco certified Mobile SDK as a challengeParameters object. 
              * CALL_THIRD_PARTY - The merchant needs to call a third party using the data found in thirdPartyData
           example: REDIRECT
+          enum:
+            - REDIRECT
+            - SHOW_FORM
+            - SHOW_INSTRUCTIONS
+            - SHOW_TRANSACTION_RESULTS
+            - MOBILE_THREEDS_CHALLENGE
+            - CALL_THIRD_PARTY
         redirectData:
           $ref: '#/components/schemas/RedirectData'
     MobilePaymentMethodSpecificInput:
@@ -3287,7 +3343,9 @@ components:
           example: 0
         taxAmountPerUnit:
           type: boolean
-          description: If this is set to true, `taxAmount` will be interpreted as the tax amount per unit as opposed to the tax amount per line item.
+          description: |- 
+            This field indicates if the `taxAmount` is to be interpreted as the tax amount per unit rather than for the entire line item. 
+            This field is included in the response only when `taxAmount` is set; otherwise, it will return as `null`.
           format: int64
           example: true
           default: false
@@ -4313,6 +4371,14 @@ components:
             Default value is false.
             Please note that this field is ignored when order.additionalInput.typeInformation.purchaseType is set to
             "digital"
+        fraudNetId:
+          type: string
+          format: UUID
+          description: |-
+            A unique ID determined by the merchant, to link a Paypal transaction to a FraudNet PayPal risk session. Only applicable to 
+            customer-initiated transactions, when the FraudNet SDK is used, and to be passed in the API request the same tracking ID value 
+            (FraudNet Session Identifier).
+          example: 686e5823-1ffd-42f7-9ba3-42b41b57d8dd
     RefreshPaymentRequest:
       type: object
       description: Request to refresh the payment status of a specific payment.
