@@ -11,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
  * Object containing the details of a customer.
  */
 @JsonPropertyOrder({
+    Customer.JSON_PROPERTY_ACCOUNT,
     Customer.JSON_PROPERTY_COMPANY_INFORMATION,
     Customer.JSON_PROPERTY_MERCHANT_CUSTOMER_ID,
     Customer.JSON_PROPERTY_BILLING_ADDRESS,
@@ -46,6 +47,9 @@ public class Customer implements Serializable {
 
   public static final String JSON_PROPERTY_PERSONAL_INFORMATION = "personalInformation";
   private PersonalInformation personalInformation;
+
+  public static final String JSON_PROPERTY_ACCOUNT = "account";
+  private CustomerAccount account;
 
   public Customer() {
   }
@@ -264,6 +268,30 @@ public class Customer implements Serializable {
     this.personalInformation = personalInformation;
   }
 
+  public Customer account(CustomerAccount account) {
+    this.account = account;
+    return this;
+  }
+
+  /**
+   * Get account information containing details about the customer's account with
+   * the merchant.
+   * 
+   * @return account
+   **/
+
+  @JsonProperty(JSON_PROPERTY_ACCOUNT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public CustomerAccount getAccount() {
+    return account;
+  }
+
+  @JsonProperty(JSON_PROPERTY_ACCOUNT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setAccount(CustomerAccount account) {
+    this.account = account;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -280,13 +308,14 @@ public class Customer implements Serializable {
         Objects.equals(this.fiscalNumber, customer.fiscalNumber) &&
         Objects.equals(this.businessRelation, customer.businessRelation) &&
         Objects.equals(this.locale, customer.locale) &&
-        Objects.equals(this.personalInformation, customer.personalInformation);
+        Objects.equals(this.personalInformation, customer.personalInformation) &&
+        Objects.equals(this.account, customer.account);
   }
 
   @Override
   public int hashCode() {
     return Objects.hash(companyInformation, merchantCustomerId, billingAddress, contactDetails, fiscalNumber,
-        businessRelation, locale, personalInformation);
+        businessRelation, locale, personalInformation, account);
   }
 
   @Override
@@ -301,6 +330,7 @@ public class Customer implements Serializable {
     sb.append("    businessRelation: ").append(toIndentedString(businessRelation)).append("\n");
     sb.append("    locale: ").append(toIndentedString(locale)).append("\n");
     sb.append("    personalInformation: ").append(toIndentedString(personalInformation)).append("\n");
+    sb.append("    account: ").append(toIndentedString(account)).append("\n");
     sb.append("}");
     return sb.toString();
   }
