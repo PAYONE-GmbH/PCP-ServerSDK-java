@@ -39,7 +39,7 @@ public class Customer implements Serializable {
   private String fiscalNumber;
 
   public static final String JSON_PROPERTY_BUSINESS_RELATION = "businessRelation";
-  private String businessRelation;
+  private BusinessRelation businessRelation;
 
   public static final String JSON_PROPERTY_LOCALE = "locale";
   private String locale;
@@ -182,31 +182,34 @@ public class Customer implements Serializable {
     this.fiscalNumber = fiscalNumber;
   }
 
-  public Customer businessRelation(String businessRelation) {
+  public Customer businessRelation(BusinessRelation businessRelation) {
 
     this.businessRelation = businessRelation;
     return this;
   }
 
   /**
-   * Business relation to the customer. Possible values: * B2C - Indicates
-   * business to consumer * B2B - Indicates business to business Mandatory for the
-   * the following payment methods: * 3390 - PAYONE Secured Invoice * 3391 -
-   * PAYONE Secured Installment * 3392 - PAYONE Secured Direct Debit
+   * Business relation to the customer. See {@link BusinessRelation} for possible
+   * values.
+   * Mandatory for PAYONE Buy Now, Pay Later payment methods:
+   * - 3390 - PAYONE Secured Invoice
+   * - 3391 - PAYONE Secured Installment
+   * - 3392 - PAYONE Secured Direct Debit
    * 
-   * @return businessRelation
+   * @return businessRelation The relationship between business and customer (B2B
+   *         or B2C)
    **/
 
   @JsonProperty(JSON_PROPERTY_BUSINESS_RELATION)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public String getBusinessRelation() {
+  public BusinessRelation getBusinessRelation() {
     return businessRelation;
   }
 
   @JsonProperty(JSON_PROPERTY_BUSINESS_RELATION)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setBusinessRelation(String businessRelation) {
+  public void setBusinessRelation(BusinessRelation businessRelation) {
     this.businessRelation = businessRelation;
   }
 
