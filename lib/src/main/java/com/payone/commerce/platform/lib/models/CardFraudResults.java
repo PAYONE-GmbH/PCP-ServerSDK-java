@@ -17,53 +17,35 @@ public class CardFraudResults implements Serializable {
   private static final long serialVersionUID = 1L;
 
   public static final String JSON_PROPERTY_AVS_RESULT = "avsResult";
-  private String avsResult;
+  private AvsResult avsResult;
 
   public CardFraudResults() {
   }
 
-  public CardFraudResults avsResult(String avsResult) {
+  public CardFraudResults avsResult(AvsResult avsResult) {
 
     this.avsResult = avsResult;
     return this;
   }
 
   /**
-   * Result of the Address Verification Service checks. Possible values are: * A -
-   * Address (Street) matches, Zip does not * B - Street address match for
-   * international transactions—Postal code not verified due to incompatible
-   * formats * C - Street address and postal code not verified for international
-   * transaction due to incompatible formats * D - Street address and postal code
-   * match for international transaction, cardholder name is incorrect * E - AVS
-   * error * F - Address does match and five digit ZIP code does match (UK only) *
-   * G - Address information is unavailable; international transaction; non-AVS
-   * participant * H - Billing address and postal code match, cardholder name is
-   * incorrect (Amex) * I - Address information not verified for international
-   * transaction * K - Cardholder name matches (Amex) * L - Cardholder name and
-   * postal code match (Amex) * M - Cardholder name, street address, and postal
-   * code match for international transaction * N - No Match on Address (Street)
-   * or Zip * O - Cardholder name and address match (Amex) * P - Postal codes
-   * match for international transaction—Street address not verified due to
-   * incompatible formats * Q - Billing address matches, cardholder is incorrect
-   * (Amex) * R - Retry, System unavailable or Timed out * S - Service not
-   * supported by issuer * U - Address information is unavailable * W - 9 digit
-   * Zip matches, Address (Street) does not * X - Exact AVS Match * Y - Address
-   * (Street) and 5 digit Zip match * Z - 5 digit Zip matches, Address (Street)
-   * does not * 0 - No service available
+   * Result of the Address Verification Service checks using standardized AVS
+   * result codes.
+   * See AvsResult enum for all possible values and their descriptions.
    * 
-   * @return avsResult
+   * @return avsResult The AVS result code
    **/
 
   @JsonProperty(JSON_PROPERTY_AVS_RESULT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public String getAvsResult() {
+  public AvsResult getAvsResult() {
     return avsResult;
   }
 
   @JsonProperty(JSON_PROPERTY_AVS_RESULT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setAvsResult(String avsResult) {
+  public void setAvsResult(AvsResult avsResult) {
     this.avsResult = avsResult;
   }
 
