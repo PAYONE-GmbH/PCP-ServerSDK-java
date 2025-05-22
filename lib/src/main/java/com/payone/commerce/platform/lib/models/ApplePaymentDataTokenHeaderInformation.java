@@ -39,14 +39,14 @@ public class ApplePaymentDataTokenHeaderInformation implements Serializable {
    **/
 
   @JsonProperty(JSON_PROPERTY_TRANSACTION_ID)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
 
   public String getTransactionId() {
     return transactionId;
   }
 
   @JsonProperty(JSON_PROPERTY_TRANSACTION_ID)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setTransactionId(String transactionId) {
     this.transactionId = transactionId;
   }
