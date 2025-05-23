@@ -11,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
  * Object containing the details of a customer.
  */
 @JsonPropertyOrder({
+    Customer.JSON_PROPERTY_ACCOUNT,
     Customer.JSON_PROPERTY_COMPANY_INFORMATION,
     Customer.JSON_PROPERTY_MERCHANT_CUSTOMER_ID,
     Customer.JSON_PROPERTY_BILLING_ADDRESS,
@@ -39,13 +40,16 @@ public class Customer implements Serializable {
   private String fiscalNumber;
 
   public static final String JSON_PROPERTY_BUSINESS_RELATION = "businessRelation";
-  private String businessRelation;
+  private BusinessRelation businessRelation;
 
   public static final String JSON_PROPERTY_LOCALE = "locale";
   private String locale;
 
   public static final String JSON_PROPERTY_PERSONAL_INFORMATION = "personalInformation";
   private PersonalInformation personalInformation;
+
+  public static final String JSON_PROPERTY_ACCOUNT = "account";
+  private CustomerAccount account;
 
   public Customer() {
   }
@@ -182,31 +186,34 @@ public class Customer implements Serializable {
     this.fiscalNumber = fiscalNumber;
   }
 
-  public Customer businessRelation(String businessRelation) {
+  public Customer businessRelation(BusinessRelation businessRelation) {
 
     this.businessRelation = businessRelation;
     return this;
   }
 
   /**
-   * Business relation to the customer. Possible values: * B2C - Indicates
-   * business to consumer * B2B - Indicates business to business Mandatory for the
-   * the following payment methods: * 3390 - PAYONE Secured Invoice * 3391 -
-   * PAYONE Secured Installment * 3392 - PAYONE Secured Direct Debit
+   * Business relation to the customer. See {@link BusinessRelation} for possible
+   * values.
+   * Mandatory for PAYONE Buy Now, Pay Later payment methods:
+   * - 3390 - PAYONE Secured Invoice
+   * - 3391 - PAYONE Secured Installment
+   * - 3392 - PAYONE Secured Direct Debit
    * 
-   * @return businessRelation
+   * @return businessRelation The relationship between business and customer (B2B
+   *         or B2C)
    **/
 
   @JsonProperty(JSON_PROPERTY_BUSINESS_RELATION)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public String getBusinessRelation() {
+  public BusinessRelation getBusinessRelation() {
     return businessRelation;
   }
 
   @JsonProperty(JSON_PROPERTY_BUSINESS_RELATION)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setBusinessRelation(String businessRelation) {
+  public void setBusinessRelation(BusinessRelation businessRelation) {
     this.businessRelation = businessRelation;
   }
 
@@ -261,6 +268,30 @@ public class Customer implements Serializable {
     this.personalInformation = personalInformation;
   }
 
+  public Customer account(CustomerAccount account) {
+    this.account = account;
+    return this;
+  }
+
+  /**
+   * Get account information containing details about the customer's account with
+   * the merchant.
+   * 
+   * @return account
+   **/
+
+  @JsonProperty(JSON_PROPERTY_ACCOUNT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public CustomerAccount getAccount() {
+    return account;
+  }
+
+  @JsonProperty(JSON_PROPERTY_ACCOUNT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setAccount(CustomerAccount account) {
+    this.account = account;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -277,13 +308,14 @@ public class Customer implements Serializable {
         Objects.equals(this.fiscalNumber, customer.fiscalNumber) &&
         Objects.equals(this.businessRelation, customer.businessRelation) &&
         Objects.equals(this.locale, customer.locale) &&
-        Objects.equals(this.personalInformation, customer.personalInformation);
+        Objects.equals(this.personalInformation, customer.personalInformation) &&
+        Objects.equals(this.account, customer.account);
   }
 
   @Override
   public int hashCode() {
     return Objects.hash(companyInformation, merchantCustomerId, billingAddress, contactDetails, fiscalNumber,
-        businessRelation, locale, personalInformation);
+        businessRelation, locale, personalInformation, account);
   }
 
   @Override
@@ -298,6 +330,7 @@ public class Customer implements Serializable {
     sb.append("    businessRelation: ").append(toIndentedString(businessRelation)).append("\n");
     sb.append("    locale: ").append(toIndentedString(locale)).append("\n");
     sb.append("    personalInformation: ").append(toIndentedString(personalInformation)).append("\n");
+    sb.append("    account: ").append(toIndentedString(account)).append("\n");
     sb.append("}");
     return sb.toString();
   }

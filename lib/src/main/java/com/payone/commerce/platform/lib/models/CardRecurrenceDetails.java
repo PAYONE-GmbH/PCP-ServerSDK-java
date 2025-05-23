@@ -17,39 +17,43 @@ public class CardRecurrenceDetails implements Serializable {
   private static final long serialVersionUID = 1L;
 
   public static final String JSON_PROPERTY_RECURRING_PAYMENT_SEQUENCE_INDICATOR = "recurringPaymentSequenceIndicator";
-  private String recurringPaymentSequenceIndicator;
+  private RecurringPaymentSequenceIndicator recurringPaymentSequenceIndicator;
 
   public CardRecurrenceDetails() {
   }
 
-  public CardRecurrenceDetails recurringPaymentSequenceIndicator(String recurringPaymentSequenceIndicator) {
+  public CardRecurrenceDetails recurringPaymentSequenceIndicator(
+      RecurringPaymentSequenceIndicator recurringPaymentSequenceIndicator) {
 
     this.recurringPaymentSequenceIndicator = recurringPaymentSequenceIndicator;
     return this;
   }
 
   /**
-   * * first &#x3D; This transaction is the first of a series of recurring
-   * transactions * recurring &#x3D; This transaction is a subsequent transaction
-   * in a series of recurring transactions Note: For any first of a recurring the
-   * system will automatically create a token as you will need to use a token for
-   * any subsequent recurring transactions. In case a token already exists this is
-   * indicated in the response with a value of False for the isNewToken property
-   * in the response.
+   * Indicates whether this transaction is the first or a subsequent transaction
+   * in a series of recurring transactions. See
+   * {@link RecurringPaymentSequenceIndicator} for possible values.
    * 
-   * @return recurringPaymentSequenceIndicator
+   * Note: For any first of a recurring payment, the system will automatically
+   * create a token as it will be needed for any subsequent recurring
+   * transactions.
+   * If a token already exists, this is indicated in the response with a value of
+   * False for the isNewToken property.
+   * 
+   * @return The sequence indicator for this recurring payment
    **/
 
   @JsonProperty(JSON_PROPERTY_RECURRING_PAYMENT_SEQUENCE_INDICATOR)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public String getRecurringPaymentSequenceIndicator() {
+  public RecurringPaymentSequenceIndicator getRecurringPaymentSequenceIndicator() {
     return recurringPaymentSequenceIndicator;
   }
 
   @JsonProperty(JSON_PROPERTY_RECURRING_PAYMENT_SEQUENCE_INDICATOR)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setRecurringPaymentSequenceIndicator(String recurringPaymentSequenceIndicator) {
+  public void setRecurringPaymentSequenceIndicator(
+      RecurringPaymentSequenceIndicator recurringPaymentSequenceIndicator) {
     this.recurringPaymentSequenceIndicator = recurringPaymentSequenceIndicator;
   }
 
