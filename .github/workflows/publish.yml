@@ -23,10 +23,10 @@ jobs:
         with:
           java-version: '17'
           distribution: 'adopt'
-      - name: Setup Gradle 8.9
+      - name: Setup Gradle 8.14.1
         uses: gradle/actions/setup-gradle@v3
         with:
-          gradle-version: 8.9
+          gradle-version: 8.14.1
       - name: Build Lib
         run: ./gradlew :lib:build
       - name: Publish package

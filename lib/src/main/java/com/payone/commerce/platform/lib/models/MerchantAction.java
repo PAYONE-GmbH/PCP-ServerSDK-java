@@ -20,7 +20,7 @@ public class MerchantAction implements Serializable {
   private static final long serialVersionUID = 1L;
 
   public static final String JSON_PROPERTY_ACTION_TYPE = "actionType";
-  private String actionType;
+  private ActionType actionType;
 
   public static final String JSON_PROPERTY_REDIRECT_DATA = "redirectData";
   private RedirectData redirectData;
@@ -28,43 +28,30 @@ public class MerchantAction implements Serializable {
   public MerchantAction() {
   }
 
-  public MerchantAction actionType(String actionType) {
+  public MerchantAction actionType(ActionType actionType) {
 
     this.actionType = actionType;
     return this;
   }
 
   /**
-   * Action merchants needs to take in the online payment process. Possible values
-   * are: * REDIRECT - The customer needs to be redirected using the details found
-   * in redirectData * SHOW_FORM - The customer needs to be shown a form with the
-   * fields found in formFields. You can submit the data entered by the user in a
-   * Complete payment request. * SHOW_INSTRUCTIONS - The customer needs to be
-   * shown payment instruction using the details found in showData. Alternatively
-   * the instructions can be rendered by us using the instructionsRenderingData *
-   * SHOW_TRANSACTION_RESULTS - The customer needs to be shown the transaction
-   * results using the details found in showData. Alternatively the instructions
-   * can be rendered by us using the instructionsRenderingData *
-   * MOBILE_THREEDS_CHALLENGE - The customer needs to complete a challenge as part
-   * of the 3D Secure authentication inside your mobile app. The details contained
-   * in mobileThreeDSecureChallengeParameters need to be provided to the EMVco
-   * certified Mobile SDK as a challengeParameters object. * CALL_THIRD_PARTY -
-   * The merchant needs to call a third party using the data found in
-   * thirdPartyData
+   * Action merchants needs to take in the online payment process. See
+   * {@link ActionType}
+   * for possible values and their descriptions.
    * 
-   * @return actionType
+   * @return actionType The type of action to be performed
    **/
 
   @JsonProperty(JSON_PROPERTY_ACTION_TYPE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public String getActionType() {
+  public ActionType getActionType() {
     return actionType;
   }
 
   @JsonProperty(JSON_PROPERTY_ACTION_TYPE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setActionType(String actionType) {
+  public void setActionType(ActionType actionType) {
     this.actionType = actionType;
   }
 
