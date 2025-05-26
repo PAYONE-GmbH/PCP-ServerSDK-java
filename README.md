@@ -4,7 +4,7 @@
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=PAYONE-GmbH_PCP-ServerSDK-java&metric=coverage)](https://sonarcloud.io/summary/new_code?id=PAYONE-GmbH_PCP-ServerSDK-java)
 ![Maven Central Version](https://img.shields.io/maven-central/v/io.github.payone-gmbh/pcp-serversdk-java)
 
-Welcome to the Java SDK for the PAYONE Commerce Platform (api-version 1.28.0)! This repository contains a powerful, easy-to-use software development kit (SDK) designed to simplify the integration of online payment processing into your applications.
+Welcome to the Java SDK for the PAYONE Commerce Platform (api-version 1.35.0)! This repository contains a powerful, easy-to-use software development kit (SDK) designed to simplify the integration of online payment processing into your applications.
 
 ## Table of Contents
 
