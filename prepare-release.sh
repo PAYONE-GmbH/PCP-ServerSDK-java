@@ -53,7 +53,7 @@ npm install
 npm run changelog
 git add CHANGELOG.md
 git tag -a v$NEW_VERSION -m "Version $NEW_VERSION"
-git commit -m "Update version to $VERSION"
+git commit -m "chore: update version to $VERSION"
 git push origin tag v$NEW_VERSION
 git push origin HEAD
 
