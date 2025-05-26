@@ -19,6 +19,7 @@ import com.payone.commerce.platform.lib.models.Address;
 import com.payone.commerce.platform.lib.models.AddressPersonal;
 import com.payone.commerce.platform.lib.models.AmountOfMoney;
 import com.payone.commerce.platform.lib.models.BankAccountInformation;
+import com.payone.commerce.platform.lib.models.BusinessRelation;
 import com.payone.commerce.platform.lib.models.CartItemInput;
 import com.payone.commerce.platform.lib.models.CartItemInvoiceData;
 import com.payone.commerce.platform.lib.models.CheckoutReferences;
@@ -111,6 +112,7 @@ public class App {
                 customer.setPersonalInformation(personalInformation);
                 customer.setContactDetails(contactDetails);
                 customer.billingAddress(address);
+                customer.businessRelation(BusinessRelation.B2C);
 
                 CreateCheckoutRequest checkoutRequest = new CreateCheckoutRequest();
                 AmountOfMoney amountOfMoney = new AmountOfMoney()
@@ -199,6 +201,7 @@ public class App {
                 customer.setPersonalInformation(personalInformation);
                 customer.setContactDetails(contactDetails);
                 customer.billingAddress(address);
+                customer.businessRelation(BusinessRelation.B2C);
 
                 CreateCheckoutRequest checkout = new CreateCheckoutRequest();
 
@@ -265,7 +268,7 @@ public class App {
                 // create the commercase
                 CreateCommerceCaseRequest createCommerceCaseRequest = new CreateCommerceCaseRequest()
                                 .customer(new Customer()
-                                                .businessRelation("B2C")
+                                                .businessRelation(BusinessRelation.B2C)
                                                 .locale("de")
                                                 .personalInformation(new PersonalInformation().dateOfBirth("19840604")
                                                                 .name(new PersonalName().firstName("Rich")
