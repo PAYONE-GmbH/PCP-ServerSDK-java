@@ -19,7 +19,7 @@ public class AuthenticationApiClientTest {
     private AuthenticationApiClient client;
 
     @BeforeEach
-    public void setUp() throws InvalidKeyException {
+    void setUp() throws InvalidKeyException {
         config = mock(CommunicatorConfiguration.class);
         when(config.getHost()).thenReturn("api.testhost.com");
         when(config.getApiKey()).thenReturn("dummy-key");
@@ -28,7 +28,7 @@ public class AuthenticationApiClientTest {
     }
 
     @Test
-    public void testGetAuthenticationTokens_NullMerchantId_ThrowsException() {
+    void testGetAuthenticationTokens_NullMerchantId_ThrowsException() {
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
             client.getAuthenticationTokens(null, null);
         });
@@ -39,7 +39,7 @@ public class AuthenticationApiClientTest {
     }
 
     @Test
-    public void testGetAuthenticationTokens_ValidMerchantId_ReturnsToken() throws Exception {
+    void testGetAuthenticationTokens_ValidMerchantId_ReturnsToken() throws Exception {
         // Arrange
         AuthenticationApiClient spyClient = org.mockito.Mockito.spy(client);
         AuthenticationToken mockToken = new AuthenticationToken();
@@ -63,7 +63,7 @@ public class AuthenticationApiClientTest {
     }
 
     @Test
-    public void testGetAuthenticationTokens_ValidMerchantId_WithRequestId_ReturnsToken() throws Exception {
+    void testGetAuthenticationTokens_ValidMerchantId_WithRequestId_ReturnsToken() throws Exception {
         // Arrange
         AuthenticationApiClient spyClient = org.mockito.Mockito.spy(client);
         AuthenticationToken mockToken = new AuthenticationToken();
