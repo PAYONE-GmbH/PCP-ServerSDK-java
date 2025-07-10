@@ -12,6 +12,7 @@ Welcome to the Java SDK for the PAYONE Commerce Platform (api-version 1.35.0)! T
 - [Installation](#installation)
 - [Usage](#usage)
   - [General](#general)
+  - [Authentication Token Retrieval](#authentication-token-retrieval)
   - [Error Handling](#error-handling)
   - [Client Side](#client-side)
   - [Apple Pay](#apple-pay)
@@ -112,6 +113,29 @@ class App {
 
 The models directly map to the API as described in [PAYONE Commerce Platform API Reference](https://docs.payone.com/pcp/commerce-platform-api). For an in depth example you can take a look at the [demo app](#demo-app).
 
+### Authentication Token Retrieval
+
+To interact with certain client-side SDKs (such as the credit card tokenizer), you need to generate a short-lived authentication JWT token for your merchant. This token can be retrieved using the SDK as follows:
+
+```java
+import com.payone.commerce.platform.lib.endpoints.AuthenticationApiClient;
+import com.payone.commerce.platform.lib.models.AuthenticationToken;
+
+// ...
+AuthenticationApiClient authenticationApiClient = new AuthenticationApiClient(config);
+AuthenticationToken token = authenticationApiClient.getAuthenticationTokens(merchantId, null);
+System.out.println("JWT Token: " + token.getToken());
+System.out.println("Token ID: " + token.getId());
+System.out.println("Created: " + token.getCreationDate());
+System.out.println("Expires: " + token.getExpirationDate());
+```
+
+This token can then be used for secure operations such as initializing the credit card tokenizer or other client-side SDKs that require merchant authentication. The token is valid for a limited time (10 minutes) and should be handled securely.
+
+**Note:** The `getAuthenticationTokens` method requires a valid `merchantId`. Optionally, you can provide an `X-Request-ID` header for tracing requests.
+
+**[back to top](#table-of-contents)**
+
 ### Error Handling
 
 When making a request any client may throw a `ApiException`. There two subtypes of this exception:
@@ -187,7 +211,11 @@ class App {
 
 ## Demo App
 
-This repo contains a demo app that showcases how to implement common use cases, like a [Step-by-Step Checkout](https://docs.payone.com/pcp/checkout-flows/step-by-step-checkout) and an [One-Stop-Checkout](https://docs.payone.com/pcp/checkout-flows/one-step-checkout). For each use case the demo app contains a private method in the top level class `App`. You can run the app to execute the code within in the sandbox API. This is a good way to test, if your setup is correct.
+This repo contains a demo app that showcases how to implement common use cases, like a [Step-by-Step Checkout](https://docs.payone.com/pcp/checkout-flows/step-by-step-checkout) and an [One-Stop-Checkout](https://docs.payone.com/pcp/checkout-flows/one-step-checkout). For each use case the demo app contains a private method in the top level class `App`.
+
+**New:** After startup, the demo app also tries to retrieve an authentication token for the merchant and prints it to the console immediately after successful retrieval. This demonstrates how to use the authentication-tokens endpoint for scenarios like credit card tokenization.
+
+You can run the app to execute the code within in the sandbox API. This is a good way to test, if your setup is correct.
 
 If you're using grald can run it within the demo app directory via:
 
