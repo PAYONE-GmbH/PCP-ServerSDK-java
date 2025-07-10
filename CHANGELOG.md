@@ -1,3 +1,33 @@
+# [1.3.0](https://github.com/PAYONE-GmbH/PCP-ServerSDK-java/compare/v1.0.0...v1.3.0) (2025-07-10)
+
+### Bug Fixes
+
+* fix: change JsonInclude strategy for transactionId to always include as its a required property ([9ba6fff98b9d7cb3aab7345ae311fd7244564da3](https://github.com/PAYONE-GmbH/PCP-ServerSDK-java/commit/9ba6fff98b9d7cb3aab7345ae311fd7244564da3))
+
+### Documentation
+
+* docs: add Authentication Token Retrieval section to README and update demo app to retrieve token ([bbead7a7628bbd3737d86767358827055927f22a](https://github.com/PAYONE-GmbH/PCP-ServerSDK-java/commit/bbead7a7628bbd3737d86767358827055927f22a))
+* docs: add changelog ([02364d5b907f712c0d9714286168bfcba723f76f](https://github.com/PAYONE-GmbH/PCP-ServerSDK-java/commit/02364d5b907f712c0d9714286168bfcba723f76f))
+* docs: add maven link to readme ([0cc0e443c9670dab7abb30f538c77f77f91758a6](https://github.com/PAYONE-GmbH/PCP-ServerSDK-java/commit/0cc0e443c9670dab7abb30f538c77f77f91758a6))
+* docs: improve Javadoc for taxAmountPerUnit field in OrderLineDetailsInput ([74252775d5790fa459e2453301c904046a356bb5](https://github.com/PAYONE-GmbH/PCP-ServerSDK-java/commit/74252775d5790fa459e2453301c904046a356bb5))
+* docs: update error category documentation to clarify possible values and their meanings ([6d8dda707d9a3999bf6868936c00c4a65fe9ece6](https://github.com/PAYONE-GmbH/PCP-ServerSDK-java/commit/6d8dda707d9a3999bf6868936c00c4a65fe9ece6))
+* docs: update readme ([42826dac963443597d14b1c4aa5fc21d28e66439](https://github.com/PAYONE-GmbH/PCP-ServerSDK-java/commit/42826dac963443597d14b1c4aa5fc21d28e66439))
+
+### Features
+
+* feat: add AuthenticationApiClient to demo App ([0e8c4bf5680a5fa844364f1eb2bf444c099ed302](https://github.com/PAYONE-GmbH/PCP-ServerSDK-java/commit/0e8c4bf5680a5fa844364f1eb2bf444c099ed302))
+* feat: add BusinessRelation enum and update Customer model to use it ([69e1777510ff6936692c28ddc823d2c01ec15bf0](https://github.com/PAYONE-GmbH/PCP-ServerSDK-java/commit/69e1777510ff6936692c28ddc823d2c01ec15bf0))
+* feat: add CustomerAccount model and integrate it into Customer class ([09db51a9a970f337ab0e813190cd3c01eb85f7d5](https://github.com/PAYONE-GmbH/PCP-ServerSDK-java/commit/09db51a9a970f337ab0e813190cd3c01eb85f7d5))
+* feat: add fraudNetId field to RedirectPaymentProduct840SpecificInput model ([9d54df263be99280c89ce5f840b8d00e3ae0ceaf](https://github.com/PAYONE-GmbH/PCP-ServerSDK-java/commit/9d54df263be99280c89ce5f840b8d00e3ae0ceaf))
+* feat: add RecurringPaymentSequenceIndicator enum ([06d9074b719e129b94d06263d8a8c41a71795fa7](https://github.com/PAYONE-GmbH/PCP-ServerSDK-java/commit/06d9074b719e129b94d06263d8a8c41a71795fa7))
+* feat: implement AuthenticationApiClient and AuthenticationToken model with unit tests ([6059df53709531b6cf3bd23c0662a1e781bd0c1c](https://github.com/PAYONE-GmbH/PCP-ServerSDK-java/commit/6059df53709531b6cf3bd23c0662a1e781bd0c1c))
+* feat: implement AvsResult enum and update CardFraudResults to use it for AVS result handling ([9a38daadee205b63f1c5e78e36f4450eb1080b94](https://github.com/PAYONE-GmbH/PCP-ServerSDK-java/commit/9a38daadee205b63f1c5e78e36f4450eb1080b94))
+* feat: integrate BusinessRelation model for customer billing and commerce case creation ([4644a1d7c2d4a548acc525944082214b519bd4cc](https://github.com/PAYONE-GmbH/PCP-ServerSDK-java/commit/4644a1d7c2d4a548acc525944082214b519bd4cc))
+* feat: introduce ActionType enum and update MerchantAction to use it ([d1adbddaeabc06010e3ec75b961e08450a1c6946](https://github.com/PAYONE-GmbH/PCP-ServerSDK-java/commit/d1adbddaeabc06010e3ec75b961e08450a1c6946))
+* feat: update api-definition file with new version 1.35.0 changes ([63f7e2d8ae591c18ee8b3feca2781a6e2654b442](https://github.com/PAYONE-GmbH/PCP-ServerSDK-java/commit/63f7e2d8ae591c18ee8b3feca2781a6e2654b442))
+* feat: update Gradle version to 8.14.1 in workflows and wrapper properties to support Java 24 ([500c21522f308ff345fac4b882962cb622ccb67e](https://github.com/PAYONE-GmbH/PCP-ServerSDK-java/commit/500c21522f308ff345fac4b882962cb622ccb67e))
+* feat: update SDK to API 1.28.0 ([518a177487dc26139313eb385af6029b1f034275](https://github.com/PAYONE-GmbH/PCP-ServerSDK-java/commit/518a177487dc26139313eb385af6029b1f034275))
+
 # [1.2.0](https://github.com/PAYONE-GmbH/PCP-ServerSDK-java/compare/v1.0.0...v1.2.0) (2025-05-26)
 
 ### Bug Fixes
