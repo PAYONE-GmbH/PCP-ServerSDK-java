@@ -8,6 +8,7 @@ import java.security.InvalidKeyException;
 import java.util.Arrays;
 
 import com.payone.commerce.platform.lib.CommunicatorConfiguration;
+import com.payone.commerce.platform.lib.endpoints.AuthenticationApiClient;
 import com.payone.commerce.platform.lib.endpoints.CheckoutApiClient;
 import com.payone.commerce.platform.lib.endpoints.CommerceCaseApiClient;
 import com.payone.commerce.platform.lib.endpoints.OrderManagementCheckoutActionsApiClient;
@@ -51,6 +52,7 @@ import com.payone.commerce.platform.lib.models.SepaDirectDebitPaymentMethodSpeci
 import com.payone.commerce.platform.lib.models.SepaDirectDebitPaymentProduct771SpecificInput;
 import com.payone.commerce.platform.lib.models.Shipping;
 import com.payone.commerce.platform.lib.models.ShoppingCartInput;
+import com.payone.commerce.platform.lib.models.AuthenticationToken;
 
 public class App {
         private final String MERCHANT_ID;
@@ -59,6 +61,7 @@ public class App {
         private final CheckoutApiClient checkoutClient;
         private final OrderManagementCheckoutActionsApiClient orderManagementCheckoutClient;
         private final PaymentExecutionApiClient paymentExecutionClient;
+        private final AuthenticationApiClient authenticationApiClient;
 
         public App(String API_KEY, String API_SECRET, String MERCHANT_ID) {
                 this.MERCHANT_ID = MERCHANT_ID;
@@ -69,6 +72,7 @@ public class App {
                         this.checkoutClient = new CheckoutApiClient(config);
                         this.orderManagementCheckoutClient = new OrderManagementCheckoutActionsApiClient(config);
                         this.paymentExecutionClient = new PaymentExecutionApiClient(config);
+                        this.authenticationApiClient = new AuthenticationApiClient(config);
                 } catch (InvalidKeyException e) {
                         throw new RuntimeException("Expected key to be valid", e);
                 }
@@ -355,8 +359,29 @@ public class App {
                 System.out.println(delivery);
         }
 
+        private void printAuthenticationToken() throws IOException, ApiException {
+                // Retrieve authentication token for the merchant
+                AuthenticationToken token = this.authenticationApiClient.getAuthenticationTokens(MERCHANT_ID, null);
+                System.out.println("AuthenticationToken: " + token.getToken());
+                System.out.println("Token ID: " + token.getId());
+                System.out.println("Created: " + token.getCreationDate());
+                System.out.println("Expires: " + token.getExpirationDate());
+        }
+
         public static void main(String[] args) {
                 App app = initFromEnv();
+
+                // Retrieve and print authentication token
+                try {
+                        app.printAuthenticationToken();
+                } catch (ApiErrorResponseException e) {
+                        for (APIError error : e.getErrors()) {
+                                System.err.println(error.getMessage());
+                        }
+                        System.exit(1);
+                } catch (Exception e) {
+                        throw new RuntimeException(e);
+                }
 
                 // creates a checkout and executes the payment in one go
                 try {
