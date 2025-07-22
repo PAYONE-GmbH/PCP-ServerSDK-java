@@ -12,6 +12,7 @@ Welcome to the Java SDK for the PAYONE Commerce Platform (api-version 1.35.0)! T
 - [Installation](#installation)
 - [Usage](#usage)
   - [General](#general)
+  - [HTTP Client Customization](#http-client-customization)
   - [Authentication Token Retrieval](#authentication-token-retrieval)
   - [Error Handling](#error-handling)
   - [Client Side](#client-side)
@@ -112,6 +113,64 @@ class App {
 ```
 
 The models directly map to the API as described in [PAYONE Commerce Platform API Reference](https://docs.payone.com/pcp/commerce-platform-api). For an in depth example you can take a look at the [demo app](#demo-app).
+
+### HTTP Client Customization
+
+The SDK allows you to customize the underlying OkHttpClient used for API requests. This gives you control over timeouts, interceptors, proxy settings, and SSL configurations. You can customize the HTTP client either globally for all API clients or for specific API clients.
+
+#### Global HTTP Client Customization
+
+To set a custom OkHttpClient for all API clients:
+
+```java
+// Create a custom OkHttpClient
+OkHttpClient customHttpClient = new OkHttpClient.Builder()
+        .connectTimeout(30, TimeUnit.SECONDS)
+        .readTimeout(30, TimeUnit.SECONDS)
+        .writeTimeout(30, TimeUnit.SECONDS)
+        .addInterceptor(new LoggingInterceptor()) // Your custom interceptor
+        .build();
+
+// Set the custom client on the CommunicatorConfiguration
+CommunicatorConfiguration config = new CommunicatorConfiguration(apiKey, apiSecret, "api.preprod.commerce.payone.com", "YourIntegrator");
+config.setHttpClient(customHttpClient);
+
+// All API clients created with this configuration will use the custom HTTP client
+CheckoutApiClient checkoutClient = new CheckoutApiClient(config);
+CommerceCaseApiClient commerceCaseClient = new CommerceCaseApiClient(config);
+```
+
+#### Client-Specific HTTP Client Customization
+
+For more granular control, you can set a custom OkHttpClient for specific API clients:
+
+```java
+// Create a client with default settings
+CheckoutApiClient checkoutClient = new CheckoutApiClient(config);
+
+// Create a custom HTTP client for this specific API client
+OkHttpClient clientSpecificHttpClient = new OkHttpClient.Builder()
+        .connectTimeout(60, TimeUnit.SECONDS)
+        .addInterceptor(new DebugInterceptor()) // Client-specific interceptor
+        .build();
+
+// Set the custom client for this specific API client
+checkoutClient.setHttpClient(clientSpecificHttpClient);
+```
+
+#### Priority Logic
+
+When both global and client-specific HTTP clients are set, the SDK follows this priority order:
+
+1. Global client from CommunicatorConfiguration (if set)
+2. Client-specific instance (if set)
+3. Default client instance
+
+This allows you to set general settings at the global level while still customizing specific clients when needed.
+
+**Note:** The custom HTTP client should be configured before making any API requests.
+
+**[back to top](#table-of-contents)**
 
 ### Authentication Token Retrieval
 
