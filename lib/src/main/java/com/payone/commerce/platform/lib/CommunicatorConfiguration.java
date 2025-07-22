@@ -11,7 +11,7 @@ public class CommunicatorConfiguration {
     private final ServerMetaInfo serverMetaInfo;
     private OkHttpClient httpClient;
 
-        public CommunicatorConfiguration(String apiKey, String apiSecret, String host, String integrator) {
+    public CommunicatorConfiguration(String apiKey, String apiSecret, String host, String integrator) {
         this.apiKey = apiKey;
         this.apiSecret = apiSecret;
         this.host = host;
@@ -38,7 +38,7 @@ public class CommunicatorConfiguration {
     public OkHttpClient getHttpClient() {
         return httpClient;
     }
-
+    
     public void setHttpClient(OkHttpClient httpClient) {
         this.httpClient = httpClient;
     }
