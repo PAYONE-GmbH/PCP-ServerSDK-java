@@ -34,7 +34,7 @@ public class BaseApiClient {
 
     protected static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
 
-    private final OkHttpClient client = new OkHttpClient();
+    private OkHttpClient client = new OkHttpClient();
     private final RequestHeaderGenerator requestHeaderGenerator;
     private final CommunicatorConfiguration config;
 
@@ -53,7 +53,17 @@ public class BaseApiClient {
     }
 
     protected OkHttpClient getClient() {
+        // First check if there's a global client configured
+        if (this.config != null && this.config.getHttpClient() != null) {
+            return this.config.getHttpClient();
+        }
+        
+        // Otherwise, use the client-specific instance
         return client;
+    }
+
+    public void setHttpClient(OkHttpClient httpClient) {
+        this.client = httpClient;
     }
 
     protected CommunicatorConfiguration getConfig() {
