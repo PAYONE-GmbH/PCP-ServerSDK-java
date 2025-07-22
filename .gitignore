@@ -15,3 +15,5 @@ bin
 
 test_release.sh
 node_modules
+
+.tasks 
