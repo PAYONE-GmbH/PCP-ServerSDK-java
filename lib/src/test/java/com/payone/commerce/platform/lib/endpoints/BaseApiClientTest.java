@@ -2,7 +2,6 @@ package com.payone.commerce.platform.lib.endpoints;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.lang.reflect.Method;
 import java.security.InvalidKeyException;
 import java.util.concurrent.TimeUnit;
 
