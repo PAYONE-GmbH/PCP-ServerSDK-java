@@ -8,24 +8,29 @@ Welcome to the Java SDK for the PAYONE Commerce Platform (api-version 1.35.0)! T
 
 ## Table of Contents
 
-- [Features](#features)
-- [Installation](#installation)
-- [Usage](#usage)
-  - [General](#general)
-  - [HTTP Client Customization](#http-client-customization)
-  - [Authentication Token Retrieval](#authentication-token-retrieval)
-  - [Error Handling](#error-handling)
-  - [Client Side](#client-side)
-  - [Apple Pay](#apple-pay)
-- [Demo App](#demo-app)
-- [Contributing](#contributing)
-- [Releasing the library](#releasing-the-library)
-  - [Preparing the Release](#preparing-the-release)
-  - [Changelog Generation with Conventional Changelog](#changelog-generation-with-conventional-changelog)
-  - [Merging the Release Branch](#merging-the-release-branch)
-  - [GitHub Action for Release](#github-action-for-release)
-  - [Optional: Creating a GitHub Release](#optional-creating-a-github-release)
-- [License](#license)
+- [PAYONE Commerce Platform Java SDK](#payone-commerce-platform-java-sdk)
+  - [Table of Contents](#table-of-contents)
+  - [Features](#features)
+  - [Installation](#installation)
+  - [Usage](#usage)
+    - [General](#general)
+    - [HTTP Client Customization](#http-client-customization)
+      - [Global HTTP Client Customization](#global-http-client-customization)
+      - [Client-Specific HTTP Client Customization](#client-specific-http-client-customization)
+      - [Priority Logic](#priority-logic)
+    - [Authentication Token Retrieval](#authentication-token-retrieval)
+    - [Error Handling](#error-handling)
+    - [Client Side](#client-side)
+    - [Apple Pay](#apple-pay)
+  - [Demo App](#demo-app)
+  - [Contributing](#contributing)
+  - [Releasing the library](#releasing-the-library)
+    - [Preparing the Release](#preparing-the-release)
+    - [Changelog Generation with Conventional Changelog](#changelog-generation-with-conventional-changelog)
+    - [Merging the Release Branch](#merging-the-release-branch)
+    - [GitHub Action for Release](#github-action-for-release)
+    - [Optional: Creating a GitHub Release](#optional-creating-a-github-release)
+  - [License](#license)
 
 ## Features
 
@@ -162,8 +167,8 @@ checkoutClient.setHttpClient(clientSpecificHttpClient);
 
 When both global and client-specific HTTP clients are set, the SDK follows this priority order:
 
-1. Global client from CommunicatorConfiguration (if set)
-2. Client-specific instance (if set)
+1. Client-specific instance (if set)
+2. Global client from CommunicatorConfiguration (if set)
 3. Default client instance
 
 This allows you to set general settings at the global level while still customizing specific clients when needed.
