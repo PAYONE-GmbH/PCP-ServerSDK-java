@@ -368,8 +368,84 @@ public class App {
                 System.out.println("Expires: " + token.getExpirationDate());
         }
 
+        private void demonstrateHttpClientCustomization() {
+                System.out.println("\n=== OkHttpClient Customization Example ===");
+
+                try {
+                        // Create a custom OkHttpClient with custom timeouts and logging
+                        okhttp3.OkHttpClient customClient = new okhttp3.OkHttpClient.Builder()
+                                .connectTimeout(30, java.util.concurrent.TimeUnit.SECONDS)
+                                .readTimeout(30, java.util.concurrent.TimeUnit.SECONDS)
+                                .writeTimeout(30, java.util.concurrent.TimeUnit.SECONDS)
+                                .addInterceptor(chain -> {
+                                        okhttp3.Request request = chain.request();
+                                        System.out.println("Making request to: " + request.url());
+                                        long startTime = System.currentTimeMillis();
+                                        okhttp3.Response response = chain.proceed(request);
+                                        long endTime = System.currentTimeMillis();
+                                        System.out.println("Received response from: " + request.url() + 
+                                                " in " + (endTime - startTime) + "ms");
+                                        return response;
+                                })
+                                .build();
+
+                        // Example 1: Set global HTTP client for all API clients
+                        System.out.println("Setting global HTTP client for all API clients");
+                        this.config.setHttpClient(customClient);
+                        
+                        // Request with the global HTTP client
+                        System.out.println("Making request with global HTTP client");
+                        this.authenticationApiClient.getAuthenticationTokens(MERCHANT_ID, null);
+                        
+                        // Example 2: Set client-specific HTTP client for one API client
+                        System.out.println("\nSetting client-specific HTTP client for checkout API client");
+                        okhttp3.OkHttpClient clientSpecificClient = new okhttp3.OkHttpClient.Builder()
+                                .connectTimeout(60, java.util.concurrent.TimeUnit.SECONDS)
+                                .addInterceptor(chain -> {
+                                        okhttp3.Request request = chain.request();
+                                        System.out.println("Checkout API Client request to: " + request.url());
+                                        okhttp3.Response response = chain.proceed(request);
+                                        System.out.println("Checkout API Client response status: " + response.code());
+                                        return response;
+                                })
+                                .build();
+                        
+                        // Set the client-specific HTTP client on the checkout client
+                        this.checkoutClient.setHttpClient(clientSpecificClient);
+                        
+                        // Note: The global client will still be used because it takes priority
+                        System.out.println("Making request with checkout API client (global client has priority)");
+                        CheckoutResponse commerceCaseId = System.getenv("COMMERCE_CASE_ID") != null &&
+                                      System.getenv("CHECKOUT_ID") != null ? 
+                                      this.checkoutClient.getCheckoutRequest(
+                                        MERCHANT_ID,
+                                        System.getenv("COMMERCE_CASE_ID"),
+                                        System.getenv("CHECKOUT_ID")) : null;
+                                      
+                        // To demonstrate client-specific HTTP client, remove the global client
+                        System.out.println("\nRemoving global HTTP client to demonstrate client-specific client");
+                        this.config.setHttpClient(null);
+                        
+                        System.out.println("Making request with checkout API client (using client-specific HTTP client)");
+                        if (commerceCaseId != null) {
+                                this.checkoutClient.getCheckoutRequest(
+                                        MERCHANT_ID,
+                                        System.getenv("COMMERCE_CASE_ID"),
+                                        System.getenv("CHECKOUT_ID"));
+                        }
+                        
+                        System.out.println("=== End of OkHttpClient Customization Example ===\n");
+                } catch (Exception e) {
+                        System.err.println("Error in HTTP client customization example: " + e.getMessage());
+                        e.printStackTrace();
+                }
+        }
+
         public static void main(String[] args) {
                 App app = initFromEnv();
+
+                // Demonstrate HTTP client customization
+                app.demonstrateHttpClientCustomization();
 
                 // Retrieve and print authentication token
                 try {
