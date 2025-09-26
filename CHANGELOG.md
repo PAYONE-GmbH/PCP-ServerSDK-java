@@ -1,3 +1,13 @@
+# [1.5.0](https://github.com/PAYONE-GmbH/PCP-ServerSDK-java/compare/v1.4.0...v1.5.0) (2025-09-26)
+
+### Bug Fixes
+
+* fix: add missing newline at end of files ([7a3ea2d0ac1c2d774304e649017d55cc86d01da3](https://github.com/PAYONE-GmbH/PCP-ServerSDK-java/commit/7a3ea2d0ac1c2d774304e649017d55cc86d01da3))
+
+### Features
+
+* feat: add required parameters for PayPal integration ([090cc550531a1bac8c7a3cdb17eeba7c4cfe33c5](https://github.com/PAYONE-GmbH/PCP-ServerSDK-java/commit/090cc550531a1bac8c7a3cdb17eeba7c4cfe33c5))
+
 # [1.4.0](https://github.com/PAYONE-GmbH/PCP-ServerSDK-java/compare/v1.3.0...v1.4.0) (2025-07-31)
 
 # [1.3.0](https://github.com/PAYONE-GmbH/PCP-ServerSDK-java/compare/v1.0.0...v1.3.0) (2025-07-10)

@@ -45,7 +45,7 @@ Welcome to the Java SDK for the PAYONE Commerce Platform (api-version 1.35.0)! T
 
 ```groovy
 dependencies {
-    implementation group: 'io.github.payone-gmbh', name: 'pcp-serversdk-java', version: '1.4.0'
+    implementation group: 'io.github.payone-gmbh', name: 'pcp-serversdk-java', version: '1.5.0'
 }
 ```
 
