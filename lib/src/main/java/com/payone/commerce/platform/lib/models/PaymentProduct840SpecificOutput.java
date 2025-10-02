@@ -13,7 +13,8 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 @JsonPropertyOrder({
     PaymentProduct840SpecificOutput.JSON_PROPERTY_BILLING_ADDRESS,
     PaymentProduct840SpecificOutput.JSON_PROPERTY_CUSTOMER_ACCOUNT,
-    PaymentProduct840SpecificOutput.JSON_PROPERTY_SHIPPING_ADDRESS
+    PaymentProduct840SpecificOutput.JSON_PROPERTY_SHIPPING_ADDRESS,
+    PaymentProduct840SpecificOutput.JSON_PROPERTY_PAYPAL_TRANSACTION_ID
 })
 public class PaymentProduct840SpecificOutput implements Serializable {
   private static final long serialVersionUID = 1L;
@@ -27,11 +28,13 @@ public class PaymentProduct840SpecificOutput implements Serializable {
   public static final String JSON_PROPERTY_SHIPPING_ADDRESS = "shippingAddress";
   private Address shippingAddress;
 
+  public static final String JSON_PROPERTY_PAYPAL_TRANSACTION_ID = "payPalTransactionId";
+  private String payPalTransactionId;
+
   public PaymentProduct840SpecificOutput() {
   }
 
   public PaymentProduct840SpecificOutput billingAddress(Address billingAddress) {
-
     this.billingAddress = billingAddress;
     return this;
   }
@@ -41,10 +44,8 @@ public class PaymentProduct840SpecificOutput implements Serializable {
    * 
    * @return billingAddress
    **/
-
   @JsonProperty(JSON_PROPERTY_BILLING_ADDRESS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public Address getBillingAddress() {
     return billingAddress;
   }
@@ -56,7 +57,6 @@ public class PaymentProduct840SpecificOutput implements Serializable {
   }
 
   public PaymentProduct840SpecificOutput customerAccount(PaymentProduct840CustomerAccount customerAccount) {
-
     this.customerAccount = customerAccount;
     return this;
   }
@@ -66,10 +66,8 @@ public class PaymentProduct840SpecificOutput implements Serializable {
    * 
    * @return customerAccount
    **/
-
   @JsonProperty(JSON_PROPERTY_CUSTOMER_ACCOUNT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public PaymentProduct840CustomerAccount getCustomerAccount() {
     return customerAccount;
   }
@@ -81,7 +79,6 @@ public class PaymentProduct840SpecificOutput implements Serializable {
   }
 
   public PaymentProduct840SpecificOutput shippingAddress(Address shippingAddress) {
-
     this.shippingAddress = shippingAddress;
     return this;
   }
@@ -91,10 +88,8 @@ public class PaymentProduct840SpecificOutput implements Serializable {
    * 
    * @return shippingAddress
    **/
-
   @JsonProperty(JSON_PROPERTY_SHIPPING_ADDRESS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public Address getShippingAddress() {
     return shippingAddress;
   }
@@ -103,6 +98,28 @@ public class PaymentProduct840SpecificOutput implements Serializable {
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setShippingAddress(Address shippingAddress) {
     this.shippingAddress = shippingAddress;
+  }
+
+  public PaymentProduct840SpecificOutput payPalTransactionId(String payPalTransactionId) {
+    this.payPalTransactionId = payPalTransactionId;
+    return this;
+  }
+
+  /**
+   * PayPal transaction ID
+   * 
+   * @return payPalTransactionId
+   **/
+  @JsonProperty(JSON_PROPERTY_PAYPAL_TRANSACTION_ID)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public String getPayPalTransactionId() {
+    return payPalTransactionId;
+  }
+
+  @JsonProperty(JSON_PROPERTY_PAYPAL_TRANSACTION_ID)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setPayPalTransactionId(String payPalTransactionId) {
+    this.payPalTransactionId = payPalTransactionId;
   }
 
   @Override
@@ -116,12 +133,13 @@ public class PaymentProduct840SpecificOutput implements Serializable {
     PaymentProduct840SpecificOutput paymentProduct840SpecificOutput = (PaymentProduct840SpecificOutput) o;
     return Objects.equals(this.billingAddress, paymentProduct840SpecificOutput.billingAddress) &&
         Objects.equals(this.customerAccount, paymentProduct840SpecificOutput.customerAccount) &&
-        Objects.equals(this.shippingAddress, paymentProduct840SpecificOutput.shippingAddress);
+        Objects.equals(this.shippingAddress, paymentProduct840SpecificOutput.shippingAddress) &&
+        Objects.equals(this.payPalTransactionId, paymentProduct840SpecificOutput.payPalTransactionId);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(billingAddress, customerAccount, shippingAddress);
+    return Objects.hash(billingAddress, customerAccount, shippingAddress, payPalTransactionId);
   }
 
   @Override
@@ -131,6 +149,7 @@ public class PaymentProduct840SpecificOutput implements Serializable {
     sb.append("    billingAddress: ").append(toIndentedString(billingAddress)).append("\n");
     sb.append("    customerAccount: ").append(toIndentedString(customerAccount)).append("\n");
     sb.append("    shippingAddress: ").append(toIndentedString(shippingAddress)).append("\n");
+    sb.append("    payPalTransactionId: ").append(toIndentedString(payPalTransactionId)).append("\n");
     sb.append("}");
     return sb.toString();
   }
@@ -145,5 +164,4 @@ public class PaymentProduct840SpecificOutput implements Serializable {
     }
     return o.toString().replace("\n", "\n    ");
   }
-
 }
