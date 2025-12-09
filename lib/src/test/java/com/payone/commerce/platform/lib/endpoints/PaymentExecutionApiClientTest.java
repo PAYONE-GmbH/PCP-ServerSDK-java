@@ -25,8 +25,10 @@ import com.payone.commerce.platform.lib.models.CancelPaymentRequest;
 import com.payone.commerce.platform.lib.models.CancelPaymentResponse;
 import com.payone.commerce.platform.lib.models.CapturePaymentRequest;
 import com.payone.commerce.platform.lib.models.CapturePaymentResponse;
+import com.payone.commerce.platform.lib.models.CompletePaymentProduct840SpecificInput;
 import com.payone.commerce.platform.lib.models.CompletePaymentRequest;
 import com.payone.commerce.platform.lib.models.CompletePaymentResponse;
+import com.payone.commerce.platform.lib.models.CompleteRedirectPaymentMethodSpecificInput;
 import com.payone.commerce.platform.lib.models.CreatePaymentResponse;
 import com.payone.commerce.platform.lib.models.PausePaymentRequest;
 import com.payone.commerce.platform.lib.models.PausePaymentResponse;
@@ -353,6 +355,12 @@ public class PaymentExecutionApiClientTest {
             when(paymentExecutionApiClient.getResponse(any())).thenReturn(response);
 
             CompletePaymentRequest payload = new CompletePaymentRequest();
+            CompleteRedirectPaymentMethodSpecificInput redirectInput = new CompleteRedirectPaymentMethodSpecificInput();
+            CompletePaymentProduct840SpecificInput product840Input = new CompletePaymentProduct840SpecificInput();
+            product840Input.setAction("CONFIRM_ORDER_STATUS");
+            product840Input.setJavaScriptSdkFlow(true);
+            redirectInput.setPaymentProduct840SpecificInput(product840Input);
+            payload.setRedirectPaymentMethodSpecificInput(redirectInput);
             CompletePaymentResponse res = paymentExecutionApiClient.completePayment("1", "2", "3", "4", payload);
 
             assertEquals(expected, res);

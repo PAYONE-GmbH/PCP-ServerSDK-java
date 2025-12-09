@@ -6,6 +6,7 @@ import com.payone.commerce.platform.lib.models.ApplePaymentDataTokenHeaderInform
 import com.payone.commerce.platform.lib.models.ApplePaymentDataTokenInformation;
 import com.payone.commerce.platform.lib.models.MobilePaymentMethodSpecificInput;
 import com.payone.commerce.platform.lib.models.PaymentProduct302SpecificInput;
+import com.payone.commerce.platform.lib.models.PaymentProductId;
 import com.payone.commerce.platform.lib.models.applepay.ApplePayPayment;
 import com.payone.commerce.platform.lib.models.applepay.ApplePayPaymentContact;
 import com.payone.commerce.platform.lib.models.applepay.ApplePayPaymentData;
@@ -58,7 +59,7 @@ class ApplePayTransformerTest {
                                 .shippingContact(null);
 
                 MobilePaymentMethodSpecificInput expected = new MobilePaymentMethodSpecificInput()
-                                .paymentProductId(302)
+                                .paymentProductId(new PaymentProductId(302))
                                 .publicKeyHash("hashhashhash")
                                 .ephemeralKey(null)
                                 .paymentProduct302SpecificInput(

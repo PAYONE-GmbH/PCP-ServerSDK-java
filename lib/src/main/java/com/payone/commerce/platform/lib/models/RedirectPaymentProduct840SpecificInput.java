@@ -15,8 +15,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 @JsonPropertyOrder({
     RedirectPaymentProduct840SpecificInput.JSON_PROPERTY_ADDRESS_SELECTION_AT_PAY_PAL,
     RedirectPaymentProduct840SpecificInput.JSON_PROPERTY_FRAUD_NET_ID,
-    RedirectPaymentProduct840SpecificInput.JSON_PROPERTY_JAVASCRIPT_SDK_FLOW,
-    RedirectPaymentProduct840SpecificInput.JSON_PROPERTY_ACTION
+    RedirectPaymentProduct840SpecificInput.JSON_PROPERTY_JAVASCRIPT_SDK_FLOW
 })
 public class RedirectPaymentProduct840SpecificInput implements Serializable {
   private static final long serialVersionUID = 1L;
@@ -29,9 +28,6 @@ public class RedirectPaymentProduct840SpecificInput implements Serializable {
 
   public static final String JSON_PROPERTY_JAVASCRIPT_SDK_FLOW = "javaScriptSdkFlow";
   private Boolean javaScriptSdkFlow;
-
-  public static final String JSON_PROPERTY_ACTION = "action";
-  private String action;
 
   public RedirectPaymentProduct840SpecificInput() {
   }
@@ -96,11 +92,14 @@ public class RedirectPaymentProduct840SpecificInput implements Serializable {
   }
 
   /**
-   * Required parameter which defines how PayPal is being integrated inside the
-   * checkout page.
-   * * true = the current integration uses PayPal SDK
-   * * false = classic usage with PayPal Redirect flow
+   * Indicates whether the PayPal JavaScript SDK flow is used.
+   * * true = The PayPal JavaScript SDK flow is used.
+   * * false = The PayPal JavaScript SDK flow is not used.
+   *
+   * Default value is false.
    * 
+   * @default false
+   * @example true
    * @return javaScriptSdkFlow
    **/
   @JsonProperty(JSON_PROPERTY_JAVASCRIPT_SDK_FLOW)
@@ -115,30 +114,6 @@ public class RedirectPaymentProduct840SpecificInput implements Serializable {
     this.javaScriptSdkFlow = javaScriptSdkFlow;
   }
 
-  public RedirectPaymentProduct840SpecificInput action(String action) {
-    this.action = action;
-    return this;
-  }
-
-  /**
-   * Required parameter for a COMPLETE CALL (not only an ORDER CALL) which one
-   * value "CONFIRM_ORDER_STATUS"
-   * it signals process is finished on merchant side.
-   * 
-   * @return action
-   **/
-  @JsonProperty(JSON_PROPERTY_ACTION)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public String getAction() {
-    return action;
-  }
-
-  @JsonProperty(JSON_PROPERTY_ACTION)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setAction(String action) {
-    this.action = action;
-  }
-
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -151,13 +126,12 @@ public class RedirectPaymentProduct840SpecificInput implements Serializable {
     return Objects.equals(this.addressSelectionAtPayPal,
         redirectPaymentProduct840SpecificInput.addressSelectionAtPayPal) &&
         Objects.equals(this.fraudNetId, redirectPaymentProduct840SpecificInput.fraudNetId) &&
-        Objects.equals(this.javaScriptSdkFlow, redirectPaymentProduct840SpecificInput.javaScriptSdkFlow) &&
-        Objects.equals(this.action, redirectPaymentProduct840SpecificInput.action);
+        Objects.equals(this.javaScriptSdkFlow, redirectPaymentProduct840SpecificInput.javaScriptSdkFlow);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(addressSelectionAtPayPal, fraudNetId, javaScriptSdkFlow, action);
+    return Objects.hash(addressSelectionAtPayPal, fraudNetId, javaScriptSdkFlow);
   }
 
   @Override
@@ -167,7 +141,6 @@ public class RedirectPaymentProduct840SpecificInput implements Serializable {
     sb.append("    addressSelectionAtPayPal: ").append(toIndentedString(addressSelectionAtPayPal)).append("\n");
     sb.append("    fraudNetId: ").append(toIndentedString(fraudNetId)).append("\n");
     sb.append("    javaScriptSdkFlow: ").append(toIndentedString(javaScriptSdkFlow)).append("\n");
-    sb.append("    action: ").append(toIndentedString(action)).append("\n");
     sb.append("}");
     return sb.toString();
   }

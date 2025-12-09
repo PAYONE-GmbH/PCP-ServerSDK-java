@@ -30,7 +30,7 @@ public class PaymentInformationRequest implements Serializable {
   private PaymentChannel paymentChannel;
 
   public static final String JSON_PROPERTY_PAYMENT_PRODUCT_ID = "paymentProductId";
-  private Integer paymentProductId;
+  private PaymentProductId paymentProductId;
 
   public static final String JSON_PROPERTY_MERCHANT_REFERENCE = "merchantReference";
   private String merchantReference;
@@ -113,17 +113,14 @@ public class PaymentInformationRequest implements Serializable {
     this.paymentChannel = paymentChannel;
   }
 
-  public PaymentInformationRequest paymentProductId(Integer paymentProductId) {
+  public PaymentInformationRequest paymentProductId(PaymentProductId paymentProductId) {
 
     this.paymentProductId = paymentProductId;
     return this;
   }
 
   /**
-   * Payment method identifier - please check the product documentation for a full
-   * overview of possible values.
-   * minimum: 0
-   * maximum: 99999
+   * Get paymentProductId
    * 
    * @return paymentProductId
    **/
@@ -131,13 +128,13 @@ public class PaymentInformationRequest implements Serializable {
   @JsonProperty(JSON_PROPERTY_PAYMENT_PRODUCT_ID)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
 
-  public Integer getPaymentProductId() {
+  public PaymentProductId getPaymentProductId() {
     return paymentProductId;
   }
 
   @JsonProperty(JSON_PROPERTY_PAYMENT_PRODUCT_ID)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  public void setPaymentProductId(Integer paymentProductId) {
+  public void setPaymentProductId(PaymentProductId paymentProductId) {
     this.paymentProductId = paymentProductId;
   }
 
