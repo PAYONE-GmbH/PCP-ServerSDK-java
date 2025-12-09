@@ -18,6 +18,16 @@ plugins {
     id 'io.github.kmbisset89.changelog.plugin' version '1.0.4'
 }
 
+def targetJavaVersionProvider = providers.gradleProperty('targetJavaVersion').map(Integer.&parseInt)
+
+java {
+  toolchain {
+    languageVersion = targetJavaVersionProvider
+      .map { JavaLanguageVersion.of(it) }
+      .orElse(JavaLanguageVersion.of(21))
+  }
+}
+
 if (JavaVersion.current().majorVersion != '8') {
    apply plugin: 'com.vanniktech.maven.publish'
    apply plugin: 'org.sonarqube'
