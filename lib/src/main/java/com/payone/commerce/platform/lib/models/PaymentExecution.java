@@ -337,8 +337,9 @@ public class PaymentExecution implements Serializable {
   }
 
   /**
-   * Get previousPayment
+   * Reference to the previous payment, if applicable.
    * 
+   * @example cee5276d-6b1e-4a4f-a46f-27b7550d484e
    * @return previousPayment
    */
 
@@ -360,10 +361,14 @@ public class PaymentExecution implements Serializable {
   }
 
   /**
-   * The date and time when the payment was created. Format will be in one of the
-   * following formats: * YYYY-MM-DD&#39;T&#39;HH:mm:ss&#39;Z&#39; *
-   * YYYY-MM-DD&#39;T&#39;HH:mm:ss+XX:XX * YYYY-MM-DD&#39;T&#39;HH:mm:ss-XX:XX
+   * The date and time when the payment was created.
+   *
+   * Format will be in one of the following formats:
+   * * YYYY-MM-DD'T'HH:mm:ss'Z'
+   * * YYYY-MM-DD'T'HH:mm:ss+XX:XX
+   * * YYYY-MM-DD'T'HH:mm:ss-XX:XX
    * 
+   * @example 2022-01-01T00:00:00Z
    * @return creationDateTime
    */
 
@@ -385,10 +390,14 @@ public class PaymentExecution implements Serializable {
   }
 
   /**
-   * The date and time when the payment was last updated. Format will be in one of
-   * the following formats: * YYYY-MM-DD&#39;T&#39;HH:mm:ss&#39;Z&#39; *
-   * YYYY-MM-DD&#39;T&#39;HH:mm:ss+XX:XX * YYYY-MM-DD&#39;T&#39;HH:mm:ss-XX:XX
+   * The date and time when the payment was last updated.
+   *
+   * Format will be in one of the following formats:
+   * * YYYY-MM-DD'T'HH:mm:ss'Z'
+   * * YYYY-MM-DD'T'HH:mm:ss+XX:XX
+   * * YYYY-MM-DD'T'HH:mm:ss-XX:XX
    * 
+   * @example 2022-01-01T00:00:00Z
    * @return lastUpdated
    */
 
@@ -418,7 +427,7 @@ public class PaymentExecution implements Serializable {
   }
 
   /**
-   * Get events
+   * Payment events associated with this payment execution.
    * 
    * @return events
    */

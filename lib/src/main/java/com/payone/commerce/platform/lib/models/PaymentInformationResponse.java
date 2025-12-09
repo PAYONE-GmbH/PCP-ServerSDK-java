@@ -55,7 +55,7 @@ public class PaymentInformationResponse implements Serializable {
 
   public static final String JSON_PROPERTY_PAYMENT_PRODUCT_ID = "paymentProductId";
 
-  private Integer paymentProductId;
+  private PaymentProductId paymentProductId;
 
   public static final String JSON_PROPERTY_TERMINAL_ID = "terminalId";
 
@@ -203,29 +203,26 @@ public class PaymentInformationResponse implements Serializable {
     this.paymentChannel = paymentChannel;
   }
 
-  public PaymentInformationResponse paymentProductId(Integer paymentProductId) {
+  public PaymentInformationResponse paymentProductId(PaymentProductId paymentProductId) {
     this.paymentProductId = paymentProductId;
     return this;
   }
 
   /**
-   * Payment product identifier - please check see product documentation for a
-   * full overview of possible values.
-   * minimum: 0
-   * maximum: 99999
+   * Get paymentProductId
    * 
    * @return paymentProductId
-   */
+   **/
 
   @JsonProperty(JSON_PROPERTY_PAYMENT_PRODUCT_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public Integer getPaymentProductId() {
+  public PaymentProductId getPaymentProductId() {
     return paymentProductId;
   }
 
   @JsonProperty(JSON_PROPERTY_PAYMENT_PRODUCT_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setPaymentProductId(Integer paymentProductId) {
+  public void setPaymentProductId(PaymentProductId paymentProductId) {
     this.paymentProductId = paymentProductId;
   }
 

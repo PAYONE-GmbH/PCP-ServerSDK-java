@@ -78,6 +78,7 @@ public class CreateCommerceCaseResponse implements Serializable {
    * Unique reference of the Commerce Case that is also returned for reporting and
    * reconciliation purposes.
    * 
+   * @maxLength 40
    * @return merchantReference
    **/
 

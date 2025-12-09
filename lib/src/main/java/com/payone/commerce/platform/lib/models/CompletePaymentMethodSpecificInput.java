@@ -13,13 +13,17 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
  * bankAccountInformation of the customer.
  */
 @JsonPropertyOrder({
-    CompletePaymentMethodSpecificInput.JSON_PROPERTY_PAYMENT_PRODUCT3391_SPECIFIC_INPUT
+    CompletePaymentMethodSpecificInput.JSON_PROPERTY_PAYMENT_PRODUCT3391_SPECIFIC_INPUT,
+    CompletePaymentMethodSpecificInput.JSON_PROPERTY_PAYMENT_PRODUCT840_SPECIFIC_INPUT
 })
 public class CompletePaymentMethodSpecificInput implements Serializable {
   private static final long serialVersionUID = 1L;
 
   public static final String JSON_PROPERTY_PAYMENT_PRODUCT3391_SPECIFIC_INPUT = "paymentProduct3391SpecificInput";
   private PaymentProduct3391SpecificInput paymentProduct3391SpecificInput;
+
+  public static final String JSON_PROPERTY_PAYMENT_PRODUCT840_SPECIFIC_INPUT = "paymentProduct840SpecificInput";
+  private CompletePaymentProduct840SpecificInput paymentProduct840SpecificInput;
 
   public CompletePaymentMethodSpecificInput() {
   }
@@ -50,6 +54,33 @@ public class CompletePaymentMethodSpecificInput implements Serializable {
     this.paymentProduct3391SpecificInput = paymentProduct3391SpecificInput;
   }
 
+  public CompletePaymentMethodSpecificInput paymentProduct840SpecificInput(
+      CompletePaymentProduct840SpecificInput paymentProduct840SpecificInput) {
+
+    this.paymentProduct840SpecificInput = paymentProduct840SpecificInput;
+    return this;
+  }
+
+  /**
+   * Get paymentProduct840SpecificInput
+   * 
+   * @return paymentProduct840SpecificInput
+   **/
+
+  @JsonProperty(JSON_PROPERTY_PAYMENT_PRODUCT840_SPECIFIC_INPUT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public CompletePaymentProduct840SpecificInput getPaymentProduct840SpecificInput() {
+    return paymentProduct840SpecificInput;
+  }
+
+  @JsonProperty(JSON_PROPERTY_PAYMENT_PRODUCT840_SPECIFIC_INPUT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setPaymentProduct840SpecificInput(
+      CompletePaymentProduct840SpecificInput paymentProduct840SpecificInput) {
+    this.paymentProduct840SpecificInput = paymentProduct840SpecificInput;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -60,12 +91,14 @@ public class CompletePaymentMethodSpecificInput implements Serializable {
     }
     CompletePaymentMethodSpecificInput completePaymentMethodSpecificInput = (CompletePaymentMethodSpecificInput) o;
     return Objects.equals(this.paymentProduct3391SpecificInput,
-        completePaymentMethodSpecificInput.paymentProduct3391SpecificInput);
+        completePaymentMethodSpecificInput.paymentProduct3391SpecificInput) &&
+        Objects.equals(this.paymentProduct840SpecificInput,
+            completePaymentMethodSpecificInput.paymentProduct840SpecificInput);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(paymentProduct3391SpecificInput);
+    return Objects.hash(paymentProduct3391SpecificInput, paymentProduct840SpecificInput);
   }
 
   @Override
@@ -73,6 +106,8 @@ public class CompletePaymentMethodSpecificInput implements Serializable {
     StringBuilder sb = new StringBuilder();
     sb.append("class CompletePaymentMethodSpecificInput {\n");
     sb.append("    paymentProduct3391SpecificInput: ").append(toIndentedString(paymentProduct3391SpecificInput))
+        .append("\n");
+    sb.append("    paymentProduct840SpecificInput: ").append(toIndentedString(paymentProduct840SpecificInput))
         .append("\n");
     sb.append("}");
     return sb.toString();

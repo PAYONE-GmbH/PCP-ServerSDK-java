@@ -20,7 +20,7 @@ public class RedirectPaymentMethodSpecificOutput implements Serializable {
   private static final long serialVersionUID = 1L;
 
   public static final String JSON_PROPERTY_PAYMENT_PRODUCT_ID = "paymentProductId";
-  private Integer paymentProductId;
+  private PaymentProductId paymentProductId;
 
   public static final String JSON_PROPERTY_PAYMENT_PRODUCT840_SPECIFIC_OUTPUT = "paymentProduct840SpecificOutput";
   private PaymentProduct840SpecificOutput paymentProduct840SpecificOutput;
@@ -34,17 +34,14 @@ public class RedirectPaymentMethodSpecificOutput implements Serializable {
   public RedirectPaymentMethodSpecificOutput() {
   }
 
-  public RedirectPaymentMethodSpecificOutput paymentProductId(Integer paymentProductId) {
+  public RedirectPaymentMethodSpecificOutput paymentProductId(PaymentProductId paymentProductId) {
 
     this.paymentProductId = paymentProductId;
     return this;
   }
 
   /**
-   * &lt;- Payment product identifier - please check product documentation for a
-   * full overview of possible values.
-   * minimum: 0
-   * maximum: 99999
+   * Get paymentProductId
    * 
    * @return paymentProductId
    **/
@@ -52,13 +49,13 @@ public class RedirectPaymentMethodSpecificOutput implements Serializable {
   @JsonProperty(JSON_PROPERTY_PAYMENT_PRODUCT_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public Integer getPaymentProductId() {
+  public PaymentProductId getPaymentProductId() {
     return paymentProductId;
   }
 
   @JsonProperty(JSON_PROPERTY_PAYMENT_PRODUCT_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setPaymentProductId(Integer paymentProductId) {
+  public void setPaymentProductId(PaymentProductId paymentProductId) {
     this.paymentProductId = paymentProductId;
   }
 

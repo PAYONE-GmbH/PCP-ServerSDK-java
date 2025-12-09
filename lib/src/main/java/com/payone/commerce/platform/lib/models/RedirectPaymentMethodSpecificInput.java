@@ -37,7 +37,7 @@ public class RedirectPaymentMethodSpecificInput implements Serializable {
   private Boolean tokenize;
 
   public static final String JSON_PROPERTY_PAYMENT_PRODUCT_ID = "paymentProductId";
-  private Integer paymentProductId;
+  private PaymentProductId paymentProductId;
 
   public static final String JSON_PROPERTY_PAYMENT_PRODUCT840_SPECIFIC_INPUT = "paymentProduct840SpecificInput";
   private RedirectPaymentProduct840SpecificInput paymentProduct840SpecificInput;
@@ -92,6 +92,8 @@ public class RedirectPaymentMethodSpecificInput implements Serializable {
   /**
    * ID of the token to use to create the payment.
    * 
+   * @maxLength 40
+   * @example 0ca037cc-9079-4df7-8f6f-f2a3443ee521
    * @return paymentProcessingToken
    **/
 
@@ -111,6 +113,8 @@ public class RedirectPaymentMethodSpecificInput implements Serializable {
   /**
    * Token to identify the card in the reporting.
    * 
+   * @maxLength 40
+   * @example 12a037cc-833d-8b45-8f6f-11c34171f4e1
    * @return reportingToken
    **/
 
@@ -131,8 +135,8 @@ public class RedirectPaymentMethodSpecificInput implements Serializable {
    * Indicates if this transaction should be tokenized * true - Tokenize the
    * transaction. * false - Do not tokenize the transaction, unless it would be
    * tokenized by other means such as auto- tokenization of recurring payments.
-   * example: false
    * 
+   * @example: false
    * @return tokenize
    **/
 
@@ -149,17 +153,14 @@ public class RedirectPaymentMethodSpecificInput implements Serializable {
     this.tokenize = tokenize;
   }
 
-  public RedirectPaymentMethodSpecificInput paymentProductId(Integer paymentProductId) {
+  public RedirectPaymentMethodSpecificInput paymentProductId(PaymentProductId paymentProductId) {
 
     this.paymentProductId = paymentProductId;
     return this;
   }
 
   /**
-   * Payment product identifier - please check product documentation for a full
-   * overview of possible values.
-   * minimum: 0
-   * maximum: 99999
+   * Get paymentProductId
    * 
    * @return paymentProductId
    **/
@@ -167,13 +168,13 @@ public class RedirectPaymentMethodSpecificInput implements Serializable {
   @JsonProperty(JSON_PROPERTY_PAYMENT_PRODUCT_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public Integer getPaymentProductId() {
+  public PaymentProductId getPaymentProductId() {
     return paymentProductId;
   }
 
   @JsonProperty(JSON_PROPERTY_PAYMENT_PRODUCT_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setPaymentProductId(Integer paymentProductId) {
+  public void setPaymentProductId(PaymentProductId paymentProductId) {
     this.paymentProductId = paymentProductId;
   }
 

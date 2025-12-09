@@ -18,7 +18,7 @@ public class SepaDirectDebitPaymentMethodSpecificOutput implements Serializable 
   private static final long serialVersionUID = 1L;
 
   public static final String JSON_PROPERTY_PAYMENT_PRODUCT_ID = "paymentProductId";
-  private Integer paymentProductId;
+  private PaymentProductId paymentProductId;
 
   public static final String JSON_PROPERTY_PAYMENT_PRODUCT771_SPECIFIC_OUTPUT = "paymentProduct771SpecificOutput";
   private PaymentProduct771SpecificOutput paymentProduct771SpecificOutput;
@@ -26,17 +26,14 @@ public class SepaDirectDebitPaymentMethodSpecificOutput implements Serializable 
   public SepaDirectDebitPaymentMethodSpecificOutput() {
   }
 
-  public SepaDirectDebitPaymentMethodSpecificOutput paymentProductId(Integer paymentProductId) {
+  public SepaDirectDebitPaymentMethodSpecificOutput paymentProductId(PaymentProductId paymentProductId) {
 
     this.paymentProductId = paymentProductId;
     return this;
   }
 
   /**
-   * Payment product identifier - please check product documentation for a full
-   * overview of possible values.
-   * minimum: 0
-   * maximum: 99999
+   * Get paymentProductId
    * 
    * @return paymentProductId
    **/
@@ -44,13 +41,13 @@ public class SepaDirectDebitPaymentMethodSpecificOutput implements Serializable 
   @JsonProperty(JSON_PROPERTY_PAYMENT_PRODUCT_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public Integer getPaymentProductId() {
+  public PaymentProductId getPaymentProductId() {
     return paymentProductId;
   }
 
   @JsonProperty(JSON_PROPERTY_PAYMENT_PRODUCT_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setPaymentProductId(Integer paymentProductId) {
+  public void setPaymentProductId(PaymentProductId paymentProductId) {
     this.paymentProductId = paymentProductId;
   }
 

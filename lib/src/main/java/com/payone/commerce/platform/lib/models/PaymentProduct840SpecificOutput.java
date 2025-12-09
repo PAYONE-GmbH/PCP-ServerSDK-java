@@ -106,8 +106,11 @@ public class PaymentProduct840SpecificOutput implements Serializable {
   }
 
   /**
-   * PayPal transaction ID
+   * A 17-character unique identifier of the PayPal transaction. This identifier
+   * is used to identify the transaction in the PayPal system and needed for the
+   * PayPal Javascript SDK flow.
    * 
+   * @example 9A1234567890123
    * @return payPalTransactionId
    **/
   @JsonProperty(JSON_PROPERTY_PAYPAL_TRANSACTION_ID)

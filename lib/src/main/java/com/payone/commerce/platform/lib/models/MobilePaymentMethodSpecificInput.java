@@ -25,7 +25,7 @@ public class MobilePaymentMethodSpecificInput implements Serializable {
 
   public static final String JSON_PROPERTY_PAYMENT_PRODUCT_ID = "paymentProductId";
 
-  private Integer paymentProductId;
+  private PaymentProductId paymentProductId;
 
   public static final String JSON_PROPERTY_AUTHORIZATION_MODE = "authorizationMode";
 
@@ -54,29 +54,26 @@ public class MobilePaymentMethodSpecificInput implements Serializable {
   public MobilePaymentMethodSpecificInput() {
   }
 
-  public MobilePaymentMethodSpecificInput paymentProductId(Integer paymentProductId) {
+  public MobilePaymentMethodSpecificInput paymentProductId(PaymentProductId paymentProductId) {
     this.paymentProductId = paymentProductId;
     return this;
   }
 
   /**
-   * Payment product identifier - please check product documentation for a full
-   * overview of possible values.
-   * minimum: 0
-   * maximum: 99999
+   * Get paymentProductId
    * 
    * @return paymentProductId
-   */
+   **/
 
   @JsonProperty(JSON_PROPERTY_PAYMENT_PRODUCT_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public Integer getPaymentProductId() {
+  public PaymentProductId getPaymentProductId() {
     return paymentProductId;
   }
 
   @JsonProperty(JSON_PROPERTY_PAYMENT_PRODUCT_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setPaymentProductId(Integer paymentProductId) {
+  public void setPaymentProductId(PaymentProductId paymentProductId) {
     this.paymentProductId = paymentProductId;
   }
 
