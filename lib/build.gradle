@@ -46,11 +46,12 @@ dependencies {
 
     testImplementation group: 'org.mockito', name: 'mockito-core', version: '3.12.4'
     testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.10.3'
-    testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.10.3'
+    testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.10.3'
+    testRuntimeOnly group: 'org.junit.platform', name: 'junit-platform-launcher', version: '1.10.3'
 }
 
 jacoco {
-    toolVersion = '0.8.8' // Specify the version of JaCoCo you want to use
+    toolVersion = '0.8.11' // Updated for Java 21+ support
 }
 
 tasks.test {
