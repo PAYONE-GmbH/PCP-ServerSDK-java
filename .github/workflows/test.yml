@@ -22,6 +22,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
       - name: Set up Gradle runtime JDK
+        id: runtime-jdk
         uses: actions/setup-java@v4
         with:
           java-version: '21'
@@ -38,6 +39,7 @@ jobs:
           gradle-version: 9.2.1
       - name: Test
         env:
+          JAVA_HOME: ${{ steps.runtime-jdk.outputs.path }}
           TARGET_JAVA_VERSION: ${{ matrix.java }}
           TARGET_JAVA_HOME: ${{ steps.target-jdk.outputs.path }}
         run: |
