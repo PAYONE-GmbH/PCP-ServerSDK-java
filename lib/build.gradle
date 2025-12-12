@@ -51,6 +51,10 @@ dependencies {
     testRuntimeOnly('org.junit.platform:junit-platform-launcher:1.10.3')
 }
 
+tasks.withType(Javadoc).configureEach {
+  options.tags("maxLength:a:Max Length", "minimum:a:Minimum", "maximum:a:Maximum", "example:a:Example", "default:a:Default")
+}
+
 jacoco {
     toolVersion = '0.8.14' // Updated for Java 21+ support
 }
