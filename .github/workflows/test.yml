@@ -17,19 +17,33 @@ jobs:
     runs-on: ubuntu-24.04
     strategy:
       matrix:
-        java: ['8', '11', '17', '21', '23', '24']
+        java: ['8', '11', '17', '21', '23', '24', '25']
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-      - name: Set up JDK
+      - name: Set up Gradle runtime JDK
+        id: runtime-jdk
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+      - name: Set up target JDK
+        id: target-jdk
         uses: actions/setup-java@v4
         with:
           java-version: ${{ matrix.java }}
-          distribution: 'adopt'
-      - name: Setup Gradle 8.14.1
+          distribution: 'temurin'
+      - name: Setup Gradle 9.2.1
         uses: gradle/actions/setup-gradle@v3
         with:
-          gradle-version: 8.14.1
+          gradle-version: 9.2.1
       - name: Test
+        env:
+          JAVA_HOME: ${{ steps.runtime-jdk.outputs.path }}
+          TARGET_JAVA_VERSION: ${{ matrix.java }}
+          TARGET_JAVA_HOME: ${{ steps.target-jdk.outputs.path }}
         run: |
-          ./gradlew :lib:test
+          ./gradlew \
+            -PtargetJavaVersion=$TARGET_JAVA_VERSION \
+            -Dorg.gradle.java.installations.paths=$TARGET_JAVA_HOME \
+            :lib:test

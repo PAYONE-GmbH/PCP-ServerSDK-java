@@ -117,6 +117,7 @@ public class PayoutResponse implements Serializable {
   /**
    * Unique payment transaction identifier of the payment gateway.
    * 
+   * @example PP1AA7KKLSFB9MBG
    * @return id
    */
 

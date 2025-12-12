@@ -1,3 +1,10 @@
+# [1.6.0](https://github.com/PAYONE-GmbH/PCP-ServerSDK-java/compare/v1.5.0...v1.6.0) (2025-12-09)
+
+### Features
+
+* feat: add changes for api version 1.40.0 ([029d798bc1d35c0dc9d0d6b249961a6437803085](https://github.com/PAYONE-GmbH/PCP-ServerSDK-java/commit/029d798bc1d35c0dc9d0d6b249961a6437803085))
+* feat: update Gradle version to 9.2.1 to support Java 25 ([f43e6e818452e42eb68ec7dab0dde6f68fc3eae2](https://github.com/PAYONE-GmbH/PCP-ServerSDK-java/commit/f43e6e818452e42eb68ec7dab0dde6f68fc3eae2))
+
 # [1.5.0](https://github.com/PAYONE-GmbH/PCP-ServerSDK-java/compare/v1.4.0...v1.5.0) (2025-09-26)
 
 ### Bug Fixes

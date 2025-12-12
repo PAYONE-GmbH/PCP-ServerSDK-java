@@ -71,6 +71,7 @@ public class PaymentInstructions implements Serializable {
   /**
    * Due date of the payment. Format: YYYYMMDD
    * 
+   * @maxLength 8
    * @return dueDate
    */
 

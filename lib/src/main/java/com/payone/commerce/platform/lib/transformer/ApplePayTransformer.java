@@ -4,6 +4,7 @@ import com.payone.commerce.platform.lib.models.ApplePaymentDataTokenHeaderInform
 import com.payone.commerce.platform.lib.models.ApplePaymentDataTokenInformation;
 import com.payone.commerce.platform.lib.models.MobilePaymentMethodSpecificInput;
 import com.payone.commerce.platform.lib.models.PaymentProduct302SpecificInput;
+import com.payone.commerce.platform.lib.models.PaymentProductId;
 import com.payone.commerce.platform.lib.models.ApplePaymentDataTokenInformation.VersionEnum;
 import com.payone.commerce.platform.lib.models.PaymentProduct302SpecificInput.NetworkEnum;
 import com.payone.commerce.platform.lib.models.applepay.ApplePayPayment;
@@ -51,7 +52,7 @@ public class ApplePayTransformer {
                 .transactionId(transactionId).applicationData(applicationData));
         paymentProduct302SpecificInput.setToken(applePaymentDataTokenInformation);
 
-        input.setPaymentProductId(APPLE_PAY_PAYMENT_PRODUCT_ID);
+        input.setPaymentProductId(new PaymentProductId(APPLE_PAY_PAYMENT_PRODUCT_ID));
         input.setPublicKeyHash(publicKeyHash);
         input.setEphemeralKey(ephemeralKey);
         input.setPaymentProduct302SpecificInput(paymentProduct302SpecificInput);

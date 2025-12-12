@@ -44,6 +44,8 @@ public class Payee implements Serializable {
    * International Bank Account Number. It is an internationally agreed format for
    * the BBAN and includes the ISO country code and two check digits.
    * 
+   * @maxLength 50
+   * @example DE02370502990000684712
    * @return iban
    */
 
@@ -67,6 +69,8 @@ public class Payee implements Serializable {
   /**
    * Bank Identification Code
    * 
+   * @maxLength 11
+   * @example COKSDE33XXX
    * @return bic
    */
 
@@ -90,6 +94,7 @@ public class Payee implements Serializable {
   /**
    * Name of the payee
    * 
+   * @example Max Mustermann
    * @return name
    */
 

@@ -148,6 +148,8 @@ public class PaymentEvent implements Serializable {
   /**
    * Reason of the Refund (e.g. communicated by or to the costumer).
    * 
+   * @maxLength 255
+   * @example Customer complained
    * @return returnReason
    */
 

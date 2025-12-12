@@ -39,6 +39,8 @@ public class RedirectionData implements Serializable {
    * protocol://. This protocol must be registered on the device first. URLs
    * without a protocol will be rejected.
    * 
+   * @maxLength 200
+   * @example https://secure.ogone.com/ncol/test/displayparams.asp
    * @return returnUrl
    **/
 

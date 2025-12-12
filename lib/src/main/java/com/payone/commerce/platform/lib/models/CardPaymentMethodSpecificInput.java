@@ -51,7 +51,7 @@ public class CardPaymentMethodSpecificInput implements Serializable {
   private UnscheduledCardOnFileSequenceIndicator unscheduledCardOnFileSequenceIndicator;
 
   public static final String JSON_PROPERTY_PAYMENT_PRODUCT_ID = "paymentProductId";
-  private Integer paymentProductId;
+  private PaymentProductId paymentProductId;
 
   public static final String JSON_PROPERTY_CARD = "card";
   private CardInfo card;
@@ -283,17 +283,14 @@ public class CardPaymentMethodSpecificInput implements Serializable {
     this.unscheduledCardOnFileSequenceIndicator = unscheduledCardOnFileSequenceIndicator;
   }
 
-  public CardPaymentMethodSpecificInput paymentProductId(Integer paymentProductId) {
+  public CardPaymentMethodSpecificInput paymentProductId(PaymentProductId paymentProductId) {
 
     this.paymentProductId = paymentProductId;
     return this;
   }
 
   /**
-   * Payment product identifier - please check product documentation for a full
-   * overview of possible values.
-   * minimum: 0
-   * maximum: 99999
+   * Get paymentProductId
    * 
    * @return paymentProductId
    **/
@@ -301,13 +298,13 @@ public class CardPaymentMethodSpecificInput implements Serializable {
   @JsonProperty(JSON_PROPERTY_PAYMENT_PRODUCT_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public Integer getPaymentProductId() {
+  public PaymentProductId getPaymentProductId() {
     return paymentProductId;
   }
 
   @JsonProperty(JSON_PROPERTY_PAYMENT_PRODUCT_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setPaymentProductId(Integer paymentProductId) {
+  public void setPaymentProductId(PaymentProductId paymentProductId) {
     this.paymentProductId = paymentProductId;
   }
 
@@ -377,8 +374,7 @@ public class CardPaymentMethodSpecificInput implements Serializable {
   }
 
   /**
-   * Period of payment occurrence for recurring and installment payments. Allowed
-   * values: * Yearly * Quarterly * Monthly * Weekly * Daily Supported soon
+   * Get cardOnFileRecurringFrequency
    * 
    * @return cardOnFileRecurringFrequency
    **/

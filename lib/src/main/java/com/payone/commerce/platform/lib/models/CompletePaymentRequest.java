@@ -16,6 +16,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
  */
 @JsonPropertyOrder({
     CompletePaymentRequest.JSON_PROPERTY_FINANCING_PAYMENT_METHOD_SPECIFIC_INPUT,
+    CompletePaymentRequest.JSON_PROPERTY_REDIRECT_PAYMENT_METHOD_SPECIFIC_INPUT,
     CompletePaymentRequest.JSON_PROPERTY_ORDER,
     CompletePaymentRequest.JSON_PROPERTY_DEVICE
 })
@@ -24,6 +25,9 @@ public class CompletePaymentRequest implements Serializable {
 
   public static final String JSON_PROPERTY_FINANCING_PAYMENT_METHOD_SPECIFIC_INPUT = "financingPaymentMethodSpecificInput";
   private CompleteFinancingPaymentMethodSpecificInput financingPaymentMethodSpecificInput;
+
+  public static final String JSON_PROPERTY_REDIRECT_PAYMENT_METHOD_SPECIFIC_INPUT = "redirectPaymentMethodSpecificInput";
+  private CompleteRedirectPaymentMethodSpecificInput redirectPaymentMethodSpecificInput;
 
   public static final String JSON_PROPERTY_ORDER = "order";
   private Order order;
@@ -59,6 +63,33 @@ public class CompletePaymentRequest implements Serializable {
   public void setFinancingPaymentMethodSpecificInput(
       CompleteFinancingPaymentMethodSpecificInput financingPaymentMethodSpecificInput) {
     this.financingPaymentMethodSpecificInput = financingPaymentMethodSpecificInput;
+  }
+
+  public CompletePaymentRequest redirectPaymentMethodSpecificInput(
+      CompleteRedirectPaymentMethodSpecificInput redirectPaymentMethodSpecificInput) {
+
+    this.redirectPaymentMethodSpecificInput = redirectPaymentMethodSpecificInput;
+    return this;
+  }
+
+  /**
+   * Get redirectPaymentMethodSpecificInput
+   * 
+   * @return redirectPaymentMethodSpecificInput
+   **/
+
+  @JsonProperty(JSON_PROPERTY_REDIRECT_PAYMENT_METHOD_SPECIFIC_INPUT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public CompleteRedirectPaymentMethodSpecificInput getRedirectPaymentMethodSpecificInput() {
+    return redirectPaymentMethodSpecificInput;
+  }
+
+  @JsonProperty(JSON_PROPERTY_REDIRECT_PAYMENT_METHOD_SPECIFIC_INPUT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setRedirectPaymentMethodSpecificInput(
+      CompleteRedirectPaymentMethodSpecificInput redirectPaymentMethodSpecificInput) {
+    this.redirectPaymentMethodSpecificInput = redirectPaymentMethodSpecificInput;
   }
 
   public CompletePaymentRequest order(Order order) {
@@ -122,13 +153,15 @@ public class CompletePaymentRequest implements Serializable {
     CompletePaymentRequest completePaymentRequest = (CompletePaymentRequest) o;
     return Objects.equals(this.financingPaymentMethodSpecificInput,
         completePaymentRequest.financingPaymentMethodSpecificInput) &&
+        Objects.equals(this.redirectPaymentMethodSpecificInput,
+            completePaymentRequest.redirectPaymentMethodSpecificInput) &&
         Objects.equals(this.order, completePaymentRequest.order) &&
         Objects.equals(this.device, completePaymentRequest.device);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(financingPaymentMethodSpecificInput, order, device);
+    return Objects.hash(financingPaymentMethodSpecificInput, redirectPaymentMethodSpecificInput, order, device);
   }
 
   @Override
@@ -137,6 +170,8 @@ public class CompletePaymentRequest implements Serializable {
     sb.append("class CompletePaymentRequest {\n");
     sb.append("    financingPaymentMethodSpecificInput: ").append(toIndentedString(financingPaymentMethodSpecificInput))
         .append("\n");
+    sb.append("    redirectPaymentMethodSpecificInput: ")
+        .append(toIndentedString(redirectPaymentMethodSpecificInput)).append("\n");
     sb.append("    order: ").append(toIndentedString(order)).append("\n");
     sb.append("    device: ").append(toIndentedString(device)).append("\n");
     sb.append("}");
