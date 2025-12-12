@@ -136,7 +136,7 @@ public class RedirectPaymentMethodSpecificInput implements Serializable {
    * transaction. * false - Do not tokenize the transaction, unless it would be
    * tokenized by other means such as auto- tokenization of recurring payments.
    * 
-   * @example: false
+   * @example false
    * @return tokenize
    **/
 
