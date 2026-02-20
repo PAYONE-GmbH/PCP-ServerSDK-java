@@ -22,6 +22,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
     OrderLineDetailsPatch.JSON_PROPERTY_PRODUCT_TYPE,
     OrderLineDetailsPatch.JSON_PROPERTY_QUANTITY,
     OrderLineDetailsPatch.JSON_PROPERTY_TAX_AMOUNT,
+    OrderLineDetailsPatch.JSON_PROPERTY_TAX_AMOUNT_PER_UNIT,
     OrderLineDetailsPatch.JSON_PROPERTY_PRODUCT_URL,
     OrderLineDetailsPatch.JSON_PROPERTY_PRODUCT_IMAGE_URL,
     OrderLineDetailsPatch.JSON_PROPERTY_PRODUCT_CATEGORY_PATH,
@@ -50,6 +51,9 @@ public class OrderLineDetailsPatch implements Serializable {
 
   public static final String JSON_PROPERTY_TAX_AMOUNT = "taxAmount";
   private Long taxAmount;
+
+  public static final String JSON_PROPERTY_TAX_AMOUNT_PER_UNIT = "taxAmountPerUnit";
+  private Boolean taxAmountPerUnit = false;
 
   public static final String JSON_PROPERTY_PRODUCT_URL = "productUrl";
   private String productUrl;
@@ -256,6 +260,32 @@ public class OrderLineDetailsPatch implements Serializable {
     this.taxAmount = taxAmount;
   }
 
+  public OrderLineDetailsPatch taxAmountPerUnit(Boolean taxAmountPerUnit) {
+
+    this.taxAmountPerUnit = taxAmountPerUnit;
+    return this;
+  }
+
+  /**
+   * This field indicates if the taxAmount is to be interpreted as the tax amount
+   * per unit rather than for the entire line item.
+   * 
+   * @return taxAmountPerUnit
+   **/
+
+  @JsonProperty(JSON_PROPERTY_TAX_AMOUNT_PER_UNIT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public Boolean getTaxAmountPerUnit() {
+    return taxAmountPerUnit;
+  }
+
+  @JsonProperty(JSON_PROPERTY_TAX_AMOUNT_PER_UNIT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setTaxAmountPerUnit(Boolean taxAmountPerUnit) {
+    this.taxAmountPerUnit = taxAmountPerUnit;
+  }
+
   public OrderLineDetailsPatch productUrl(String productUrl) {
 
     this.productUrl = productUrl;
@@ -373,6 +403,7 @@ public class OrderLineDetailsPatch implements Serializable {
         Objects.equals(this.productType, orderLineDetailsPatch.productType) &&
         Objects.equals(this.quantity, orderLineDetailsPatch.quantity) &&
         Objects.equals(this.taxAmount, orderLineDetailsPatch.taxAmount) &&
+        Objects.equals(this.taxAmountPerUnit, orderLineDetailsPatch.taxAmountPerUnit) &&
         Objects.equals(this.productUrl, orderLineDetailsPatch.productUrl) &&
         Objects.equals(this.productImageUrl, orderLineDetailsPatch.productImageUrl) &&
         Objects.equals(this.productCategoryPath, orderLineDetailsPatch.productCategoryPath) &&
@@ -381,8 +412,8 @@ public class OrderLineDetailsPatch implements Serializable {
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, status, productCode, productPrice, productType, quantity, taxAmount, productUrl,
-        productImageUrl, productCategoryPath, merchantShopDeliveryReference);
+    return Objects.hash(id, status, productCode, productPrice, productType, quantity, taxAmount, taxAmountPerUnit,
+        productUrl, productImageUrl, productCategoryPath, merchantShopDeliveryReference);
   }
 
   @Override
@@ -396,6 +427,7 @@ public class OrderLineDetailsPatch implements Serializable {
     sb.append("    productType: ").append(toIndentedString(productType)).append("\n");
     sb.append("    quantity: ").append(toIndentedString(quantity)).append("\n");
     sb.append("    taxAmount: ").append(toIndentedString(taxAmount)).append("\n");
+    sb.append("    taxAmountPerUnit: ").append(toIndentedString(taxAmountPerUnit)).append("\n");
     sb.append("    productUrl: ").append(toIndentedString(productUrl)).append("\n");
     sb.append("    productImageUrl: ").append(toIndentedString(productImageUrl)).append("\n");
     sb.append("    productCategoryPath: ").append(toIndentedString(productCategoryPath)).append("\n");
