@@ -13,7 +13,8 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
  */
 @JsonPropertyOrder({
     PaymentInformationRefundResponse.JSON_PROPERTY_PAYMENT,
-    PaymentInformationRefundResponse.JSON_PROPERTY_PAYMENT_EXECUTION_ID
+    PaymentInformationRefundResponse.JSON_PROPERTY_PAYMENT_EXECUTION_ID,
+    PaymentInformationRefundResponse.JSON_PROPERTY_FUND_SPLIT
 })
 
 public class PaymentInformationRefundResponse implements Serializable {
@@ -26,6 +27,10 @@ public class PaymentInformationRefundResponse implements Serializable {
   public static final String JSON_PROPERTY_PAYMENT_EXECUTION_ID = "paymentExecutionId";
 
   private UUID paymentExecutionId;
+
+  public static final String JSON_PROPERTY_FUND_SPLIT = "fundSplit";
+
+  private FundSplit fundSplit;
 
   public PaymentInformationRefundResponse() {
   }
@@ -76,6 +81,29 @@ public class PaymentInformationRefundResponse implements Serializable {
     this.paymentExecutionId = paymentExecutionId;
   }
 
+  public PaymentInformationRefundResponse fundSplit(FundSplit fundSplit) {
+    this.fundSplit = fundSplit;
+    return this;
+  }
+
+  /**
+   * Get fundSplit
+   *
+   * @return fundSplit
+   */
+
+  @JsonProperty(JSON_PROPERTY_FUND_SPLIT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public FundSplit getFundSplit() {
+    return fundSplit;
+  }
+
+  @JsonProperty(JSON_PROPERTY_FUND_SPLIT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setFundSplit(FundSplit fundSplit) {
+    this.fundSplit = fundSplit;
+  }
+
   /**
    * Return true if this PaymentInformationRefundResponse object is equal to o.
    */
@@ -89,12 +117,13 @@ public class PaymentInformationRefundResponse implements Serializable {
     }
     PaymentInformationRefundResponse paymentInformationRefundResponse = (PaymentInformationRefundResponse) o;
     return Objects.equals(this.payment, paymentInformationRefundResponse.payment) &&
-        Objects.equals(this.paymentExecutionId, paymentInformationRefundResponse.paymentExecutionId);
+        Objects.equals(this.paymentExecutionId, paymentInformationRefundResponse.paymentExecutionId) &&
+        Objects.equals(this.fundSplit, paymentInformationRefundResponse.fundSplit);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(payment, paymentExecutionId);
+    return Objects.hash(payment, paymentExecutionId, fundSplit);
   }
 
   @Override
@@ -103,6 +132,7 @@ public class PaymentInformationRefundResponse implements Serializable {
     sb.append("class PaymentInformationRefundResponse {\n");
     sb.append("    payment: ").append(toIndentedString(payment)).append("\n");
     sb.append("    paymentExecutionId: ").append(toIndentedString(paymentExecutionId)).append("\n");
+    sb.append("    fundSplit: ").append(toIndentedString(fundSplit)).append("\n");
     sb.append("}");
     return sb.toString();
   }

@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import com.payone.commerce.platform.lib.models.ApplePaymentDataTokenHeaderInformation;
 import com.payone.commerce.platform.lib.models.ApplePaymentDataTokenInformation;
 import com.payone.commerce.platform.lib.models.MobilePaymentMethodSpecificInput;
+import com.payone.commerce.platform.lib.models.MobilePaymentNetwork;
 import com.payone.commerce.platform.lib.models.PaymentProduct302SpecificInput;
 import com.payone.commerce.platform.lib.models.PaymentProductId;
 import com.payone.commerce.platform.lib.models.applepay.ApplePayPayment;
@@ -64,7 +65,7 @@ class ApplePayTransformerTest {
                                 .ephemeralKey(null)
                                 .paymentProduct302SpecificInput(
                                                 new PaymentProduct302SpecificInput()
-                                                                .network(PaymentProduct302SpecificInput.NetworkEnum.MASTERCARD)
+                                                                .network(MobilePaymentNetwork.MASTERCARD)
                                                                 .token(
                                                                                 new ApplePaymentDataTokenInformation()
                                                                                                 .signature(null)

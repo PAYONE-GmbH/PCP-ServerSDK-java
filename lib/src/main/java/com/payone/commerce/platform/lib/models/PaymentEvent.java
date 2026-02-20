@@ -1,7 +1,9 @@
 package com.payone.commerce.platform.lib.models;
 
 import java.io.Serializable;
+import java.time.OffsetDateTime;
 import java.util.Objects;
+import java.util.UUID;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -11,6 +13,8 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
  * Detailed information regarding an occurred payment event.
  */
 @JsonPropertyOrder({
+    PaymentEvent.JSON_PROPERTY_PAYMENT_EVENT_ID,
+    PaymentEvent.JSON_PROPERTY_CREATION_DATE_TIME,
     PaymentEvent.JSON_PROPERTY_TYPE,
     PaymentEvent.JSON_PROPERTY_AMOUNT_OF_MONEY,
     PaymentEvent.JSON_PROPERTY_PAYMENT_STATUS,
@@ -21,6 +25,15 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 public class PaymentEvent implements Serializable {
   private static final long serialVersionUID = 1L;
+
+  public static final String JSON_PROPERTY_PAYMENT_EVENT_ID = "paymentEventId";
+
+  private UUID paymentEventId;
+
+  public static final String JSON_PROPERTY_CREATION_DATE_TIME = "creationDateTime";
+
+  private OffsetDateTime creationDateTime;
+
   public static final String JSON_PROPERTY_TYPE = "type";
 
   private PaymentType type;
@@ -46,6 +59,31 @@ public class PaymentEvent implements Serializable {
   private PaymentInstructions paymentInstructions;
 
   public PaymentEvent() {
+  }
+
+  /**
+   * Unique identifier of the payment event.
+   * 
+   * @return paymentEventId
+   */
+
+  @JsonProperty(JSON_PROPERTY_PAYMENT_EVENT_ID)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public UUID getPaymentEventId() {
+    return paymentEventId;
+  }
+
+  /**
+   * The date and time of the payment event. Format: YYYY-MM-DD&#39;T&#39;HH:mm:ss&#39;Z&#39; or
+   * YYYY-MM-DD&#39;T&#39;HH:mm:ss+XX:XX or YYYY-MM-DD&#39;T&#39;HH:mm:ss-XX:XX
+   * 
+   * @return creationDateTime
+   */
+
+  @JsonProperty(JSON_PROPERTY_CREATION_DATE_TIME)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public OffsetDateTime getCreationDateTime() {
+    return creationDateTime;
   }
 
   public PaymentEvent type(PaymentType type) {
@@ -200,7 +238,9 @@ public class PaymentEvent implements Serializable {
       return false;
     }
     PaymentEvent paymentEvent = (PaymentEvent) o;
-    return Objects.equals(this.type, paymentEvent.type) &&
+    return Objects.equals(this.paymentEventId, paymentEvent.paymentEventId) &&
+        Objects.equals(this.creationDateTime, paymentEvent.creationDateTime) &&
+        Objects.equals(this.type, paymentEvent.type) &&
         Objects.equals(this.amountOfMoney, paymentEvent.amountOfMoney) &&
         Objects.equals(this.paymentStatus, paymentEvent.paymentStatus) &&
         Objects.equals(this.cancellationReason, paymentEvent.cancellationReason) &&
@@ -210,13 +250,15 @@ public class PaymentEvent implements Serializable {
 
   @Override
   public int hashCode() {
-    return Objects.hash(type, amountOfMoney, paymentStatus, cancellationReason, returnReason, paymentInstructions);
+    return Objects.hash(paymentEventId, creationDateTime, type, amountOfMoney, paymentStatus, cancellationReason, returnReason, paymentInstructions);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class PaymentEvent {\n");
+    sb.append("    paymentEventId: ").append(toIndentedString(paymentEventId)).append("\n");
+    sb.append("    creationDateTime: ").append(toIndentedString(creationDateTime)).append("\n");
     sb.append("    type: ").append(toIndentedString(type)).append("\n");
     sb.append("    amountOfMoney: ").append(toIndentedString(amountOfMoney)).append("\n");
     sb.append("    paymentStatus: ").append(toIndentedString(paymentStatus)).append("\n");

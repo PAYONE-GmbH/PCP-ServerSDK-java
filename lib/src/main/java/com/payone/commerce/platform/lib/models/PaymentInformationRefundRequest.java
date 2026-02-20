@@ -15,7 +15,8 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 @JsonPropertyOrder({
     PaymentInformationRefundRequest.JSON_PROPERTY_AMOUNT_OF_MONEY,
     PaymentInformationRefundRequest.JSON_PROPERTY_REFERENCES,
-    PaymentInformationRefundRequest.JSON_PROPERTY_ACCOUNT_HOLDER
+    PaymentInformationRefundRequest.JSON_PROPERTY_ACCOUNT_HOLDER,
+    PaymentInformationRefundRequest.JSON_PROPERTY_FUND_SPLIT
 })
 
 public class PaymentInformationRefundRequest implements Serializable {
@@ -32,6 +33,10 @@ public class PaymentInformationRefundRequest implements Serializable {
   public static final String JSON_PROPERTY_ACCOUNT_HOLDER = "accountHolder";
 
   private String accountHolder;
+
+  public static final String JSON_PROPERTY_FUND_SPLIT = "fundSplit";
+
+  private FundSplit fundSplit;
 
   public PaymentInformationRefundRequest() {
   }
@@ -108,6 +113,29 @@ public class PaymentInformationRefundRequest implements Serializable {
     this.accountHolder = accountHolder;
   }
 
+  public PaymentInformationRefundRequest fundSplit(FundSplit fundSplit) {
+    this.fundSplit = fundSplit;
+    return this;
+  }
+
+  /**
+   * Get fundSplit
+   *
+   * @return fundSplit
+   */
+
+  @JsonProperty(JSON_PROPERTY_FUND_SPLIT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public FundSplit getFundSplit() {
+    return fundSplit;
+  }
+
+  @JsonProperty(JSON_PROPERTY_FUND_SPLIT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setFundSplit(FundSplit fundSplit) {
+    this.fundSplit = fundSplit;
+  }
+
   /**
    * Return true if this PaymentInformationRefundRequest object is equal to o.
    */
@@ -122,12 +150,13 @@ public class PaymentInformationRefundRequest implements Serializable {
     PaymentInformationRefundRequest paymentInformationRefundRequest = (PaymentInformationRefundRequest) o;
     return Objects.equals(this.amountOfMoney, paymentInformationRefundRequest.amountOfMoney) &&
         Objects.equals(this.references, paymentInformationRefundRequest.references) &&
-        Objects.equals(this.accountHolder, paymentInformationRefundRequest.accountHolder);
+        Objects.equals(this.accountHolder, paymentInformationRefundRequest.accountHolder) &&
+        Objects.equals(this.fundSplit, paymentInformationRefundRequest.fundSplit);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(amountOfMoney, references, accountHolder);
+    return Objects.hash(amountOfMoney, references, accountHolder, fundSplit);
   }
 
   @Override
@@ -137,6 +166,7 @@ public class PaymentInformationRefundRequest implements Serializable {
     sb.append("    amountOfMoney: ").append(toIndentedString(amountOfMoney)).append("\n");
     sb.append("    references: ").append(toIndentedString(references)).append("\n");
     sb.append("    accountHolder: ").append(toIndentedString(accountHolder)).append("\n");
+    sb.append("    fundSplit: ").append(toIndentedString(fundSplit)).append("\n");
     sb.append("}");
     return sb.toString();
   }

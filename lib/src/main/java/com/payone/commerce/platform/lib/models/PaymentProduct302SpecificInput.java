@@ -65,53 +65,9 @@ public class PaymentProduct302SpecificInput implements Serializable {
 
   private IntegrationTypeEnum integrationType;
 
-  /**
-   * Network/Scheme of the card used for the payment. * MASTERCARD * VISA * AMEX *
-   * GIROCARD * DISCOVER (not supported yet) * JCB (not supported yet)
-   */
-  public enum NetworkEnum {
-    MASTERCARD(String.valueOf("MASTERCARD")),
-
-    VISA(String.valueOf("VISA")),
-
-    AMEX(String.valueOf("AMEX")),
-
-    GIROCARD(String.valueOf("GIROCARD")),
-
-    DISCOVER(String.valueOf("DISCOVER")),
-
-    JCB(String.valueOf("JCB"));
-
-    private String value;
-
-    NetworkEnum(String value) {
-      this.value = value;
-    }
-
-    @JsonValue
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    @JsonCreator
-    public static NetworkEnum fromValue(String value) {
-      for (NetworkEnum b : NetworkEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-  }
-
   public static final String JSON_PROPERTY_NETWORK = "network";
 
-  private NetworkEnum network;
+  private MobilePaymentNetwork network;
 
   public static final String JSON_PROPERTY_TOKEN = "token";
 
@@ -153,7 +109,7 @@ public class PaymentProduct302SpecificInput implements Serializable {
     this.integrationType = integrationType;
   }
 
-  public PaymentProduct302SpecificInput network(NetworkEnum network) {
+  public PaymentProduct302SpecificInput network(MobilePaymentNetwork network) {
     this.network = network;
     return this;
   }
@@ -167,13 +123,13 @@ public class PaymentProduct302SpecificInput implements Serializable {
 
   @JsonProperty(JSON_PROPERTY_NETWORK)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public NetworkEnum getNetwork() {
+  public MobilePaymentNetwork getNetwork() {
     return network;
   }
 
   @JsonProperty(JSON_PROPERTY_NETWORK)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setNetwork(NetworkEnum network) {
+  public void setNetwork(MobilePaymentNetwork network) {
     this.network = network;
   }
 
