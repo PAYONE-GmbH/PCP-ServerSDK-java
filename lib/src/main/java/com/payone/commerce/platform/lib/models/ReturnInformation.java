@@ -16,8 +16,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
  */
 @JsonPropertyOrder({
     ReturnInformation.JSON_PROPERTY_RETURN_REASON,
-    ReturnInformation.JSON_PROPERTY_ITEMS,
-    ReturnInformation.JSON_PROPERTY_FUND_SPLIT
+    ReturnInformation.JSON_PROPERTY_ITEMS
 })
 public class ReturnInformation implements Serializable {
   private static final long serialVersionUID = 1L;
@@ -27,9 +26,6 @@ public class ReturnInformation implements Serializable {
 
   public static final String JSON_PROPERTY_ITEMS = "items";
   private List<CartItemInput> items;
-
-  public static final String JSON_PROPERTY_FUND_SPLIT = "fundSplit";
-  private FundSplit fundSplit;
 
   public ReturnInformation() {
   }
@@ -92,31 +88,6 @@ public class ReturnInformation implements Serializable {
     this.items = items;
   }
 
-  public ReturnInformation fundSplit(FundSplit fundSplit) {
-
-    this.fundSplit = fundSplit;
-    return this;
-  }
-
-  /**
-   * Get fundSplit
-   *
-   * @return fundSplit
-   **/
-
-  @JsonProperty(JSON_PROPERTY_FUND_SPLIT)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-  public FundSplit getFundSplit() {
-    return fundSplit;
-  }
-
-  @JsonProperty(JSON_PROPERTY_FUND_SPLIT)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setFundSplit(FundSplit fundSplit) {
-    this.fundSplit = fundSplit;
-  }
-
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -127,13 +98,12 @@ public class ReturnInformation implements Serializable {
     }
     ReturnInformation returnInformation = (ReturnInformation) o;
     return Objects.equals(this.returnReason, returnInformation.returnReason) &&
-        Objects.equals(this.items, returnInformation.items) &&
-        Objects.equals(this.fundSplit, returnInformation.fundSplit);
+        Objects.equals(this.items, returnInformation.items);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(returnReason, items, fundSplit);
+    return Objects.hash(returnReason, items);
   }
 
   @Override
@@ -142,7 +112,6 @@ public class ReturnInformation implements Serializable {
     sb.append("class ReturnInformation {\n");
     sb.append("    returnReason: ").append(toIndentedString(returnReason)).append("\n");
     sb.append("    items: ").append(toIndentedString(items)).append("\n");
-    sb.append("    fundSplit: ").append(toIndentedString(fundSplit)).append("\n");
     sb.append("}");
     return sb.toString();
   }

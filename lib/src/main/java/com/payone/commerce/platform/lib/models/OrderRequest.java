@@ -24,7 +24,8 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
     OrderRequest.JSON_PROPERTY_ORDER_TYPE,
     OrderRequest.JSON_PROPERTY_ORDER_REFERENCES,
     OrderRequest.JSON_PROPERTY_ITEMS,
-    OrderRequest.JSON_PROPERTY_PAYMENT_METHOD_SPECIFIC_INPUT
+    OrderRequest.JSON_PROPERTY_PAYMENT_METHOD_SPECIFIC_INPUT,
+    OrderRequest.JSON_PROPERTY_FUND_SPLIT
 })
 public class OrderRequest implements Serializable {
   private static final long serialVersionUID = 1L;
@@ -40,6 +41,9 @@ public class OrderRequest implements Serializable {
 
   public static final String JSON_PROPERTY_PAYMENT_METHOD_SPECIFIC_INPUT = "paymentMethodSpecificInput";
   private PaymentMethodSpecificInput paymentMethodSpecificInput;
+
+  public static final String JSON_PROPERTY_FUND_SPLIT = "fundSplit";
+  private FundSplit fundSplit;
 
   public OrderRequest() {
   }
@@ -152,6 +156,31 @@ public class OrderRequest implements Serializable {
     this.paymentMethodSpecificInput = paymentMethodSpecificInput;
   }
 
+  public OrderRequest fundSplit(FundSplit fundSplit) {
+
+    this.fundSplit = fundSplit;
+    return this;
+  }
+
+  /**
+   * Get fundSplit
+   * 
+   * @return fundSplit
+   **/
+
+  @JsonProperty(JSON_PROPERTY_FUND_SPLIT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public FundSplit getFundSplit() {
+    return fundSplit;
+  }
+
+  @JsonProperty(JSON_PROPERTY_FUND_SPLIT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setFundSplit(FundSplit fundSplit) {
+    this.fundSplit = fundSplit;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -164,12 +193,13 @@ public class OrderRequest implements Serializable {
     return Objects.equals(this.orderType, orderRequest.orderType) &&
         Objects.equals(this.orderReferences, orderRequest.orderReferences) &&
         Objects.equals(this.items, orderRequest.items) &&
-        Objects.equals(this.paymentMethodSpecificInput, orderRequest.paymentMethodSpecificInput);
+        Objects.equals(this.paymentMethodSpecificInput, orderRequest.paymentMethodSpecificInput) &&
+        Objects.equals(this.fundSplit, orderRequest.fundSplit);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(orderType, orderReferences, items, paymentMethodSpecificInput);
+    return Objects.hash(orderType, orderReferences, items, paymentMethodSpecificInput, fundSplit);
   }
 
   @Override
@@ -180,6 +210,7 @@ public class OrderRequest implements Serializable {
     sb.append("    orderReferences: ").append(toIndentedString(orderReferences)).append("\n");
     sb.append("    items: ").append(toIndentedString(items)).append("\n");
     sb.append("    paymentMethodSpecificInput: ").append(toIndentedString(paymentMethodSpecificInput)).append("\n");
+    sb.append("    fundSplit: ").append(toIndentedString(fundSplit)).append("\n");
     sb.append("}");
     return sb.toString();
   }

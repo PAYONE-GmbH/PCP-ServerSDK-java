@@ -21,7 +21,8 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 @JsonPropertyOrder({
     ReturnRequest.JSON_PROPERTY_RETURN_TYPE,
     ReturnRequest.JSON_PROPERTY_RETURN_REASON,
-    ReturnRequest.JSON_PROPERTY_RETURN_ITEMS
+    ReturnRequest.JSON_PROPERTY_RETURN_ITEMS,
+    ReturnRequest.JSON_PROPERTY_FUND_SPLIT
 })
 public class ReturnRequest implements Serializable {
   private static final long serialVersionUID = 1L;
@@ -34,6 +35,9 @@ public class ReturnRequest implements Serializable {
 
   public static final String JSON_PROPERTY_RETURN_ITEMS = "returnItems";
   private List<ReturnItem> returnItems;
+
+  public static final String JSON_PROPERTY_FUND_SPLIT = "fundSplit";
+  private FundSplit fundSplit;
 
   public ReturnRequest() {
   }
@@ -121,6 +125,31 @@ public class ReturnRequest implements Serializable {
     this.returnItems = returnItems;
   }
 
+  public ReturnRequest fundSplit(FundSplit fundSplit) {
+
+    this.fundSplit = fundSplit;
+    return this;
+  }
+
+  /**
+   * Get fundSplit
+   *
+   * @return fundSplit
+   **/
+
+  @JsonProperty(JSON_PROPERTY_FUND_SPLIT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public FundSplit getFundSplit() {
+    return fundSplit;
+  }
+
+  @JsonProperty(JSON_PROPERTY_FUND_SPLIT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setFundSplit(FundSplit fundSplit) {
+    this.fundSplit = fundSplit;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -132,12 +161,13 @@ public class ReturnRequest implements Serializable {
     ReturnRequest returnRequest = (ReturnRequest) o;
     return Objects.equals(this.returnType, returnRequest.returnType) &&
         Objects.equals(this.returnReason, returnRequest.returnReason) &&
-        Objects.equals(this.returnItems, returnRequest.returnItems);
+        Objects.equals(this.returnItems, returnRequest.returnItems) &&
+        Objects.equals(this.fundSplit, returnRequest.fundSplit);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(returnType, returnReason, returnItems);
+    return Objects.hash(returnType, returnReason, returnItems, fundSplit);
   }
 
   @Override
@@ -147,6 +177,7 @@ public class ReturnRequest implements Serializable {
     sb.append("    returnType: ").append(toIndentedString(returnType)).append("\n");
     sb.append("    returnReason: ").append(toIndentedString(returnReason)).append("\n");
     sb.append("    returnItems: ").append(toIndentedString(returnItems)).append("\n");
+    sb.append("    fundSplit: ").append(toIndentedString(fundSplit)).append("\n");
     sb.append("}");
     return sb.toString();
   }

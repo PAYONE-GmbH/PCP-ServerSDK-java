@@ -16,7 +16,8 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 @JsonPropertyOrder({
     RefundRequest.JSON_PROPERTY_AMOUNT_OF_MONEY,
     RefundRequest.JSON_PROPERTY_REFERENCES,
-    RefundRequest.JSON_PROPERTY_RETURN
+    RefundRequest.JSON_PROPERTY_RETURN,
+    RefundRequest.JSON_PROPERTY_FUND_SPLIT
 })
 public class RefundRequest implements Serializable {
   private static final long serialVersionUID = 1L;
@@ -29,6 +30,9 @@ public class RefundRequest implements Serializable {
 
   public static final String JSON_PROPERTY_RETURN = "return";
   private ReturnInformation _return;
+
+  public static final String JSON_PROPERTY_FUND_SPLIT = "fundSplit";
+  private FundSplit fundSplit;
 
   public RefundRequest() {
   }
@@ -108,6 +112,31 @@ public class RefundRequest implements Serializable {
     this._return = _return;
   }
 
+  public RefundRequest fundSplit(FundSplit fundSplit) {
+
+    this.fundSplit = fundSplit;
+    return this;
+  }
+
+  /**
+   * Get fundSplit
+   * 
+   * @return fundSplit
+   **/
+
+  @JsonProperty(JSON_PROPERTY_FUND_SPLIT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public FundSplit getFundSplit() {
+    return fundSplit;
+  }
+
+  @JsonProperty(JSON_PROPERTY_FUND_SPLIT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setFundSplit(FundSplit fundSplit) {
+    this.fundSplit = fundSplit;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -119,12 +148,13 @@ public class RefundRequest implements Serializable {
     RefundRequest refundRequest = (RefundRequest) o;
     return Objects.equals(this.amountOfMoney, refundRequest.amountOfMoney) &&
         Objects.equals(this.references, refundRequest.references) &&
-        Objects.equals(this._return, refundRequest._return);
+        Objects.equals(this._return, refundRequest._return) &&
+        Objects.equals(this.fundSplit, refundRequest.fundSplit);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(amountOfMoney, references, _return);
+    return Objects.hash(amountOfMoney, references, _return, fundSplit);
   }
 
   @Override
@@ -134,6 +164,7 @@ public class RefundRequest implements Serializable {
     sb.append("    amountOfMoney: ").append(toIndentedString(amountOfMoney)).append("\n");
     sb.append("    references: ").append(toIndentedString(references)).append("\n");
     sb.append("    _return: ").append(toIndentedString(_return)).append("\n");
+    sb.append("    fundSplit: ").append(toIndentedString(fundSplit)).append("\n");
     sb.append("}");
     return sb.toString();
   }

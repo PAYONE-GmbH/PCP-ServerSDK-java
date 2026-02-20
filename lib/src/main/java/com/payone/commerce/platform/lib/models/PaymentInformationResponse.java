@@ -28,8 +28,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
     PaymentInformationResponse.JSON_PROPERTY_LAST_UPDATED,
     PaymentInformationResponse.JSON_PROPERTY_CARD_PAYMENT_DETAILS,
     PaymentInformationResponse.JSON_PROPERTY_EVENTS,
-    PaymentInformationResponse.JSON_PROPERTY_FUND_SPLITS,
-    PaymentInformationResponse.JSON_PROPERTY_FUND_SPLIT
+    PaymentInformationResponse.JSON_PROPERTY_FUND_SPLITS
 })
 
 public class PaymentInformationResponse implements Serializable {
@@ -90,10 +89,6 @@ public class PaymentInformationResponse implements Serializable {
   public static final String JSON_PROPERTY_FUND_SPLITS = "fundSplits";
 
   private List<FundSplit> fundSplits;
-
-  public static final String JSON_PROPERTY_FUND_SPLIT = "fundSplit";
-
-  private FundSplit fundSplit;
 
   public PaymentInformationResponse() {
   }
@@ -444,29 +439,6 @@ public class PaymentInformationResponse implements Serializable {
     this.fundSplits = fundSplits;
   }
 
-  public PaymentInformationResponse fundSplit(FundSplit fundSplit) {
-    this.fundSplit = fundSplit;
-    return this;
-  }
-
-  /**
-   * Get fundSplit
-   *
-   * @return fundSplit
-   */
-
-  @JsonProperty(JSON_PROPERTY_FUND_SPLIT)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public FundSplit getFundSplit() {
-    return fundSplit;
-  }
-
-  @JsonProperty(JSON_PROPERTY_FUND_SPLIT)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setFundSplit(FundSplit fundSplit) {
-    this.fundSplit = fundSplit;
-  }
-
   /**
    * Return true if this PaymentInformationResponse object is equal to o.
    */
@@ -492,15 +464,14 @@ public class PaymentInformationResponse implements Serializable {
         Objects.equals(this.lastUpdated, paymentInformationResponse.lastUpdated) &&
         Objects.equals(this.cardPaymentDetails, paymentInformationResponse.cardPaymentDetails) &&
         Objects.equals(this.events, paymentInformationResponse.events) &&
-        Objects.equals(this.fundSplits, paymentInformationResponse.fundSplits) &&
-        Objects.equals(this.fundSplit, paymentInformationResponse.fundSplit);
+        Objects.equals(this.fundSplits, paymentInformationResponse.fundSplits);
   }
 
   @Override
   public int hashCode() {
     return Objects.hash(commerceCaseId, checkoutId, merchantCustomerId, paymentInformationId, paymentChannel,
         paymentProductId, terminalId, cardAcceptorId, merchantReference, creationDateTime, lastUpdated,
-        cardPaymentDetails, events, fundSplits, fundSplit);
+        cardPaymentDetails, events, fundSplits);
   }
 
   @Override
@@ -521,7 +492,6 @@ public class PaymentInformationResponse implements Serializable {
     sb.append("    cardPaymentDetails: ").append(toIndentedString(cardPaymentDetails)).append("\n");
     sb.append("    events: ").append(toIndentedString(events)).append("\n");
     sb.append("    fundSplits: ").append(toIndentedString(fundSplits)).append("\n");
-    sb.append("    fundSplit: ").append(toIndentedString(fundSplit)).append("\n");
     sb.append("}");
     return sb.toString();
   }

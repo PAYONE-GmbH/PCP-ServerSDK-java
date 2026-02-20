@@ -15,8 +15,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
     CaptureOutput.JSON_PROPERTY_MERCHANT_PARAMETERS,
     CaptureOutput.JSON_PROPERTY_REFERENCES,
     CaptureOutput.JSON_PROPERTY_PAYMENT_METHOD,
-    CaptureOutput.JSON_PROPERTY_PAYMENT_INSTRUCTIONS,
-    CaptureOutput.JSON_PROPERTY_FUND_SPLIT
+    CaptureOutput.JSON_PROPERTY_PAYMENT_INSTRUCTIONS
 })
 
 public class CaptureOutput implements Serializable {
@@ -41,10 +40,6 @@ public class CaptureOutput implements Serializable {
   public static final String JSON_PROPERTY_PAYMENT_INSTRUCTIONS = "paymentInstructions";
 
   private PaymentInstructions paymentInstructions;
-
-  public static final String JSON_PROPERTY_FUND_SPLIT = "fundSplit";
-
-  private FundSplit fundSplit;
 
   public CaptureOutput() {
   }
@@ -165,29 +160,6 @@ public class CaptureOutput implements Serializable {
     this.paymentInstructions = paymentInstructions;
   }
 
-  public CaptureOutput fundSplit(FundSplit fundSplit) {
-    this.fundSplit = fundSplit;
-    return this;
-  }
-
-  /**
-   * Get fundSplit
-   *
-   * @return fundSplit
-   */
-
-  @JsonProperty(JSON_PROPERTY_FUND_SPLIT)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public FundSplit getFundSplit() {
-    return fundSplit;
-  }
-
-  @JsonProperty(JSON_PROPERTY_FUND_SPLIT)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setFundSplit(FundSplit fundSplit) {
-    this.fundSplit = fundSplit;
-  }
-
   /**
    * Return true if this CaptureOutput object is equal to o.
    */
@@ -204,13 +176,12 @@ public class CaptureOutput implements Serializable {
         Objects.equals(this.merchantParameters, captureOutput.merchantParameters) &&
         Objects.equals(this.references, captureOutput.references) &&
         Objects.equals(this.paymentMethod, captureOutput.paymentMethod) &&
-        Objects.equals(this.paymentInstructions, captureOutput.paymentInstructions) &&
-        Objects.equals(this.fundSplit, captureOutput.fundSplit);
+        Objects.equals(this.paymentInstructions, captureOutput.paymentInstructions);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(amountOfMoney, merchantParameters, references, paymentMethod, paymentInstructions, fundSplit);
+    return Objects.hash(amountOfMoney, merchantParameters, references, paymentMethod, paymentInstructions);
   }
 
   @Override
@@ -222,7 +193,6 @@ public class CaptureOutput implements Serializable {
     sb.append("    references: ").append(toIndentedString(references)).append("\n");
     sb.append("    paymentMethod: ").append(toIndentedString(paymentMethod)).append("\n");
     sb.append("    paymentInstructions: ").append(toIndentedString(paymentInstructions)).append("\n");
-    sb.append("    fundSplit: ").append(toIndentedString(fundSplit)).append("\n");
     sb.append("}");
     return sb.toString();
   }

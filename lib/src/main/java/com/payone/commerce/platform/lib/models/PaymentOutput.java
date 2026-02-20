@@ -19,8 +19,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
     PaymentOutput.JSON_PROPERTY_PAYMENT_METHOD,
     PaymentOutput.JSON_PROPERTY_REDIRECT_PAYMENT_METHOD_SPECIFIC_OUTPUT,
     PaymentOutput.JSON_PROPERTY_SEPA_DIRECT_DEBIT_PAYMENT_METHOD_SPECIFIC_OUTPUT,
-    PaymentOutput.JSON_PROPERTY_FINANCING_PAYMENT_METHOD_SPECIFIC_OUTPUT,
-    PaymentOutput.JSON_PROPERTY_FUND_SPLIT
+    PaymentOutput.JSON_PROPERTY_FINANCING_PAYMENT_METHOD_SPECIFIC_OUTPUT
 })
 public class PaymentOutput implements Serializable {
   private static final long serialVersionUID = 1L;
@@ -51,9 +50,6 @@ public class PaymentOutput implements Serializable {
 
   public static final String JSON_PROPERTY_FINANCING_PAYMENT_METHOD_SPECIFIC_OUTPUT = "financingPaymentMethodSpecificOutput";
   private FinancingPaymentMethodSpecificOutput financingPaymentMethodSpecificOutput;
-
-  public static final String JSON_PROPERTY_FUND_SPLIT = "fundSplit";
-  private FundSplit fundSplit;
 
   public PaymentOutput() {
   }
@@ -293,31 +289,6 @@ public class PaymentOutput implements Serializable {
     this.financingPaymentMethodSpecificOutput = financingPaymentMethodSpecificOutput;
   }
 
-  public PaymentOutput fundSplit(FundSplit fundSplit) {
-
-    this.fundSplit = fundSplit;
-    return this;
-  }
-
-  /**
-   * Get fundSplit
-   *
-   * @return fundSplit
-   **/
-
-  @JsonProperty(JSON_PROPERTY_FUND_SPLIT)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-  public FundSplit getFundSplit() {
-    return fundSplit;
-  }
-
-  @JsonProperty(JSON_PROPERTY_FUND_SPLIT)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setFundSplit(FundSplit fundSplit) {
-    this.fundSplit = fundSplit;
-  }
-
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -337,15 +308,14 @@ public class PaymentOutput implements Serializable {
         Objects.equals(this.sepaDirectDebitPaymentMethodSpecificOutput,
             paymentOutput.sepaDirectDebitPaymentMethodSpecificOutput)
         &&
-        Objects.equals(this.financingPaymentMethodSpecificOutput, paymentOutput.financingPaymentMethodSpecificOutput) &&
-        Objects.equals(this.fundSplit, paymentOutput.fundSplit);
+        Objects.equals(this.financingPaymentMethodSpecificOutput, paymentOutput.financingPaymentMethodSpecificOutput);
   }
 
   @Override
   public int hashCode() {
     return Objects.hash(amountOfMoney, merchantParameters, references, cardPaymentMethodSpecificOutput,
         mobilePaymentMethodSpecificOutput, paymentMethod, redirectPaymentMethodSpecificOutput,
-        sepaDirectDebitPaymentMethodSpecificOutput, financingPaymentMethodSpecificOutput, fundSplit);
+        sepaDirectDebitPaymentMethodSpecificOutput, financingPaymentMethodSpecificOutput);
   }
 
   @Override
@@ -366,7 +336,6 @@ public class PaymentOutput implements Serializable {
         .append(toIndentedString(sepaDirectDebitPaymentMethodSpecificOutput)).append("\n");
     sb.append("    financingPaymentMethodSpecificOutput: ")
         .append(toIndentedString(financingPaymentMethodSpecificOutput)).append("\n");
-    sb.append("    fundSplit: ").append(toIndentedString(fundSplit)).append("\n");
     sb.append("}");
     return sb.toString();
   }

@@ -15,7 +15,8 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
     CreatePaymentResponse.JSON_PROPERTY_CREATION_OUTPUT,
     CreatePaymentResponse.JSON_PROPERTY_MERCHANT_ACTION,
     CreatePaymentResponse.JSON_PROPERTY_PAYMENT,
-    CreatePaymentResponse.JSON_PROPERTY_PAYMENT_EXECUTION_ID
+    CreatePaymentResponse.JSON_PROPERTY_PAYMENT_EXECUTION_ID,
+    CreatePaymentResponse.JSON_PROPERTY_FUND_SPLIT
 })
 public class CreatePaymentResponse implements Serializable {
   private static final long serialVersionUID = 1L;
@@ -31,6 +32,9 @@ public class CreatePaymentResponse implements Serializable {
 
   public static final String JSON_PROPERTY_PAYMENT_EXECUTION_ID = "paymentExecutionId";
   private UUID paymentExecutionId;
+
+  public static final String JSON_PROPERTY_FUND_SPLIT = "fundSplit";
+  private FundSplit fundSplit;
 
   public CreatePaymentResponse() {
   }
@@ -135,6 +139,31 @@ public class CreatePaymentResponse implements Serializable {
     this.paymentExecutionId = paymentExecutionId;
   }
 
+  public CreatePaymentResponse fundSplit(FundSplit fundSplit) {
+
+    this.fundSplit = fundSplit;
+    return this;
+  }
+
+  /**
+   * Get fundSplit
+   * 
+   * @return fundSplit
+   **/
+
+  @JsonProperty(JSON_PROPERTY_FUND_SPLIT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public FundSplit getFundSplit() {
+    return fundSplit;
+  }
+
+  @JsonProperty(JSON_PROPERTY_FUND_SPLIT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setFundSplit(FundSplit fundSplit) {
+    this.fundSplit = fundSplit;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -147,12 +176,13 @@ public class CreatePaymentResponse implements Serializable {
     return Objects.equals(this.creationOutput, createPaymentResponse.creationOutput) &&
         Objects.equals(this.merchantAction, createPaymentResponse.merchantAction) &&
         Objects.equals(this.payment, createPaymentResponse.payment) &&
-        Objects.equals(this.paymentExecutionId, createPaymentResponse.paymentExecutionId);
+        Objects.equals(this.paymentExecutionId, createPaymentResponse.paymentExecutionId) &&
+        Objects.equals(this.fundSplit, createPaymentResponse.fundSplit);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(creationOutput, merchantAction, payment, paymentExecutionId);
+    return Objects.hash(creationOutput, merchantAction, payment, paymentExecutionId, fundSplit);
   }
 
   @Override
@@ -163,6 +193,7 @@ public class CreatePaymentResponse implements Serializable {
     sb.append("    merchantAction: ").append(toIndentedString(merchantAction)).append("\n");
     sb.append("    payment: ").append(toIndentedString(payment)).append("\n");
     sb.append("    paymentExecutionId: ").append(toIndentedString(paymentExecutionId)).append("\n");
+    sb.append("    fundSplit: ").append(toIndentedString(fundSplit)).append("\n");
     sb.append("}");
     return sb.toString();
   }

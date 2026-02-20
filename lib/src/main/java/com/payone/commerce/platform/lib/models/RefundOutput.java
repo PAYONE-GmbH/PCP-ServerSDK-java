@@ -14,8 +14,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
     RefundOutput.JSON_PROPERTY_AMOUNT_OF_MONEY,
     RefundOutput.JSON_PROPERTY_MERCHANT_PARAMETERS,
     RefundOutput.JSON_PROPERTY_REFERENCES,
-    RefundOutput.JSON_PROPERTY_PAYMENT_METHOD,
-    RefundOutput.JSON_PROPERTY_FUND_SPLIT
+    RefundOutput.JSON_PROPERTY_PAYMENT_METHOD
 })
 public class RefundOutput implements Serializable {
   private static final long serialVersionUID = 1L;
@@ -31,9 +30,6 @@ public class RefundOutput implements Serializable {
 
   public static final String JSON_PROPERTY_PAYMENT_METHOD = "paymentMethod";
   private String paymentMethod;
-
-  public static final String JSON_PROPERTY_FUND_SPLIT = "fundSplit";
-  private FundSplit fundSplit;
 
   public RefundOutput() {
   }
@@ -139,31 +135,6 @@ public class RefundOutput implements Serializable {
     this.paymentMethod = paymentMethod;
   }
 
-  public RefundOutput fundSplit(FundSplit fundSplit) {
-
-    this.fundSplit = fundSplit;
-    return this;
-  }
-
-  /**
-   * Get fundSplit
-   *
-   * @return fundSplit
-   **/
-
-  @JsonProperty(JSON_PROPERTY_FUND_SPLIT)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-  public FundSplit getFundSplit() {
-    return fundSplit;
-  }
-
-  @JsonProperty(JSON_PROPERTY_FUND_SPLIT)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setFundSplit(FundSplit fundSplit) {
-    this.fundSplit = fundSplit;
-  }
-
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -176,13 +147,12 @@ public class RefundOutput implements Serializable {
     return Objects.equals(this.amountOfMoney, refundOutput.amountOfMoney) &&
         Objects.equals(this.merchantParameters, refundOutput.merchantParameters) &&
         Objects.equals(this.references, refundOutput.references) &&
-        Objects.equals(this.paymentMethod, refundOutput.paymentMethod) &&
-        Objects.equals(this.fundSplit, refundOutput.fundSplit);
+        Objects.equals(this.paymentMethod, refundOutput.paymentMethod);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(amountOfMoney, merchantParameters, references, paymentMethod, fundSplit);
+    return Objects.hash(amountOfMoney, merchantParameters, references, paymentMethod);
   }
 
   @Override
@@ -193,7 +163,6 @@ public class RefundOutput implements Serializable {
     sb.append("    merchantParameters: ").append(toIndentedString(merchantParameters)).append("\n");
     sb.append("    references: ").append(toIndentedString(references)).append("\n");
     sb.append("    paymentMethod: ").append(toIndentedString(paymentMethod)).append("\n");
-    sb.append("    fundSplit: ").append(toIndentedString(fundSplit)).append("\n");
     sb.append("}");
     return sb.toString();
   }

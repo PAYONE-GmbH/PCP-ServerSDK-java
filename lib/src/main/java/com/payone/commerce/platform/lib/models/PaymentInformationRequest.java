@@ -15,8 +15,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
     PaymentInformationRequest.JSON_PROPERTY_TYPE,
     PaymentInformationRequest.JSON_PROPERTY_PAYMENT_CHANNEL,
     PaymentInformationRequest.JSON_PROPERTY_PAYMENT_PRODUCT_ID,
-    PaymentInformationRequest.JSON_PROPERTY_MERCHANT_REFERENCE,
-    PaymentInformationRequest.JSON_PROPERTY_FUND_SPLIT
+    PaymentInformationRequest.JSON_PROPERTY_MERCHANT_REFERENCE
 })
 public class PaymentInformationRequest implements Serializable {
   private static final long serialVersionUID = 1L;
@@ -35,9 +34,6 @@ public class PaymentInformationRequest implements Serializable {
 
   public static final String JSON_PROPERTY_MERCHANT_REFERENCE = "merchantReference";
   private String merchantReference;
-
-  public static final String JSON_PROPERTY_FUND_SPLIT = "fundSplit";
-  private FundSplit fundSplit;
 
   public PaymentInformationRequest() {
   }
@@ -170,31 +166,6 @@ public class PaymentInformationRequest implements Serializable {
     this.merchantReference = merchantReference;
   }
 
-  public PaymentInformationRequest fundSplit(FundSplit fundSplit) {
-
-    this.fundSplit = fundSplit;
-    return this;
-  }
-
-  /**
-   * Get fundSplit
-   *
-   * @return fundSplit
-   **/
-
-  @JsonProperty(JSON_PROPERTY_FUND_SPLIT)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-  public FundSplit getFundSplit() {
-    return fundSplit;
-  }
-
-  @JsonProperty(JSON_PROPERTY_FUND_SPLIT)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setFundSplit(FundSplit fundSplit) {
-    this.fundSplit = fundSplit;
-  }
-
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -208,13 +179,12 @@ public class PaymentInformationRequest implements Serializable {
         Objects.equals(this.type, paymentInformationRequest.type) &&
         Objects.equals(this.paymentChannel, paymentInformationRequest.paymentChannel) &&
         Objects.equals(this.paymentProductId, paymentInformationRequest.paymentProductId) &&
-        Objects.equals(this.merchantReference, paymentInformationRequest.merchantReference) &&
-        Objects.equals(this.fundSplit, paymentInformationRequest.fundSplit);
+        Objects.equals(this.merchantReference, paymentInformationRequest.merchantReference);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(amountOfMoney, type, paymentChannel, paymentProductId, merchantReference, fundSplit);
+    return Objects.hash(amountOfMoney, type, paymentChannel, paymentProductId, merchantReference);
   }
 
   @Override
@@ -226,7 +196,6 @@ public class PaymentInformationRequest implements Serializable {
     sb.append("    paymentChannel: ").append(toIndentedString(paymentChannel)).append("\n");
     sb.append("    paymentProductId: ").append(toIndentedString(paymentProductId)).append("\n");
     sb.append("    merchantReference: ").append(toIndentedString(merchantReference)).append("\n");
-    sb.append("    fundSplit: ").append(toIndentedString(fundSplit)).append("\n");
     sb.append("}");
     return sb.toString();
   }
