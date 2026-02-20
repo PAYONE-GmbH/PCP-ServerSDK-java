@@ -13,8 +13,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
  */
 @JsonPropertyOrder({
     OrderResponse.JSON_PROPERTY_CREATE_PAYMENT_RESPONSE,
-    OrderResponse.JSON_PROPERTY_SHOPPING_CART,
-    OrderResponse.JSON_PROPERTY_FUND_SPLIT
+    OrderResponse.JSON_PROPERTY_SHOPPING_CART
 })
 public class OrderResponse implements Serializable {
   private static final long serialVersionUID = 1L;
@@ -24,9 +23,6 @@ public class OrderResponse implements Serializable {
 
   public static final String JSON_PROPERTY_SHOPPING_CART = "shoppingCart";
   private ShoppingCartResult shoppingCart;
-
-  public static final String JSON_PROPERTY_FUND_SPLIT = "fundSplit";
-  private FundSplit fundSplit;
 
   public OrderResponse() {
   }
@@ -81,31 +77,6 @@ public class OrderResponse implements Serializable {
     this.shoppingCart = shoppingCart;
   }
 
-  public OrderResponse fundSplit(FundSplit fundSplit) {
-
-    this.fundSplit = fundSplit;
-    return this;
-  }
-
-  /**
-   * Get fundSplit
-   * 
-   * @return fundSplit
-   **/
-
-  @JsonProperty(JSON_PROPERTY_FUND_SPLIT)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-  public FundSplit getFundSplit() {
-    return fundSplit;
-  }
-
-  @JsonProperty(JSON_PROPERTY_FUND_SPLIT)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setFundSplit(FundSplit fundSplit) {
-    this.fundSplit = fundSplit;
-  }
-
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -116,13 +87,12 @@ public class OrderResponse implements Serializable {
     }
     OrderResponse orderResponse = (OrderResponse) o;
     return Objects.equals(this.createPaymentResponse, orderResponse.createPaymentResponse) &&
-        Objects.equals(this.shoppingCart, orderResponse.shoppingCart) &&
-        Objects.equals(this.fundSplit, orderResponse.fundSplit);
+        Objects.equals(this.shoppingCart, orderResponse.shoppingCart);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(createPaymentResponse, shoppingCart, fundSplit);
+    return Objects.hash(createPaymentResponse, shoppingCart);
   }
 
   @Override
@@ -131,7 +101,6 @@ public class OrderResponse implements Serializable {
     sb.append("class OrderResponse {\n");
     sb.append("    createPaymentResponse: ").append(toIndentedString(createPaymentResponse)).append("\n");
     sb.append("    shoppingCart: ").append(toIndentedString(shoppingCart)).append("\n");
-    sb.append("    fundSplit: ").append(toIndentedString(fundSplit)).append("\n");
     sb.append("}");
     return sb.toString();
   }

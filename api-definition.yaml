@@ -1,7 +1,7 @@
 openapi: "3.0.3"
 
 info:
-  version: 1.47.0
+  version: 1.48.0
   title: "Commerce Platform API"
   description: |
     RESTful API for the creation of Commerce Cases with Checkouts and the execution of Payments.
@@ -3054,8 +3054,6 @@ components:
           $ref: '#/components/schemas/CapturePaymentResponse'
         shoppingCart:
           $ref: '#/components/schemas/ShoppingCartResult'
-        fundSplit:
-          $ref: '#/components/schemas/FundSplit'
     DeliverType:
       type: string
       description: |
@@ -3614,8 +3612,6 @@ components:
           $ref: '#/components/schemas/CreatePaymentResponse'
         shoppingCart:
           $ref: '#/components/schemas/ShoppingCartResult'
-        fundSplit:
-          $ref: '#/components/schemas/FundSplit'
     OrderType:
       type: string
       description: |
@@ -4728,8 +4724,6 @@ components:
           $ref: '#/components/schemas/RefundPaymentResponse'
         shoppingCart:
           $ref: '#/components/schemas/ShoppingCartResult'
-        fundSplit:
-          $ref: '#/components/schemas/FundSplit'
     ReturnType:
       type: string
       description: |
@@ -4988,3 +4982,4 @@ components:
         - first
         - subsequent
       x-enum-to-string: false
+      
