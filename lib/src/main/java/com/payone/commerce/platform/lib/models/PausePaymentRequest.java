@@ -1,49 +1,17 @@
 package com.payone.commerce.platform.lib.models;
 
 import java.io.Serializable;
-import java.util.Objects;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 /**
- * Request to refresh the payment status of a specific payment.
+ * Request to pause a payment for a specific payment method.
  */
-@JsonPropertyOrder({
-    PausePaymentRequest.JSON_PROPERTY_REFRESH_TYPE
-})
+@JsonPropertyOrder({})
 public class PausePaymentRequest implements Serializable {
   private static final long serialVersionUID = 1L;
 
-  public static final String JSON_PROPERTY_REFRESH_TYPE = "refreshType";
-
-  private RefreshType refreshType;
-
   public PausePaymentRequest() {
-  }
-
-  public PausePaymentRequest refreshType(RefreshType refreshType) {
-    this.refreshType = refreshType;
-    return this;
-  }
-
-  /**
-   * Get refreshType
-   * 
-   * @return refreshType
-   */
-
-  @JsonProperty(JSON_PROPERTY_REFRESH_TYPE)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  public RefreshType getRefreshType() {
-    return refreshType;
-  }
-
-  @JsonProperty(JSON_PROPERTY_REFRESH_TYPE)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  public void setRefreshType(RefreshType refreshType) {
-    this.refreshType = refreshType;
   }
 
   /**
@@ -57,33 +25,19 @@ public class PausePaymentRequest implements Serializable {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    PausePaymentRequest refreshPaymentRequest = (PausePaymentRequest) o;
-    return Objects.equals(this.refreshType, refreshPaymentRequest.refreshType);
+    return true;
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(refreshType);
+    return getClass().hashCode();
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class PausePaymentRequest {\n");
-    sb.append("    refreshType: ").append(toIndentedString(refreshType)).append("\n");
     sb.append("}");
     return sb.toString();
   }
-
-  /**
-   * Convert the given object to string with each line indented by 4 spaces
-   * (except the first line).
-   */
-  private String toIndentedString(Object o) {
-    if (o == null) {
-      return "null";
-    }
-    return o.toString().replace("\n", "\n    ");
-  }
-
 }
