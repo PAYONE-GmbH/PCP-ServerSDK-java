@@ -16,7 +16,8 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
     CapturePaymentRequest.JSON_PROPERTY_IS_FINAL,
     CapturePaymentRequest.JSON_PROPERTY_CANCELLATION_REASON,
     CapturePaymentRequest.JSON_PROPERTY_REFERENCES,
-    CapturePaymentRequest.JSON_PROPERTY_DELIVERY
+    CapturePaymentRequest.JSON_PROPERTY_DELIVERY,
+    CapturePaymentRequest.JSON_PROPERTY_FUND_SPLIT
 })
 public class CapturePaymentRequest implements Serializable {
   private static final long serialVersionUID = 1L;
@@ -35,6 +36,9 @@ public class CapturePaymentRequest implements Serializable {
 
   public static final String JSON_PROPERTY_DELIVERY = "delivery";
   private DeliveryInformation delivery;
+
+  public static final String JSON_PROPERTY_FUND_SPLIT = "fundSplit";
+  private FundSplit fundSplit;
 
   public CapturePaymentRequest() {
   }
@@ -172,6 +176,31 @@ public class CapturePaymentRequest implements Serializable {
     this.delivery = delivery;
   }
 
+  public CapturePaymentRequest fundSplit(FundSplit fundSplit) {
+
+    this.fundSplit = fundSplit;
+    return this;
+  }
+
+  /**
+   * Get fundSplit
+   *
+   * @return fundSplit
+   **/
+
+  @JsonProperty(JSON_PROPERTY_FUND_SPLIT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public FundSplit getFundSplit() {
+    return fundSplit;
+  }
+
+  @JsonProperty(JSON_PROPERTY_FUND_SPLIT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setFundSplit(FundSplit fundSplit) {
+    this.fundSplit = fundSplit;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -185,12 +214,13 @@ public class CapturePaymentRequest implements Serializable {
         Objects.equals(this.isFinal, capturePaymentRequest.isFinal) &&
         Objects.equals(this.cancellationReason, capturePaymentRequest.cancellationReason) &&
         Objects.equals(this.references, capturePaymentRequest.references) &&
-        Objects.equals(this.delivery, capturePaymentRequest.delivery);
+        Objects.equals(this.delivery, capturePaymentRequest.delivery) &&
+        Objects.equals(this.fundSplit, capturePaymentRequest.fundSplit);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(amount, isFinal, cancellationReason, references, delivery);
+    return Objects.hash(amount, isFinal, cancellationReason, references, delivery, fundSplit);
   }
 
   @Override
@@ -202,6 +232,7 @@ public class CapturePaymentRequest implements Serializable {
     sb.append("    cancellationReason: ").append(toIndentedString(cancellationReason)).append("\n");
     sb.append("    references: ").append(toIndentedString(references)).append("\n");
     sb.append("    delivery: ").append(toIndentedString(delivery)).append("\n");
+    sb.append("    fundSplit: ").append(toIndentedString(fundSplit)).append("\n");
     sb.append("}");
     return sb.toString();
   }
