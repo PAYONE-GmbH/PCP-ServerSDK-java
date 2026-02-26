@@ -6,7 +6,7 @@ import com.payone.commerce.platform.lib.models.MobilePaymentMethodSpecificInput;
 import com.payone.commerce.platform.lib.models.PaymentProduct302SpecificInput;
 import com.payone.commerce.platform.lib.models.PaymentProductId;
 import com.payone.commerce.platform.lib.models.ApplePaymentDataTokenInformation.VersionEnum;
-import com.payone.commerce.platform.lib.models.PaymentProduct302SpecificInput.NetworkEnum;
+import com.payone.commerce.platform.lib.models.MobilePaymentNetwork;
 import com.payone.commerce.platform.lib.models.applepay.ApplePayPayment;
 
 public class ApplePayTransformer {
@@ -42,7 +42,7 @@ public class ApplePayTransformer {
         PaymentProduct302SpecificInput paymentProduct302SpecificInput = new PaymentProduct302SpecificInput();
         ApplePaymentDataTokenInformation applePaymentDataTokenInformation = new ApplePaymentDataTokenInformation();
         if (network != null) {
-            paymentProduct302SpecificInput.setNetwork(NetworkEnum.fromValue(network.toUpperCase()));
+            paymentProduct302SpecificInput.setNetwork(MobilePaymentNetwork.fromValue(network.toUpperCase()));
         }
         if (version != null) {
             applePaymentDataTokenInformation.setVersion(VersionEnum.fromValue(version));

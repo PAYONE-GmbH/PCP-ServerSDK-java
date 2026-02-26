@@ -17,7 +17,8 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
     MobilePaymentMethodSpecificInput.JSON_PROPERTY_PUBLIC_KEY_HASH,
     MobilePaymentMethodSpecificInput.JSON_PROPERTY_EPHEMERAL_KEY,
     MobilePaymentMethodSpecificInput.JSON_PROPERTY_THREE_D_SECURE,
-    MobilePaymentMethodSpecificInput.JSON_PROPERTY_PAYMENT_PRODUCT302_SPECIFIC_INPUT
+    MobilePaymentMethodSpecificInput.JSON_PROPERTY_PAYMENT_PRODUCT302_SPECIFIC_INPUT,
+    MobilePaymentMethodSpecificInput.JSON_PROPERTY_PAYMENT_PRODUCT5002_SPECIFIC_INPUT
 })
 
 public class MobilePaymentMethodSpecificInput implements Serializable {
@@ -50,6 +51,10 @@ public class MobilePaymentMethodSpecificInput implements Serializable {
   public static final String JSON_PROPERTY_PAYMENT_PRODUCT302_SPECIFIC_INPUT = "paymentProduct302SpecificInput";
 
   private PaymentProduct302SpecificInput paymentProduct302SpecificInput;
+
+  public static final String JSON_PROPERTY_PAYMENT_PRODUCT5002_SPECIFIC_INPUT = "paymentProduct5002SpecificInput";
+
+  private PaymentProduct5002SpecificInput paymentProduct5002SpecificInput;
 
   public MobilePaymentMethodSpecificInput() {
   }
@@ -219,6 +224,30 @@ public class MobilePaymentMethodSpecificInput implements Serializable {
     this.paymentProduct302SpecificInput = paymentProduct302SpecificInput;
   }
 
+  public MobilePaymentMethodSpecificInput paymentProduct5002SpecificInput(
+      PaymentProduct5002SpecificInput paymentProduct5002SpecificInput) {
+    this.paymentProduct5002SpecificInput = paymentProduct5002SpecificInput;
+    return this;
+  }
+
+  /**
+   * Get paymentProduct5002SpecificInput
+   * 
+   * @return paymentProduct5002SpecificInput
+   */
+
+  @JsonProperty(JSON_PROPERTY_PAYMENT_PRODUCT5002_SPECIFIC_INPUT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public PaymentProduct5002SpecificInput getPaymentProduct5002SpecificInput() {
+    return paymentProduct5002SpecificInput;
+  }
+
+  @JsonProperty(JSON_PROPERTY_PAYMENT_PRODUCT5002_SPECIFIC_INPUT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setPaymentProduct5002SpecificInput(PaymentProduct5002SpecificInput paymentProduct5002SpecificInput) {
+    this.paymentProduct5002SpecificInput = paymentProduct5002SpecificInput;
+  }
+
   /**
    * Return true if this MobilePaymentMethodSpecificInput object is equal to o.
    */
@@ -238,13 +267,15 @@ public class MobilePaymentMethodSpecificInput implements Serializable {
         Objects.equals(this.ephemeralKey, mobilePaymentMethodSpecificInput.ephemeralKey) &&
         Objects.equals(this.threeDSecure, mobilePaymentMethodSpecificInput.threeDSecure) &&
         Objects.equals(this.paymentProduct302SpecificInput,
-            mobilePaymentMethodSpecificInput.paymentProduct302SpecificInput);
+            mobilePaymentMethodSpecificInput.paymentProduct302SpecificInput) &&
+        Objects.equals(this.paymentProduct5002SpecificInput,
+            mobilePaymentMethodSpecificInput.paymentProduct5002SpecificInput);
   }
 
   @Override
   public int hashCode() {
     return Objects.hash(paymentProductId, authorizationMode, encryptedPaymentData, publicKeyHash, ephemeralKey,
-        threeDSecure, paymentProduct302SpecificInput);
+        threeDSecure, paymentProduct302SpecificInput, paymentProduct5002SpecificInput);
   }
 
   @Override
@@ -258,6 +289,8 @@ public class MobilePaymentMethodSpecificInput implements Serializable {
     sb.append("    ephemeralKey: ").append(toIndentedString(ephemeralKey)).append("\n");
     sb.append("    threeDSecure: ").append(toIndentedString(threeDSecure)).append("\n");
     sb.append("    paymentProduct302SpecificInput: ").append(toIndentedString(paymentProduct302SpecificInput))
+        .append("\n");
+    sb.append("    paymentProduct5002SpecificInput: ").append(toIndentedString(paymentProduct5002SpecificInput))
         .append("\n");
     sb.append("}");
     return sb.toString();

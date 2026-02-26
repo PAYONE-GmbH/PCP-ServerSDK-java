@@ -15,7 +15,7 @@ import com.payone.commerce.platform.lib.errors.ApiResponseRetrievalException;
 import com.payone.commerce.platform.lib.models.CommerceCaseResponse;
 import com.payone.commerce.platform.lib.models.CreateCommerceCaseRequest;
 import com.payone.commerce.platform.lib.models.CreateCommerceCaseResponse;
-import com.payone.commerce.platform.lib.models.Customer;
+import com.payone.commerce.platform.lib.models.PatchCommerceCaseRequest;
 import com.payone.commerce.platform.lib.queries.GetCommerceCasesQuery;
 import com.payone.commerce.platform.lib.serializer.JsonSerializer;
 
@@ -125,7 +125,7 @@ public class CommerceCaseApiClient extends BaseApiClient {
     }
 
     public void updateCommerceCaseRequest(String merchantId, String commerceCaseId,
-            Customer payload) throws ApiErrorResponseException, ApiResponseRetrievalException, IOException {
+            PatchCommerceCaseRequest payload) throws ApiErrorResponseException, ApiResponseRetrievalException, IOException {
         if (merchantId == null) {
             throw new IllegalArgumentException(MERCHANT_ID_REQUIRED_ERROR);
         }
@@ -147,7 +147,7 @@ public class CommerceCaseApiClient extends BaseApiClient {
 
         String jsonString = JsonSerializer.serializeToJson(payload);
 
-        RequestBody formBody = RequestBody.create("{\"customer\":" + jsonString + "}", JSON);
+        RequestBody formBody = RequestBody.create(jsonString, JSON);
 
         Request request = new Request.Builder()
                 .url(url)

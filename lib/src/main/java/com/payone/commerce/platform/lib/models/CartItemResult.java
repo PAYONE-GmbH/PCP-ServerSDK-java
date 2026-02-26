@@ -13,7 +13,8 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
  */
 @JsonPropertyOrder({
     CartItemResult.JSON_PROPERTY_INVOICE_DATA,
-    CartItemResult.JSON_PROPERTY_ORDER_LINE_DETAILS
+    CartItemResult.JSON_PROPERTY_ORDER_LINE_DETAILS,
+    CartItemResult.JSON_PROPERTY_SUPPLIER_REFERENCES
 })
 public class CartItemResult implements Serializable {
   private static final long serialVersionUID = 1L;
@@ -23,6 +24,9 @@ public class CartItemResult implements Serializable {
 
   public static final String JSON_PROPERTY_ORDER_LINE_DETAILS = "orderLineDetails";
   private OrderLineDetailsResult orderLineDetails;
+
+  public static final String JSON_PROPERTY_SUPPLIER_REFERENCES = "supplierReferences";
+  private CartItemSupplierReferences supplierReferences;
 
   public CartItemResult() {
   }
@@ -77,6 +81,31 @@ public class CartItemResult implements Serializable {
     this.orderLineDetails = orderLineDetails;
   }
 
+  public CartItemResult supplierReferences(CartItemSupplierReferences supplierReferences) {
+
+    this.supplierReferences = supplierReferences;
+    return this;
+  }
+
+  /**
+   * Get supplierReferences
+   *
+   * @return supplierReferences
+   **/
+
+  @JsonProperty(JSON_PROPERTY_SUPPLIER_REFERENCES)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public CartItemSupplierReferences getSupplierReferences() {
+    return supplierReferences;
+  }
+
+  @JsonProperty(JSON_PROPERTY_SUPPLIER_REFERENCES)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setSupplierReferences(CartItemSupplierReferences supplierReferences) {
+    this.supplierReferences = supplierReferences;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -87,12 +116,13 @@ public class CartItemResult implements Serializable {
     }
     CartItemResult cartItemResult = (CartItemResult) o;
     return Objects.equals(this.invoiceData, cartItemResult.invoiceData) &&
-        Objects.equals(this.orderLineDetails, cartItemResult.orderLineDetails);
+        Objects.equals(this.orderLineDetails, cartItemResult.orderLineDetails) &&
+        Objects.equals(this.supplierReferences, cartItemResult.supplierReferences);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(invoiceData, orderLineDetails);
+    return Objects.hash(invoiceData, orderLineDetails, supplierReferences);
   }
 
   @Override
@@ -101,6 +131,7 @@ public class CartItemResult implements Serializable {
     sb.append("class CartItemResult {\n");
     sb.append("    invoiceData: ").append(toIndentedString(invoiceData)).append("\n");
     sb.append("    orderLineDetails: ").append(toIndentedString(orderLineDetails)).append("\n");
+    sb.append("    supplierReferences: ").append(toIndentedString(supplierReferences)).append("\n");
     sb.append("}");
     return sb.toString();
   }

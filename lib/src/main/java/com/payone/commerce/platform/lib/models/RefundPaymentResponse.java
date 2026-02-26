@@ -16,7 +16,8 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
     RefundPaymentResponse.JSON_PROPERTY_REFUND_OUTPUT,
     RefundPaymentResponse.JSON_PROPERTY_STATUS,
     RefundPaymentResponse.JSON_PROPERTY_STATUS_OUTPUT,
-    RefundPaymentResponse.JSON_PROPERTY_ID
+    RefundPaymentResponse.JSON_PROPERTY_ID,
+    RefundPaymentResponse.JSON_PROPERTY_FUND_SPLIT
 })
 public class RefundPaymentResponse implements Serializable {
   private static final long serialVersionUID = 1L;
@@ -32,6 +33,9 @@ public class RefundPaymentResponse implements Serializable {
 
   public static final String JSON_PROPERTY_ID = "id";
   private String id;
+
+  public static final String JSON_PROPERTY_FUND_SPLIT = "fundSplit";
+  private FundSplit fundSplit;
 
   public RefundPaymentResponse() {
   }
@@ -136,6 +140,31 @@ public class RefundPaymentResponse implements Serializable {
     this.id = id;
   }
 
+  public RefundPaymentResponse fundSplit(FundSplit fundSplit) {
+
+    this.fundSplit = fundSplit;
+    return this;
+  }
+
+  /**
+   * Get fundSplit
+   * 
+   * @return fundSplit
+   **/
+
+  @JsonProperty(JSON_PROPERTY_FUND_SPLIT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public FundSplit getFundSplit() {
+    return fundSplit;
+  }
+
+  @JsonProperty(JSON_PROPERTY_FUND_SPLIT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setFundSplit(FundSplit fundSplit) {
+    this.fundSplit = fundSplit;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -148,12 +177,13 @@ public class RefundPaymentResponse implements Serializable {
     return Objects.equals(this.refundOutput, refundPaymentResponse.refundOutput) &&
         Objects.equals(this.status, refundPaymentResponse.status) &&
         Objects.equals(this.statusOutput, refundPaymentResponse.statusOutput) &&
-        Objects.equals(this.id, refundPaymentResponse.id);
+        Objects.equals(this.id, refundPaymentResponse.id) &&
+        Objects.equals(this.fundSplit, refundPaymentResponse.fundSplit);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(refundOutput, status, statusOutput, id);
+    return Objects.hash(refundOutput, status, statusOutput, id, fundSplit);
   }
 
   @Override
@@ -164,6 +194,7 @@ public class RefundPaymentResponse implements Serializable {
     sb.append("    status: ").append(toIndentedString(status)).append("\n");
     sb.append("    statusOutput: ").append(toIndentedString(statusOutput)).append("\n");
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
+    sb.append("    fundSplit: ").append(toIndentedString(fundSplit)).append("\n");
     sb.append("}");
     return sb.toString();
   }

@@ -28,7 +28,8 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
     PaymentExecution.JSON_PROPERTY_PREVIOUS_PAYMENT,
     PaymentExecution.JSON_PROPERTY_CREATION_DATE_TIME,
     PaymentExecution.JSON_PROPERTY_LAST_UPDATED,
-    PaymentExecution.JSON_PROPERTY_EVENTS
+    PaymentExecution.JSON_PROPERTY_EVENTS,
+    PaymentExecution.JSON_PROPERTY_FUND_SPLITS
 })
 
 public class PaymentExecution implements Serializable {
@@ -89,6 +90,10 @@ public class PaymentExecution implements Serializable {
   public static final String JSON_PROPERTY_EVENTS = "events";
 
   private List<PaymentEvent> events = new ArrayList<>();
+
+  public static final String JSON_PROPERTY_FUND_SPLITS = "fundSplits";
+
+  private List<FundSplit> fundSplits;
 
   public PaymentExecution() {
   }
@@ -444,6 +449,37 @@ public class PaymentExecution implements Serializable {
     this.events = events;
   }
 
+  public PaymentExecution fundSplits(List<FundSplit> fundSplits) {
+    this.fundSplits = fundSplits;
+    return this;
+  }
+
+  public PaymentExecution addFundSplitsItem(FundSplit fundSplitsItem) {
+    if (this.fundSplits == null) {
+      this.fundSplits = new ArrayList<>();
+    }
+    this.fundSplits.add(fundSplitsItem);
+    return this;
+  }
+
+  /**
+   * List of fund splits associated with this payment execution.
+   *
+   * @return fundSplits
+   */
+
+  @JsonProperty(JSON_PROPERTY_FUND_SPLITS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public List<FundSplit> getFundSplits() {
+    return fundSplits;
+  }
+
+  @JsonProperty(JSON_PROPERTY_FUND_SPLITS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setFundSplits(List<FundSplit> fundSplits) {
+    this.fundSplits = fundSplits;
+  }
+
   /**
    * Return true if this PaymentExecution object is equal to o.
    */
@@ -472,7 +508,8 @@ public class PaymentExecution implements Serializable {
         Objects.equals(this.previousPayment, paymentExecution.previousPayment) &&
         Objects.equals(this.creationDateTime, paymentExecution.creationDateTime) &&
         Objects.equals(this.lastUpdated, paymentExecution.lastUpdated) &&
-        Objects.equals(this.events, paymentExecution.events);
+        Objects.equals(this.events, paymentExecution.events) &&
+        Objects.equals(this.fundSplits, paymentExecution.fundSplits);
   }
 
   @Override
@@ -480,7 +517,7 @@ public class PaymentExecution implements Serializable {
     return Objects.hash(paymentExecutionId, paymentId, cardPaymentMethodSpecificInput, mobilePaymentMethodSpecificInput,
         redirectPaymentMethodSpecificInput, sepaDirectDebitPaymentMethodSpecificInput,
         financingPaymentMethodSpecificInput, bankPayoutMethodSpecificInput, paymentChannel, references, previousPayment,
-        creationDateTime, lastUpdated, events);
+        creationDateTime, lastUpdated, events, fundSplits);
   }
 
   @Override
@@ -507,6 +544,7 @@ public class PaymentExecution implements Serializable {
     sb.append("    creationDateTime: ").append(toIndentedString(creationDateTime)).append("\n");
     sb.append("    lastUpdated: ").append(toIndentedString(lastUpdated)).append("\n");
     sb.append("    events: ").append(toIndentedString(events)).append("\n");
+    sb.append("    fundSplits: ").append(toIndentedString(fundSplits)).append("\n");
     sb.append("}");
     return sb.toString();
   }
