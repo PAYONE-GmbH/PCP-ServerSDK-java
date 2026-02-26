@@ -1,3 +1,10 @@
+# [1.7.0](https://github.com/PAYONE-GmbH/PCP-ServerSDK-java/compare/v1.6.0...v1.7.0) (2026-02-26)
+
+### Features
+
+* feat: add fund split property to CapturePaymentRequest ([85b0a3368c7b67418c332580800ff26cfbadb5a5](https://github.com/PAYONE-GmbH/PCP-ServerSDK-java/commit/85b0a3368c7b67418c332580800ff26cfbadb5a5))
+* feat: implement api definition 1.47.0 ([c564ac873cb9b1150e074c44213df077364c9ea9](https://github.com/PAYONE-GmbH/PCP-ServerSDK-java/commit/c564ac873cb9b1150e074c44213df077364c9ea9))
+
 # [1.6.0](https://github.com/PAYONE-GmbH/PCP-ServerSDK-java/compare/v1.5.0...v1.6.0) (2025-12-09)
 
 ### Features
