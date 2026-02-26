@@ -13,7 +13,8 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 @JsonPropertyOrder({
     CardPaymentDetails.JSON_PROPERTY_MASKED_CARD_NUMBER,
     CardPaymentDetails.JSON_PROPERTY_PAYMENT_PROCESSING_TOKEN,
-    CardPaymentDetails.JSON_PROPERTY_REPORTING_TOKEN
+    CardPaymentDetails.JSON_PROPERTY_REPORTING_TOKEN,
+    CardPaymentDetails.JSON_PROPERTY_CARD_AUTHORIZATION_ID
 })
 public class CardPaymentDetails implements Serializable {
   private static final long serialVersionUID = 1L;
@@ -26,6 +27,9 @@ public class CardPaymentDetails implements Serializable {
 
   public static final String JSON_PROPERTY_REPORTING_TOKEN = "reportingToken";
   private String reportingToken;
+
+  public static final String JSON_PROPERTY_CARD_AUTHORIZATION_ID = "cardAuthorizationId";
+  private String cardAuthorizationId;
 
   public CardPaymentDetails() {
   }
@@ -106,6 +110,32 @@ public class CardPaymentDetails implements Serializable {
     this.reportingToken = reportingToken;
   }
 
+  public CardPaymentDetails cardAuthorizationId(String cardAuthorizationId) {
+
+    this.cardAuthorizationId = cardAuthorizationId;
+    return this;
+  }
+
+  /**
+   * Identifier for a successful authorization, reversal or refund. Usually
+   * provided by the issuer system. Only provided for card payments.
+   *
+   * @return cardAuthorizationId
+   **/
+
+  @JsonProperty(JSON_PROPERTY_CARD_AUTHORIZATION_ID)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public String getCardAuthorizationId() {
+    return cardAuthorizationId;
+  }
+
+  @JsonProperty(JSON_PROPERTY_CARD_AUTHORIZATION_ID)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setCardAuthorizationId(String cardAuthorizationId) {
+    this.cardAuthorizationId = cardAuthorizationId;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -117,12 +147,13 @@ public class CardPaymentDetails implements Serializable {
     CardPaymentDetails cardPaymentDetails = (CardPaymentDetails) o;
     return Objects.equals(this.maskedCardNumber, cardPaymentDetails.maskedCardNumber) &&
         Objects.equals(this.paymentProcessingToken, cardPaymentDetails.paymentProcessingToken) &&
-        Objects.equals(this.reportingToken, cardPaymentDetails.reportingToken);
+        Objects.equals(this.reportingToken, cardPaymentDetails.reportingToken) &&
+        Objects.equals(this.cardAuthorizationId, cardPaymentDetails.cardAuthorizationId);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(maskedCardNumber, paymentProcessingToken, reportingToken);
+    return Objects.hash(maskedCardNumber, paymentProcessingToken, reportingToken, cardAuthorizationId);
   }
 
   @Override
@@ -132,6 +163,7 @@ public class CardPaymentDetails implements Serializable {
     sb.append("    maskedCardNumber: ").append(toIndentedString(maskedCardNumber)).append("\n");
     sb.append("    paymentProcessingToken: ").append(toIndentedString(paymentProcessingToken)).append("\n");
     sb.append("    reportingToken: ").append(toIndentedString(reportingToken)).append("\n");
+    sb.append("    cardAuthorizationId: ").append(toIndentedString(cardAuthorizationId)).append("\n");
     sb.append("}");
     return sb.toString();
   }

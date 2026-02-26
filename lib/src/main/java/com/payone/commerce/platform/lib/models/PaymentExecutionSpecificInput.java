@@ -22,7 +22,8 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 @JsonPropertyOrder({
     PaymentExecutionSpecificInput.JSON_PROPERTY_AMOUNT_OF_MONEY,
     PaymentExecutionSpecificInput.JSON_PROPERTY_SHOPPING_CART,
-    PaymentExecutionSpecificInput.JSON_PROPERTY_PAYMENT_REFERENCES
+    PaymentExecutionSpecificInput.JSON_PROPERTY_PAYMENT_REFERENCES,
+    PaymentExecutionSpecificInput.JSON_PROPERTY_FUND_SPLIT
 })
 public class PaymentExecutionSpecificInput implements Serializable {
   private static final long serialVersionUID = 1L;
@@ -35,6 +36,9 @@ public class PaymentExecutionSpecificInput implements Serializable {
 
   public static final String JSON_PROPERTY_PAYMENT_REFERENCES = "paymentReferences";
   private References paymentReferences;
+
+  public static final String JSON_PROPERTY_FUND_SPLIT = "fundSplit";
+  private FundSplit fundSplit;
 
   public PaymentExecutionSpecificInput() {
   }
@@ -114,6 +118,31 @@ public class PaymentExecutionSpecificInput implements Serializable {
     this.paymentReferences = paymentReferences;
   }
 
+  public PaymentExecutionSpecificInput fundSplit(FundSplit fundSplit) {
+
+    this.fundSplit = fundSplit;
+    return this;
+  }
+
+  /**
+   * Get fundSplit
+   *
+   * @return fundSplit
+   **/
+
+  @JsonProperty(JSON_PROPERTY_FUND_SPLIT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public FundSplit getFundSplit() {
+    return fundSplit;
+  }
+
+  @JsonProperty(JSON_PROPERTY_FUND_SPLIT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setFundSplit(FundSplit fundSplit) {
+    this.fundSplit = fundSplit;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -125,12 +154,13 @@ public class PaymentExecutionSpecificInput implements Serializable {
     PaymentExecutionSpecificInput paymentExecutionSpecificInput = (PaymentExecutionSpecificInput) o;
     return Objects.equals(this.amountOfMoney, paymentExecutionSpecificInput.amountOfMoney) &&
         Objects.equals(this.shoppingCart, paymentExecutionSpecificInput.shoppingCart) &&
-        Objects.equals(this.paymentReferences, paymentExecutionSpecificInput.paymentReferences);
+        Objects.equals(this.paymentReferences, paymentExecutionSpecificInput.paymentReferences) &&
+        Objects.equals(this.fundSplit, paymentExecutionSpecificInput.fundSplit);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(amountOfMoney, shoppingCart, paymentReferences);
+    return Objects.hash(amountOfMoney, shoppingCart, paymentReferences, fundSplit);
   }
 
   @Override
@@ -140,6 +170,7 @@ public class PaymentExecutionSpecificInput implements Serializable {
     sb.append("    amountOfMoney: ").append(toIndentedString(amountOfMoney)).append("\n");
     sb.append("    shoppingCart: ").append(toIndentedString(shoppingCart)).append("\n");
     sb.append("    paymentReferences: ").append(toIndentedString(paymentReferences)).append("\n");
+    sb.append("    fundSplit: ").append(toIndentedString(fundSplit)).append("\n");
     sb.append("}");
     return sb.toString();
   }

@@ -13,7 +13,8 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
  */
 @JsonPropertyOrder({
     CartItemPatch.JSON_PROPERTY_INVOICE_DATA,
-    CartItemPatch.JSON_PROPERTY_ORDER_LINE_DETAILS
+    CartItemPatch.JSON_PROPERTY_ORDER_LINE_DETAILS,
+    CartItemPatch.JSON_PROPERTY_SUPPLIER_REFERENCES
 })
 public class CartItemPatch implements Serializable {
   private static final long serialVersionUID = 1L;
@@ -23,6 +24,9 @@ public class CartItemPatch implements Serializable {
 
   public static final String JSON_PROPERTY_ORDER_LINE_DETAILS = "orderLineDetails";
   private OrderLineDetailsPatch orderLineDetails;
+
+  public static final String JSON_PROPERTY_SUPPLIER_REFERENCES = "supplierReferences";
+  private CartItemSupplierReferences supplierReferences;
 
   public CartItemPatch() {
   }
@@ -77,6 +81,31 @@ public class CartItemPatch implements Serializable {
     this.orderLineDetails = orderLineDetails;
   }
 
+  public CartItemPatch supplierReferences(CartItemSupplierReferences supplierReferences) {
+
+    this.supplierReferences = supplierReferences;
+    return this;
+  }
+
+  /**
+   * Get supplierReferences
+   *
+   * @return supplierReferences
+   **/
+
+  @JsonProperty(JSON_PROPERTY_SUPPLIER_REFERENCES)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public CartItemSupplierReferences getSupplierReferences() {
+    return supplierReferences;
+  }
+
+  @JsonProperty(JSON_PROPERTY_SUPPLIER_REFERENCES)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setSupplierReferences(CartItemSupplierReferences supplierReferences) {
+    this.supplierReferences = supplierReferences;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -87,12 +116,13 @@ public class CartItemPatch implements Serializable {
     }
     CartItemPatch cartItemPatch = (CartItemPatch) o;
     return Objects.equals(this.invoiceData, cartItemPatch.invoiceData) &&
-        Objects.equals(this.orderLineDetails, cartItemPatch.orderLineDetails);
+        Objects.equals(this.orderLineDetails, cartItemPatch.orderLineDetails) &&
+        Objects.equals(this.supplierReferences, cartItemPatch.supplierReferences);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(invoiceData, orderLineDetails);
+    return Objects.hash(invoiceData, orderLineDetails, supplierReferences);
   }
 
   @Override
@@ -101,6 +131,7 @@ public class CartItemPatch implements Serializable {
     sb.append("class CartItemPatch {\n");
     sb.append("    invoiceData: ").append(toIndentedString(invoiceData)).append("\n");
     sb.append("    orderLineDetails: ").append(toIndentedString(orderLineDetails)).append("\n");
+    sb.append("    supplierReferences: ").append(toIndentedString(supplierReferences)).append("\n");
     sb.append("}");
     return sb.toString();
   }

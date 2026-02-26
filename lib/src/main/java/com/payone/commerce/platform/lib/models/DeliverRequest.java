@@ -25,7 +25,8 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
     DeliverRequest.JSON_PROPERTY_DELIVER_TYPE,
     DeliverRequest.JSON_PROPERTY_IS_FINAL,
     DeliverRequest.JSON_PROPERTY_CANCELLATION_REASON,
-    DeliverRequest.JSON_PROPERTY_DELIVER_ITEMS
+    DeliverRequest.JSON_PROPERTY_DELIVER_ITEMS,
+    DeliverRequest.JSON_PROPERTY_FUND_SPLIT
 })
 public class DeliverRequest implements Serializable {
   private static final long serialVersionUID = 1L;
@@ -41,6 +42,9 @@ public class DeliverRequest implements Serializable {
 
   public static final String JSON_PROPERTY_DELIVER_ITEMS = "deliverItems";
   private List<DeliverItem> deliverItems;
+
+  public static final String JSON_PROPERTY_FUND_SPLIT = "fundSplit";
+  private FundSplit fundSplit;
 
   public DeliverRequest() {
   }
@@ -156,6 +160,31 @@ public class DeliverRequest implements Serializable {
     this.deliverItems = deliverItems;
   }
 
+  public DeliverRequest fundSplit(FundSplit fundSplit) {
+
+    this.fundSplit = fundSplit;
+    return this;
+  }
+
+  /**
+   * Get fundSplit
+   * 
+   * @return fundSplit
+   **/
+
+  @JsonProperty(JSON_PROPERTY_FUND_SPLIT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public FundSplit getFundSplit() {
+    return fundSplit;
+  }
+
+  @JsonProperty(JSON_PROPERTY_FUND_SPLIT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setFundSplit(FundSplit fundSplit) {
+    this.fundSplit = fundSplit;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -168,12 +197,13 @@ public class DeliverRequest implements Serializable {
     return Objects.equals(this.deliverType, deliverRequest.deliverType) &&
         Objects.equals(this.isFinal, deliverRequest.isFinal) &&
         Objects.equals(this.cancellationReason, deliverRequest.cancellationReason) &&
-        Objects.equals(this.deliverItems, deliverRequest.deliverItems);
+        Objects.equals(this.deliverItems, deliverRequest.deliverItems) &&
+        Objects.equals(this.fundSplit, deliverRequest.fundSplit);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(deliverType, isFinal, cancellationReason, deliverItems);
+    return Objects.hash(deliverType, isFinal, cancellationReason, deliverItems, fundSplit);
   }
 
   @Override
@@ -184,6 +214,7 @@ public class DeliverRequest implements Serializable {
     sb.append("    isFinal: ").append(toIndentedString(isFinal)).append("\n");
     sb.append("    cancellationReason: ").append(toIndentedString(cancellationReason)).append("\n");
     sb.append("    deliverItems: ").append(toIndentedString(deliverItems)).append("\n");
+    sb.append("    fundSplit: ").append(toIndentedString(fundSplit)).append("\n");
     sb.append("}");
     return sb.toString();
   }

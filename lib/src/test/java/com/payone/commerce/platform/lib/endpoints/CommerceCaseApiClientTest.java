@@ -23,7 +23,7 @@ import com.payone.commerce.platform.lib.errors.ApiResponseRetrievalException;
 import com.payone.commerce.platform.lib.models.CommerceCaseResponse;
 import com.payone.commerce.platform.lib.models.CreateCommerceCaseRequest;
 import com.payone.commerce.platform.lib.models.CreateCommerceCaseResponse;
-import com.payone.commerce.platform.lib.models.Customer;
+import com.payone.commerce.platform.lib.models.PatchCommerceCaseRequest;
 import com.payone.commerce.platform.lib.testutils.ApiResponseMocks;
 import com.payone.commerce.platform.lib.testutils.TestConfig;
 
@@ -280,7 +280,7 @@ public class CommerceCaseApiClientTest {
             doReturn(response).when(commerceCaseApiClient).getResponse(any());
             when(commerceCaseApiClient.getResponse(any())).thenReturn(response);
 
-            Customer payload = new Customer();
+            PatchCommerceCaseRequest payload = new PatchCommerceCaseRequest();
 
             assertDoesNotThrow(() -> commerceCaseApiClient.updateCommerceCaseRequest("1", "3", payload));
 
@@ -297,7 +297,7 @@ public class CommerceCaseApiClientTest {
             doReturn(response).when(commerceCaseApiClient).getResponse(any());
 
             ApiErrorResponseException e = assertThrows(ApiErrorResponseException.class, () -> {
-                Customer payload = new Customer();
+                PatchCommerceCaseRequest payload = new PatchCommerceCaseRequest();
                 commerceCaseApiClient.updateCommerceCaseRequest("1", "3", payload);
             });
             int s = e.getErrors().get(0).getHttpStatusCode();
@@ -315,7 +315,7 @@ public class CommerceCaseApiClientTest {
             doReturn(response).when(commerceCaseApiClient).getResponse(any());
 
             ApiResponseRetrievalException e = assertThrows(ApiResponseRetrievalException.class, () -> {
-                Customer payload = new Customer();
+                PatchCommerceCaseRequest payload = new PatchCommerceCaseRequest();
                 commerceCaseApiClient.updateCommerceCaseRequest("1", "3", payload);
             });
             int code = e.getStatusCode();
@@ -333,14 +333,14 @@ public class CommerceCaseApiClientTest {
             String m;
 
             e = assertThrows(IllegalArgumentException.class, () -> {
-                Customer payload = new Customer();
+                PatchCommerceCaseRequest payload = new PatchCommerceCaseRequest();
                 commerceCaseApiClient.updateCommerceCaseRequest(null, "2", payload);
             });
             m = e.getMessage();
             assertEquals("Merchant ID is required", m);
 
             e = assertThrows(IllegalArgumentException.class, () -> {
-                Customer payload = new Customer();
+                PatchCommerceCaseRequest payload = new PatchCommerceCaseRequest();
                 commerceCaseApiClient.updateCommerceCaseRequest("1", null, payload);
             });
             m = e.getMessage();
