@@ -1,5 +1,6 @@
 package com.payone.commerce.platform.lib.models;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 /**
@@ -40,6 +41,16 @@ public enum ActionType {
     @JsonValue
     public String getValue() {
         return value;
+    }
+
+    @JsonCreator
+    public static ActionType fromValue(String value) {
+        for (ActionType b : ActionType.values()) {
+            if (b.value.equals(value)) {
+                return b;
+            }
+        }
+        throw new IllegalArgumentException("Unexpected value '" + value + "'");
     }
 
     @Override
