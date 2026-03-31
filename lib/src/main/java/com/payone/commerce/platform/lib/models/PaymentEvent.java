@@ -20,6 +20,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
     PaymentEvent.JSON_PROPERTY_PAYMENT_STATUS,
     PaymentEvent.JSON_PROPERTY_CANCELLATION_REASON,
     PaymentEvent.JSON_PROPERTY_RETURN_REASON,
+    PaymentEvent.JSON_PROPERTY_MERCHANT_REFERENCE,
     PaymentEvent.JSON_PROPERTY_PAYMENT_INSTRUCTIONS
 })
 
@@ -53,6 +54,10 @@ public class PaymentEvent implements Serializable {
   public static final String JSON_PROPERTY_RETURN_REASON = "returnReason";
 
   private String returnReason;
+
+  public static final String JSON_PROPERTY_MERCHANT_REFERENCE = "merchantReference";
+
+  private String merchantReference;
 
   public static final String JSON_PROPERTY_PAYMENT_INSTRUCTIONS = "paymentInstructions";
 
@@ -203,6 +208,31 @@ public class PaymentEvent implements Serializable {
     this.returnReason = returnReason;
   }
 
+  public PaymentEvent merchantReference(String merchantReference) {
+    this.merchantReference = merchantReference;
+    return this;
+  }
+
+  /**
+   * Unique reference of the payment event that is also returned for reporting and
+   * reconciliation purposes.
+   *
+   * @maxLength 20
+   * @return merchantReference
+   */
+
+  @JsonProperty(JSON_PROPERTY_MERCHANT_REFERENCE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public String getMerchantReference() {
+    return merchantReference;
+  }
+
+  @JsonProperty(JSON_PROPERTY_MERCHANT_REFERENCE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setMerchantReference(String merchantReference) {
+    this.merchantReference = merchantReference;
+  }
+
   public PaymentEvent paymentInstructions(PaymentInstructions paymentInstructions) {
     this.paymentInstructions = paymentInstructions;
     return this;
@@ -245,12 +275,13 @@ public class PaymentEvent implements Serializable {
         Objects.equals(this.paymentStatus, paymentEvent.paymentStatus) &&
         Objects.equals(this.cancellationReason, paymentEvent.cancellationReason) &&
         Objects.equals(this.returnReason, paymentEvent.returnReason) &&
+        Objects.equals(this.merchantReference, paymentEvent.merchantReference) &&
         Objects.equals(this.paymentInstructions, paymentEvent.paymentInstructions);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(paymentEventId, creationDateTime, type, amountOfMoney, paymentStatus, cancellationReason, returnReason, paymentInstructions);
+    return Objects.hash(paymentEventId, creationDateTime, type, amountOfMoney, paymentStatus, cancellationReason, returnReason, merchantReference, paymentInstructions);
   }
 
   @Override
@@ -264,6 +295,7 @@ public class PaymentEvent implements Serializable {
     sb.append("    paymentStatus: ").append(toIndentedString(paymentStatus)).append("\n");
     sb.append("    cancellationReason: ").append(toIndentedString(cancellationReason)).append("\n");
     sb.append("    returnReason: ").append(toIndentedString(returnReason)).append("\n");
+    sb.append("    merchantReference: ").append(toIndentedString(merchantReference)).append("\n");
     sb.append("    paymentInstructions: ").append(toIndentedString(paymentInstructions)).append("\n");
     sb.append("}");
     return sb.toString();

@@ -1,5 +1,6 @@
 package com.payone.commerce.platform.lib.models;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 /**
@@ -27,5 +28,15 @@ public enum RecurringPaymentSequenceIndicator {
     @Override
     public String toString() {
         return String.valueOf(value);
+    }
+
+    @JsonCreator
+    public static RecurringPaymentSequenceIndicator fromValue(String value) {
+        for (RecurringPaymentSequenceIndicator b : RecurringPaymentSequenceIndicator.values()) {
+            if (b.value.equals(value)) {
+                return b;
+            }
+        }
+        throw new IllegalArgumentException("Unexpected value '" + value + "'");
     }
 }
