@@ -1,5 +1,6 @@
 package com.payone.commerce.platform.lib.models;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 /**
@@ -46,6 +47,16 @@ public enum AvsResult {
     @JsonValue
     public String getValue() {
         return value;
+    }
+
+    @JsonCreator
+    public static AvsResult fromValue(String value) {
+        for (AvsResult b : AvsResult.values()) {
+            if (b.value.equals(value)) {
+                return b;
+            }
+        }
+        throw new IllegalArgumentException("Unexpected value '" + value + "'");
     }
 
     @Override

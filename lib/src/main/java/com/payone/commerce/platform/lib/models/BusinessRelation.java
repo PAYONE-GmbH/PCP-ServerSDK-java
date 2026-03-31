@@ -1,5 +1,6 @@
 package com.payone.commerce.platform.lib.models;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 /**
@@ -22,6 +23,16 @@ public enum BusinessRelation {
     @JsonValue
     public String getValue() {
         return value;
+    }
+
+    @JsonCreator
+    public static BusinessRelation fromValue(String value) {
+        for (BusinessRelation b : BusinessRelation.values()) {
+            if (b.value.equals(value)) {
+                return b;
+            }
+        }
+        throw new IllegalArgumentException("Unexpected value '" + value + "'");
     }
 
     @Override

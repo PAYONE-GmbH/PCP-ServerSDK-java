@@ -26,7 +26,7 @@ public class RefundRequest implements Serializable {
   private PositiveAmountOfMoney amountOfMoney;
 
   public static final String JSON_PROPERTY_REFERENCES = "references";
-  private PaymentReferences references;
+  private PaymentReferencesForRefund references;
 
   public static final String JSON_PROPERTY_RETURN = "return";
   private ReturnInformation _return;
@@ -62,7 +62,7 @@ public class RefundRequest implements Serializable {
     this.amountOfMoney = amountOfMoney;
   }
 
-  public RefundRequest references(PaymentReferences references) {
+  public RefundRequest references(PaymentReferencesForRefund references) {
 
     this.references = references;
     return this;
@@ -77,13 +77,13 @@ public class RefundRequest implements Serializable {
   @JsonProperty(JSON_PROPERTY_REFERENCES)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public PaymentReferences getReferences() {
+  public PaymentReferencesForRefund getReferences() {
     return references;
   }
 
   @JsonProperty(JSON_PROPERTY_REFERENCES)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setReferences(PaymentReferences references) {
+  public void setReferences(PaymentReferencesForRefund references) {
     this.references = references;
   }
 
