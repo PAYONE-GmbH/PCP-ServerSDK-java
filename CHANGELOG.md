@@ -1,3 +1,10 @@
+# [1.9.0](https://github.com/PAYONE-GmbH/PCP-ServerSDK-java/compare/v1.8.0...v1.9.0) (2026-04-29)
+
+### Features
+
+* feat: add Java 26 to test matrix ([77e32f708621548f3ad3625a04e99933191d984d](https://github.com/PAYONE-GmbH/PCP-ServerSDK-java/commit/77e32f708621548f3ad3625a04e99933191d984d))
+* feat: update API version to 1.50.0 ([0635ff7efc26d2271984b00c365a50657ff640d7](https://github.com/PAYONE-GmbH/PCP-ServerSDK-java/commit/0635ff7efc26d2271984b00c365a50657ff640d7))
+
 # [1.8.0](https://github.com/PAYONE-GmbH/PCP-ServerSDK-java/compare/v1.7.0...v1.8.0) (2026-03-31)
 
 ### Features
