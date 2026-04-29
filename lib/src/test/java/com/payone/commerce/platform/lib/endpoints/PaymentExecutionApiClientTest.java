@@ -49,7 +49,7 @@ public class PaymentExecutionApiClientTest {
             PaymentExecutionApiClient paymentExecutionApiClient = spy(
                     new PaymentExecutionApiClient(TestConfig.COMMUNICATOR_CONFIGURATION));
             CreatePaymentResponse expected = new CreatePaymentResponse();
-            Response response = ApiResponseMocks.createResponse(200, new CreatePaymentResponse());
+            Response response = ApiResponseMocks.createResponse(201, new CreatePaymentResponse());
 
             doReturn(response).when(paymentExecutionApiClient).getResponse(any());
             when(paymentExecutionApiClient.getResponse(any())).thenReturn(response);
@@ -145,7 +145,7 @@ public class PaymentExecutionApiClientTest {
             PaymentExecutionApiClient paymentExecutionApiClient = spy(
                     new PaymentExecutionApiClient(TestConfig.COMMUNICATOR_CONFIGURATION));
             CapturePaymentResponse expected = new CapturePaymentResponse();
-            Response response = ApiResponseMocks.createResponse(200, new CapturePaymentResponse());
+            Response response = ApiResponseMocks.createResponse(201, new CapturePaymentResponse());
 
             doReturn(response).when(paymentExecutionApiClient).getResponse(any());
             when(paymentExecutionApiClient.getResponse(any())).thenReturn(response);
@@ -661,7 +661,7 @@ public class PaymentExecutionApiClientTest {
             PaymentExecutionApiClient paymentExecutionApiClient = spy(
                     new PaymentExecutionApiClient(TestConfig.COMMUNICATOR_CONFIGURATION));
             RefundPaymentResponse expected = new RefundPaymentResponse();
-            Response response = ApiResponseMocks.createResponse(200, new RefundPaymentResponse());
+            Response response = ApiResponseMocks.createResponse(201, new RefundPaymentResponse());
 
             doReturn(response).when(paymentExecutionApiClient).getResponse(any());
             when(paymentExecutionApiClient.getResponse(any())).thenReturn(response);

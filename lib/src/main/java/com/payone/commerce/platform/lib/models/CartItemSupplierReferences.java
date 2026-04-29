@@ -38,13 +38,13 @@ public class CartItemSupplierReferences implements Serializable {
    */
 
   @JsonProperty(JSON_PROPERTY_SUPPLIER_ID)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public String getSupplierId() {
     return supplierId;
   }
 
   @JsonProperty(JSON_PROPERTY_SUPPLIER_ID)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setSupplierId(String supplierId) {
     this.supplierId = supplierId;
   }
