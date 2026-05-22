@@ -19,6 +19,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
     RedirectPaymentMethodSpecificInput.JSON_PROPERTY_TOKENIZE,
     RedirectPaymentMethodSpecificInput.JSON_PROPERTY_PAYMENT_PRODUCT_ID,
     RedirectPaymentMethodSpecificInput.JSON_PROPERTY_PAYMENT_PRODUCT840_SPECIFIC_INPUT,
+    RedirectPaymentMethodSpecificInput.JSON_PROPERTY_PAYMENT_PRODUCT900_SPECIFIC_INPUT,
     RedirectPaymentMethodSpecificInput.JSON_PROPERTY_REDIRECTION_DATA
 })
 public class RedirectPaymentMethodSpecificInput implements Serializable {
@@ -41,6 +42,9 @@ public class RedirectPaymentMethodSpecificInput implements Serializable {
 
   public static final String JSON_PROPERTY_PAYMENT_PRODUCT840_SPECIFIC_INPUT = "paymentProduct840SpecificInput";
   private RedirectPaymentProduct840SpecificInput paymentProduct840SpecificInput;
+
+  public static final String JSON_PROPERTY_PAYMENT_PRODUCT900_SPECIFIC_INPUT = "paymentProduct900SpecificInput";
+  private RedirectPaymentProduct900SpecificInput paymentProduct900SpecificInput;
 
   public static final String JSON_PROPERTY_REDIRECTION_DATA = "redirectionData";
   private RedirectionData redirectionData;
@@ -67,6 +71,7 @@ public class RedirectPaymentMethodSpecificInput implements Serializable {
    * does not require approval, and the funds will be captured automatically If
    * the parameter is not provided in the request, the default value will be true
    * 
+   * @default true
    * @return requiresApproval
    **/
 
@@ -204,6 +209,32 @@ public class RedirectPaymentMethodSpecificInput implements Serializable {
     this.paymentProduct840SpecificInput = paymentProduct840SpecificInput;
   }
 
+  public RedirectPaymentMethodSpecificInput paymentProduct900SpecificInput(
+      RedirectPaymentProduct900SpecificInput paymentProduct900SpecificInput) {
+
+    this.paymentProduct900SpecificInput = paymentProduct900SpecificInput;
+    return this;
+  }
+
+  /**
+   * Get paymentProduct900SpecificInput
+   * 
+   * @return paymentProduct900SpecificInput
+   **/
+
+  @JsonProperty(JSON_PROPERTY_PAYMENT_PRODUCT900_SPECIFIC_INPUT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public RedirectPaymentProduct900SpecificInput getPaymentProduct900SpecificInput() {
+    return paymentProduct900SpecificInput;
+  }
+
+  @JsonProperty(JSON_PROPERTY_PAYMENT_PRODUCT900_SPECIFIC_INPUT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setPaymentProduct900SpecificInput(RedirectPaymentProduct900SpecificInput paymentProduct900SpecificInput) {
+    this.paymentProduct900SpecificInput = paymentProduct900SpecificInput;
+  }
+
   public RedirectPaymentMethodSpecificInput redirectionData(RedirectionData redirectionData) {
 
     this.redirectionData = redirectionData;
@@ -246,13 +277,16 @@ public class RedirectPaymentMethodSpecificInput implements Serializable {
         Objects.equals(this.paymentProduct840SpecificInput,
             redirectPaymentMethodSpecificInput.paymentProduct840SpecificInput)
         &&
+        Objects.equals(this.paymentProduct900SpecificInput,
+            redirectPaymentMethodSpecificInput.paymentProduct900SpecificInput)
+        &&
         Objects.equals(this.redirectionData, redirectPaymentMethodSpecificInput.redirectionData);
   }
 
   @Override
   public int hashCode() {
     return Objects.hash(requiresApproval, paymentProcessingToken, reportingToken, tokenize, paymentProductId,
-        paymentProduct840SpecificInput, redirectionData);
+        paymentProduct840SpecificInput, paymentProduct900SpecificInput, redirectionData);
   }
 
   @Override
@@ -265,6 +299,8 @@ public class RedirectPaymentMethodSpecificInput implements Serializable {
     sb.append("    tokenize: ").append(toIndentedString(tokenize)).append("\n");
     sb.append("    paymentProductId: ").append(toIndentedString(paymentProductId)).append("\n");
     sb.append("    paymentProduct840SpecificInput: ").append(toIndentedString(paymentProduct840SpecificInput))
+        .append("\n");
+    sb.append("    paymentProduct900SpecificInput: ").append(toIndentedString(paymentProduct900SpecificInput))
         .append("\n");
     sb.append("    redirectionData: ").append(toIndentedString(redirectionData)).append("\n");
     sb.append("}");

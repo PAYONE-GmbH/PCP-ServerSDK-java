@@ -9,6 +9,10 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 /**
  * Object that holds all reference properties that are linked to this refund
  * transaction.
+ * Extends the standard PaymentReferences with an additional captureReference
+ * field to support
+ * scenarios where a Checkout may contain multiple partial captures from
+ * different sellers.
  */
 @JsonPropertyOrder({
     PaymentReferencesForRefund.JSON_PROPERTY_MERCHANT_REFERENCE,
@@ -35,8 +39,19 @@ public class PaymentReferencesForRefund extends PaymentReferences {
   }
 
   /**
-   * Reference to the capture for which the refund is requested.
+   * Merchant-provided reference of the capture that this refund should be applied
+   * to.
+   * A single Checkout can contain multiple partial captures.
+   * By supplying the captureReference the merchant ensures the refund is
+   * allocated to the correct
+   * capture.
+   * 
+   * This value must match the merchantReference that was provided in the
+   * PaymentReferences of the
+   * original capture request.
    *
+   * @maxLength 20
+   * @example your-order-6372
    * @return captureReference
    **/
 

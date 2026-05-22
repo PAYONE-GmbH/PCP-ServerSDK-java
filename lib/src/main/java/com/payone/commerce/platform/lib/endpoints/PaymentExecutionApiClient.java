@@ -13,6 +13,8 @@ import com.payone.commerce.platform.lib.models.CapturePaymentResponse;
 import com.payone.commerce.platform.lib.models.CompletePaymentRequest;
 import com.payone.commerce.platform.lib.models.CompletePaymentResponse;
 import com.payone.commerce.platform.lib.models.CreatePaymentResponse;
+import com.payone.commerce.platform.lib.models.FundSplitRequest;
+import com.payone.commerce.platform.lib.models.FundSplitResponse;
 import com.payone.commerce.platform.lib.models.PausePaymentRequest;
 import com.payone.commerce.platform.lib.models.PausePaymentResponse;
 import com.payone.commerce.platform.lib.models.PaymentExecution;
@@ -355,6 +357,58 @@ public class PaymentExecutionApiClient extends BaseApiClient {
                 .build();
 
         return this.makeApiCall(request, PaymentExecution.class);
+
+    }
+
+    public FundSplitResponse createFundSplit(String merchantId, String commerceCaseId,
+            String checkoutId, String paymentExecutionId, String eventId, FundSplitRequest payload)
+            throws ApiErrorResponseException, ApiResponseRetrievalException, IOException {
+        if (merchantId == null) {
+            throw new IllegalArgumentException(MERCHANT_ID_REQUIRED_ERROR);
+        }
+        if (commerceCaseId == null) {
+            throw new IllegalArgumentException(COMMERCE_CASE_ID_REQUIRED_ERROR);
+        }
+        if (checkoutId == null) {
+            throw new IllegalArgumentException(CHECKOUT_ID_REQUIRED_ERROR);
+        }
+        if (paymentExecutionId == null) {
+            throw new IllegalArgumentException(PAYMENT_EXECUTION_ID_REQUIRED_ERROR);
+        }
+        if (eventId == null) {
+            throw new IllegalArgumentException("Event ID is required");
+        }
+        if (payload == null) {
+            throw new IllegalArgumentException(PAYLOAD_REQUIRED_ERROR);
+        }
+
+        HttpUrl url = new HttpUrl.Builder()
+                .scheme(HTTPS_SCHEME)
+                .host(this.getConfig().getHost())
+                .addPathSegment(PCP_PATH_SEGMENT_VERSION)
+                .addPathSegment(merchantId)
+                .addPathSegment(PCP_PATH_SEGMENT_COMMERCE_CASES)
+                .addPathSegment(commerceCaseId)
+                .addPathSegment(PCP_PATH_SEGMENT_CHECKOUTS)
+                .addPathSegment(checkoutId)
+                .addPathSegment(PCP_PATH_SEGMENT_PAYMENT_EXECUTIONS)
+                .addPathSegment(paymentExecutionId)
+                .addPathSegment("events")
+                .addPathSegment(eventId)
+                .addPathSegment("fund-splits")
+                .build();
+
+        String jsonString = JsonSerializer.serializeToJson(payload);
+
+        RequestBody formBody = RequestBody.create(jsonString, JSON);
+
+        Request request = new Request.Builder()
+                .url(url)
+                .post(formBody)
+                .header(CONTENT_TYPE_HEADER_NAME, formBody.contentType().toString())
+                .build();
+
+        return this.makeApiCall(request, FundSplitResponse.class);
 
     }
 

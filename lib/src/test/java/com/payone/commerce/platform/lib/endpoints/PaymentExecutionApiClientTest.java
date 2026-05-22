@@ -30,6 +30,8 @@ import com.payone.commerce.platform.lib.models.CompletePaymentRequest;
 import com.payone.commerce.platform.lib.models.CompletePaymentResponse;
 import com.payone.commerce.platform.lib.models.CompleteRedirectPaymentMethodSpecificInput;
 import com.payone.commerce.platform.lib.models.CreatePaymentResponse;
+import com.payone.commerce.platform.lib.models.FundSplitRequest;
+import com.payone.commerce.platform.lib.models.FundSplitResponse;
 import com.payone.commerce.platform.lib.models.PausePaymentRequest;
 import com.payone.commerce.platform.lib.models.PausePaymentResponse;
 import com.payone.commerce.platform.lib.models.PaymentExecution;
@@ -247,7 +249,7 @@ public class PaymentExecutionApiClientTest {
             PaymentExecutionApiClient paymentExecutionApiClient = spy(
                     new PaymentExecutionApiClient(TestConfig.COMMUNICATOR_CONFIGURATION));
             CancelPaymentResponse expected = new CancelPaymentResponse();
-            Response response = ApiResponseMocks.createResponse(200, new CancelPayment());
+            Response response = ApiResponseMocks.createResponse(200, new CancelPaymentResponse());
 
             doReturn(response).when(paymentExecutionApiClient).getResponse(any());
             when(paymentExecutionApiClient.getResponse(any())).thenReturn(response);
@@ -645,6 +647,114 @@ public class PaymentExecutionApiClientTest {
 
             e = assertThrows(IllegalArgumentException.class, () -> {
                 paymentExecutionApiClient.refreshPayment("1", "2", "3", "4", null);
+            });
+            m = e.getMessage();
+            assertEquals("Payload is required", m);
+        }
+    }
+
+    @Nested
+    @DisplayName("createFundSplitRequest")
+    class CreateFundSplit {
+        @Test
+        @DisplayName("given request was successful, then return response")
+        void createFundSplitRequestSuccessful() throws InvalidKeyException, ApiException, IOException {
+
+            PaymentExecutionApiClient paymentExecutionApiClient = spy(
+                    new PaymentExecutionApiClient(TestConfig.COMMUNICATOR_CONFIGURATION));
+            FundSplitResponse expected = new FundSplitResponse();
+            Response response = ApiResponseMocks.createResponse(201, new FundSplitResponse());
+
+            doReturn(response).when(paymentExecutionApiClient).getResponse(any());
+            when(paymentExecutionApiClient.getResponse(any())).thenReturn(response);
+
+            FundSplitRequest payload = new FundSplitRequest();
+            FundSplitResponse res = paymentExecutionApiClient.createFundSplit("1", "2", "3", "4", "5", payload);
+
+            assertEquals(expected, res);
+        }
+
+        @Test
+        @DisplayName("given request unsuccessful (400), then throw exception")
+        void createFundSplitRequestUnsuccessful400() throws InvalidKeyException, IOException {
+
+            PaymentExecutionApiClient paymentExecutionApiClient = spy(
+                    new PaymentExecutionApiClient(TestConfig.COMMUNICATOR_CONFIGURATION));
+            Response response = ApiResponseMocks.createErrorResponse(400);
+
+            doReturn(response).when(paymentExecutionApiClient).getResponse(any());
+            when(paymentExecutionApiClient.getResponse(any())).thenReturn(response);
+
+            ApiErrorResponseException e = assertThrows(ApiErrorResponseException.class, () -> {
+                FundSplitRequest payload = new FundSplitRequest();
+                paymentExecutionApiClient.createFundSplit("1", "2", "3", "4", "5", payload);
+            });
+            int code = e.getErrors().get(0).getHttpStatusCode();
+            assertEquals(400, code);
+        }
+
+        @Test
+        @DisplayName("given request unsuccessful (500) with empty body, then throw exception")
+        void createFundSplitRequestUnsuccessful500() throws InvalidKeyException, IOException {
+
+            PaymentExecutionApiClient paymentExecutionApiClient = spy(
+                    new PaymentExecutionApiClient(TestConfig.COMMUNICATOR_CONFIGURATION));
+            Response response = ApiResponseMocks.createEmptyErrorResponse(500);
+
+            doReturn(response).when(paymentExecutionApiClient).getResponse(any());
+            when(paymentExecutionApiClient.getResponse(any())).thenReturn(response);
+
+            ApiResponseRetrievalException e = assertThrows(ApiResponseRetrievalException.class, () -> {
+                FundSplitRequest payload = new FundSplitRequest();
+                paymentExecutionApiClient.createFundSplit("1", "2", "3", "4", "5", payload);
+            });
+            int code = e.getStatusCode();
+            assertEquals(500, code);
+        }
+
+        @Test
+        @DisplayName("Given required params are null, then throw exception")
+        void createFundSplitRequestParamsNull() throws InvalidKeyException {
+
+            PaymentExecutionApiClient paymentExecutionApiClient = spy(
+                    new PaymentExecutionApiClient(TestConfig.COMMUNICATOR_CONFIGURATION));
+            FundSplitRequest payload = new FundSplitRequest();
+
+            IllegalArgumentException e;
+            String m;
+
+            e = assertThrows(IllegalArgumentException.class, () -> {
+                paymentExecutionApiClient.createFundSplit(null, "2", "3", "4", "5", payload);
+            });
+            m = e.getMessage();
+            assertEquals("Merchant ID is required", m);
+
+            e = assertThrows(IllegalArgumentException.class, () -> {
+                paymentExecutionApiClient.createFundSplit("1", null, "3", "4", "5", payload);
+            });
+            m = e.getMessage();
+            assertEquals("Commerce Case ID is required", m);
+
+            e = assertThrows(IllegalArgumentException.class, () -> {
+                paymentExecutionApiClient.createFundSplit("1", "2", null, "4", "5", payload);
+            });
+            m = e.getMessage();
+            assertEquals("Checkout ID is required", m);
+
+            e = assertThrows(IllegalArgumentException.class, () -> {
+                paymentExecutionApiClient.createFundSplit("1", "2", "3", null, "5", payload);
+            });
+            m = e.getMessage();
+            assertEquals("Payment Execution ID is required", m);
+
+            e = assertThrows(IllegalArgumentException.class, () -> {
+                paymentExecutionApiClient.createFundSplit("1", "2", "3", "4", null, payload);
+            });
+            m = e.getMessage();
+            assertEquals("Event ID is required", m);
+
+            e = assertThrows(IllegalArgumentException.class, () -> {
+                paymentExecutionApiClient.createFundSplit("1", "2", "3", "4", "5", null);
             });
             m = e.getMessage();
             assertEquals("Payload is required", m);
