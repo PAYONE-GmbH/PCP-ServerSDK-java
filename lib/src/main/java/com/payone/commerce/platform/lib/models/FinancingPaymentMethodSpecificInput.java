@@ -73,6 +73,7 @@ public class FinancingPaymentMethodSpecificInput implements Serializable {
    * does not require approval, and the funds will be captured automatically If
    * the parameter is not provided in the request, the default value will be true
    * 
+   * @default true
    * @return requiresApproval
    **/
 
