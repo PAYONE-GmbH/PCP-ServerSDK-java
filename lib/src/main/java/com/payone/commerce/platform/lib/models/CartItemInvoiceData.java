@@ -30,7 +30,7 @@ public class CartItemInvoiceData implements Serializable {
 
   /**
    * Shopping cart item description. The description will also be displayed in the
-   * portal as the product name.
+   * portal as the product name if orderLineDetails.productName is not set.
    * 
    * @return description
    **/

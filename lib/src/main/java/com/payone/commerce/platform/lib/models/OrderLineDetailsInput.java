@@ -22,7 +22,8 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
     OrderLineDetailsInput.JSON_PROPERTY_PRODUCT_URL,
     OrderLineDetailsInput.JSON_PROPERTY_PRODUCT_IMAGE_URL,
     OrderLineDetailsInput.JSON_PROPERTY_PRODUCT_CATEGORY_PATH,
-    OrderLineDetailsInput.JSON_PROPERTY_MERCHANT_SHOP_DELIVERY_REFERENCE
+    OrderLineDetailsInput.JSON_PROPERTY_MERCHANT_SHOP_DELIVERY_REFERENCE,
+    OrderLineDetailsInput.JSON_PROPERTY_PRODUCT_NAME
 })
 
 public class OrderLineDetailsInput implements Serializable {
@@ -67,6 +68,10 @@ public class OrderLineDetailsInput implements Serializable {
   public static final String JSON_PROPERTY_MERCHANT_SHOP_DELIVERY_REFERENCE = "merchantShopDeliveryReference";
 
   private String merchantShopDeliveryReference;
+
+  public static final String JSON_PROPERTY_PRODUCT_NAME = "productName";
+
+  private String productName;
 
   public OrderLineDetailsInput() {
   }
@@ -312,6 +317,29 @@ public class OrderLineDetailsInput implements Serializable {
     this.merchantShopDeliveryReference = merchantShopDeliveryReference;
   }
 
+  public OrderLineDetailsInput productName(String productName) {
+    this.productName = productName;
+    return this;
+  }
+
+  /**
+   * The name of the product, will be displayed in Portal if set.
+   * 
+   * @return productName
+   */
+
+  @JsonProperty(JSON_PROPERTY_PRODUCT_NAME)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public String getProductName() {
+    return productName;
+  }
+
+  @JsonProperty(JSON_PROPERTY_PRODUCT_NAME)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setProductName(String productName) {
+    this.productName = productName;
+  }
+
   /**
    * Return true if this OrderLineDetailsInput object is equal to o.
    */
@@ -333,13 +361,14 @@ public class OrderLineDetailsInput implements Serializable {
         Objects.equals(this.productUrl, orderLineDetailsInput.productUrl) &&
         Objects.equals(this.productImageUrl, orderLineDetailsInput.productImageUrl) &&
         Objects.equals(this.productCategoryPath, orderLineDetailsInput.productCategoryPath) &&
-        Objects.equals(this.merchantShopDeliveryReference, orderLineDetailsInput.merchantShopDeliveryReference);
+        Objects.equals(this.merchantShopDeliveryReference, orderLineDetailsInput.merchantShopDeliveryReference) &&
+        Objects.equals(this.productName, orderLineDetailsInput.productName);
   }
 
   @Override
   public int hashCode() {
     return Objects.hash(productCode, productPrice, productType, quantity, taxAmount, taxAmountPerUnit, productUrl,
-        productImageUrl, productCategoryPath, merchantShopDeliveryReference);
+        productImageUrl, productCategoryPath, merchantShopDeliveryReference, productName);
   }
 
   @Override
@@ -357,6 +386,7 @@ public class OrderLineDetailsInput implements Serializable {
     sb.append("    productCategoryPath: ").append(toIndentedString(productCategoryPath)).append("\n");
     sb.append("    merchantShopDeliveryReference: ").append(toIndentedString(merchantShopDeliveryReference))
         .append("\n");
+    sb.append("    productName: ").append(toIndentedString(productName)).append("\n");
     sb.append("}");
     return sb.toString();
   }
