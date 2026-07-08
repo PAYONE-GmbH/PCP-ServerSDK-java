@@ -1,3 +1,9 @@
+# [1.12.0](https://github.com/PAYONE-GmbH/PCP-ServerSDK-java/compare/v1.11.0...v1.12.0) (2026-07-08)
+
+### Features
+
+* feat: update API version to 1.57.0 ([4396cbb0721916fb6ec59d7ea359b39e21b13281](https://github.com/PAYONE-GmbH/PCP-ServerSDK-java/commit/4396cbb0721916fb6ec59d7ea359b39e21b13281))
+
 # [1.11.0](https://github.com/PAYONE-GmbH/PCP-ServerSDK-java/compare/v1.10.0...v1.11.0) (2026-06-15)
 
 ### Features
