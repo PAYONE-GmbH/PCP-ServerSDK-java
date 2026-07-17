@@ -29,7 +29,6 @@ public class BaseApiClient {
     protected static final String PCP_PATH_SEGMENT_VERSION = "v1";
     protected static final String PCP_PATH_SEGMENT_COMMERCE_CASES = "commerce-cases";
     protected static final String PCP_PATH_SEGMENT_CHECKOUTS = "checkouts";
-    protected static final String PCP_PATH_SEGMENT_PAYMENT_INTENTS = "payment-intents";
 
     protected static final String CONTENT_TYPE_HEADER_NAME = "Content-Type";
 

@@ -6,21 +6,12 @@ import com.payone.commerce.platform.lib.models.AddressPersonal;
 import com.payone.commerce.platform.lib.models.AmountOfMoney;
 import com.payone.commerce.platform.lib.models.CartItemInput;
 import com.payone.commerce.platform.lib.models.CartItemInvoiceData;
-import com.payone.commerce.platform.lib.models.CartItemSupplierReferences;
-import com.payone.commerce.platform.lib.models.CancelRequest;
 import com.payone.commerce.platform.lib.models.CreateCheckoutRequest;
-import com.payone.commerce.platform.lib.models.CartItemData;
-import com.payone.commerce.platform.lib.models.CreatePaymentIntentRequest;
-import com.payone.commerce.platform.lib.models.FundSplit;
 import com.payone.commerce.platform.lib.models.OrderLineDetailsInput;
 import com.payone.commerce.platform.lib.models.OrderRequest;
-import com.payone.commerce.platform.lib.models.PaymentIntentResponse;
 import com.payone.commerce.platform.lib.models.ProductType;
-import com.payone.commerce.platform.lib.models.PaymentMethodSpecificInputForIntent;
-import com.payone.commerce.platform.lib.models.RedirectPaymentMethodSpecificInputForIntent;
 import com.payone.commerce.platform.lib.models.Shipping;
 import com.payone.commerce.platform.lib.models.ShoppingCartInput;
-import com.payone.commerce.platform.lib.models.ShoppingCartData;
 import com.payone.commerce.platform.lib.models.applepay.ApplePayPayment;
 import com.payone.commerce.platform.lib.models.applepay.ApplePayPaymentContact;
 import com.payone.commerce.platform.lib.models.applepay.ApplePayPaymentData;
@@ -35,62 +26,6 @@ import static org.junit.jupiter.api.Assertions.fail;
 import java.util.Arrays;
 
 class JsonSerializerTest {
-        @Test
-        void cartItemInputInheritsCartItemData() throws Exception {
-                CartItemInput item = new CartItemInput()
-                                .invoiceData(new CartItemInvoiceData().description("Item"))
-                                .supplierReferences(new CartItemSupplierReferences());
-
-                assertEquals("{\"invoiceData\":{\"description\":\"Item\"},\"supplierReferences\":{\"supplierId\":null}}",
-                                JsonSerializer.serializeToJson(item));
-        }
-
-        @Test
-        void paymentIntentRequestUsesTheIntentSpecificJsonStructure() {
-                CreatePaymentIntentRequest request = new CreatePaymentIntentRequest()
-                                .amountOfMoney(new AmountOfMoney().amount(100L).currencyCode("EUR"))
-                                .shoppingCart(new ShoppingCartData().addItemsItem(new CartItemData()))
-                                .paymentMethodSpecificInput(new PaymentMethodSpecificInputForIntent()
-                                                .redirectPaymentMethodSpecificInput(
-                                                                new RedirectPaymentMethodSpecificInputForIntent()
-                                                                                .paymentProductId(840)));
-
-                String expected = "{\"amountOfMoney\":{\"amount\":100,\"currencyCode\":\"EUR\"},\"shoppingCart\":{\"items\":[{}]},\"paymentMethodSpecificInput\":{\"redirectPaymentMethodSpecificInput\":{\"paymentProductId\":840}}}";
-
-                try {
-                        String json = JsonSerializer.serializeToJson(request);
-                        assertEquals(expected, json);
-                        assertEquals(request,
-                                        JsonSerializer.deserializeFromJson(json, CreatePaymentIntentRequest.class));
-                } catch (Exception e) {
-                        fail(e);
-                }
-        }
-
-        @Test
-        void paymentIntentResponseUsesShippingAddressWithCompanyName() {
-                String json = "{\"redirectPaymentMethodSpecificOutput\":{\"paymentProduct840SpecificOutput\":{\"shippingAddress\":{\"companyName\":\"PAYONE\"}}}}";
-
-                try {
-                        PaymentIntentResponse response = JsonSerializer.deserializeFromJson(json,
-                                        PaymentIntentResponse.class);
-                        assertEquals("PAYONE", response.getRedirectPaymentMethodSpecificOutput()
-                                        .getPaymentProduct840SpecificOutput().getShippingAddress().getCompanyName());
-                } catch (Exception e) {
-                        fail(e);
-                }
-        }
-
-        @Test
-        void cancelRequestSerializesFundSplit() {
-                try {
-                        assertEquals("{\"fundSplit\":{}}",
-                                        JsonSerializer.serializeToJson(new CancelRequest().fundSplit(new FundSplit())));
-                } catch (Exception e) {
-                        fail(e);
-                }
-        }
-
         @Test
         void testSerializeJson() {
                 CreateCheckoutRequest object = new CreateCheckoutRequest()

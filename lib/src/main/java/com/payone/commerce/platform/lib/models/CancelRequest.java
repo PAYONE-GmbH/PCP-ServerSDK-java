@@ -22,8 +22,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 @JsonPropertyOrder({
     CancelRequest.JSON_PROPERTY_CANCEL_TYPE,
     CancelRequest.JSON_PROPERTY_CANCELLATION_REASON,
-    CancelRequest.JSON_PROPERTY_CANCEL_ITEMS,
-    CancelRequest.JSON_PROPERTY_FUND_SPLIT
+    CancelRequest.JSON_PROPERTY_CANCEL_ITEMS
 })
 public class CancelRequest implements Serializable {
   private static final long serialVersionUID = 1L;
@@ -36,9 +35,6 @@ public class CancelRequest implements Serializable {
 
   public static final String JSON_PROPERTY_CANCEL_ITEMS = "cancelItems";
   private List<CancelItem> cancelItems;
-
-  public static final String JSON_PROPERTY_FUND_SPLIT = "fundSplit";
-  private FundSplit fundSplit;
 
   public CancelRequest() {
   }
@@ -126,24 +122,6 @@ public class CancelRequest implements Serializable {
     this.cancelItems = cancelItems;
   }
 
-  public CancelRequest fundSplit(FundSplit fundSplit) {
-
-    this.fundSplit = fundSplit;
-    return this;
-  }
-
-  @JsonProperty(JSON_PROPERTY_FUND_SPLIT)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public FundSplit getFundSplit() {
-    return fundSplit;
-  }
-
-  @JsonProperty(JSON_PROPERTY_FUND_SPLIT)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setFundSplit(FundSplit fundSplit) {
-    this.fundSplit = fundSplit;
-  }
-
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -155,13 +133,12 @@ public class CancelRequest implements Serializable {
     CancelRequest cancelRequest = (CancelRequest) o;
     return Objects.equals(this.cancelType, cancelRequest.cancelType) &&
         Objects.equals(this.cancellationReason, cancelRequest.cancellationReason) &&
-        Objects.equals(this.cancelItems, cancelRequest.cancelItems) &&
-        Objects.equals(this.fundSplit, cancelRequest.fundSplit);
+        Objects.equals(this.cancelItems, cancelRequest.cancelItems);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(cancelType, cancellationReason, cancelItems, fundSplit);
+    return Objects.hash(cancelType, cancellationReason, cancelItems);
   }
 
   @Override
@@ -171,7 +148,6 @@ public class CancelRequest implements Serializable {
     sb.append("    cancelType: ").append(toIndentedString(cancelType)).append("\n");
     sb.append("    cancellationReason: ").append(toIndentedString(cancellationReason)).append("\n");
     sb.append("    cancelItems: ").append(toIndentedString(cancelItems)).append("\n");
-    sb.append("    fundSplit: ").append(toIndentedString(fundSplit)).append("\n");
     sb.append("}");
     return sb.toString();
   }

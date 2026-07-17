@@ -1,5 +1,6 @@
 package com.payone.commerce.platform.lib.models;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -11,12 +12,18 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
  * provided, the productPrice and quantity is required.
  */
 @JsonPropertyOrder({
-    CartItemData.JSON_PROPERTY_INVOICE_DATA,
-    CartItemData.JSON_PROPERTY_ORDER_LINE_DETAILS,
+    CartItemInput.JSON_PROPERTY_INVOICE_DATA,
+    CartItemInput.JSON_PROPERTY_ORDER_LINE_DETAILS,
     CartItemInput.JSON_PROPERTY_SUPPLIER_REFERENCES
 })
-public class CartItemInput extends CartItemData {
+public class CartItemInput implements Serializable {
   private static final long serialVersionUID = 1L;
+
+  public static final String JSON_PROPERTY_INVOICE_DATA = "invoiceData";
+  private CartItemInvoiceData invoiceData;
+
+  public static final String JSON_PROPERTY_ORDER_LINE_DETAILS = "orderLineDetails";
+  private OrderLineDetailsInput orderLineDetails;
 
   public static final String JSON_PROPERTY_SUPPLIER_REFERENCES = "supplierReferences";
   private CartItemSupplierReferences supplierReferences;
@@ -24,16 +31,54 @@ public class CartItemInput extends CartItemData {
   public CartItemInput() {
   }
 
-  @Override
   public CartItemInput invoiceData(CartItemInvoiceData invoiceData) {
-    super.invoiceData(invoiceData);
+
+    this.invoiceData = invoiceData;
     return this;
   }
 
-  @Override
+  /**
+   * Get invoiceData
+   * 
+   * @return invoiceData
+   **/
+
+  @JsonProperty(JSON_PROPERTY_INVOICE_DATA)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public CartItemInvoiceData getInvoiceData() {
+    return invoiceData;
+  }
+
+  @JsonProperty(JSON_PROPERTY_INVOICE_DATA)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setInvoiceData(CartItemInvoiceData invoiceData) {
+    this.invoiceData = invoiceData;
+  }
+
   public CartItemInput orderLineDetails(OrderLineDetailsInput orderLineDetails) {
-    super.orderLineDetails(orderLineDetails);
+
+    this.orderLineDetails = orderLineDetails;
     return this;
+  }
+
+  /**
+   * Get orderLineDetails
+   * 
+   * @return orderLineDetails
+   **/
+
+  @JsonProperty(JSON_PROPERTY_ORDER_LINE_DETAILS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public OrderLineDetailsInput getOrderLineDetails() {
+    return orderLineDetails;
+  }
+
+  @JsonProperty(JSON_PROPERTY_ORDER_LINE_DETAILS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setOrderLineDetails(OrderLineDetailsInput orderLineDetails) {
+    this.orderLineDetails = orderLineDetails;
   }
 
   public CartItemInput supplierReferences(CartItemSupplierReferences supplierReferences) {
@@ -70,21 +115,22 @@ public class CartItemInput extends CartItemData {
       return false;
     }
     CartItemInput cartItemInput = (CartItemInput) o;
-    return Objects.equals(this.supplierReferences, cartItemInput.supplierReferences) &&
-        super.equals(o);
+    return Objects.equals(this.invoiceData, cartItemInput.invoiceData) &&
+        Objects.equals(this.orderLineDetails, cartItemInput.orderLineDetails) &&
+        Objects.equals(this.supplierReferences, cartItemInput.supplierReferences);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(supplierReferences, super.hashCode());
+    return Objects.hash(invoiceData, orderLineDetails, supplierReferences);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class CartItemInput {\n");
-    sb.append("    invoiceData: ").append(toIndentedString(getInvoiceData())).append("\n");
-    sb.append("    orderLineDetails: ").append(toIndentedString(getOrderLineDetails())).append("\n");
+    sb.append("    invoiceData: ").append(toIndentedString(invoiceData)).append("\n");
+    sb.append("    orderLineDetails: ").append(toIndentedString(orderLineDetails)).append("\n");
     sb.append("    supplierReferences: ").append(toIndentedString(supplierReferences)).append("\n");
     sb.append("}");
     return sb.toString();

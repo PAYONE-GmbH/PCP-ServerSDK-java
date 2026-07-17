@@ -1,43 +1,93 @@
 package com.payone.commerce.platform.lib.models;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
-@JsonPropertyOrder({ PaymentProduct840SpecificOutputData.JSON_PROPERTY_BILLING_ADDRESS,
-    PaymentProduct840SpecificOutputData.JSON_PROPERTY_CUSTOMER_ACCOUNT,
-    PaymentProduct840SpecificOutputData.JSON_PROPERTY_PAYPAL_TRANSACTION_ID,
-    PaymentProduct840SpecificOutput.JSON_PROPERTY_SHIPPING_ADDRESS })
-public class PaymentProduct840SpecificOutput extends PaymentProduct840SpecificOutputData {
+/**
+ * PayPal (payment product 840) specific details.
+ */
+@JsonPropertyOrder({
+    PaymentProduct840SpecificOutput.JSON_PROPERTY_BILLING_ADDRESS,
+    PaymentProduct840SpecificOutput.JSON_PROPERTY_CUSTOMER_ACCOUNT,
+    PaymentProduct840SpecificOutput.JSON_PROPERTY_SHIPPING_ADDRESS,
+    PaymentProduct840SpecificOutput.JSON_PROPERTY_PAYPAL_TRANSACTION_ID
+})
+public class PaymentProduct840SpecificOutput implements Serializable {
   private static final long serialVersionUID = 1L;
+
+  public static final String JSON_PROPERTY_BILLING_ADDRESS = "billingAddress";
+  private Address billingAddress;
+
+  public static final String JSON_PROPERTY_CUSTOMER_ACCOUNT = "customerAccount";
+  private PaymentProduct840CustomerAccount customerAccount;
+
   public static final String JSON_PROPERTY_SHIPPING_ADDRESS = "shippingAddress";
   private Address shippingAddress;
 
-  @Override
-  public PaymentProduct840SpecificOutput billingAddress(Address value) {
-    super.billingAddress(value);
+  public static final String JSON_PROPERTY_PAYPAL_TRANSACTION_ID = "payPalTransactionId";
+  private String payPalTransactionId;
+
+  public PaymentProduct840SpecificOutput() {
+  }
+
+  public PaymentProduct840SpecificOutput billingAddress(Address billingAddress) {
+    this.billingAddress = billingAddress;
     return this;
   }
 
-  @Override
-  public PaymentProduct840SpecificOutput customerAccount(PaymentProduct840CustomerAccount value) {
-    super.customerAccount(value);
+  /**
+   * Get billingAddress
+   * 
+   * @return billingAddress
+   **/
+  @JsonProperty(JSON_PROPERTY_BILLING_ADDRESS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public Address getBillingAddress() {
+    return billingAddress;
+  }
+
+  @JsonProperty(JSON_PROPERTY_BILLING_ADDRESS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setBillingAddress(Address billingAddress) {
+    this.billingAddress = billingAddress;
+  }
+
+  public PaymentProduct840SpecificOutput customerAccount(PaymentProduct840CustomerAccount customerAccount) {
+    this.customerAccount = customerAccount;
     return this;
   }
 
-  @Override
-  public PaymentProduct840SpecificOutput payPalTransactionId(String value) {
-    super.payPalTransactionId(value);
+  /**
+   * Get customerAccount
+   * 
+   * @return customerAccount
+   **/
+  @JsonProperty(JSON_PROPERTY_CUSTOMER_ACCOUNT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public PaymentProduct840CustomerAccount getCustomerAccount() {
+    return customerAccount;
+  }
+
+  @JsonProperty(JSON_PROPERTY_CUSTOMER_ACCOUNT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setCustomerAccount(PaymentProduct840CustomerAccount customerAccount) {
+    this.customerAccount = customerAccount;
+  }
+
+  public PaymentProduct840SpecificOutput shippingAddress(Address shippingAddress) {
+    this.shippingAddress = shippingAddress;
     return this;
   }
 
-  public PaymentProduct840SpecificOutput shippingAddress(Address value) {
-    shippingAddress = value;
-    return this;
-  }
-
+  /**
+   * Get shippingAddress
+   * 
+   * @return shippingAddress
+   **/
   @JsonProperty(JSON_PROPERTY_SHIPPING_ADDRESS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Address getShippingAddress() {
@@ -46,33 +96,75 @@ public class PaymentProduct840SpecificOutput extends PaymentProduct840SpecificOu
 
   @JsonProperty(JSON_PROPERTY_SHIPPING_ADDRESS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setShippingAddress(Address value) {
-    shippingAddress = value;
+  public void setShippingAddress(Address shippingAddress) {
+    this.shippingAddress = shippingAddress;
+  }
+
+  public PaymentProduct840SpecificOutput payPalTransactionId(String payPalTransactionId) {
+    this.payPalTransactionId = payPalTransactionId;
+    return this;
+  }
+
+  /**
+   * A 17-character unique identifier of the PayPal transaction. This identifier
+   * is used to identify the transaction in the PayPal system and needed for the
+   * PayPal Javascript SDK flow.
+   * 
+   * @example 9A1234567890123
+   * @return payPalTransactionId
+   **/
+  @JsonProperty(JSON_PROPERTY_PAYPAL_TRANSACTION_ID)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public String getPayPalTransactionId() {
+    return payPalTransactionId;
+  }
+
+  @JsonProperty(JSON_PROPERTY_PAYPAL_TRANSACTION_ID)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setPayPalTransactionId(String payPalTransactionId) {
+    this.payPalTransactionId = payPalTransactionId;
   }
 
   @Override
   public boolean equals(Object o) {
-    if (this == o)
+    if (this == o) {
       return true;
-    if (o == null || getClass() != o.getClass())
+    }
+    if (o == null || getClass() != o.getClass()) {
       return false;
-    return Objects.equals(shippingAddress, ((PaymentProduct840SpecificOutput) o).shippingAddress) && super.equals(o);
+    }
+    PaymentProduct840SpecificOutput paymentProduct840SpecificOutput = (PaymentProduct840SpecificOutput) o;
+    return Objects.equals(this.billingAddress, paymentProduct840SpecificOutput.billingAddress) &&
+        Objects.equals(this.customerAccount, paymentProduct840SpecificOutput.customerAccount) &&
+        Objects.equals(this.shippingAddress, paymentProduct840SpecificOutput.shippingAddress) &&
+        Objects.equals(this.payPalTransactionId, paymentProduct840SpecificOutput.payPalTransactionId);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(shippingAddress, super.hashCode());
+    return Objects.hash(billingAddress, customerAccount, shippingAddress, payPalTransactionId);
   }
 
   @Override
   public String toString() {
-    return "class PaymentProduct840SpecificOutput {\n    billingAddress: " + toIndentedString(getBillingAddress())
-        + "\n    customerAccount: " + toIndentedString(getCustomerAccount()) + "\n    payPalTransactionId: "
-        + toIndentedString(getPayPalTransactionId()) + "\n    shippingAddress: " + toIndentedString(shippingAddress)
-        + "\n}";
+    StringBuilder sb = new StringBuilder();
+    sb.append("class PaymentProduct840SpecificOutput {\n");
+    sb.append("    billingAddress: ").append(toIndentedString(billingAddress)).append("\n");
+    sb.append("    customerAccount: ").append(toIndentedString(customerAccount)).append("\n");
+    sb.append("    shippingAddress: ").append(toIndentedString(shippingAddress)).append("\n");
+    sb.append("    payPalTransactionId: ").append(toIndentedString(payPalTransactionId)).append("\n");
+    sb.append("}");
+    return sb.toString();
   }
 
-  private String toIndentedString(Object value) {
-    return value == null ? "null" : value.toString().replace("\n", "\n    ");
+  /**
+   * Convert the given object to string with each line indented by 4 spaces
+   * (except the first line).
+   */
+  private String toIndentedString(Object o) {
+    if (o == null) {
+      return "null";
+    }
+    return o.toString().replace("\n", "\n    ");
   }
 }
