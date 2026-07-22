@@ -9,11 +9,14 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonPropertyOrder({ RedirectPaymentProduct840SpecificInputData.JSON_PROPERTY_ADDRESS_SELECTION_AT_PAYPAL,
     RedirectPaymentProduct840SpecificInputData.JSON_PROPERTY_JAVA_SCRIPT_SDK_FLOW,
-    RedirectPaymentProduct840SpecificInput.JSON_PROPERTY_FRAUD_NET_ID })
+    RedirectPaymentProduct840SpecificInput.JSON_PROPERTY_FRAUD_NET_ID,
+    RedirectPaymentProduct840SpecificInput.JSON_PROPERTY_PAYMENT_ID })
 public class RedirectPaymentProduct840SpecificInput extends RedirectPaymentProduct840SpecificInputData {
   private static final long serialVersionUID = 1L;
   public static final String JSON_PROPERTY_FRAUD_NET_ID = "fraudNetId";
   private UUID fraudNetId;
+  public static final String JSON_PROPERTY_PAYMENT_ID = "paymentId";
+  private String paymentId;
 
   @Override
   public RedirectPaymentProduct840SpecificInput addressSelectionAtPayPal(Boolean value) {
@@ -44,25 +47,44 @@ public class RedirectPaymentProduct840SpecificInput extends RedirectPaymentProdu
     fraudNetId = value;
   }
 
+  public RedirectPaymentProduct840SpecificInput paymentId(String value) {
+    paymentId = value;
+    return this;
+  }
+
+  @JsonProperty(JSON_PROPERTY_PAYMENT_ID)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public String getPaymentId() {
+    return paymentId;
+  }
+
+  @JsonProperty(JSON_PROPERTY_PAYMENT_ID)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setPaymentId(String value) {
+    paymentId = value;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o)
       return true;
     if (o == null || getClass() != o.getClass())
       return false;
-    return Objects.equals(fraudNetId, ((RedirectPaymentProduct840SpecificInput) o).fraudNetId) && super.equals(o);
+    RedirectPaymentProduct840SpecificInput that = (RedirectPaymentProduct840SpecificInput) o;
+    return Objects.equals(fraudNetId, that.fraudNetId) && Objects.equals(paymentId, that.paymentId) && super.equals(o);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(fraudNetId, super.hashCode());
+    return Objects.hash(fraudNetId, paymentId, super.hashCode());
   }
 
   @Override
   public String toString() {
     return "class RedirectPaymentProduct840SpecificInput {\n    addressSelectionAtPayPal: "
         + toIndentedString(getAddressSelectionAtPayPal()) + "\n    javaScriptSdkFlow: "
-        + toIndentedString(getJavaScriptSdkFlow()) + "\n    fraudNetId: " + toIndentedString(fraudNetId) + "\n}";
+        + toIndentedString(getJavaScriptSdkFlow()) + "\n    fraudNetId: " + toIndentedString(fraudNetId)
+        + "\n    paymentId: " + toIndentedString(paymentId) + "\n}";
   }
 
   private String toIndentedString(Object value) {
