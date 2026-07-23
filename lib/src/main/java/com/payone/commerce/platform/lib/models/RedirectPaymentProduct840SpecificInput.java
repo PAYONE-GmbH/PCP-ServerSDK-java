@@ -1,6 +1,5 @@
 package com.payone.commerce.platform.lib.models;
 
-import java.io.Serializable;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -8,72 +7,34 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
-/**
- * Object containing specific input required for PayPal payments (Payment
- * product ID 840)
- */
-@JsonPropertyOrder({
-    RedirectPaymentProduct840SpecificInput.JSON_PROPERTY_ADDRESS_SELECTION_AT_PAY_PAL,
+@JsonPropertyOrder({ RedirectPaymentProduct840SpecificInputData.JSON_PROPERTY_ADDRESS_SELECTION_AT_PAYPAL,
+    RedirectPaymentProduct840SpecificInputData.JSON_PROPERTY_JAVA_SCRIPT_SDK_FLOW,
     RedirectPaymentProduct840SpecificInput.JSON_PROPERTY_FRAUD_NET_ID,
-    RedirectPaymentProduct840SpecificInput.JSON_PROPERTY_JAVASCRIPT_SDK_FLOW
-})
-public class RedirectPaymentProduct840SpecificInput implements Serializable {
+    RedirectPaymentProduct840SpecificInput.JSON_PROPERTY_PAYMENT_ID })
+public class RedirectPaymentProduct840SpecificInput extends RedirectPaymentProduct840SpecificInputData {
   private static final long serialVersionUID = 1L;
-
-  public static final String JSON_PROPERTY_ADDRESS_SELECTION_AT_PAY_PAL = "addressSelectionAtPayPal";
-  private Boolean addressSelectionAtPayPal;
-
   public static final String JSON_PROPERTY_FRAUD_NET_ID = "fraudNetId";
   private UUID fraudNetId;
+  public static final String JSON_PROPERTY_PAYMENT_ID = "paymentId";
+  private String paymentId;
 
-  public static final String JSON_PROPERTY_JAVASCRIPT_SDK_FLOW = "javaScriptSdkFlow";
-  private Boolean javaScriptSdkFlow;
-
-  public RedirectPaymentProduct840SpecificInput() {
-  }
-
-  public RedirectPaymentProduct840SpecificInput addressSelectionAtPayPal(Boolean addressSelectionAtPayPal) {
-    this.addressSelectionAtPayPal = addressSelectionAtPayPal;
+  @Override
+  public RedirectPaymentProduct840SpecificInput addressSelectionAtPayPal(Boolean value) {
+    super.addressSelectionAtPayPal(value);
     return this;
   }
 
-  /**
-   * Indicates whether to use PayPal Express Checkout Shortcut. * true &#x3D; When
-   * shortcut is enabled, the consumer can select a shipping address during PayPal
-   * checkout. * false &#x3D; When shortcut is disabled, the consumer cannot
-   * change the shipping address. Default value is false. Please note that this
-   * field is ignored when order.additionalInput.typeInformation.purchaseType is
-   * set to \&quot;digital\&quot;
-   * 
-   * @return addressSelectionAtPayPal
-   **/
-  @JsonProperty(JSON_PROPERTY_ADDRESS_SELECTION_AT_PAY_PAL)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public Boolean getAddressSelectionAtPayPal() {
-    return addressSelectionAtPayPal;
-  }
-
-  @JsonProperty(JSON_PROPERTY_ADDRESS_SELECTION_AT_PAY_PAL)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setAddressSelectionAtPayPal(Boolean addressSelectionAtPayPal) {
-    this.addressSelectionAtPayPal = addressSelectionAtPayPal;
-  }
-
-  public RedirectPaymentProduct840SpecificInput fraudNetId(UUID fraudNetId) {
-    this.fraudNetId = fraudNetId;
+  @Override
+  public RedirectPaymentProduct840SpecificInput javaScriptSdkFlow(Boolean value) {
+    super.javaScriptSdkFlow(value);
     return this;
   }
 
-  /**
-   * A unique ID determined by the merchant, to link a Paypal transaction to a
-   * FraudNet PayPal risk session. Only applicable to
-   * customer-initiated transactions, when the FraudNet SDK is used, and to be
-   * passed in the API request the same tracking ID value
-   * (FraudNet Session Identifier). This SDK is available here
-   * https://developer.paypal.com/docs/checkout/apm/pay-upon-invoice/fraudnet/
-   * 
-   * @return fraudNetId
-   **/
+  public RedirectPaymentProduct840SpecificInput fraudNetId(UUID value) {
+    fraudNetId = value;
+    return this;
+  }
+
   @JsonProperty(JSON_PROPERTY_FRAUD_NET_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public UUID getFraudNetId() {
@@ -82,77 +43,51 @@ public class RedirectPaymentProduct840SpecificInput implements Serializable {
 
   @JsonProperty(JSON_PROPERTY_FRAUD_NET_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setFraudNetId(UUID fraudNetId) {
-    this.fraudNetId = fraudNetId;
+  public void setFraudNetId(UUID value) {
+    fraudNetId = value;
   }
 
-  public RedirectPaymentProduct840SpecificInput javaScriptSdkFlow(Boolean javaScriptSdkFlow) {
-    this.javaScriptSdkFlow = javaScriptSdkFlow;
+  public RedirectPaymentProduct840SpecificInput paymentId(String value) {
+    paymentId = value;
     return this;
   }
 
-  /**
-   * Indicates whether the PayPal JavaScript SDK flow is used.
-   * * true = The PayPal JavaScript SDK flow is used.
-   * * false = The PayPal JavaScript SDK flow is not used.
-   *
-   * Default value is false.
-   * 
-   * @default false
-   * @example true
-   * @return javaScriptSdkFlow
-   **/
-  @JsonProperty(JSON_PROPERTY_JAVASCRIPT_SDK_FLOW)
+  @JsonProperty(JSON_PROPERTY_PAYMENT_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public Boolean getJavaScriptSdkFlow() {
-    return javaScriptSdkFlow;
+  public String getPaymentId() {
+    return paymentId;
   }
 
-  @JsonProperty(JSON_PROPERTY_JAVASCRIPT_SDK_FLOW)
+  @JsonProperty(JSON_PROPERTY_PAYMENT_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setJavaScriptSdkFlow(Boolean javaScriptSdkFlow) {
-    this.javaScriptSdkFlow = javaScriptSdkFlow;
+  public void setPaymentId(String value) {
+    paymentId = value;
   }
 
   @Override
   public boolean equals(Object o) {
-    if (this == o) {
+    if (this == o)
       return true;
-    }
-    if (o == null || getClass() != o.getClass()) {
+    if (o == null || getClass() != o.getClass())
       return false;
-    }
-    RedirectPaymentProduct840SpecificInput redirectPaymentProduct840SpecificInput = (RedirectPaymentProduct840SpecificInput) o;
-    return Objects.equals(this.addressSelectionAtPayPal,
-        redirectPaymentProduct840SpecificInput.addressSelectionAtPayPal) &&
-        Objects.equals(this.fraudNetId, redirectPaymentProduct840SpecificInput.fraudNetId) &&
-        Objects.equals(this.javaScriptSdkFlow, redirectPaymentProduct840SpecificInput.javaScriptSdkFlow);
+    RedirectPaymentProduct840SpecificInput that = (RedirectPaymentProduct840SpecificInput) o;
+    return Objects.equals(fraudNetId, that.fraudNetId) && Objects.equals(paymentId, that.paymentId) && super.equals(o);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(addressSelectionAtPayPal, fraudNetId, javaScriptSdkFlow);
+    return Objects.hash(fraudNetId, paymentId, super.hashCode());
   }
 
   @Override
   public String toString() {
-    StringBuilder sb = new StringBuilder();
-    sb.append("class RedirectPaymentProduct840SpecificInput {\n");
-    sb.append("    addressSelectionAtPayPal: ").append(toIndentedString(addressSelectionAtPayPal)).append("\n");
-    sb.append("    fraudNetId: ").append(toIndentedString(fraudNetId)).append("\n");
-    sb.append("    javaScriptSdkFlow: ").append(toIndentedString(javaScriptSdkFlow)).append("\n");
-    sb.append("}");
-    return sb.toString();
+    return "class RedirectPaymentProduct840SpecificInput {\n    addressSelectionAtPayPal: "
+        + toIndentedString(getAddressSelectionAtPayPal()) + "\n    javaScriptSdkFlow: "
+        + toIndentedString(getJavaScriptSdkFlow()) + "\n    fraudNetId: " + toIndentedString(fraudNetId)
+        + "\n    paymentId: " + toIndentedString(paymentId) + "\n}";
   }
 
-  /**
-   * Convert the given object to string with each line indented by 4 spaces
-   * (except the first line).
-   */
-  private String toIndentedString(Object o) {
-    if (o == null) {
-      return "null";
-    }
-    return o.toString().replace("\n", "\n    ");
+  private String toIndentedString(Object value) {
+    return value == null ? "null" : value.toString().replace("\n", "\n    ");
   }
 }
