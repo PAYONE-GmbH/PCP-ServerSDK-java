@@ -82,6 +82,20 @@ class JsonSerializerTest {
         }
 
         @Test
+        void paymentIntentResponseAcceptsNonUuidPaymentId() {
+                String json = "{\"paymentId\":\"PP2000A6CC1A9R00\"}";
+
+                try {
+                        PaymentIntentResponse response = JsonSerializer.deserializeFromJson(json,
+                                        PaymentIntentResponse.class);
+                        assertEquals("PP2000A6CC1A9R00", response.getPaymentId());
+                        assertEquals(json, JsonSerializer.serializeToJson(response));
+                } catch (Exception e) {
+                        fail(e);
+                }
+        }
+
+        @Test
         void cancelRequestSerializesFundSplit() {
                 try {
                         assertEquals("{\"fundSplit\":{}}",

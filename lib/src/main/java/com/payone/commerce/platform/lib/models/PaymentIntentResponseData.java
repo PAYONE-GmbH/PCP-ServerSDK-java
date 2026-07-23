@@ -19,7 +19,7 @@ public class PaymentIntentResponseData implements Serializable {
   public static final String JSON_PROPERTY_PAYMENT_INTENT_ID = "paymentIntentId";
   private UUID paymentIntentId;
   public static final String JSON_PROPERTY_PAYMENT_ID = "paymentId";
-  private UUID paymentId;
+  private String paymentId;
 
   public PaymentIntentResponseData() {
   }
@@ -75,20 +75,20 @@ public class PaymentIntentResponseData implements Serializable {
     paymentIntentId = value;
   }
 
-  public PaymentIntentResponseData paymentId(UUID value) {
+  public PaymentIntentResponseData paymentId(String value) {
     paymentId = value;
     return this;
   }
 
   @JsonProperty(JSON_PROPERTY_PAYMENT_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public UUID getPaymentId() {
+  public String getPaymentId() {
     return paymentId;
   }
 
   @JsonProperty(JSON_PROPERTY_PAYMENT_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setPaymentId(UUID value) {
+  public void setPaymentId(String value) {
     paymentId = value;
   }
 

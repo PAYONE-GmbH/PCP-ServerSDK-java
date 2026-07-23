@@ -34,7 +34,7 @@ public class PaymentIntentResponse extends PaymentIntentResponseData {
   }
 
   @Override
-  public PaymentIntentResponse paymentId(java.util.UUID value) {
+  public PaymentIntentResponse paymentId(String value) {
     super.paymentId(value);
     return this;
   }
