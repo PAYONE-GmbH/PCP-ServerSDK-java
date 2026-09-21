@@ -17,24 +17,25 @@ jobs:
     runs-on: ubuntu-24.04
     strategy:
       matrix:
-        java: ['8', '11', '17', '21', '23', '24', '25', '26']
+        java: ["8", "11", "17", "21", "23", "24", "25", "26", "27"]
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
       - name: Set up Gradle runtime JDK
         id: runtime-jdk
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v5
         with:
-          java-version: '21'
-          distribution: 'temurin'
+          java-version: "21"
+          distribution: "temurin"
       - name: Set up target JDK
         id: target-jdk
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v5
         with:
           java-version: ${{ matrix.java }}
-          distribution: 'temurin'
+          # Temurin has not published a JDK 27 package yet; Zulu provides it.
+          distribution: ${{ matrix.java == '27' && 'zulu' || 'temurin' }}
       - name: Setup Gradle 9.2.1
-        uses: gradle/actions/setup-gradle@v3
+        uses: gradle/actions/setup-gradle@v5
         with:
           gradle-version: 9.2.1
       - name: Test
