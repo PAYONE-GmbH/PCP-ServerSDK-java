@@ -44,6 +44,9 @@ public class GetCheckoutsQuery implements QueryConfig {
   private String companyInformation;
   private String terminalId;
   private String reportingToken;
+  private String cardAuthorizationId;
+  private String receiptNumber;
+  private String traceNumber;
 
   public GetCheckoutsQuery() {
     // Empty constructor
@@ -216,6 +219,21 @@ public class GetCheckoutsQuery implements QueryConfig {
     return this;
   }
 
+  public GetCheckoutsQuery setCardAuthorizationId(String cardAuthorizationId) {
+    this.cardAuthorizationId = cardAuthorizationId;
+    return this;
+  }
+
+  public GetCheckoutsQuery setReceiptNumber(String receiptNumber) {
+    this.receiptNumber = receiptNumber;
+    return this;
+  }
+
+  public GetCheckoutsQuery setTraceNumber(String traceNumber) {
+    this.traceNumber = traceNumber;
+    return this;
+  }
+
   public Integer getOffset() {
     return this.offset;
   }
@@ -348,6 +366,18 @@ public class GetCheckoutsQuery implements QueryConfig {
     return this.reportingToken;
   }
 
+  public String getCardAuthorizationId() {
+    return this.cardAuthorizationId;
+  }
+
+  public String getReceiptNumber() {
+    return this.receiptNumber;
+  }
+
+  public String getTraceNumber() {
+    return this.traceNumber;
+  }
+
   public Map<String, String> toQueryMap() {
     Map<String, String> query = new HashMap<>();
 
@@ -465,6 +495,15 @@ public class GetCheckoutsQuery implements QueryConfig {
     }
     if (this.reportingToken != null) {
       query.put("reportingToken", this.reportingToken);
+    }
+    if (this.cardAuthorizationId != null) {
+      query.put("cardAuthorizationId", this.cardAuthorizationId);
+    }
+    if (this.receiptNumber != null) {
+      query.put("receiptNumber", this.receiptNumber);
+    }
+    if (this.traceNumber != null) {
+      query.put("traceNumber", this.traceNumber);
     }
     return query;
   }

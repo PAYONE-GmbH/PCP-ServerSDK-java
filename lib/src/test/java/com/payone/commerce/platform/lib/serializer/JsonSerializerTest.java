@@ -2,6 +2,7 @@ package com.payone.commerce.platform.lib.serializer;
 
 import org.junit.jupiter.api.Test;
 
+import com.payone.commerce.platform.lib.models.Address;
 import com.payone.commerce.platform.lib.models.AddressPersonal;
 import com.payone.commerce.platform.lib.models.AmountOfMoney;
 import com.payone.commerce.platform.lib.models.CartItemInput;
@@ -15,8 +16,11 @@ import com.payone.commerce.platform.lib.models.FundSplit;
 import com.payone.commerce.platform.lib.models.OrderLineDetailsInput;
 import com.payone.commerce.platform.lib.models.OrderRequest;
 import com.payone.commerce.platform.lib.models.PaymentIntentResponse;
+import com.payone.commerce.platform.lib.models.PaymentProduct840CustomerAccount;
+import com.payone.commerce.platform.lib.models.PaymentProduct840SpecificOutput;
 import com.payone.commerce.platform.lib.models.ProductType;
 import com.payone.commerce.platform.lib.models.PaymentMethodSpecificInputForIntent;
+import com.payone.commerce.platform.lib.models.PaymentReferencesForPaymentIntent;
 import com.payone.commerce.platform.lib.models.RedirectPaymentMethodSpecificInputForIntent;
 import com.payone.commerce.platform.lib.models.Shipping;
 import com.payone.commerce.platform.lib.models.ShoppingCartInput;
@@ -49,13 +53,14 @@ class JsonSerializerTest {
         void paymentIntentRequestUsesTheIntentSpecificJsonStructure() {
                 CreatePaymentIntentRequest request = new CreatePaymentIntentRequest()
                                 .amountOfMoney(new AmountOfMoney().amount(100L).currencyCode("EUR"))
+                                .references(new PaymentReferencesForPaymentIntent().merchantReference("order-1"))
                                 .shoppingCart(new ShoppingCartData().addItemsItem(new CartItemData()))
                                 .paymentMethodSpecificInput(new PaymentMethodSpecificInputForIntent()
                                                 .redirectPaymentMethodSpecificInput(
                                                                 new RedirectPaymentMethodSpecificInputForIntent()
                                                                                 .paymentProductId(840)));
 
-                String expected = "{\"amountOfMoney\":{\"amount\":100,\"currencyCode\":\"EUR\"},\"shoppingCart\":{\"items\":[{}]},\"paymentMethodSpecificInput\":{\"redirectPaymentMethodSpecificInput\":{\"paymentProductId\":840}}}";
+                String expected = "{\"amountOfMoney\":{\"amount\":100,\"currencyCode\":\"EUR\"},\"references\":{\"merchantReference\":\"order-1\"},\"shoppingCart\":{\"items\":[{}]},\"paymentMethodSpecificInput\":{\"redirectPaymentMethodSpecificInput\":{\"paymentProductId\":840}}}";
 
                 try {
                         String json = JsonSerializer.serializeToJson(request);
@@ -76,6 +81,23 @@ class JsonSerializerTest {
                                         PaymentIntentResponse.class);
                         assertEquals("PAYONE", response.getRedirectPaymentMethodSpecificOutput()
                                         .getPaymentProduct840SpecificOutput().getShippingAddress().getCompanyName());
+                } catch (Exception e) {
+                        fail(e);
+                }
+        }
+
+        @Test
+        void paymentProduct840SpecificOutputUsesTheFlattenedSchemaStructure() {
+                PaymentProduct840SpecificOutput output = new PaymentProduct840SpecificOutput()
+                                .billingAddress(new Address().city("Kiel"))
+                                .customerAccount(new PaymentProduct840CustomerAccount().payerId("payer"))
+                                .payPalTransactionId("transaction")
+                                .shippingAddress(new Address().city("Hamburg"));
+
+                String expected = "{\"billingAddress\":{\"city\":\"Kiel\"},\"customerAccount\":{\"payerId\":\"payer\"},\"payPalTransactionId\":\"transaction\",\"shippingAddress\":{\"city\":\"Hamburg\"}}";
+
+                try {
+                        assertEquals(expected, JsonSerializer.serializeToJson(output));
                 } catch (Exception e) {
                         fail(e);
                 }
