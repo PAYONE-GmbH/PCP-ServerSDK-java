@@ -23,6 +23,8 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
     PaymentInformationResponse.JSON_PROPERTY_TERMINAL_ID,
     PaymentInformationResponse.JSON_PROPERTY_CARD_ACCEPTOR_ID,
     PaymentInformationResponse.JSON_PROPERTY_MERCHANT_REFERENCE,
+    PaymentInformationResponse.JSON_PROPERTY_TRACE_NUMBER,
+    PaymentInformationResponse.JSON_PROPERTY_RECEIPT_NUMBER,
     PaymentInformationResponse.JSON_PROPERTY_CREATION_DATE_TIME,
     PaymentInformationResponse.JSON_PROPERTY_LAST_UPDATED,
     PaymentInformationResponse.JSON_PROPERTY_CARD_PAYMENT_DETAILS,
@@ -67,6 +69,14 @@ public class PaymentInformationResponse implements Serializable {
   public static final String JSON_PROPERTY_MERCHANT_REFERENCE = "merchantReference";
 
   private String merchantReference;
+
+  public static final String JSON_PROPERTY_TRACE_NUMBER = "traceNumber";
+
+  private String traceNumber;
+
+  public static final String JSON_PROPERTY_RECEIPT_NUMBER = "receiptNumber";
+
+  private String receiptNumber;
 
   public static final String JSON_PROPERTY_CREATION_DATE_TIME = "creationDateTime";
 
@@ -298,6 +308,40 @@ public class PaymentInformationResponse implements Serializable {
     this.merchantReference = merchantReference;
   }
 
+  public PaymentInformationResponse traceNumber(String traceNumber) {
+    this.traceNumber = traceNumber;
+    return this;
+  }
+
+  @JsonProperty(JSON_PROPERTY_TRACE_NUMBER)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public String getTraceNumber() {
+    return traceNumber;
+  }
+
+  @JsonProperty(JSON_PROPERTY_TRACE_NUMBER)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setTraceNumber(String traceNumber) {
+    this.traceNumber = traceNumber;
+  }
+
+  public PaymentInformationResponse receiptNumber(String receiptNumber) {
+    this.receiptNumber = receiptNumber;
+    return this;
+  }
+
+  @JsonProperty(JSON_PROPERTY_RECEIPT_NUMBER)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public String getReceiptNumber() {
+    return receiptNumber;
+  }
+
+  @JsonProperty(JSON_PROPERTY_RECEIPT_NUMBER)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setReceiptNumber(String receiptNumber) {
+    this.receiptNumber = receiptNumber;
+  }
+
   public PaymentInformationResponse creationDateTime(OffsetDateTime creationDateTime) {
     this.creationDateTime = creationDateTime;
     return this;
@@ -423,6 +467,8 @@ public class PaymentInformationResponse implements Serializable {
         Objects.equals(this.terminalId, paymentInformationResponse.terminalId) &&
         Objects.equals(this.cardAcceptorId, paymentInformationResponse.cardAcceptorId) &&
         Objects.equals(this.merchantReference, paymentInformationResponse.merchantReference) &&
+        Objects.equals(this.traceNumber, paymentInformationResponse.traceNumber) &&
+        Objects.equals(this.receiptNumber, paymentInformationResponse.receiptNumber) &&
         Objects.equals(this.creationDateTime, paymentInformationResponse.creationDateTime) &&
         Objects.equals(this.lastUpdated, paymentInformationResponse.lastUpdated) &&
         Objects.equals(this.cardPaymentDetails, paymentInformationResponse.cardPaymentDetails) &&
@@ -432,7 +478,8 @@ public class PaymentInformationResponse implements Serializable {
   @Override
   public int hashCode() {
     return Objects.hash(commerceCaseId, checkoutId, merchantCustomerId, paymentInformationId, paymentChannel,
-        paymentProductId, terminalId, cardAcceptorId, merchantReference, creationDateTime, lastUpdated,
+        paymentProductId, terminalId, cardAcceptorId, merchantReference, traceNumber, receiptNumber, creationDateTime,
+        lastUpdated,
         cardPaymentDetails, events);
   }
 
@@ -449,6 +496,8 @@ public class PaymentInformationResponse implements Serializable {
     sb.append("    terminalId: ").append(toIndentedString(terminalId)).append("\n");
     sb.append("    cardAcceptorId: ").append(toIndentedString(cardAcceptorId)).append("\n");
     sb.append("    merchantReference: ").append(toIndentedString(merchantReference)).append("\n");
+    sb.append("    traceNumber: ").append(toIndentedString(traceNumber)).append("\n");
+    sb.append("    receiptNumber: ").append(toIndentedString(receiptNumber)).append("\n");
     sb.append("    creationDateTime: ").append(toIndentedString(creationDateTime)).append("\n");
     sb.append("    lastUpdated: ").append(toIndentedString(lastUpdated)).append("\n");
     sb.append("    cardPaymentDetails: ").append(toIndentedString(cardPaymentDetails)).append("\n");

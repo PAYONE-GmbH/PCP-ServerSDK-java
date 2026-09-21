@@ -48,6 +48,9 @@ class GetCheckoutsQueryTest {
         query.setPhoneNumber("1234567890");
         query.setDateOfBirth("1980-01-01");
         query.setCompanyInformation("Company Inc.");
+        query.setCardAuthorizationId("authorization-1");
+        query.setReceiptNumber("receipt-1");
+        query.setTraceNumber("trace-1");
 
         Map<String, String> queryMap = query.toQueryMap();
         assertEquals("1", queryMap.get("offset"));
@@ -81,6 +84,9 @@ class GetCheckoutsQueryTest {
         assertEquals("1234567890", queryMap.get("phoneNumber"));
         assertEquals("1980-01-01", queryMap.get("dateOfBirth"));
         assertEquals("Company Inc.", queryMap.get("companyInformation"));
+        assertEquals("authorization-1", queryMap.get("cardAuthorizationId"));
+        assertEquals("receipt-1", queryMap.get("receiptNumber"));
+        assertEquals("trace-1", queryMap.get("traceNumber"));
 
     }
 
@@ -119,6 +125,9 @@ class GetCheckoutsQueryTest {
         query.setPhoneNumber("1234567890");
         query.setDateOfBirth("1980-01-01");
         query.setCompanyInformation("Company Inc.");
+        query.setCardAuthorizationId("authorization-1");
+        query.setReceiptNumber("receipt-1");
+        query.setTraceNumber("trace-1");
 
         assertEquals(1, query.getOffset());
         assertEquals(10, query.getSize());
@@ -154,6 +163,9 @@ class GetCheckoutsQueryTest {
         assertEquals("1234567890", query.getPhoneNumber());
         assertEquals("1980-01-01", query.getDateOfBirth());
         assertEquals("Company Inc.", query.getCompanyInformation());
+        assertEquals("authorization-1", query.getCardAuthorizationId());
+        assertEquals("receipt-1", query.getReceiptNumber());
+        assertEquals("trace-1", query.getTraceNumber());
 
     }
 
