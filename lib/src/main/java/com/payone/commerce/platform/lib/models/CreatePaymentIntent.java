@@ -14,7 +14,7 @@ public class CreatePaymentIntent implements Serializable {
   public static final String JSON_PROPERTY_AMOUNT_OF_MONEY = "amountOfMoney";
   private AmountOfMoney amountOfMoney;
   public static final String JSON_PROPERTY_REFERENCES = "references";
-  private PaymentReferences references;
+  private PaymentReferencesForPaymentIntent references;
   public static final String JSON_PROPERTY_SHOPPING_CART = "shoppingCart";
   private ShoppingCartData shoppingCart;
 
@@ -38,20 +38,20 @@ public class CreatePaymentIntent implements Serializable {
     this.amountOfMoney = amountOfMoney;
   }
 
-  public CreatePaymentIntent references(PaymentReferences references) {
+  public CreatePaymentIntent references(PaymentReferencesForPaymentIntent references) {
     this.references = references;
     return this;
   }
 
   @JsonProperty(JSON_PROPERTY_REFERENCES)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public PaymentReferences getReferences() {
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+  public PaymentReferencesForPaymentIntent getReferences() {
     return references;
   }
 
   @JsonProperty(JSON_PROPERTY_REFERENCES)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setReferences(PaymentReferences references) {
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+  public void setReferences(PaymentReferencesForPaymentIntent references) {
     this.references = references;
   }
 

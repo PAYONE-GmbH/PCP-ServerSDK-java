@@ -21,7 +21,7 @@ public class CreatePaymentIntentRequest extends CreatePaymentIntent {
   }
 
   @Override
-  public CreatePaymentIntentRequest references(PaymentReferences value) {
+  public CreatePaymentIntentRequest references(PaymentReferencesForPaymentIntent value) {
     super.references(value);
     return this;
   }

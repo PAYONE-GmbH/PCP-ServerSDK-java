@@ -147,6 +147,26 @@ public class PaymentInformationApiClientTest {
         }
 
         @Test
+        @DisplayName("given response contains terminal receipt details, then return them")
+        void getPaymentInformationReturnsTraceAndReceiptNumbers()
+                throws InvalidKeyException, ApiException, IOException {
+
+            PaymentInformationApiClient paymentInformationApiClient = spy(
+                    new PaymentInformationApiClient(TestConfig.COMMUNICATOR_CONFIGURATION));
+            PaymentInformationResponse expected = new PaymentInformationResponse()
+                    .traceNumber("012345")
+                    .receiptNumber("0321");
+            Response response = ApiResponseMocks.createResponse(200, expected);
+
+            doReturn(response).when(paymentInformationApiClient).getResponse(any());
+
+            PaymentInformationResponse result = paymentInformationApiClient.getPaymentInformation("1", "2", "3", "4");
+
+            assertEquals("012345", result.getTraceNumber());
+            assertEquals("0321", result.getReceiptNumber());
+        }
+
+        @Test
         @DisplayName("given request was unsuccessful (400), then throw exception")
         void getPaymentInformationRequestUnsuccessful400()
                 throws InvalidKeyException, IOException {
