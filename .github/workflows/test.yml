@@ -32,7 +32,8 @@ jobs:
         uses: actions/setup-java@v5
         with:
           java-version: ${{ matrix.java }}
-          distribution: "temurin"
+          # Temurin has not published a JDK 27 package yet; Zulu provides it.
+          distribution: ${{ matrix.java == '27' && 'zulu' || 'temurin' }}
       - name: Setup Gradle 9.2.1
         uses: gradle/actions/setup-gradle@v5
         with:
