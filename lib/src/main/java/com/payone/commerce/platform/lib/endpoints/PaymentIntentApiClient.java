@@ -8,6 +8,8 @@ import com.payone.commerce.platform.lib.errors.ApiException;
 import com.payone.commerce.platform.lib.models.CreatePaymentIntentRequest;
 import com.payone.commerce.platform.lib.models.CreatePaymentIntentResponse;
 import com.payone.commerce.platform.lib.models.PaymentIntentResponse;
+import com.payone.commerce.platform.lib.models.PatchPaymentIntentRequest;
+import com.payone.commerce.platform.lib.models.PatchPaymentIntentResponse;
 import com.payone.commerce.platform.lib.serializer.JsonSerializer;
 
 import okhttp3.HttpUrl;
@@ -73,5 +75,36 @@ public class PaymentIntentApiClient extends BaseApiClient {
                 .build();
 
         return this.makeApiCall(request, PaymentIntentResponse.class);
+    }
+
+    public PatchPaymentIntentResponse patchPaymentIntent(String merchantId, String paymentIntentId,
+            PatchPaymentIntentRequest payload) throws ApiException, IOException {
+        if (merchantId == null) {
+            throw new IllegalArgumentException(MERCHANT_ID_REQUIRED_ERROR);
+        }
+        if (paymentIntentId == null) {
+            throw new IllegalArgumentException(PAYMENT_INTENT_ID_REQUIRED_ERROR);
+        }
+        if (payload == null) {
+            throw new IllegalArgumentException(PAYLOAD_REQUIRED_ERROR);
+        }
+
+        HttpUrl url = new HttpUrl.Builder()
+                .scheme(HTTPS_SCHEME)
+                .host(this.getConfig().getHost())
+                .addPathSegment(PCP_PATH_SEGMENT_VERSION)
+                .addPathSegment(merchantId)
+                .addPathSegment(PCP_PATH_SEGMENT_PAYMENT_INTENTS)
+                .addPathSegment(paymentIntentId)
+                .build();
+
+        RequestBody requestBody = RequestBody.create(JsonSerializer.serializeToJson(payload), JSON);
+        Request request = new Request.Builder()
+                .url(url)
+                .patch(requestBody)
+                .header(CONTENT_TYPE_HEADER_NAME, requestBody.contentType().toString())
+                .build();
+
+        return this.makeApiCall(request, PatchPaymentIntentResponse.class);
     }
 }

@@ -9,7 +9,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 @JsonPropertyOrder({ RedirectPaymentMethodSpecificOutputForCreateIntent.JSON_PROPERTY_REQUIRES_APPROVAL,
     RedirectPaymentMethodSpecificOutputForCreateIntent.JSON_PROPERTY_PAYMENT_PRODUCT_ID,
     RedirectPaymentMethodSpecificOutputForCreateIntent.JSON_PROPERTY_PAYMENT_PRODUCT840_SPECIFIC_OUTPUT,
-    RedirectPaymentMethodSpecificOutputForCreateIntent.JSON_PROPERTY_REDIRECTION_DATA })
+    RedirectPaymentMethodSpecificOutputForCreateIntent.JSON_PROPERTY_REDIRECT_DATA })
 public class RedirectPaymentMethodSpecificOutputForCreateIntent implements Serializable {
   private static final long serialVersionUID = 1L;
   public static final String JSON_PROPERTY_REQUIRES_APPROVAL = "requiresApproval";
@@ -18,8 +18,8 @@ public class RedirectPaymentMethodSpecificOutputForCreateIntent implements Seria
   private Integer paymentProductId;
   public static final String JSON_PROPERTY_PAYMENT_PRODUCT840_SPECIFIC_OUTPUT = "paymentProduct840SpecificOutput";
   private RedirectPaymentProduct840SpecificInputData paymentProduct840SpecificOutput;
-  public static final String JSON_PROPERTY_REDIRECTION_DATA = "redirectionData";
-  private RedirectionData redirectionData;
+  public static final String JSON_PROPERTY_REDIRECT_DATA = "redirectData";
+  private RedirectData redirectData;
 
   public RedirectPaymentMethodSpecificOutputForCreateIntent() {
   }
@@ -76,21 +76,21 @@ public class RedirectPaymentMethodSpecificOutputForCreateIntent implements Seria
     paymentProduct840SpecificOutput = value;
   }
 
-  public RedirectPaymentMethodSpecificOutputForCreateIntent redirectionData(RedirectionData value) {
-    redirectionData = value;
+  public RedirectPaymentMethodSpecificOutputForCreateIntent redirectData(RedirectData value) {
+    redirectData = value;
     return this;
   }
 
-  @JsonProperty(JSON_PROPERTY_REDIRECTION_DATA)
+  @JsonProperty(JSON_PROPERTY_REDIRECT_DATA)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public RedirectionData getRedirectionData() {
-    return redirectionData;
+  public RedirectData getRedirectData() {
+    return redirectData;
   }
 
-  @JsonProperty(JSON_PROPERTY_REDIRECTION_DATA)
+  @JsonProperty(JSON_PROPERTY_REDIRECT_DATA)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setRedirectionData(RedirectionData value) {
-    redirectionData = value;
+  public void setRedirectData(RedirectData value) {
+    redirectData = value;
   }
 
   @Override
@@ -103,12 +103,12 @@ public class RedirectPaymentMethodSpecificOutputForCreateIntent implements Seria
     return Objects.equals(requiresApproval, that.requiresApproval)
         && Objects.equals(paymentProductId, that.paymentProductId)
         && Objects.equals(paymentProduct840SpecificOutput, that.paymentProduct840SpecificOutput)
-        && Objects.equals(redirectionData, that.redirectionData);
+        && Objects.equals(redirectData, that.redirectData);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(requiresApproval, paymentProductId, paymentProduct840SpecificOutput, redirectionData);
+    return Objects.hash(requiresApproval, paymentProductId, paymentProduct840SpecificOutput, redirectData);
   }
 
   @Override
@@ -116,7 +116,7 @@ public class RedirectPaymentMethodSpecificOutputForCreateIntent implements Seria
     return "class RedirectPaymentMethodSpecificOutputForCreateIntent {\n    requiresApproval: "
         + toIndentedString(requiresApproval) + "\n    paymentProductId: " + toIndentedString(paymentProductId)
         + "\n    paymentProduct840SpecificOutput: " + toIndentedString(paymentProduct840SpecificOutput)
-        + "\n    redirectionData: " + toIndentedString(redirectionData) + "\n}";
+        + "\n    redirectData: " + toIndentedString(redirectData) + "\n}";
   }
 
   private String toIndentedString(Object o) {
