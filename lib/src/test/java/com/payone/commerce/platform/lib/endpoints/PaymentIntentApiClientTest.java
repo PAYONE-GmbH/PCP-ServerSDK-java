@@ -15,10 +15,18 @@ import org.mockito.ArgumentCaptor;
 import com.payone.commerce.platform.lib.errors.ApiErrorResponseException;
 import com.payone.commerce.platform.lib.errors.ApiException;
 import com.payone.commerce.platform.lib.errors.ApiResponseRetrievalException;
+import com.payone.commerce.platform.lib.models.AmountOfMoney;
 import com.payone.commerce.platform.lib.models.CreatePaymentIntentRequest;
 import com.payone.commerce.platform.lib.models.CreatePaymentIntentResponse;
+import com.payone.commerce.platform.lib.models.PatchPaymentIntentRequest;
+import com.payone.commerce.platform.lib.models.PatchPaymentIntentResponse;
+import com.payone.commerce.platform.lib.models.PaymentIntentOutput;
 import com.payone.commerce.platform.lib.models.PaymentIntentResponse;
 import com.payone.commerce.platform.lib.models.PaymentReferencesForPaymentIntent;
+import com.payone.commerce.platform.lib.models.RedirectData;
+import com.payone.commerce.platform.lib.models.RedirectPaymentMethodSpecificOutputForCreateIntent;
+import com.payone.commerce.platform.lib.models.ShoppingCartData;
+import com.payone.commerce.platform.lib.serializer.JsonSerializer;
 import com.payone.commerce.platform.lib.testutils.ApiResponseMocks;
 import com.payone.commerce.platform.lib.testutils.TestConfig;
 
@@ -27,6 +35,73 @@ import okhttp3.Response;
 import okio.Buffer;
 
 public class PaymentIntentApiClientTest {
+        @Test
+        void patchPaymentIntentSendsPatchAndReadsUpdatedStructure()
+                        throws InvalidKeyException, ApiException, IOException {
+                PaymentIntentApiClient client = spy(new PaymentIntentApiClient(TestConfig.COMMUNICATOR_CONFIGURATION));
+                PatchPaymentIntentResponse expected = new PatchPaymentIntentResponse()
+                                .shoppingCart(new ShoppingCartData())
+                                .paymentIntentOutput(new PaymentIntentOutput().redirectPaymentMethodSpecificOutput(
+                                                new RedirectPaymentMethodSpecificOutputForCreateIntent()
+                                                                .redirectData(new RedirectData()
+                                                                                .redirectURL("https://example.com"))));
+                ArgumentCaptor<Request> requestCaptor = ArgumentCaptor.forClass(Request.class);
+                doReturn(ApiResponseMocks.createResponse(200, expected)).when(client)
+                                .getResponse(requestCaptor.capture());
+
+                PatchPaymentIntentResponse result = client.patchPaymentIntent("merchant", "intent-id",
+                                new PatchPaymentIntentRequest().amountOfMoney(new AmountOfMoney().amount(123L)
+                                                .currencyCode("EUR")).shoppingCart(new ShoppingCartData()));
+
+                Request request = requestCaptor.getValue();
+                assertEquals("PATCH", request.method());
+                assertEquals("/v1/merchant/payment-intents/intent-id", request.url().encodedPath());
+                assertEquals("application/json; charset=utf-8", request.header("Content-Type"));
+                Buffer buffer = new Buffer();
+                request.body().writeTo(buffer);
+                assertEquals("{\"amountOfMoney\":{\"amount\":123,\"currencyCode\":\"EUR\"},\"shoppingCart\":{}}",
+                                buffer.readUtf8());
+                assertEquals(expected, result);
+                assertEquals("https://example.com", result.getPaymentIntentOutput()
+                                .getRedirectPaymentMethodSpecificOutput().getRedirectData().getRedirectURL());
+        }
+
+        @Test
+        void patchPaymentIntentRejectsNullArguments() throws InvalidKeyException {
+                PaymentIntentApiClient client = new PaymentIntentApiClient(TestConfig.COMMUNICATOR_CONFIGURATION);
+
+                assertEquals("Merchant ID is required", assertThrows(IllegalArgumentException.class,
+                                () -> client.patchPaymentIntent(null, "intent", new PatchPaymentIntentRequest()))
+                                .getMessage());
+                assertEquals("Payment Intent ID is required", assertThrows(IllegalArgumentException.class,
+                                () -> client.patchPaymentIntent("merchant", null, new PatchPaymentIntentRequest()))
+                                .getMessage());
+                assertEquals("Payload is required", assertThrows(IllegalArgumentException.class,
+                                () -> client.patchPaymentIntent("merchant", "intent", null)).getMessage());
+        }
+
+        @Test
+        void patchPaymentIntentHandlesNotFound() throws InvalidKeyException, IOException {
+                PaymentIntentApiClient client = spy(new PaymentIntentApiClient(TestConfig.COMMUNICATOR_CONFIGURATION));
+                doReturn(ApiResponseMocks.createErrorResponse(404)).when(client).getResponse(any());
+
+                ApiErrorResponseException error = assertThrows(ApiErrorResponseException.class,
+                                () -> client.patchPaymentIntent("merchant", "intent", new PatchPaymentIntentRequest()));
+                assertEquals(404, error.getStatusCode());
+        }
+
+        @Test
+        void createIntentRedirectOutputUsesRedirectDataRatherThanRedirectionData() throws IOException {
+                String json = "{\"paymentIntentOutput\":{\"redirectPaymentMethodSpecificOutput\":"
+                                + "{\"redirectData\":{\"redirectURL\":\"https://example.com\"}}}}";
+                CreatePaymentIntentResponse response = JsonSerializer.deserializeFromJson(json,
+                                CreatePaymentIntentResponse.class);
+
+                assertEquals("https://example.com", response.getPaymentIntentOutput()
+                                .getRedirectPaymentMethodSpecificOutput().getRedirectData().getRedirectURL());
+                assertEquals(json, JsonSerializer.serializeToJson(response));
+        }
+
         @Test
         void createPaymentIntentSuccessful() throws InvalidKeyException, ApiException, IOException {
                 PaymentIntentApiClient client = spy(new PaymentIntentApiClient(TestConfig.COMMUNICATOR_CONFIGURATION));
